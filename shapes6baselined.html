@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shapes Drawing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .controls {
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-bottom: 1px solid #ddd;
+    }
+    .controls label {
+      margin-right: 10px;
+    }
+    .controls select, .controls input {
+      margin-right: 10px;
+    }
+    canvas {
+      display: block;
+      margin: 10px auto;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>
+      <input type="radio" name="mode" value="create" checked> Create
+    </label>
+    <label>
+      <input type="radio" name="mode" value="modify"> Modify
+    </label>
+    <label>
+      <input type="radio" name="mode" value="delete"> Delete
+    </label>
+
+    <select id="shapeType">
+      <option value="point">Point</option>
+      <option value="line">Line</option>
+      <option value="circle">Circle</option>
+      <option value="triangle">Triangle</option>
+      <option value="rectangle">Rectangle</option>
+      <option value="parallelogram">Parallelogram</option>
+    </select>
+
+    <button onclick="resetCanvas()">Reset Canvas</button>
+  </div>
+
+  <canvas id="canvas" width="800" height="600"></canvas>
+
+  <script>
+    class Shape {
+      draw(ctx) {}
+      isPointInside(x, y) {}
+      drag(dx, dy) {}
+    }
+
+    class Point extends Shape {
+      constructor(x, y) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.radius = 5;
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+      }
+
+      isPointInside(px, py) {
+        return Math.hypot(this.x - px, this.y - py) <= this.radius;
+      }
+
+      drag(dx, dy) {
+        this.x += dx;
+        this.y += dy;
+      }
+    }
+
+    class Line extends Shape {
+      constructor(start, end) {
+        super();
+        this.start = start;
+        this.end = end;
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.start.x, this.start.y);
+        ctx.lineTo(this.end.x, this.end.y);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        this.start.draw(ctx);
+        this.end.draw(ctx);
+      }
+
+      isPointInside(x, y) {
+        if (this.start.isPointInside(x, y)) {
+          this.draggingPoint = this.start;
+          return true;
+        }
+        if (this.end.isPointInside(x, y)) {
+          this.draggingPoint = this.end;
+          return true;
+        }
+        const distToStart = Math.hypot(this.start.x - x, this.start.y - y);
+        const distToEnd = Math.hypot(this.end.x - x, this.end.y - y);
+        const lineLength = Math.hypot(this.start.x - this.end.x, this.start.y - this.end.y);
+        const isOnLine = Math.abs(distToStart + distToEnd - lineLength) < 1;
+
+        if (isOnLine) {
+          this.draggingPoint = null;
+        }
+        return isOnLine;
+      }
+
+      drag(dx, dy) {
+        if (this.draggingPoint) {
+          this.draggingPoint.drag(dx, dy);
+        } else {
+          this.start.drag(dx, dy);
+          this.end.drag(dx, dy);
+        }
+      }
+    }
+
+    class Circle extends Shape {
+      constructor(center, radius) {
+        super();
+        this.center = center;
+        this.radius = radius;
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.center.x, this.center.y, this.radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
+        ctx.fill();
+
+        this.center.draw(ctx);
+      }
+
+      isPointInside(x, y) {
+        return Math.hypot(this.center.x - x, this.center.y - y) <= this.radius;
+      }
+
+      drag(dx, dy) {
+        this.center.drag(dx, dy);
+      }
+    }
+
+    class Triangle extends Shape {
+      constructor(p1, p2, p3) {
+        super();
+        this.points = [p1, p2, p3];
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        this.points.forEach((point, index) => {
+          if (index > 0) ctx.lineTo(point.x, point.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0, 0, 255, 0.1)';
+        ctx.fill();
+
+        this.points.forEach((point) => point.draw(ctx));
+      }
+
+      isPointInside(x, y) {
+        for (const point of this.points) {
+          if (point.isPointInside(x, y)) {
+            this.draggingPoint = point;
+            return true;
+          }
+        }
+        this.draggingPoint = null;
+        return true;
+      }
+
+      drag(dx, dy) {
+        if (this.draggingPoint) {
+          this.draggingPoint.drag(dx, dy);
+        } else {
+          this.points.forEach((point) => point.drag(dx, dy));
+        }
+      }
+    }
+
+    class Rectangle extends Shape {
+      constructor(p1, p2) {
+        super();
+        const p3 = new Point(p2.x, p1.y);
+        const p4 = new Point(p1.x, p2.y);
+        this.points = [p1, p3, p2, p4];
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        this.points.forEach((point, index) => {
+          const nextPoint = this.points[(index + 1) % this.points.length];
+          ctx.lineTo(nextPoint.x, nextPoint.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0, 255, 0, 0.1)';
+        ctx.fill();
+
+        this.points.forEach((point) => point.draw(ctx));
+      }
+
+      isPointInside(x, y) {
+        for (const point of this.points) {
+          if (point.isPointInside(x, y)) return true;
+        }
+        return false;
+      }
+
+      drag(dx, dy) {
+        this.points.forEach((point) => point.drag(dx, dy));
+      }
+    }
+
+    class Parallelogram extends Shape {
+      constructor(points) {
+        super();
+        this.points = points;
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        this.points.forEach((point, index) => {
+          const nextPoint = this.points[(index + 1) % this.points.length];
+          ctx.lineTo(nextPoint.x, nextPoint.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255, 255, 0, 0.1)';
+        ctx.fill();
+
+        this.points.forEach((point) => point.draw(ctx));
+      }
+
+      isPointInside(x, y) {
+        for (const point of this.points) {
+          if (point.isPointInside(x, y)) return true;
+        }
+        return false;
+      }
+
+      drag(dx, dy) {
+        this.points.forEach((point) => point.drag(dx, dy));
+      }
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const shapes = [];
+    const points = [];
+    let selectedShape = null;
+    let dragStart = null;
+    let mode = 'create';
+    let shapeType = 'line';
+
+    document.querySelectorAll('input[name="mode"]').forEach((radio) => {
+      radio.addEventListener('change', (e) => (mode = e.target.value));
+    });
+    document.getElementById('shapeType').addEventListener('change', (e) => (shapeType = e.target.value));
+
+    canvas.addEventListener('mousedown', (e) => {
+      const { offsetX, offsetY } = e;
+
+      if (mode === 'create') {
+        collectPoints(offsetX, offsetY);
+      } else if (mode === 'modify') {
+        selectShape(offsetX, offsetY);
+        dragStart = { x: offsetX, y: offsetY };
+      } else if (mode === 'delete') {
+        deleteShape(offsetX, offsetY);
+      }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (mode === 'modify' && selectedShape && dragStart) {
+        const { offsetX, offsetY } = e;
+        const dx = offsetX - dragStart.x;
+        const dy = offsetY - dragStart.y;
+
+        selectedShape.drag(dx, dy);
+        dragStart = { x: offsetX, y: offsetY };
+        render();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      dragStart = null;
+      if (selectedShape) selectedShape.draggingPoint = null;
+    });
+
+    function collectPoints(x, y) {
+      points.push(new Point(x, y));
+      render();
+
+      if (
+        (shapeType === 'line' && points.length === 2) ||
+        (shapeType === 'triangle' && points.length === 3) ||
+        (shapeType === 'rectangle' && points.length === 2) ||
+        (shapeType === 'parallelogram' && points.length === 4) ||
+        (shapeType === 'circle' && points.length === 2)
+      ) {
+        createShapeFromPoints();
+        points.length = 0; // Reset points only after creating shape
+      }
+    }
+
+    function createShapeFromPoints() {
+      if (shapeType === 'point') {
+        shapes.push(new Point(points[0].x, points[0].y));
+      } else if (shapeType === 'line') {
+        shapes.push(new Line(points[0], points[1]));
+      } else if (shapeType === 'circle') {
+        const radius = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+        shapes.push(new Circle(points[0], radius));
+      } else if (shapeType === 'triangle') {
+        shapes.push(new Triangle(points[0], points[1], points[2]));
+      } else if (shapeType === 'rectangle') {
+        shapes.push(new Rectangle(points[0], points[1]));
+      } else if (shapeType === 'parallelogram') {
+        shapes.push(new Parallelogram(points.slice()));
+      }
+      render();
+    }
+
+    function selectShape(x, y) {
+      selectedShape = shapes.find((shape) => shape.isPointInside(x, y));
+    }
+
+    function deleteShape(x, y) {
+      const index = shapes.findIndex((shape) => shape.isPointInside(x, y));
+      if (index !== -1) {
+        shapes.splice(index, 1);
+        render();
+      }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      points.forEach((point) => point.draw(ctx));
+      shapes.forEach((shape) => shape.draw(ctx));
+    }
+
+    function resetCanvas() {
+      shapes.length = 0;
+      points.length = 0;
+      render();
+    }
+  </script>
+</body>
+</html>

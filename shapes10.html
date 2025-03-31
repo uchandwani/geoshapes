@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shapes Drawing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .controls {
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-bottom: 1px solid #ddd;
+    }
+    .controls label {
+      margin-right: 10px;
+    }
+    .controls select, .controls input {
+      margin-right: 10px;
+    }
+    canvas {
+      display: block;
+      margin: 10px auto;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <label>
+      <input type="radio" name="mode" value="create" checked> Create
+    </label>
+
+    <select id="shapeType">
+      <option value="point">Point</option>
+      <option value="line">Line</option>
+      <option value="circle">Circle</option>
+      <option value="triangle">Triangle</option>
+      <option value="rectangle">Rectangle</option>
+      
+    </select>
+    <label>
+      <input type="radio" name="mode" value="modify"> Modify
+    </label>
+    <label>
+      <input type="radio" name="mode" value="delete"> Delete
+    </label>
+
+    
+
+    <button onclick="resetCanvas()">Reset Canvas</button>
+  </div>
+
+  <canvas id="canvas" width="1000" height="800"></canvas>
+
+  <script>
+    let pointCounter = 0;
+    function generatePointLabel() {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let label = '';
+    let index = pointCounter;
+
+    do {
+      label = alphabet[index % 26] + label;
+      index = Math.floor(index / 26) - 1;
+    } while (index >= 0);
+
+    pointCounter++;
+    console.log("The label is", label)
+    return label;
+  }
+
+    class Shape {
+      draw(ctx) {}
+      isPointInside(x, y) {}
+      drag(dx, dy) {}
+    }
+
+    class Point extends Shape {
+      constructor(x, y) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.radius = 5;
+        this.label = generatePointLabel(); 
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+
+        ctx.fillStyle = 'black';
+        ctx.font = '12px Arial';
+        ctx.fillText(
+    `${this.label} (${Math.round(this.x)}, ${Math.round(this.y)})`,
+    this.x + 8,
+    this.y - 8
+  );
+
+      }
+
+      isPointInside(px, py) {
+        return Math.hypot(this.x - px, this.y - py) <= this.radius;
+      }
+
+      drag(dx, dy) {
+        this.x += dx;
+        this.y += dy;
+      }
+    }
+
+    class Line extends Shape {
+      constructor(start, end) {
+        super();
+        this.start = start;
+        this.end = end;
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.start.x, this.start.y);
+        ctx.lineTo(this.end.x, this.end.y);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        this.start.draw(ctx);
+        this.end.draw(ctx);
+      }
+
+      isPointInside(x, y) {
+        if (this.start.isPointInside(x, y)) {
+          this.draggingPoint = this.start;
+          return true;
+        }
+        if (this.end.isPointInside(x, y)) {
+          this.draggingPoint = this.end;
+          return true;
+        }
+        const distToStart = Math.hypot(this.start.x - x, this.start.y - y);
+        const distToEnd = Math.hypot(this.end.x - x, this.end.y - y);
+        const lineLength = Math.hypot(this.start.x - this.end.x, this.start.y - this.end.y);
+        const isOnLine = Math.abs(distToStart + distToEnd - lineLength) < 1;
+
+        if (isOnLine) {
+          this.draggingPoint = null;
+        }
+        return isOnLine;
+      }
+
+      drag(dx, dy) {
+        if (this.draggingPoint) {
+          this.draggingPoint.drag(dx, dy);
+        } else {
+          this.start.drag(dx, dy);
+          this.end.drag(dx, dy);
+        }
+      }
+    }
+
+    function resetLabels() {
+      pointCounter = 0;
+    }
+
+    class Circle extends Shape {
+      constructor(center, radius) {
+        super();
+        this.center = center;
+        this.radius = radius;
+        this.circumferencePoint = new Point(center.x + radius, center.y); 
+        this.draggingEdge = false; // Track whether the edge is being dragged
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.center.x, this.center.y, this.radius, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
+        ctx.fill();
+
+        const area = this.getArea().toFixed(2);
+        const circumference = this.getCircumference().toFixed(2);
+        ctx.fillStyle = 'black';
+        ctx.font = '12px Arial';
+        //ctx.fillText(`Radius: ${this.radius.toFixed(2)}`, this.center.x + this.radius + 10, this.center.y - 10);
+        //ctx.fillText(`Area: ${area}`, this.center.x + this.radius + 10, this.center.y + 10);
+        //ctx.fillText(`Circumference: ${circumference}`, this.center.x + this.radius + 10, this.center.y + 30);
+        this.center.draw(ctx);
+             // Draw the circumference point
+            this.circumferencePoint.draw(ctx);
+      }     
+        getArea() { 
+          return Math.PI * Math.pow(this.radius, 2);
+          }
+
+        getCircumference() {
+          return 2 * Math.PI * this.radius;
+        }
+
+        
+    
+
+     isPointInside(x, y) {
+          const distanceToCenter = Math.hypot(this.center.x - x, this.center.y - y);
+          
+         if (Math.abs(distanceToCenter - this.radius) <= 5) { // 5px tolerance
+            this.draggingEdge = true;
+            return true;
+          }
+          
+          // Check if the point is inside the circle
+          if (distanceToCenter <= this.radius) {
+            this.draggingEdge = false;
+            return true;
+          }
+
+          this.draggingEdge = false;
+          return false;
+        }
+
+      drag(dx, dy) {
+          if (this.draggingEdge) {
+            // Calculate the new radius based on the dragged position of the circumference point
+            const mouseX = this.circumferencePoint.x + dx;
+            const mouseY = this.circumferencePoint.y + dy;
+            const newRadius = Math.hypot(this.center.x - mouseX, this.center.y - mouseY);
+
+            if (newRadius > 5) { // Ensure radius doesn't shrink to an invalid value
+              this.radius = newRadius;
+              this.updateCircumferencePoint(); // Update the circumference point position
+            }
+          } else {
+            // Move the entire circle
+            this.center.drag(dx, dy);
+            this.circumferencePoint.drag(dx, dy); // Move the circumference point along with the center
+          }
+        }
+
+
+        updateCircumferencePoint() {
+            // Place the circumference point directly to the right of the center for simplicity
+            this.circumferencePoint.x = this.center.x + this.radius;
+            this.circumferencePoint.y = this.center.y;
+          }
+
+
+
+      }
+
+    class Triangle extends Shape {
+      constructor(p1, p2, p3) {
+        super();
+        this.points = [p1, p2, p3];
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        this.points.forEach((point, index) => {
+          if (index > 0) ctx.lineTo(point.x, point.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0, 0, 255, 0.1)';
+        ctx.fill();
+
+        const sideLengths = this.getSideLengths().map(length => length.toFixed(2));
+        const area = this.getArea().toFixed(2);
+        const angles = this.getAngles().map(angle => angle.toFixed(1));
+        const centroidX = (this.points[0].x + this.points[1].x + this.points[2].x) / 3;
+        const centroidY = (this.points[0].y + this.points[1].y + this.points[2].y) / 3;
+        ctx.fillStyle = 'black';
+        ctx.font = '12px Arial';
+
+        ctx.fillStyle = 'black';
+          ctx.font = '12px Arial';
+          this.points.forEach((point, index) => {
+          const angle = angles[index];
+          ctx.fillText(`${angle}°`, point.x -10, point.y + 10);
+          });
+       // ctx.fillText(`Sides: ${sideLengths.join(', ')}`, centroidX, centroidY - 20);
+        //ctx.fillText(`Area: ${area}`, centroidX, centroidY);
+        
+        this.points.forEach((point) => point.draw(ctx));
+      }
+
+      isPointInside(x, y) {
+        const [A, B, C] = this.points;
+        const area = (p1, p2, p3) =>
+          Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+        const totalArea = area(A, B, C);
+        const area1 = area({ x, y }, B, C);
+        const area2 = area(A, { x, y }, C);
+        const area3 = area(A, B, { x, y });
+
+        for (const point of this.points) {
+            if (point.isPointInside(x, y)) {
+            this.draggingPoint = point; // Set the selected vertex for dragging
+            return true;
+            }
+          }
+          this.draggingPoint = null;
+          return Math.abs(totalArea - (area1 + area2 + area3)) < 0.1;
+      }
+
+      drag(dx, dy) {
+        if (this.draggingPoint) {
+          this.draggingPoint.drag(dx, dy);
+        } else {
+          this.points.forEach((point) => point.drag(dx, dy));
+        }
+      }
+      getSideLengths() {
+          const [p1, p2, p3] = this.points;
+          return [
+            Math.hypot(p2.x - p1.x, p2.y - p1.y),
+            Math.hypot(p3.x - p2.x, p3.y - p2.y),
+            Math.hypot(p1.x - p3.x, p1.y - p3.y),
+          ];
+        }
+
+      getArea() {
+          const [p1, p2, p3] = this.points;
+          return Math.abs((p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2);
+        }
+
+      getAngles() {
+          const [p1, p2, p3] = this.points;
+          const [a, b, c] = this.getSideLengths();
+
+          // Calculate angles using the Law of Cosines
+          const angleA = (Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) * 180) / Math.PI; // Angle at p1
+          const angleB = (Math.acos((a ** 2 + c ** 2 - b ** 2) / (2 * a * c)) * 180) / Math.PI; // Angle at p2
+          const angleC = (Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b)) * 180) / Math.PI; // Angle at p3
+
+          return [angleA, angleB, angleC];
+        }
+      }
+
+    class Rectangle extends Shape {
+      constructor(p1, p2) {
+        super();
+        const p3 = new Point(p2.x, p1.y);
+        const p4 = new Point(p1.x, p2.y);
+        this.points = [p1, p3, p2, p4];
+      }
+
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
+        this.points.forEach((point, index) => {
+          const nextPoint = this.points[(index + 1) % this.points.length];
+          ctx.lineTo(nextPoint.x, nextPoint.y);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(0, 255, 0, 0.1)';
+        ctx.fill();
+
+        this.points.forEach((point) => point.draw(ctx));
+      }
+
+      isPointInside(x, y) {
+        // Check if the mouse is near any vertex
+        for (const point of this.points) {
+          if (point.isPointInside(x, y)) {
+            this.draggingPoint = point; // Set the vertex for dragging
+            return true; // Mouse is on a vertex
+          }
+        }
+
+        // Check if the mouse is inside the rectangle's boundary
+        const [p1, , p2] = this.points; // Top-left and bottom-right points
+        const isInsideBoundary = x >= p1.x && x <= p2.x && y >= p1.y && y <= p2.y;
+
+        if (isInsideBoundary) {
+          this.draggingPoint = null; // No vertex selected, but inside boundary
+        }
+
+        return isInsideBoundary; // Return true if within the boundary, false otherwise
+      }
+
+      drag(dx, dy) {
+  if (this.draggingPoint) {
+    // Update the position of the dragged point
+    this.draggingPoint.drag(dx, dy);
+
+    // Recalculate the other points to maintain the rectangle shape
+    const [p1, p3, p2, p4] = this.points;
+
+    if (this.draggingPoint === p1) {
+      // Adjust points relative to top-left corner (p1)
+      p3.y = p1.y; // Keep p3 aligned horizontally with p1
+      p4.x = p1.x; // Keep p4 aligned vertically with p1
+    } else if (this.draggingPoint === p2) {
+      // Adjust points relative to bottom-right corner (p2)
+      p3.x = p2.x; // Keep p3 aligned vertically with p2
+      p4.y = p2.y; // Keep p4 aligned horizontally with p2
+    } else if (this.draggingPoint === p3) {
+      // Adjust points relative to top-right corner (p3)
+      p1.y = p3.y; // Keep p1 aligned horizontally with p3
+      p2.x = p3.x; // Keep p2 aligned vertically with p3
+    } else if (this.draggingPoint === p4) {
+      // Adjust points relative to bottom-left corner (p4)
+      p1.x = p4.x; // Keep p1 aligned vertically with p4
+      p2.y = p4.y; // Keep p2 aligned horizontally with p4
+    }
+  } else {
+    // General dragging of the rectangle
+    this.points.forEach((point) => point.drag(dx, dy));
+  }
+}
+
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const shapes = [];
+    const points = [];
+    let selectedShape = null;
+    let dragStart = null;
+    let mode = 'create';
+    let shapeType = 'points';
+
+   // Select elements
+    const modeRadios = document.querySelectorAll('input[name="mode"]');
+    const shapeTypeDropdown = document.getElementById('shapeType');
+
+// Attach event listeners for mode radio buttons
+    modeRadios.forEach((radio) => {
+    radio.addEventListener('change', (e) => {
+    mode = e.target.value;
+
+    // Show or hide dropdown based on mode
+        if (mode === 'create') {
+          shapeTypeDropdown.disabled = false; // Enable dropdown
+          } 
+        else {
+          shapeTypeDropdown.disabled = true; // Disable dropdown
+        }
+      });
+    });
+
+// Attach event listener for shapeType dropdown
+    shapeTypeDropdown.addEventListener('change', (e) => {
+      if (mode === 'create') {
+        shapeType = e.target.value;
+       }
+    });
+
+
+document.getElementById('shapeType').addEventListener('change', (e) => {
+  console.log(e.target); // Logs the entire dropdown element
+  console.log(e.target.value); // Logs the value of the selected option
+});
+
+
+    canvas.addEventListener('mousedown', (e) => {
+      const { offsetX, offsetY } = e;
+
+      if (mode === 'create') {
+        
+            collectPoints(offsetX, offsetY);
+      } else if (mode === 'modify') {
+        selectShape(offsetX, offsetY);
+        dragStart = { x: offsetX, y: offsetY };
+      } else if (mode === 'delete') {
+        deleteShape(offsetX, offsetY);
+      }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+     
+     const x = e.offsetX;
+     const y = e.offsetY;
+
+  // Find the shape under the mouse pointer
+  let hoveredShape = null;
+  let debugInfo = shapes.map((shape) => {
+    const isInside = shape.isPointInside(x, y);
+    if (isInside && !hoveredShape) hoveredShape = shape; 
+    return {
+      shape: shape.constructor.name,
+      coordinates: shape.points ? shape.points.map(p => `(${p.x}, ${p.y})`).join(", ") : `Center: (${shape.center?.x}, ${shape.center?.y})`,
+      isInside: isInside,
+    };
+  });
+
+  // Log debug information
+  //console.clear();
+ // console.log(`Mouse coordinates: (${x}, ${y})`);
+  //console.log("Hovered Shape:", hoveredShape ? hoveredShape.constructor.name : "None");
+  //console.table(debugInfo);
+
+
+      if (mode === 'modify' && selectedShape && dragStart) {
+        const { offsetX, offsetY } = e;
+        const dx = offsetX - dragStart.x;
+        const dy = offsetY - dragStart.y;
+
+        selectedShape.drag(dx, dy);
+        dragStart = { x: offsetX, y: offsetY };
+        render();
+      }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+      dragStart = null;
+      if (selectedShape) selectedShape.draggingPoint = null;
+    });
+
+    function collectPoints(x, y) {
+      
+     const newPoint = new Point(x, y);
+     points.push(newPoint);
+     
+  // If shapeType is 'point', add the point directly to shapes
+    if (shapeType === 'points') {
+        shapes.push(newPoint);
+        points.length = 0;
+        }
+   else if (
+        (shapeType === 'line' && points.length === 2) ||
+        (shapeType === 'triangle' && points.length === 3) ||
+        (shapeType === 'rectangle' && points.length === 2) ||
+      //  (shapeType === 'parallelogram' && points.length === 4) ||
+        (shapeType === 'circle' && points.length === 2)
+      ) {
+        createShapeFromPoints();
+        points.length = 0; // Reset points only after creating shape
+      }
+     /* else if (shapeType === 'points') {
+        createShapeFromPoints();
+        points.length = 0;
+      } */
+      render();
+    }
+
+    function createShapeFromPoints() {
+      console.log("Inside createShapeFromPoints - ShapeType", shapeType);
+     
+     if (shapeType === 'line') {
+        shapes.push(new Line(points[0], points[1]));
+        console.log("Inside createShapeFromPoints - ShapeType", shapeType);
+        
+      } else if (shapeType === 'circle') {
+        const radius = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+        shapes.push(new Circle(points[0], radius));
+      } else if (shapeType === 'triangle') {
+        shapes.push(new Triangle(points[0], points[1], points[2]));
+      } else if (shapeType === 'rectangle') {
+        shapes.push(new Rectangle(points[0], points[1]));
+      }
+      render();
+    }
+
+    function selectShape(x, y) {
+      selectedShape = shapes.find((shape) => shape.isPointInside(x, y));
+      console.log("The selected shape is ",selectedShape);
+    }
+
+    function deleteShape(x, y) {
+      const index = shapes.findIndex((shape) => shape.isPointInside(x, y));
+      if (index !== -1) {
+        shapes.splice(index, 1);
+        render();
+      }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      points.forEach((point) => point.draw(ctx));
+      shapes.forEach((shape) => shape.draw(ctx));
+    }
+
+    function resetCanvas() {
+      shapes.length = 0;
+      points.length = 0;
+      resetLabels()
+      render();
+    }
+  </script>
+</body>
+</html>

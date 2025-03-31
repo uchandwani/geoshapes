@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Page</title>
+    <script src="./js/header.js" defer></script>
+    <link rel="stylesheet" href="./css/header_styles.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/circleTheoremPage.js"></script>
+    <script type="module">
+    import {sumMeasures, compareMeasures} from './js/circleTheoremPage.js';
+
+    // Expose functions globally
+    window.sumMeasures = sumMeasures;
+    window.compareMeasures = compareMeasures;
+    
+    </script>
+    
+</head>
+
+<body>
+<header>
+    <div class="icon-container">
+    <!--div class="nav-bar-left">
+        <button class="nav-icon-btn" id="triangle-theorems-btn" title="Triangle Theorems">
+            <img src="icons/icon1.png" alt="Circle Theorem" />
+        </button>
+        <button class="nav-icon-btn" id="triangle-properties-btn" title="Triangle Properties">
+            <img src="icons/icon2.png" alt="Pythogoras Theorem" />
+        </button>
+        <button class="nav-icon-btn" id="circle-theorems-btn" title="Circle Theorems">
+            <img src="icons/icon3.png" alt="Estimating Pi" />
+        </button>
+        <button class="nav-icon-btn" id="parallel-lines-btn" title="Parallel Lines">
+            <img src="icons/icon4.png" alt="Parallel Lines" />
+        </button>
+        <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
+            <img src="icons/icon5.png" alt="Representting underroot x" />
+        </button>
+         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
+            <img src="icons/icon6.png" alt="Similarity and Congruence" />
+        </button>
+         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
+            <img src="icons/icon7.png" alt="Triangle Theorems" />
+        </button>
+         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
+            <img src="icons/icon8.png" alt="Arithmetic Progression" />
+        </button>
+    </div>
+
+    <h1>Triangle Properties</h1>
+
+    <div class="nav-bar-right">
+        <button class="nav-icon-btn" id="icon-btn-9" title="Placeholder Icon 9">
+            <img src="icons/icon9.png" alt="Icon 9" />
+        </button>
+        <button class="nav-icon-btn" id="icon-btn-10" title="Placeholder Icon 10">
+            <img src="icons/icon10.png" alt="Icon 10" />
+        </button>
+        <button class="nav-icon-btn" id="icon-btn-11" title="Placeholder Icon 11">
+            <img src="icons/icon11.png" alt="Icon 11" />
+        </button>
+        <button class="nav-icon-btn" id="icon-btn-12" title="Placeholder Icon 12">
+            <img src="icons/icon12.png" alt="Icon 12" />
+        </button>
+        <button class="nav-icon-btn" id="icon-btn-13" title="Placeholder Icon 13">
+            <img src="icons/icon13.png" alt="Icon 13" />
+         </button>   
+        <button class="nav-icon-btn" id="icon-btn-14" title="Placeholder Icon 14">
+            <img src="icons/icon14.png" alt="Icon 13" />
+        </button>
+         <button class="nav-icon-btn" id="icon-btn-15" title="Placeholder Icon 15">
+            <img src="icons/icon15.png" alt="Icon 13" />
+        </button>
+         <button class="nav-icon-btn" id="icon-btn-16" title="Placeholder Icon 16">
+            <img src="icons/icon16.png" alt="Icon 13" />
+        </button-->
+        
+    </div>
+</header>
+    
+    <!-- Theorem Definition Section -->
+    
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar left" id="left-sidebar">
+            <h3>Instructions</h3>
+            <p>Select a theorem from the navigation bar above to see its instructions here.</p>
+        </div>
+            
+
+        <!-- Main Canvas -->
+        <div class="canvas-container">
+            <div class="navigation-buttons">
+          
+                
+                <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">Radius Tangent Theorem</button>
+                <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">Two Tangent Theorem</button>
+                <button id="subtendedAngles-button" class="icon-btn" title="Theorem C">Subtended Angles Theorems</button>
+                <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment"> Alternate Segment Theorem</button>
+                <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral"> Cyclic Quadrilateral</button>
+                        
+                </div>
+            <div id="theorem-definition" class="theorem-definition">
+             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+             </div> 
+
+             <div id="dynamic-buttons" class="triangle-buttons">
+    <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
+    <button id="tab-other" onclick="showTab('other')">Other Tab</button>
+   </div>
+
+             <!--div id="dynamic-buttons" class="triangle-buttons"></div-->
+                     <div class="canvas-wrapper">
+             <div class="additional-div">
+        
+         <button id="draw-line" class="icon-btn" title="Draw Line">
+            <img src="icons/line-icon.png" alt="Line Icon" />
+          </button>
+          <button id="draw-scale"class="icon-btn" title="Show Scale">Add Scale</button>
+
+          <button id="add-divider" class="icon-btn" title="Add Divider">
+          <img src="./icons/divider-icon.png" alt="Add Divider" />
+          </button>
+
+          
+
+          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
+            <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
+          </button>
+          
+
+          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
+          </button>
+          <button id="modify-shape" class="icon-btn" title="Modify Shape">
+            <img src="icons/modify-icon.png" alt="Modify Icon" />
+          </button>
+          <button id="delete-shape" class="icon-btn" title="Delete Shape">
+            <img src="icons/delete-icon.png" alt="Delete Icon" />
+          </button>
+         </div>
+        
+                    <canvas id="canvas" width="800" height="800" ></canvas>
+                </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar right" id="right-sidebar">
+            <h3>Exercises / Results</h3>
+            <ul>
+                <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+    <thead>
+        <tr>
+            <th>Readings</th>
+            <th>Measure of Angle ABD</th>
+            <th>Corresponding Angle ACF</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
+            <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
+            <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
+            <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
+            <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
+        </tr>
+    </tbody>
+</table>
+
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p></p>
+    </footer>
+     <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./shapes/CanvasManager.js"></script>
+   
+  
+
+</body>
+</html>
