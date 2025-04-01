@@ -21,6 +21,7 @@ header h1 {
     color: white;
 }
 
+
 /* Navigation Bar Left and Right */
 .nav-bar-left,
 .nav-bar-right {
@@ -38,10 +39,7 @@ header h1 {
     padding: 5px;
 }
 
-.nav-icon-btn img {
-    width: 40px; /* Fixed size for icons */
-    height: 40px;
-}
+
 
 .nav-icon-btn:hover {
     transform: scale(1.1); /* Slightly enlarge on hover */
@@ -55,5 +53,74 @@ header h1 {
 }
 
 /* Ensure Proper Layout */
+
+##main-header {
+  display: flex;
+  justify-content: space-between; /* icons on left, title centered */
+  align-items: center;
+  padding: 4px 12px;
+  background-color: #f9f9f9;
+  min-height: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.header-right {
+  display: flex;
+  gap: 10px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;  /* spacing between icons */
+}
+
+
+.header-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#page-title {
+  font-size: 18px;
+  margin-left: 20px;
+  margin: 0;
+  font-weight: 600; /* instead of bold */
+  font-family: 'Segoe UI', 'Helvetica', sans-serif;  /* modern, clean font */
+  color: #2f80ed;  /* This is a professional blue tone used in your icons */
+}
+
+
+
+.nav-icon-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+#main-header a {
+  text-decoration: none;
+}
+
+#main-header svg {
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+.nav-icon-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: #2f80ed;
+  stroke-width: 2;
+  fill: none;
+}
+
+
 
 

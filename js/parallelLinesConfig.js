@@ -40,7 +40,7 @@ export  const functionalityConfig = {
                 { endA: { x: 140, y: 420 }, endB: { x: 700, y: 420 }, type: "parallel",color: "green", enableDrag:false    },
 
                 // Transversals
-                { endA: { x: 380, y: 80 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false   },
+                { endA: { x: 400, y: 110 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false   },
                 { endA: { x: 450, y: 80 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
                 { endA: { x: 480, y: 80 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false   },
 
@@ -271,9 +271,9 @@ export  const functionalityConfig = {
                 { endA: { x: 140, y: 420 }, endB: { x: 700, y: 420 }, type: "parallel",color: "green",enableDrag:false   },
 
                 // Transversals
-                { endA: { x: 380, y: 80 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 450, y: 80 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 480, y: 80 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false  },
+                { endA: { x: 405, y: 120 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false  },
+                { endA: { x: 450, y: 100 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
+                { endA: { x: 475, y: 100 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false  },
 
                 // Connecting lines
                

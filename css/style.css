@@ -287,9 +287,9 @@ header h1 {
 }
 .theorem-definition {
     text-align: center;
-    font-size: 18px;
-    height : 04 vh;
-    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
     color: #4a90e2; /
     background-color: #f9f9f9;
     padding: ; /* Reduce padding */
@@ -379,6 +379,9 @@ header h1 {
             display: flex;
             flex: 1;
             position: relative;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
 .scale-label {
@@ -389,13 +392,14 @@ header h1 {
 }
 .triangle-buttons {
     position: absolute;
-    top: 170px; /* Adjust positioning if needed */
-    left: 50%; /* Keep it centered */
+    padding: 6px 14px;
+    top: 150px; /* Adjust positioning if needed */
+    left: 60%; /* Keep it centered */
     transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;  /* Allow buttons to wrap if needed */
     justify-content: center; /* Center the buttons */
-    gap: 5px; /* Reduce spacing */
+    gap: 15px; /* Reduce spacing */
     max-width: 90%; /* Prevent overflow */
     overflow: hidden; /* Hide extra content */
     padding: 5px;
@@ -439,7 +443,7 @@ header h1 {
 }
 
 .triangle-button.active {
-    background-color: blue; /* Change to preferred active color */
+    background-color: #007BFF; /* Change to preferred active color */
     color: white;
     border: 2px solid darkblue;
 }
@@ -495,4 +499,19 @@ header h1 {
     border-radius: 5px; /* Optional rounded corners */
     transform: scale(1.1); /* Slightly larger */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+/* ✅ Ensure triangle-buttons are clickable */
+#dynamic-buttons {
+    position: absolute;
+    z-index: 10;               /* Bring above canvas */
+    pointer-events: auto;      /* Allow clicks */
+}
+
+/* ✅ Ensure canvas does NOT block buttons */
+canvas {
+    width: 800px;
+    height: 800px;
+    z-index: 0;
+    position: relative;        /* Must be positioned to obey z-index */
 }

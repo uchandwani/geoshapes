@@ -23,65 +23,8 @@
 </head>
 
 <body>
-<header>
-    <div class="icon-container">
-    <!--div class="nav-bar-left">
-        <button class="nav-icon-btn" id="triangle-theorems-btn" title="Triangle Theorems">
-            <img src="icons/icon1.png" alt="Circle Theorem" />
-        </button>
-        <button class="nav-icon-btn" id="triangle-properties-btn" title="Triangle Properties">
-            <img src="icons/icon2.png" alt="Pythogoras Theorem" />
-        </button>
-        <button class="nav-icon-btn" id="circle-theorems-btn" title="Circle Theorems">
-            <img src="icons/icon3.png" alt="Estimating Pi" />
-        </button>
-        <button class="nav-icon-btn" id="parallel-lines-btn" title="Parallel Lines">
-            <img src="icons/icon4.png" alt="Parallel Lines" />
-        </button>
-        <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
-            <img src="icons/icon5.png" alt="Representting underroot x" />
-        </button>
-         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
-            <img src="icons/icon6.png" alt="Similarity and Congruence" />
-        </button>
-         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
-            <img src="icons/icon7.png" alt="Triangle Theorems" />
-        </button>
-         <button class="nav-icon-btn" id="triangle-centers-btn" title="Triangle Centers">
-            <img src="icons/icon8.png" alt="Arithmetic Progression" />
-        </button>
-    </div>
+<div id="header-placeholder"></div>
 
-    <h1>Triangle Properties</h1>
-
-    <div class="nav-bar-right">
-        <button class="nav-icon-btn" id="icon-btn-9" title="Placeholder Icon 9">
-            <img src="icons/icon9.png" alt="Icon 9" />
-        </button>
-        <button class="nav-icon-btn" id="icon-btn-10" title="Placeholder Icon 10">
-            <img src="icons/icon10.png" alt="Icon 10" />
-        </button>
-        <button class="nav-icon-btn" id="icon-btn-11" title="Placeholder Icon 11">
-            <img src="icons/icon11.png" alt="Icon 11" />
-        </button>
-        <button class="nav-icon-btn" id="icon-btn-12" title="Placeholder Icon 12">
-            <img src="icons/icon12.png" alt="Icon 12" />
-        </button>
-        <button class="nav-icon-btn" id="icon-btn-13" title="Placeholder Icon 13">
-            <img src="icons/icon13.png" alt="Icon 13" />
-         </button>   
-        <button class="nav-icon-btn" id="icon-btn-14" title="Placeholder Icon 14">
-            <img src="icons/icon14.png" alt="Icon 13" />
-        </button>
-         <button class="nav-icon-btn" id="icon-btn-15" title="Placeholder Icon 15">
-            <img src="icons/icon15.png" alt="Icon 13" />
-        </button>
-         <button class="nav-icon-btn" id="icon-btn-16" title="Placeholder Icon 16">
-            <img src="icons/icon16.png" alt="Icon 13" />
-        </button-->
-        
-    </div>
-</header>
     
     <!-- Theorem Definition Section -->
     
@@ -186,6 +129,24 @@
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
    <script type="module" src="./js/trianglePropertiesPage.js"></script>
+
+  <script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+
+      // Dynamically load header.js *after* header.html is loaded
+      const script = document.createElement('script');
+      script.src = './js/header.js';
+      script.onload = () => {
+        updatePageTitle();
+      };
+      document.head.appendChild(script);
+    });
+</script>
+
+
 
 </body>
 </html>

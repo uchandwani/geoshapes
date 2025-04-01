@@ -27,14 +27,11 @@
  * updateUI              | UUI     | config, functionalityKey           | Updates UI elements like sidebars and dynamic buttons.
  */
 
-import { functionalityConfig } from './circleTheoremConfig.js';
+import { functionalityConfig } from './PLTConfig.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
-import { Point } from '../shapes/Points.js';
-import { setMode } from '../shapes.js';
-
 
 // Functions ordered alphabetically
 
@@ -45,15 +42,14 @@ function activateButton(containerSelector, button) {
     console.log('%c' + "Function AB - activateButton", 'color: green;', button);
 
     const container = document.querySelector(containerSelector);
-    if (!container) return;
+    if (container) {
+        const buttons = container.querySelectorAll("button");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+    }
 
-    const buttons = container.querySelectorAll(".triangle-button");
-    buttons.forEach((btn) => btn.classList.remove("active"));  // Remove active class from all buttons
-
-    button.classList.add("active");  // Add active class to the clicked button
-    console.log("The active button is now:", button);
+    button.classList.add("active");
+    console.log("The active button is:", button);
 }
-
 
 /**
  * Adds specific points to the canvas and renders them.
@@ -80,9 +76,7 @@ export function attachNavBarListeners() {
     const navButtons = {
         sineTheta: document.getElementById("sineTheta-button"),
         cosineTheta: document.getElementById("cosineTheta-button"),
-        alternateSegments: document.getElementById("alternateSegments-button"),
-        subtendedAngles: document.getElementById("subtendedAngles-button"),
-        quadrilaterals: document.getElementById("quadrilaterals-button"),
+        trigonoIdentities: document.getElementById("trigonoIdentities-button"),
     };
 
     Object.entries(navButtons).forEach(([key, button]) => {
@@ -116,7 +110,7 @@ export function attachNavBarListeners() {
  * Draws a circle based on the given configuration.
  */
 function drawCircle(canvasConfig) {
-    console.log('%c' + "Function DWC - canvasConfig", 'color: green;', canvasConfig, canvasConfig.length);
+    console.log('%c' + "Function DWC - canvasConfig", 'color: green;', canvasConfig);
     const { circle } = canvasConfig;
     if (!circle || circle.length !== 2) {
         console.warn("Invalid or missing circle configuration:", circle);
@@ -137,305 +131,84 @@ function drawCircle(canvasConfig) {
 
     console.log("Drawing circle with center:", center, "and radius:", radius);
 
+  //  canvasManager.clearAllShapes();
     const circleShape = new Circle(center, radius);
-    
-    // 🔹 Ensure enableDrag is applied properly
-    circleShape.setEnableDrag(canvasConfig.enableDrag ?? true);  
-
     canvasManager.addShape(circleShape);
     canvasManager.render();
 
     console.log("Circle successfully drawn:", canvasManager.shapes);
 }
 
-
-function drawPoints(config, subtype) {
-    let points = config.points || [];
-
-    // Include external points but filter them based on subtype
-    if (config.externalPoints) {
-        const externalPoint = config.externalPoints[subtype];
-        if (externalPoint) {
-            points.push(externalPoint);
-        }
-    }
-
-    console.log(`📌 drawPoints - Incoming points for subtype "${subtype}":`, points);
-
-    // ✅ Filter points that belong to the selected subtype
-    if (subtype) {
-        points = points.filter(p => !p.subtype || p.subtype === subtype);
-    }
-
-    console.log(`🔎 drawPoints - Filtered points for subtype "${subtype}":`, points);
-
-    if (!Array.isArray(points) || points.length === 0) {
-        console.warn(`⚠️ No points found in configuration for subtype "${subtype}".`);
-        return;
-    }
-
-    console.log(`🖊 Drawing ${points.length} points for subtype "${subtype}":`, points);
-
-    points.forEach(({ x, y, label, color = "black", radius = 5 }) => {
-        if (x === undefined || y === undefined) {
-            console.warn("⚠️ Skipping invalid point with missing coordinates:", { x, y, label });
-            return;
-        }
-
-        // ✅ Correctly create and store the Point object
-        const point = new Point(x, y, label || "", color, radius);
-
-        console.log(`🖊 Adding point ${label} at (${x}, ${y})`);
-
-        // ✅ First add the point to the canvas
-        canvasManager.addShape(point);
-    });
-
-    // ✅ Render all added points at once after the loop
-    canvasManager.render();
-}
-
 /**
  * Draws lines filtered by the specified type.
  */
-function drawLines(canvasConfig, subtype = null) {
-    console.log(`%cFunction DWL - Drawing Lines for subtype: "${subtype}"`, 'color: blue;', canvasConfig);
+function drawLines(canvasConfig, type) {
+    if (canvasConfig.lines && Array.isArray(canvasConfig.lines)) {
+        const filteredLines = canvasConfig.lines.filter(line => line.type === type);
+        filteredLines.forEach(lineConfig => {
+            const { endA, endB } = lineConfig;
+            if (endA && endB) {
+                const line = new Line(endA, endB, 'red');
+                canvasManager.addShape(line);
+                console.log("Line drawn at:", canvasManager.shapes);
+            }
+        });
+        console.log(`Lines of type '${type}' drawn.`);
+        canvasManager.render();
+    } else {
+        console.warn("Invalid or missing lines configuration.");
+    }
+}
 
-    if (!canvasConfig.lines || !Array.isArray(canvasConfig.lines)) {
-        console.warn("⚠️ No valid lines data in canvasConfig:", canvasConfig.lines);
+function drawPoints(canvasConfig, buttonType) {
+    console.log('%c' + "Function DWP - Drawing Points", 'color: green;', canvasConfig, buttonType);
+
+    if (!canvasConfig.points || !Array.isArray(canvasConfig.points)) {
+        console.warn("⚠️ No points found in configuration.");
         return;
     }
 
-    // ✅ If subtype is provided, filter lines; otherwise, use all lines
-    const filteredLines = subtype 
-        ? canvasConfig.lines.filter(line => line.subtype === subtype) 
-        : canvasConfig.lines;
-
-    console.log(`🔍 Found ${filteredLines.length} lines to draw for subtype "${subtype || 'ALL'}"`);
-
-    if (filteredLines.length === 0) {
-        console.warn(`⚠️ No lines found for subtype "${subtype}". Skipping drawing.`);
-        return;
-    }
-
-    filteredLines.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
-        if (endA && endB) {
-            const line = new Line(endA, endB, color);
-            line.setEnableDrag(enableDrag);  // Apply dragging setting from config
-
-            canvasManager.addShape(line);
-            console.log(`📏 Drawing line from (${endA.x}, ${endA.y}) to (${endB.x}, ${endB.y}) in color "${color}"`);
-        } else {
-            console.warn("⚠️ Skipping invalid line (missing endpoints):", { endA, endB });
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type }) => {
+        // ✅ Draw points that:
+        // - Match the current buttonType (sin, cos, tan)
+        // - OR Have no 'type' (universal points like E)
+        if (!type || type === buttonType) {
+            const point = new Point(x, y, label, color, radius);
+            canvasManager.addShape(point);
+         //   console.log(`✅ Point drawn at (${x}, ${y}) with label "${label}" (Type: ${type || "Universal"})`);
         }
     });
 
-    console.log("🔄 Rendering lines...");
     canvasManager.render();
 }
-
-
-function drawTangents(config, subtype) {
-    console.log(`🎯 Processing Tangents for ${subtype}`);
-
-    const { circle, points, externalPoints, tangentLines } = config;
-    if (!circle || !points) {
-        console.warn("⚠️ Invalid tangent configuration.");
-        return;
-    }
-
-    const [center, radius] = circle;
-
-    /*** 📌 Step 1: Handle Standard Two-Point Tangents ***/
-    const tangentPoints = points.filter(p => p.type === "tangent" && p.subtype === subtype);
-    if (tangentPoints.length === 2) {
-        console.log(`✅ Found two tangent points for ${subtype}:`, tangentPoints);
-
-        const [point1, point2] = tangentPoints;
-
-        // Compute external intersection dynamically
-        const computedExternal = findTangentIntersection(center, radius, point1, point2);
-        if (!computedExternal) {
-            console.warn("❌ Could not compute external tangent intersection.");
-            return;
-        }
-
-        // Assign metadata from config.externalPoints
-        const externalPointConfig = externalPoints[subtype] || {};
-        const externalPoint = {
-            ...computedExternal,
-            label: externalPointConfig.label || subtype.toUpperCase(),
-            color: externalPointConfig.color || "blue",
-            radius: externalPointConfig.radius || 5
-        };
-
-        console.log(`✅ Using tangent points for ${subtype}:`, point1, point2, "and external point:", externalPoint);
-
-        // Draw traditional tangents
-        drawLines({
-            lines: [
-                { endA: point1, endB: externalPoint, color: "red" },
-                { endA: point2, endB: externalPoint, color: "red" }
-            ]
-        });
-
-        // Draw external point
-        console.log("🖊 Drawing external point:", externalPoint);
-        drawPoints({ points: [externalPoint] });
-
-        console.log(`🎯 Tangents drawn for ${subtype} with external point ${externalPoint.label}`);
-    } else if (tangentPoints.length > 2) {
-        console.warn(`⚠️ Expected 2 tangent points for ${subtype}, but found more.`);
-    }
-
-    /*** 📌 Step 2: Handle Midpoint-Based Tangents ***/
-    console.log("The tangentLines are", tangentLines);
-    if (tangentLines) {
-        const midTangents = tangentLines.filter(t => t.subtype === subtype);
-        console.log("The mid Tangents are ", midTangents);
-        midTangents.forEach(({ midpoint, length, color = "black" }) => {
-            if (!midpoint || !length) {
-                console.warn("⚠️ Skipping invalid midpoint tangent (missing parameters):", { midpoint, length });
-                return;
-            }
-
-            // Compute perpendicular direction to the radius
-            let dx = midpoint.x - center.x;
-            let dy = midpoint.y - center.y;
-
-            // Compute perpendicular (rotate 90 degrees)
-            let perpX = -dy;
-            let perpY = dx;
-
-            // Normalize
-            let magnitude = Math.sqrt(perpX * perpX + perpY * perpY);
-            perpX /= magnitude;
-            perpY /= magnitude;
-
-            // Compute endpoints
-            let halfLength = length / 2;
-            let endA = { x: midpoint.x + halfLength * perpX, y: midpoint.y + halfLength * perpY };
-            let endB = { x: midpoint.x - halfLength * perpX, y: midpoint.y - halfLength * perpY };
-
-            console.log(`📏 Drawing midpoint tangent from (${endA.x}, ${endA.y}) to (${endB.x}, ${endB.y})`);
-
-            // Draw the midpoint tangent
-            drawLines({ lines: [{ endA, endB, color }] });
-
-            // Draw the midpoint itself
-            drawPoints({ points: [midpoint] });
-        });
-    }
-
-    console.log(`🎯 Tangents processing complete for ${subtype}`);
-}
-
-
-/**
- * Computes the external intersection point of two tangents from given points on the circle.
- */
-function computeExternalPoint(center, radius, point1, point2) {
-    const midX = (point1.x + point2.x) / 2;
-    const midY = (point1.y + point2.y) / 2;
-
-    // Compute slope of the line joining the two tangent points
-    const dx = point2.x - point1.x;
-    const dy = point2.y - point1.y;
-
-    // Find the perpendicular slope
-    if (dy === 0) return null;  // Avoid division by zero
-    const perpSlope = -dx / dy;
-
-    // Estimate external intersection beyond midpoint (adjust multiplier if needed)
-    const distance = 2 * Math.hypot(midX - center.x, midY - center.y);
-    const angle = Math.atan(perpSlope);
-
-    return {
-        x: midX + distance * Math.cos(angle),
-        y: midY + distance * Math.sin(angle),
-        label: "P",
-        color: "blue",
-        radius: 5
-    };
-}
-
-
-
-/**
- * Computes the external intersection point of two tangents from given points on the circle.
- */
-function findTangentIntersection(center, radius, point1, point2) {
-    const { x: h, y: k } = center;
-    const r = radius;
-    
-    // Compute slope of the line joining two tangent points
-    const slope = (point2.y - point1.y) / (point2.x - point1.x);
-
-    // Compute the perpendicular slope
-    const perpSlope = -1 / slope;
-
-    // Midpoint of tangent points
-    const midX = (point1.x + point2.x) / 2;
-    const midY = (point1.y + point2.y) / 2;
-
-    // External point should be positioned further along the perpendicular line
-    const distance = Math.sqrt(r * r - ((midX - h) ** 2 + (midY - k) ** 2));
-
-    return {
-        x: midX + distance * Math.cos(Math.atan(perpSlope)),
-        y: midY + distance * Math.sin(Math.atan(perpSlope))
-    };
-}
-
-
-
-
 
 /**
  * Draws shapes (circle, triangles, or lines) on the canvas.
  */
 function drawShapes(fkey, canvasConfig, buttonType) {
     console.log('%c' + "Function DWS - canvasConfig, buttonType", 'color: green;', buttonType);
-
+   
     if (canvasConfig.points) {
-        console.log("✅ Points in config before filtering:", JSON.stringify(canvasConfig.points, null, 2));
         drawPoints(canvasConfig, buttonType);
-    } else {
-        console.warn("⚠️ No points found in `canvasConfig.points`");
     }
 
-    if (canvasConfig.circle) {
+   if (canvasConfig.circle) {
         console.log("✅ Drawing Circle");
         drawCircle(canvasConfig);
     }
 
-    // Extract tangent points from config.points
-    const tangentPoints = canvasConfig.points?.filter(p => p.type === "tangent" && p.subtype === buttonType) || [];
-
-    // Check if tangentLines exist in config
-    const hasTangentLines = Array.isArray(canvasConfig.tangentLines) && canvasConfig.tangentLines.length > 0;
-
-    if (tangentPoints.length === 2 || hasTangentLines) {
-        console.log(`✅ Drawing Tangents for subtype: ${buttonType}`, JSON.stringify({ tangentPoints, tangentLines: canvasConfig.tangentLines }, null, 2));
-        drawTangents(canvasConfig, buttonType);
-    } else {
-        console.warn(`⚠️ No valid tangent points or tangent lines found for subtype "${buttonType}".`);
+    if (canvasConfig.triangles) {
+        console.log("✅ Drawing Triangles", canvasConfig, buttonType);
+        drawTriangles(canvasConfig, buttonType);
     }
-
-
 
     if (canvasConfig.lines) {
         console.log("✅ Drawing Lines");
         drawLines(canvasConfig, buttonType);
     } else {
-        console.warn("⚠️ No lines found in `canvasConfig.lines`");
+        console.warn("⚠️ No lines found in canvasConfig");
     }
-
-    canvasManager.render();
 }
-
-
-
 
 /**
  * Draws triangles according to configuration and type.
@@ -461,11 +234,15 @@ function drawTriangles(canvasConfig, buttonType) {
     console.log(`Drawing ${filteredTriangles.length} triangles for type: ${buttonType || "all"}`);
 
     filteredTriangles.forEach(triangleConfig => {
+        
+
         let { vertexA, vertexB, vertexC, angles, radius, labels, showMidPoints = false, showMeasurements = false } = triangleConfig;
 
         if (triangleConfig.vertexA && triangleConfig.angles && triangleConfig.radius) {
             console.log("Inside if vertex, angles and radius defined", triangleConfig);
+            // ✅ **Case 1: Calculate vertices from vertexA, angles, and radius**
            
+            
             const angle1 = (angles[0] * Math.PI) / 180;
 
             vertexB = {
@@ -477,8 +254,10 @@ function drawTriangles(canvasConfig, buttonType) {
                 y: vertexA.y,
             };
         } else if (triangleConfig.vertices) {
+            // ✅ **Case 2: Use provided three vertices**
+
             if (triangleConfig.vertices.length === 3) {
-                console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
+                 console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
                 [vertexA, vertexB, vertexC] = triangleConfig.vertices;
             } else {
                 console.warn("⚠️ Invalid vertices configuration. Expected exactly 3 points.");
@@ -489,16 +268,12 @@ function drawTriangles(canvasConfig, buttonType) {
             return;
         }
 
+        // ✅ Create Triangle and Add to Canvas
         const triangle = new Triangle(vertexA, vertexB, vertexC);
         triangle.setVertexLabels(labels);
-        
-        // 🔹 Ensure enableDrag is applied properly
-        triangle.setEnableDrag(canvasConfig.enableDrag ?? true);  
-
-        triangle.setShowLabels(true); 
+        triangle.setShowLabels(true); // Ensure labels appear
         triangle.setShowMidpoints(showMidPoints);
         triangle.setShowMeasurements(showMeasurements);
-
         if (triangleConfig.labels) {
             triangle.setVertexLabels(triangleConfig.labels);
         }
@@ -509,8 +284,6 @@ function drawTriangles(canvasConfig, buttonType) {
     canvasManager.render();
     console.log("✅ Triangles successfully drawn.");
 }
-
-
 
 function handleNavButtons(functionalityKey) {
     const navButtonsContainer = ".navigation-buttons";
@@ -543,8 +316,8 @@ export function handleTriangleType(fkey, type) {
     // Draw triangles
     drawTriangles(canvasConfig, type);
 
-    if(fkey === "sineTheta" || fkey === "cosineTheta" ) {
-       
+    if(fkey === "sinrTheta" || fkey === "cosineTheta" ) {
+        if (type === 'cos') // Draw lines
             drawLines(canvasConfig, type);
     }    
     // Render canvas
@@ -554,42 +327,41 @@ export function handleTriangleType(fkey, type) {
 
 
 export function switchFunctionality(functionalityKey, buttonType) {
-    console.log(`🟢 [switchFunctionality] Key: ${functionalityKey}, Sub-Button: ${buttonType}`);
+    console.log(`Switching functionality: ${functionalityKey}, buttonType: ${buttonType}`);
 
-    console.log(`🚨 switchFunctionality triggered from sub-button with:`, functionalityKey, buttonType);
-
-
+    // Activate the main functionality button
     handleNavButtons(functionalityKey);
 
+    // Update the UI
     const config = functionalityConfig[functionalityKey];
-    if (!config) {
-        console.error("❌ Invalid functionality key:", functionalityKey);
-        return;
+    if (config) {
+
+    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
+    const activeSubButton = dynamicButtonsContainer?.querySelector(".triangle-button.active");
+
+        // Use the active sub-button if available, otherwise default
+        const effectiveButtonType = activeSubButton?.dataset.type || config.defaultButtonType;
+
+
+        drawShapes(functionalityKey,config.canvasConfig, buttonType);
+        updateUI(config, functionalityKey);
+        updateLeftSidebar(functionalityKey, buttonType);
+        updateRightSidebar(functionalityKey, buttonType);
+
+        // If buttonType is specified, activate it
+        if (buttonType) {
+            
+            const buttonToActivate = dynamicButtonsContainer.querySelector(
+                `button[data-type="${buttonType}"]`
+            );
+            if (buttonToActivate) {
+                activateButton("#dynamic-buttons", buttonToActivate);
+            }
+        }
+    } else {
+        console.error("Invalid functionality key:", functionalityKey);
     }
-
-    console.log("🟡 [switchFunctionality] Loaded config:", config);
-
-    canvasManager.clearAllShapes();
-    console.log("🧹 Cleared canvas shapes");
-
-    drawShapes(functionalityKey, config.canvasConfig, buttonType);
-
-
-    updateUI(config, functionalityKey, buttonType);
-    updateLeftSidebar(functionalityKey, buttonType);
-    updateRightSidebar(functionalityKey, buttonType);
-
-    // 🛠️ Prevents unintended drawing
-    setMode("modify");
-
-    console.log("🟢 [switchFunctionality] Rendered final shapes");
-    canvasManager.render();
 }
-
-
-    
-
-
 // Other functions (remaining code) should also be reordered alphabetically in a similar fashion.
 function updateActiveButton(buttonElement) {
     const currentActive = document.querySelector(".navigation-buttons button.active, .triangle-button.active");
@@ -608,27 +380,23 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey, buttonType) {
+function updateUI(config, functionalityKey) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config);
+
+    // ✅ Ensure theorem text is updated
     updateTheoremText(config);
 
+    // ✅ Handle dynamic sub-buttons
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
-    console.log("🧩 dynamicButtonsContainer:", dynamicButtonsContainer);
 
+    // ✅ Hide sub-buttons for Sine Theta (same behavior as TrigonoRatios)
     if (functionalityKey === "sineTheta") {
-        dynamicButtonsContainer.style.display = "none";
-        return;
-    }
+        dynamicButtonsContainer.style.display = "none"; // Hide sub-buttons
+    } 
+    else if (config.buttonSet && Array.isArray(config.buttonSet)) {
+        dynamicButtonsContainer.innerHTML = ""; // Clear existing buttons
 
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        console.log("🛠 Rendering buttons for:", functionalityKey);
-        console.log("🔍 buttonSet:", config.buttonSet);
-        console.log("📌 dynamicButtonsContainer found:", !!dynamicButtonsContainer);
-
-        dynamicButtonsContainer.innerHTML = "";
-
-        let buttonsMap = {};
-
+        // Render sub-buttons
         config.buttonSet.forEach((buttonConfig) => {
             const btn = document.createElement("button");
             btn.classList.add("triangle-button");
@@ -636,39 +404,32 @@ function updateUI(config, functionalityKey, buttonType) {
             btn.dataset.type = buttonConfig.type;
             btn.dataset.functionalityKey = functionalityKey;
 
-            // Store in map for later access
-            buttonsMap[buttonConfig.type] = btn;
-
+            // Attach click handler
             btn.addEventListener("click", () => {
-                console.log(`🔵 Clicked Sub-Button: ${buttonConfig.type}`);
-                document.querySelectorAll(".triangle-button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
+                activateButton("#dynamic-buttons", btn);
                 switchFunctionality(functionalityKey, buttonConfig.type);
             });
 
             dynamicButtonsContainer.appendChild(btn);
         });
 
-        dynamicButtonsContainer.style.display = "block";
+        dynamicButtonsContainer.style.display = "block"; // Show sub-buttons for other functionalities
 
-        // ✅ Mark the right sub-button active (don't click it again!)
-        if (buttonType) {
-            if (buttonsMap[buttonType]) {
-                buttonsMap[buttonType].classList.add("active");
-            }
-        } else {
-            const defaultType = config.defaultButtonType || config.buttonSet[0]?.type;
-            if (buttonsMap[defaultType]) {
-                buttonsMap[defaultType].classList.add("active");
-                buttonsMap[defaultType].click(); // Trigger once at top level
-            }
+        // Activate default sub-button if none is active
+        const activeSubButton = dynamicButtonsContainer.querySelector(".triangle-button.active");
+        const effectiveSubButton =
+            activeSubButton ||
+            dynamicButtonsContainer.querySelector(
+                `button[data-type="${config.defaultButtonType}"]`
+            );
+
+        if (effectiveSubButton) {
+            activateButton("#dynamic-buttons", effectiveSubButton);
         }
-
     } else {
-        dynamicButtonsContainer.style.display = "none";
+        dynamicButtonsContainer.style.display = "none"; // Hide if no buttons exist
     }
 }
-
 
 
 export function updateRightSidebar(functionalityKey, subClassification) {
@@ -732,12 +493,13 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     let content = leftSidebarContent[subClassification]; // Extract content for sub-button
 
     // ✅ Fix: If functionality is `sineTheta`, show all content at once
-    if (functionalityKey === "sineTheta" ||  functionalityKey === "cosineTheta" ) {
+    if (functionalityKey === "sineTheta") {
         content = leftSidebarContent;
     }
 
     
-    
+    console.log("Extracted content for left sidebar:", content);
+
     // ✅ Ensure content is a valid HTML string before inserting
     if (!content) {
         console.error(`No valid content found for subClassification: ${subClassification}`);
@@ -765,19 +527,11 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-function updateTheoremText(config, subtype) {
+function updateTheoremText(config) {
     console.log("Inside updateTheoremText", config);
-    let definition = config.theoremDefinition;
-
-    // Check if it's an object and subtype is defined
-    if (typeof definition === 'object' && subtype && definition[subtype]) {
-        definition = definition[subtype];
+    const theoremText = document.getElementById('theorem-text');
+    if (theoremText) {
+        console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
+        theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
     }
-
-    // Fall back to a default string if not found
-    if (typeof definition !== 'string') {
-        definition = "Definition not available.";
-    }
-
-    document.getElementById("theorem-definition").innerHTML = definition;
 }

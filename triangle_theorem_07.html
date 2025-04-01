@@ -23,59 +23,8 @@
     </script>
 </head>
 <body>
-    <header> 
-    <div class="icon-container">
-    <!--button class="nav-icon-btn" id="icon-btn-1" title="Home">
-        <img src="icons/home.png" alt="Home Icon" />
-    </button>
+    <div id="header-placeholder"></div>
 
-    <button class="nav-icon-btn" id="icon-btn-2" title="Search">
-        <img src="icons/search.png" alt="Search Icon" /> </button>
-    <button class="nav-icon-btn" id="icon-btn-3" title="Settings">
-        <img src="icons/settings.png" alt="Settings Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-4" title="Profile">
-        <img src="icons/profile.png" alt="Profile Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-5" title="Notifications">
-        <img src="icons/notifications.png" alt="Notifications Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-6" title="Messages">
-        <img src="icons/messages.png" alt="Messages Icon" />
-    </button-->
-    <button class="nav-icon-btn" id="icon-btn-7" title="Triangle Theorems" data-link="triangle_theorem_07.html">
-        <img src="icons/icon7.png" alt="Triangle Theorems" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-8" title="Tasks">
-        <img src="icons/icon8.png" alt="Tasks Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-9" title="Triangle Properties" data-link="trig_properties_09.html">
-        <img src="icons/icon9.png" alt="Trianlge Properties" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-10" title="Settings">
-        <img src="icons/icon10.png" alt="Settings 2 Icon" />
-    </button>
-    <!--button class="nav-icon-btn" id="icon-btn-11" title="Contact Us">
-        <img src="icons/contact.png" alt="Contact Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-12" title="About Us">
-        <img src="icons/about.png" alt="About Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-13" title="Gallery">
-        <img src="icons/gallery.png" alt="Gallery Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-14" title="Reports">
-        <img src="icons/reports.png" alt="Reports Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-15" title="Dashboard">
-        <img src="icons/dashboard.png" alt="Dashboard Icon" />
-    </button>
-    <button class="nav-icon-btn" id="icon-btn-16" title="Logout">
-        <img src="icons/logout.png" alt="Logout Icon" />
-    </button-->
-</div>       
-       
-    </header>
     
     <!-- Theorem Definition Section -->
     
@@ -212,6 +161,23 @@
     </script-->
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
+  <script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+
+      // Dynamically load header.js *after* header.html is loaded
+      const script = document.createElement('script');
+      script.src = './js/header.js';
+      script.onload = () => {
+        updatePageTitle();
+      };
+      document.head.appendChild(script);
+    });
+ </script>
+
+
   
 
 </body>
