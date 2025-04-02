@@ -144,7 +144,9 @@
           </button>
          </div>
         
-                    <canvas id="canvas" width="800" height="800" ></canvas>
+                    <div class="responsive-canvas-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
                 </div>
         </div>
 
@@ -185,6 +187,28 @@
     </footer>
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
+
+  <script>
+function resizeCanvasToDisplaySize(canvas) {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width;
+    canvas.height = height;
+  }
+}
+
+window.addEventListener("load", () => {
+  const canvas = document.getElementById("canvas");
+  resizeCanvasToDisplaySize(canvas);
+});
+
+window.addEventListener("resize", () => {
+  const canvas = document.getElementById("canvas");
+  resizeCanvasToDisplaySize(canvas);
+});
+</script>
+
   
 
 </body>
