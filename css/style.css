@@ -515,3 +515,19 @@ canvas {
     z-index: 0;
     position: relative;        /* Must be positioned to obey z-index */
 }
+
+
+/* === Responsive Enhancements === */
+
+/* Hide right sidebar on screens 1366px wide or less */
+@media (max-width: 1366px) {
+  .sidebar.right {
+    display: none;
+  }
+}
+
+/* Ensure container fits in viewport height */
+.container {
+  max-height: calc(100vh - 60px); /* Adjust based on header/footer height */
+  overflow-y: auto;
+}
