@@ -10,8 +10,8 @@ import { canvasManager } from './shapes/CanvasManager.js';
 import { Divider } from './shapes/Divider.js';
 import { Compass } from './shapes/Compass.js';
 import {Arc} from './shapes/Arc.js';
-import {functionalityConfig} from '../js/functionalityConfig.js';
-import { currentPageFeatures } from '../js/functionalityConfig.js';
+import { functionalityConfig } from '/geoshapes/js/functionalityConfig.js';
+import { currentPageFeatures } from '/geoshapes/js/functionalityConfig.js';
 
 
 
