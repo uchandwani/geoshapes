@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triangle Theorems</title>
     <!--link rel="stylesheet" href="../css/header_styles.css"-->
-    <script src="./js/header.js" defer></script>
+    
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/trianglePage.js"></script>
@@ -171,11 +171,15 @@
       const script = document.createElement('script');
       script.src = './js/header.js';
       script.onload = () => {
-        updatePageTitle();
+        if (typeof updatePageTitle === "function") {
+          updatePageTitle();  // ✅ This should be defined in header.js
+        } else {
+          console.warn("⚠️ updatePageTitle not found.");
+        }
       };
       document.head.appendChild(script);
     });
- </script>
+</script>
 
 
   

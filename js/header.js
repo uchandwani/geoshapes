@@ -2,6 +2,7 @@
 // header.js
 
 // ✅ Declare only once
+console.log("Before PageTitles declaration line");
 const pageTitles = {
   "index.html": "Home",
   "parallel_lines_04.html": "Parallel Lines",
@@ -9,7 +10,7 @@ const pageTitles = {
   "trig_properties_09.html": "Trigonometric Properties",
   "circle_theorems_02.html": "Circle Theorems"
 };
-
+console.log("PageTitle is now declared");
 function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";

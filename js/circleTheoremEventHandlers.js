@@ -555,9 +555,7 @@ export function handleTriangleType(fkey, type) {
 
 export function switchFunctionality(functionalityKey, buttonType) {
     console.log(`🟢 [switchFunctionality] Key: ${functionalityKey}, Sub-Button: ${buttonType}`);
-
     console.log(`🚨 switchFunctionality triggered from sub-button with:`, functionalityKey, buttonType);
-
 
     handleNavButtons(functionalityKey);
 
@@ -569,11 +567,26 @@ export function switchFunctionality(functionalityKey, buttonType) {
 
     console.log("🟡 [switchFunctionality] Loaded config:", config);
 
+    // 🔧 PATCH: Remove rotation controls from any active Divider objects
+    
+    
+    canvasManager.shapes.forEach(shape => {
+        if (shape.type === 'divider' && typeof shape.removeRotationControls === 'function') {
+            shape.removeRotationControls();
+        }
+
+        
+        if (shape.type === 'protractor' && typeof shape.removeRotationControls === 'function') {
+        shape.removeRotationControls();
+        }
+
+
+    });
+
     canvasManager.clearAllShapes();
     console.log("🧹 Cleared canvas shapes");
 
     drawShapes(functionalityKey, config.canvasConfig, buttonType);
-
 
     updateUI(config, functionalityKey, buttonType);
     updateLeftSidebar(functionalityKey, buttonType);
@@ -585,6 +598,7 @@ export function switchFunctionality(functionalityKey, buttonType) {
     console.log("🟢 [switchFunctionality] Rendered final shapes");
     canvasManager.render();
 }
+
 
 
     

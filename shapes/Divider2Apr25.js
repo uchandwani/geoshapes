@@ -13,8 +13,6 @@ constructor(pivotX, pivotY){
     this.ringRadius = 10;
     this.dragging = null;
     this.rotationControlsInitialized = false;
-    this.pivotDraggable = false; // new flag to allow drag when pivot is clicked
-
 
     // Initialize buttons
     this.buttons = {
@@ -34,7 +32,7 @@ constructor(pivotX, pivotY){
         if (isShiftKey) {
             this.rotateDivider(mouseX, mouseY); 
              this.updateRotationControls(); 
-        } else if (this.dragging === 'pivot' && this.pivotDraggable) {
+        } else if (this.dragging === 'pivot') {
             // Move pivot and both legs
             this.pivot.x += dx;
             this.pivot.y += dy;
@@ -140,8 +138,6 @@ constrainToCanvas(canvasWidth, canvasHeight) {
         console.log("Rotation Buttons State:", this.buttons);
         ctx.beginPath();
         ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = this.pivotDraggable ? 'red' : '#ccc';
-        ctx.fill();
         ctx.strokeStyle = '#555';
         ctx.lineWidth = 2;
         ctx.stroke();
@@ -186,9 +182,6 @@ constrainToCanvas(canvasWidth, canvasHeight) {
         console.log("Divider drag starts");
         if (this.isPointInside({ x: mouseX, y: mouseY })) {
             if (Math.hypot(this.pivot.x - mouseX, this.pivot.y - mouseY) <= 10) {
-            this.pivotDraggable = !this.pivotDraggable;
-            console.log("✅ Pivot toggle. Now draggable?", this.pivotDraggable);
-
                 this.dragging = 'pivot';
             } else if (Math.hypot(this.leg1.x - mouseX, this.leg1.y - mouseY) <= 10) {
                 this.dragging = 'leg1';
@@ -288,8 +281,6 @@ rotatePointAroundPivot(point, angle) {
         }
     });
     this.rotationControlsInitialized = false;
-    this.pivotDraggable = false; // new flag to allow drag when pivot is clicked
-
 }
 
 isNearPivot(x, y) {

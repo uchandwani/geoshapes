@@ -141,13 +141,16 @@
       const script = document.createElement('script');
       script.src = './js/header.js';
       script.onload = () => {
-        updatePageTitle();
+        if (typeof updatePageTitle === "function") {
+          updatePageTitle();  // ✅ This should be defined in header.js
+        } else {
+          console.warn("⚠️ updatePageTitle not found.");
+        }
       };
       document.head.appendChild(script);
     });
 </script>
 
-   
   
 </body>
 </html>

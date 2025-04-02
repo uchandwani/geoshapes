@@ -11,6 +11,7 @@ const enableSnapping = currentPageFeatures.enableProtractorSnapping || false;
 export class Protractor extends Shape {
     constructor(center, radius = 80, style = 'modern') {
         super();
+        this.type = 'protractor'; // important for cleanup
         this.center = center;
         this.radius = radius;
         this.style = style;
@@ -111,13 +112,14 @@ export class Protractor extends Shape {
     removeRotationControls() {
         if (this.rotationControls) {
             const { rotateLeft1, rotateRight1, rotateLeft5, rotateRight5 } = this.rotationControls;
-            document.body.removeChild(rotateLeft1);
-            document.body.removeChild(rotateRight1);
-            document.body.removeChild(rotateLeft5);
-            document.body.removeChild(rotateRight5);
+            [rotateLeft1, rotateRight1, rotateLeft5, rotateRight5].forEach((btn) => {
+                if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+            });
             this.rotationControls = null;
         }
+        this.rotationControlsInitialized = false;
     }
+
 
     rotateByDegrees(degrees) {
         this.angleOffset = (this.angleOffset + degrees + 360) % 360;

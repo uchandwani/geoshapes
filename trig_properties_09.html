@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triangle Properties</title>
-    <script src="./js/header.js" defer></script>
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/trianglePropertiesPage.js"></script>
@@ -130,7 +129,7 @@
   <script type="module" src="./shapes/CanvasManager.js"></script>
    <script type="module" src="./js/trianglePropertiesPage.js"></script>
 
-  <script>
+ <script>
   fetch('header.html')
     .then(res => res.text())
     .then(html => {
@@ -140,7 +139,11 @@
       const script = document.createElement('script');
       script.src = './js/header.js';
       script.onload = () => {
-        updatePageTitle();
+        if (typeof updatePageTitle === "function") {
+          updatePageTitle();  // ✅ This should be defined in header.js
+        } else {
+          console.warn("⚠️ updatePageTitle not found.");
+        }
       };
       document.head.appendChild(script);
     });

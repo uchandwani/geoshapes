@@ -340,14 +340,14 @@ canvas.addEventListener('mousedown', (e) => {
                             selectedShape.rotating = true;
                             console.log("🔄 Divider rotation initiated.");
                         } else {
-                            // Detect which part of the divider is clicked and set `this.dragging`
-                            if (selectedShape.isNearPivot(offsetX, offsetY)) {
+                            // Detect which part of the divider is clicked and set `dragging`
+                            if (selectedShape.isNearPivot && selectedShape.isNearPivot(offsetX, offsetY)) {
                                 selectedShape.dragging = 'pivot';
                                 console.log("📌 Dragging Divider Pivot.");
-                            } else if (selectedShape.isNearLeg1(offsetX, offsetY)) {
+                            } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
                                 selectedShape.dragging = 'leg1';
                                 console.log("📏 Dragging Divider Leg 1.");
-                            } else if (selectedShape.isNearLeg2(offsetX, offsetY)) {
+                            } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
                                 selectedShape.dragging = 'leg2';
                                 console.log("📏 Dragging Divider Leg 2.");
                             } else {
@@ -355,8 +355,7 @@ canvas.addEventListener('mousedown', (e) => {
                             }
                         }
                     }
-                    break;
-
+                 break;
 
                 case 'Compass':
                     const dx = offsetX - selectedShape.leg2.x;
@@ -693,6 +692,35 @@ export function deleteShape(x, y) {
     } else {
         console.warn("No shape found at the given coordinates.");
     }
+}
+
+
+
+// Helper: Cleanly add shape to canvas without resetting layout
+function addShapeAndSwitchToModify(shape) {
+    canvasManager.addShape(shape);
+    mode = 'modify'; // So dragging etc. works
+    selectedShape = shape; // Optional: for UI behavior
+    console.log(`📌 Shape added: ${shape.type}`);
+}
+
+// Divider tool click handler
+const dividerButton = document.getElementById("divider-icon");
+if (dividerButton) {
+    dividerButton.addEventListener("click", () => {
+        const newDivider = new Divider(300, 300); // Center-ish location
+        addShapeAndSwitchToModify(newDivider);
+    });
+}
+
+// Protractor tool click handler
+const protractorButton = document.getElementById("protractor-icon");
+if (protractorButton) {
+    protractorButton.addEventListener("click", () => {
+        const center = new Point(400, 300);
+        const newProtractor = new Protractor(center);
+        addShapeAndSwitchToModify(newProtractor);
+    });
 }
 
 
