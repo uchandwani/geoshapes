@@ -768,7 +768,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     leftSidebar.innerHTML = content;
 
     // ✅ NEW: Inject theoremDefinition here itself if the target exists
-    console.log("The status befor calling updateTheoremText", document.getElementById("theorem-text"));
+    console.log("The status befor calling updateTheoremText", config.theoremDefinition, document.getElementById("theorem-text"));
     if (config.theoremDefinition && document.getElementById("theorem-text")) {
         updateTheoremText(config.theoremDefinition);  // 🆕 This was not called earlier
     } else {
