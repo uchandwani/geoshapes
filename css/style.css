@@ -301,18 +301,18 @@ header h1 {
 .sidebar.right ul li strong {
     color: #4a90e2; /* Highlight important text */
 }
-.theorem-definition {
-    text-align: center;
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: 600;
-    color: #4a90e2; /
-    background-color: #f9f9f9;
-    padding: ; /* Reduce padding */
-    margin-bottom: -5px; /* Shift definition closer to the canvas */
-    margin-left: 0;
-    margin-right: 0;
-    border-bottom: 1px solid #ddd; /* Subtle separation line */
+
+#theorem-definition {
+  background-color: #eef5ff;
+  padding: 10px;
+  border-left: 4px solid #3366cc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #3366cc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .canvas-buttons {
@@ -554,9 +554,26 @@ canvas {
   margin: 0;
 }
 
+
+
 .left-container {
   display: flex;
   flex-direction: column;
-  width: 280px; /* 👈 Match sidebar width */
-  margin-left: 10px; /* optional: match spacing */
+  width: 280px; /* ✅ Match the width of sidebar */
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+
+/* The definition block itself */
+#theorem-definition {
+  background-color: #eef5ff;
+  padding: 10px;
+  border-left: 4px solid #3366cc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #3366cc;
+  width: 100%;
+  box-sizing: border-box;
 }
