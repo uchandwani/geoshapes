@@ -554,3 +554,9 @@ canvas {
   margin: 0;
 }
 
+.left-container {
+  display: flex;
+  flex-direction: column;
+  width: 280px; /* 👈 Match sidebar width */
+  margin-left: 10px; /* optional: match spacing */
+}
