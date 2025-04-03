@@ -770,8 +770,8 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     // ✅ NEW: Inject theoremDefinition here itself if the target exists
      console.log("The status before calling updateTheoremText: config", config);
      console.log("The status before calling updateTheoremText :config.theoremDefinition", config.theoremDefinition);
-    console.log("The status befor calling updateTheoremText", document.getElementById("theorem-definition"));
-    if (config.theoremDefinition && document.getElementById("theorem-definition")) {
+    console.log("The status before calling updateTheoremText", document.getElementById("theorem-text"));
+    if (config.theoremDefinition && document.getElementById("theorem-text")) {
           updateTheoremText(config, subClassification); // 🆕 This was not called earlier
     } else {
         console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
