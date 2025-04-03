@@ -808,5 +808,5 @@ function updateTheoremText(config, subtype) {
         definition = "Definition not available.";
     }
     console.log("DEFINITIOAN after if blocks", definition);
-    document.getElementById("theorem-definition").innerHTML = definition;
+    document.getElementById("theorem-text").innerHTML = definition;
 }
