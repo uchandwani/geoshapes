@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRT Scaled Responsive</title>
+  <link rel="stylesheet" href="PRTscaled.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar left">
+      <h3>Theorem Options</h3>
+      <ul>
+        <li>Alternate Angles</li>
+        <li>Corresponding Angles</li>
+        <li>Co-Interior Angles</li>
+      </ul>
+    </div>
+
+    <div class="canvas-wrapper">
+      <div class="responsive-canvas-container">
+        <canvas id="canvas" width="800" height="800"></canvas>
+      </div>
+    </div>
+
+    <div class="sidebar right">
+      <h3>Details</h3>
+      <ul>
+        <li>Angle A = 45°</li>
+        <li>Angle B = 135°</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="PRTconfig.js"></script>
+  <script src="shapes.js"></script>
+  <script src="CanvasManager.js"></script>
+  <script>
+    function resizeCanvasToDisplaySize(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    }
+
+    window.addEventListener("load", () => {
+      const canvas = document.getElementById("canvas");
+      resizeCanvasToDisplaySize(canvas);
+      CanvasManager.init(canvas, 'PRT');
+    });
+
+    window.addEventListener("resize", () => {
+      const canvas = document.getElementById("canvas");
+      resizeCanvasToDisplaySize(canvas);
+      CanvasManager.redraw();
+    });
+  </script>
+</body>
+</html>
