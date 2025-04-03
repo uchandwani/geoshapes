@@ -624,10 +624,10 @@ function updateActiveButton(buttonElement) {
 
 function updateUI(config, functionalityKey, buttonType) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config);
-    console.log("🔍 updateTheoremText call in updateUI skipped");
-// updateTheoremText(config);
+    console.log("🔍 updateTheoremText call in updateUI below");
 
-   // updateTheoremText(config);
+
+   updateTheoremText(config);
 
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
     console.log("🧩 dynamicButtonsContainer:", dynamicButtonsContainer);
