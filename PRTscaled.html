@@ -33,9 +33,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/PRTconfig.js"></script>
-  <script src="PRTshapes.js"></script>
-  <script src="shapes/PRTCanvasManager.js"></script>
   <script>
     function resizeCanvasToDisplaySize(canvas) {
       const rect = canvas.getBoundingClientRect();
@@ -50,18 +47,23 @@
     window.addEventListener("load", () => {
       const canvas = document.getElementById("canvas");
       resizeCanvasToDisplaySize(canvas);
+      const ctx = canvas.getContext("2d");
 
-      setTimeout(() => {
-        console.log("PRTConfig available?", !!window.PRTConfig);
-        console.log("Renderer for PRT available?", !!CanvasManager.shapeRenderer["PRT"]);
-        CanvasManager.init(canvas, 'PRT');
-      }, 50);
+      // ✅ draw a circle
+      ctx.beginPath();
+      ctx.arc(400, 400, 100, 0, 2 * Math.PI);
+      ctx.stroke();
+
+      // ✅ draw a line
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(700, 700);
+      ctx.stroke();
     });
 
     window.addEventListener("resize", () => {
       const canvas = document.getElementById("canvas");
       resizeCanvasToDisplaySize(canvas);
-      CanvasManager.redraw();
     });
   </script>
 </body>
