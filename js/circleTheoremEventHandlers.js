@@ -737,6 +737,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     }
 
     const leftSidebarContent = config.leftSidebarContent;
+    const theoremDefinition = config.theoremDefinition;
 
     if (!leftSidebarContent) {
         console.error(`No leftSidebarContent defined for functionality key: ${functionalityKey}`);
@@ -745,25 +746,31 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
 
     let content = leftSidebarContent[subClassification]; // Extract content for sub-button
 
-    // ✅ Fix: If functionality is `sineTheta`, show all content at once
-    if (functionalityKey === "sineTheta" ||  functionalityKey === "cosineTheta" ) {
+    if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
         content = leftSidebarContent;
     }
 
-    
-    
-    // ✅ Ensure content is a valid HTML string before inserting
     if (!content) {
         console.error(`No valid content found for subClassification: ${subClassification}`);
         document.querySelector('.sidebar.left').innerHTML = `<p>Content not available.</p>`;
         return;
     }
 
-    
-    // Update the sidebar
-    document.querySelector('.sidebar.left').innerHTML = content;
-   // consoled HTML
+    // ✅ Insert theorem definition at the top if available
+    let definitionHTML = '';
+    if (theoremDefinition) {
+        definitionHTML = `<div id="theorem-definition" class="theorem-definition">
+            <p id="theorem-text">${theoremDefinition}</p>
+        </div>`;
+    }
+
+    // Combine definition and instruction content
+    const finalContent = definitionHTML + content;
+
+    // ✅ Update the sidebar
+    document.querySelector('.sidebar.left').innerHTML = finalContent;
 }
+
 
 
 

@@ -23,15 +23,18 @@
 
   <div class="container">
     <!-- LEFT SIDEBAR -->
-    <div class="sidebar left" id="left-sidebar">
-      <h3>Instructions</h3>
-      <p>Select a theorem from the navigation bar above to see its instructions here.</p>
-
-      <!-- Moved definition inside sidebar -->
-      <div id="theorem-definition" class="theorem-definition">
-        <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-      </div>
+    <div id="left-sidebar" class="sidebar left">
+    <!-- Theorem Definition Section (added at runtime) -->
+    <div class="theorem-definition">
+        <p>Tangent to a circle is perpendicular to the radius at the point of contact.</p>
     </div>
+    <!-- Instructional content (existing leftSidebarContent) below -->
+    <h3>Instructions – Two Tangent Theorem</h3>
+    <ul>
+       <li>Select a pair of tangents (LA and LB) and measure their lengths…</li>
+       <!-- ... other steps ... -->
+    </ul>
+</div>
 
     <!-- CANVAS ZONE -->
     <div class="canvas-container">
