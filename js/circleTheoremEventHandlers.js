@@ -731,7 +731,6 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     console.log('%cFunction ULS : Functionality Key, Subclassification:', 'color: green;', functionalityKey, subClassification);
 
     const config = functionalityConfig[functionalityKey];
-
     if (!config) {
         console.error(`No configuration found for functionality key: ${functionalityKey}`);
         return;
@@ -739,17 +738,13 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
 
     const leftSidebarContent = config.leftSidebarContent;
 
-    let content;  // 🔄 CHANGED: declared `content` separately
-
-    // ✅ CHANGED: Improved structure for clarity + fallback logic
+    let content;
     if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
         content = leftSidebarContent;
     } else {
-        if (typeof leftSidebarContent === 'object') {
-            content = leftSidebarContent[subClassification];  // 🟡 Same as original
-        } else {
-            content = leftSidebarContent;  // 🆕 fallback for any future static entries
-        }
+        content = typeof leftSidebarContent === 'object'
+            ? leftSidebarContent[subClassification]
+            : leftSidebarContent;
     }
 
     if (!content) {
@@ -758,24 +753,21 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
         return;
     }
 
-    // 🔄 Slight refactor for readability
     const leftSidebar = document.querySelector('.sidebar.left');
     if (!leftSidebar) {
         console.warn("⚠️ Sidebar element not found");
         return;
     }
 
+    // ✅ Safe to update now
     leftSidebar.innerHTML = content;
 
-    // ✅ NEW: Inject theoremDefinition here itself if the target exists
-     console.log("The status before calling updateTheoremText: config", config);
-     console.log("The status before calling updateTheoremText :config.theoremDefinition", config.theoremDefinition);
-    console.log("The status before calling updateTheoremText", document.getElementById("theorem-text"));
-  //  if (config.theoremDefinition && document.getElementById("theorem-text")) {
-          updateTheoremText(config, subClassification); // 🆕 This was not called earlier
-  //  } else {
-   //     console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
-  //  }
+    // ✅ This will now always work
+    if (config.theoremDefinition && document.getElementById("theorem-text")) {
+        updateTheoremText(config, subClassification);
+    } else {
+        console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
+    }
 }
 
 

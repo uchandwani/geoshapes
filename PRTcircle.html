@@ -23,17 +23,26 @@
 
   <div class="container">
     <!-- LEFT SIDEBAR -->
+
+    <div class="left-container">
+  
+  <!-- Static definition block (won’t be overwritten by JS) -->
+  <div id="theorem-definition" class="theorem-definition">
+    <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+  </div>
+
+  <!-- Dynamic content gets inserted here -->
     <div id="left-sidebar" class="sidebar left">
     <!-- Theorem Definition Section (added at runtime) -->
-    <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-             </div> 
+    
     <!-- Instructional content (existing leftSidebarContent) below -->
     <h3>Instructions – Two Tangent Theorem</h3>
     <ul>
        <li>Select a pair of tangents (LA and LB) and measure their lengths…</li>
        <!-- ... other steps ... -->
     </ul>
+</div>
+
 </div>
 
     <!-- CANVAS ZONE -->
