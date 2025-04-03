@@ -796,6 +796,7 @@ function updateTheoremText(config, subtype) {
      console.log("DEFINITIOAN", definition);
     // Check if it's an object and subtype is defined
     if (typeof definition === 'object' && subtype && definition[subtype]) {
+        console.log("The typy of definition is object",definition[subtype]);
         definition = definition[subtype];
     }
 
@@ -803,6 +804,6 @@ function updateTheoremText(config, subtype) {
     if (typeof definition !== 'string') {
         definition = "Definition not available.";
     }
-
+    console.log("DEFINITIOAN after if blocks", definition);
     document.getElementById("theorem-definition").innerHTML = definition;
 }
