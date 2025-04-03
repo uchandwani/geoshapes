@@ -793,7 +793,7 @@ function updateSidebars(config) {
 function updateTheoremText(config, subtype) {
     console.log("Inside updateTheoremText", config);
     let definition = config.theoremDefinition;
-
+     console.log("DEFINITIOAN", definition);
     // Check if it's an object and subtype is defined
     if (typeof definition === 'object' && subtype && definition[subtype]) {
         definition = definition[subtype];
