@@ -624,7 +624,7 @@ function updateActiveButton(buttonElement) {
 
 function updateUI(config, functionalityKey, buttonType) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config);
-    updateTheoremText(config);
+   // updateTheoremText(config);
 
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
     console.log("🧩 dynamicButtonsContainer:", dynamicButtonsContainer);
@@ -725,11 +725,9 @@ export function updateRightSidebar(functionalityKey, subClassification) {
 }
 
 export function updateLeftSidebar(functionalityKey, subClassification) {
-    console.log('%c' + "Function ULS : Functionality Key, Subclassification: ", 'color: green;', functionalityKey, subClassification);
+    console.log('%cFunction ULS : Functionality Key, Subclassification:', 'color: green;', functionalityKey, subClassification);
 
     const config = functionalityConfig[functionalityKey];
-
-    console.log('Functionality Configuration:', config);
 
     if (!config) {
         console.error(`No configuration found for functionality key: ${functionalityKey}`);
@@ -737,38 +735,41 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     }
 
     const leftSidebarContent = config.leftSidebarContent;
-    const theoremDefinition = config.theoremDefinition;
 
-    if (!leftSidebarContent) {
-        console.error(`No leftSidebarContent defined for functionality key: ${functionalityKey}`);
-        return;
-    }
+    let content;  // 🔄 CHANGED: declared `content` separately
 
-    let content = leftSidebarContent[subClassification]; // Extract content for sub-button
-
+    // ✅ CHANGED: Improved structure for clarity + fallback logic
     if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
         content = leftSidebarContent;
+    } else {
+        if (typeof leftSidebarContent === 'object') {
+            content = leftSidebarContent[subClassification];  // 🟡 Same as original
+        } else {
+            content = leftSidebarContent;  // 🆕 fallback for any future static entries
+        }
     }
 
     if (!content) {
         console.error(`No valid content found for subClassification: ${subClassification}`);
-        document.querySelector('.sidebar.left').innerHTML = `<p>Content not available.</p>`;
+        document.querySelector('.sidebar.left').innerHTML = `<p>Instructions not available.</p>`;
         return;
     }
 
-    // ✅ Insert theorem definition at the top if available
-    let definitionHTML = '';
-    if (theoremDefinition) {
-        definitionHTML = `<div id="theorem-definition" class="theorem-definition">
-            <p id="theorem-text">${theoremDefinition}</p>
-        </div>`;
+    // 🔄 Slight refactor for readability
+    const leftSidebar = document.querySelector('.sidebar.left');
+    if (!leftSidebar) {
+        console.warn("⚠️ Sidebar element not found");
+        return;
     }
 
-    // Combine definition and instruction content
-    const finalContent = definitionHTML + content;
+    leftSidebar.innerHTML = content;
 
-    // ✅ Update the sidebar
-    document.querySelector('.sidebar.left').innerHTML = finalContent;
+    // ✅ NEW: Inject theoremDefinition here itself if the target exists
+    if (config.theoremDefinition && document.getElementById("theorem-text")) {
+        updateTheoremText(config.theoremDefinition);  // 🆕 This was not called earlier
+    } else {
+        console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
+    }
 }
 
 
