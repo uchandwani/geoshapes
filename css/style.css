@@ -36,6 +36,22 @@ header h1 {
     padding: 0;
 }
 
+.responsive-canvas-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+}
+
+.responsive-canvas-container canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: white;
+}
+
+
 
 /* Navigation Bar Left and Right */
 .nav-bar-left,
@@ -510,24 +526,31 @@ header h1 {
 
 /* ✅ Ensure canvas does NOT block buttons */
 canvas {
-    width: 800px;
-    height: 800px;
+   
     z-index: 0;
     position: relative;        /* Must be positioned to obey z-index */
 }
 
-
-/* === Responsive Enhancements === */
-
-/* Hide right sidebar on screens 1366px wide or less */
-@media (max-width: 1366px) {
-  .sidebar.right {
-    display: none;
-  }
+/* 🟡 Theorem Definition inside Sidebar */
+/* 🟡 Theorem Definition inside Sidebar */
+#theorem-definition {
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-height: 300px;       /* ✅ Prevent overflow */
+  overflow-y: auto;        /* ✅ Enable scroll if content is long */
 }
 
-/* Ensure container fits in viewport height */
-.container {
-  max-height: calc(100vh - 60px); /* Adjust based on header/footer height */
-  overflow-y: auto;
+
+#theorem-definition h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
 }
+
+#theorem-text {
+  margin: 0;
+}
+
