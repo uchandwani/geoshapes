@@ -33,6 +33,13 @@
   </div>
 
   <!-- Scripts -->
+
+<script src="js/PRTconfig.js"></script>
+<script src="PRTshapes.js"></script>
+<script src="PRTCanvasManager.js"></script>
+
+
+
   <script src="js/PRTconfig.js"></script>
   <script src="PRTshapes.js"></script>
   <script src="shapes/PRTCanvasManager.js"></script>
@@ -48,10 +55,15 @@
     }
 
     window.addEventListener("load", () => {
-      const canvas = document.getElementById("canvas");
-      resizeCanvasToDisplaySize(canvas);
-      PRTCanvasManager.init(canvas, 'PRT');
+    const canvas = document.getElementById("canvas");
+    resizeCanvasToDisplaySize(canvas);
+
+    // Add slight delay to allow shape renderer to register
+    setTimeout(() => {
+      CanvasManager.init(canvas, 'PRT');
+    }, 50);
     });
+
 
     window.addEventListener("resize", () => {
       const canvas = document.getElementById("canvas");
