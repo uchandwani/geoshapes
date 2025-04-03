@@ -30,4 +30,5 @@ const PRTConfig = {
   ]
 };
 
-export default PRTConfig;
+// Make available globally
+window.PRTConfig = PRTConfig;
