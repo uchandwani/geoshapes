@@ -34,42 +34,38 @@
 
   <!-- Scripts -->
 
+
 <script src="js/PRTconfig.js"></script>
 <script src="PRTshapes.js"></script>
-<script src="PRTCanvasManager.js"></script>
+<script src="shapes/PRTCanvasManager.js"></script>
 
-
-
-  <script src="js/PRTconfig.js"></script>
-  <script src="PRTshapes.js"></script>
-  <script src="shapes/PRTCanvasManager.js"></script>
-  <script>
-    function resizeCanvasToDisplaySize(canvas) {
-      const rect = canvas.getBoundingClientRect();
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
+<script>
+  function resizeCanvasToDisplaySize(canvas) {
+    const rect = canvas.getBoundingClientRect();
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width;
+      canvas.height = height;
     }
+  }
 
-    window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
     const canvas = document.getElementById("canvas");
     resizeCanvasToDisplaySize(canvas);
 
-    // Add slight delay to allow shape renderer to register
+    // Delay init to ensure all scripts are loaded
     setTimeout(() => {
       CanvasManager.init(canvas, 'PRT');
     }, 50);
-    });
+  });
 
+  window.addEventListener("resize", () => {
+    const canvas = document.getElementById("canvas");
+    resizeCanvasToDisplaySize(canvas);
+    CanvasManager.redraw();
+  });
+</script>
 
-    window.addEventListener("resize", () => {
-      const canvas = document.getElementById("canvas");
-      resizeCanvasToDisplaySize(canvas);
-      CanvasManager.redraw();
-    });
-  </script>
 </body>
 </html>
