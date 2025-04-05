@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circle Theorems</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <div id="main-container">
+    <!-- ② Left Sidebar with ⑤ Theorem Definition at the top -->
+    <div id="left-sidebar">
+      <div id="theorem-definition">
+        <h3>Theorem D1</h3>
+        <p>If a diameter bisects a chord at 90°, the chord is perpendicular to the diameter.</p>
+      </div>
+
+      <div class="additional-div">
+        <!-- Toolbar or buttons (icons, tools) can be placed here -->
+      </div>
+    </div>
+
+    <!-- ⑧ Canvas Area -->
+    <div class="canvas-wrapper">
+      <canvas id="canvas" width="800" height="800"></canvas>
+    </div>
+
+    <!-- ③ Right Sidebar -->
+    <div id="right-sidebar">
+      <!-- Optional content like measurements, legend, etc. -->
+    </div>
+  </div>
+
+  <div id="dynamic-buttons"></div>
+
+  <script src="js/CanvasManager.js"></script>
+  <script src="js/shapes.js"></script>
+  <script src="js/circle_theorems_config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/header.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      const canvas = document.getElementById("canvas");
+      CanvasManager.init(canvas, "circle_theorems");
+    });
+  </script>
+</body>
+</html>

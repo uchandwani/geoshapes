@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Activity</title>
+    <style>
+        #drawingCanvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas Activity for Kids</h1>
+    <div id="instructions"></div>
+    <canvas id="drawingCanvas" width="600" height="400"></canvas>
+    <div>
+        <label for="activityNumber">Enter Activity Number: </label>
+        <input type="number" id="activityNumber" min="1" max="3">
+        <button id="validateButton">Validate</button>
+    </div>
+    <script src="activity.js"></script>
+</body>
+</html>
