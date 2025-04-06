@@ -16,6 +16,45 @@
     window.sumMeasures = sumMeasures;
     window.compareMeasures = compareMeasures;
   </script>
+
+<style>
+  /* Visually merge #theorem-definition into left sidebar */
+  .left-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #theorem-definition {
+    background-color: #eef6ff;
+    border-left: 5px solid #4682b4;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  }
+
+  #theorem-text {
+    color: #003366;
+    margin: 0;
+  }
+
+  #left-sidebar h3 {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  #left-sidebar ul li {
+    margin-left: 1rem;
+    padding: 4px 0;
+  }
+</style>
+
+<!-- Just include this <style> block inside the <head> or near the bottom of the <body> section -->
+
+  
 </head>
 
 <body>
@@ -49,11 +88,12 @@
     <div class="canvas-container">
       <!-- Navigation Buttons -->
       <div class="navigation-buttons">
-        <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">Radius Tangent Theorem</button>
-        <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">Two Tangent Theorem</button>
-        <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">Subtended Angles</button>
-        <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">Alternate Segment</button>
-        <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">Cyclic Quadrilateral</button>
+        <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
+        <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
+        <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
+        <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
+        <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT
+        </button>
       </div>
 
       <!-- Optional Buttons -->
