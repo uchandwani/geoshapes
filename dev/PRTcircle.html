@@ -94,35 +94,33 @@
     fetch('header.html')
       .then(res => res.text())
       .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        // Inject navigation buttons
-        const navHTML = `
-          <div class="navigation-buttons">
-            <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
-            <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
-            <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
-            <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
-            <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
-          </div>`;
-
-        const rightSection = doc.getElementById('right-section');
-        if (rightSection) {
-          rightSection.insertAdjacentHTML('beforeend', navHTML);
-        }
-
-        document.getElementById('header-placeholder').innerHTML = doc.body.innerHTML;
+        document.getElementById('header-placeholder').innerHTML = html;
 
         const script = document.createElement('script');
         script.src = './js/header.js';
-        document.head.appendChild(script);
+        script.onload = () => {
+          if (typeof updatePageTitle === 'function') updatePageTitle();
 
-        // Import circleTheoremPage.js only after header is ready
-        import('./js/circleTheoremPage.js').then(module => {
-          window.sumMeasures = module.sumMeasures;
-          window.compareMeasures = module.compareMeasures;
-        });
+          // Add navigation buttons after header has been rendered
+          const rightSection = document.getElementById('right-section');
+          if (rightSection) {
+            rightSection.insertAdjacentHTML('beforeend', `
+              <div class="navigation-buttons">
+                <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
+                <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
+                <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
+                <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
+                <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
+              </div>
+            `);
+          }
+
+          import('./js/circleTheoremPage.js').then(module => {
+            window.sumMeasures = module.sumMeasures;
+            window.compareMeasures = module.compareMeasures;
+          });
+        };
+        document.head.appendChild(script);
       });
   </script>
 
