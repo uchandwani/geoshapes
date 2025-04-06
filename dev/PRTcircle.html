@@ -7,30 +7,6 @@
 
   <link rel="stylesheet" href="./css/header_styles.css" />
   <link rel="stylesheet" href="./css/style.css" />
-
-  <style>
-    #theorem-definition {
-      background-color: #fffaf0;
-      border-left: 4px solid #ff8c00;
-      padding: 10px;
-      margin: 10px;
-      font-weight: bold;
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    #theorem-text {
-      color: #333;
-      font-size: 15px;
-      line-height: 1.4;
-    }
-  </style>
-
-  <!-- JS Modules -->
-  <script type="module" src="./js/circleTheoremPage.js" defer></script>
-  <script type="module">
-    import { sumMeasures, compareMeasures } from './js/circleTheoremPage.js';
-    window.sumMeasures = sumMeasures;
-    window.compareMeasures = compareMeasures;
-  </script>
 </head>
 
 <body>
@@ -109,42 +85,48 @@
     </div>
   </div>
 
-  <footer><p></p></footer>
+  <footer>
+    <p></p>
+  </footer>
 
-  <!-- Scripts -->
-  <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
-
-  <!-- Load header dynamically -->
+  <!-- Scripts loaded AFTER header is injected -->
   <script>
     fetch('header.html')
       .then(res => res.text())
       .then(html => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
 
-        const rightSection = tempDiv.querySelector('#right-section');
+        // Inject navigation buttons
+        const navHTML = `
+          <div class="navigation-buttons">
+            <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
+            <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
+            <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
+            <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
+            <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
+          </div>`;
+
+        const rightSection = doc.getElementById('right-section');
         if (rightSection) {
-          rightSection.insertAdjacentHTML('beforeend', `
-            <div class="navigation-buttons">
-              <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
-              <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
-              <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
-              <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
-              <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
-            </div>
-          `);
+          rightSection.insertAdjacentHTML('beforeend', navHTML);
         }
 
-        document.getElementById('header-placeholder').innerHTML = tempDiv.innerHTML;
+        document.getElementById('header-placeholder').innerHTML = doc.body.innerHTML;
 
         const script = document.createElement('script');
         script.src = './js/header.js';
-        script.onload = () => {
-          if (typeof updatePageTitle === 'function') updatePageTitle();
-        };
         document.head.appendChild(script);
+
+        // Import circleTheoremPage.js only after header is ready
+        import('./js/circleTheoremPage.js').then(module => {
+          window.sumMeasures = module.sumMeasures;
+          window.compareMeasures = module.compareMeasures;
+        });
       });
   </script>
+
+  <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./shapes/CanvasManager.js"></script>
 </body>
 </html>
