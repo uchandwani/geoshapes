@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="./css/header_styles.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    .header-right svg {
+    .header-right svg,
+    .nav-icons svg.rtt-icon {
       width: 36px;
       height: 36px;
       stroke: #1E88E5;
@@ -24,6 +25,23 @@
       .then(res => res.text())
       .then(html => {
         document.getElementById('main-header').innerHTML = html;
+
+        // Add RTT icon next to left nav icons temporarily for comparison
+        const navIcons = document.querySelector('.nav-icons');
+        if (navIcons) {
+          const rttIcon = document.createElement('a');
+          rttIcon.href = "#";
+          rttIcon.title = "Radius Tangent Theorem";
+          rttIcon.innerHTML = `
+            <svg class="rtt-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="28" />
+              <line x1="50" y1="50" x2="78" y2="50" />
+              <line x1="78" y1="50" x2="78" y2="32" />
+              <line x1="78" y1="50" x2="78" y2="68" />
+            </svg>
+          `;
+          navIcons.appendChild(rttIcon);
+        }
       });
   </script>
 
