@@ -137,38 +137,35 @@
 
   <!-- Load header dynamically -->
   <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
+  fetch('header.html')
+    .then(res => res.text())
+    .then(html => {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
 
-        // Inject navigation buttons into right header area
-        const navHTML = `
+      const rightSection = tempDiv.querySelector('#right-section');
+      if (rightSection) {
+        rightSection.insertAdjacentHTML('beforeend', `
           <div class="navigation-buttons">
             <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
             <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
             <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
             <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
             <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
-          </div>`;
+          </div>
+        `);
+      }
 
-        const rightSection = doc.getElementById('right-section');
-        if (rightSection) {
-          rightSection.insertAdjacentHTML('beforeend', navHTML);
-        }
+      document.getElementById('header-placeholder').innerHTML = tempDiv.innerHTML;
 
-        document.getElementById('header-placeholder').innerHTML = doc.body.innerHTML;
+      const script = document.createElement('script');
+      script.src = './js/header.js';
+      script.onload = () => {
+        if (typeof updatePageTitle === 'function') updatePageTitle();
+      };
+      document.head.appendChild(script);
+    });
+</script>
 
-        const script = document.createElement('script');
-        script.src = './js/header.js';
-        script.onload = () => {
-          if (typeof updatePageTitle === 'function') {
-            updatePageTitle();
-          }
-        };
-        document.head.appendChild(script);
-      });
-  </script>
 </body>
 </html>
