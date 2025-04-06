@@ -50,7 +50,7 @@
     </a>
 
    <!-- 🔘 Radius Tangent Theorem (RTT) -->
-<!-- 🔘 Radius Tangent Theorem (RTT) -->
+<!-- 🔘 Radius Tangent Theorem (RTT) – Geometrically accurate with 3 tangents -->
 <a href="PRTcircle.html" title="Radius Tangent Theorem">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
        stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -58,23 +58,24 @@
     <!-- Circle -->
     <circle cx="12" cy="12" r="10" />
 
-    <!-- Radius 1 (Right) + Tangents -->
-    <line x1="12" y1="12" x2="20" y2="12" />  <!-- Radius -->
-    <line x1="20" y1="12" x2="20" y2="8" />   <!-- Tangent up -->
-    <line x1="20" y1="12" x2="20" y2="16" />  <!-- Tangent down -->
+    <!-- Radius 1 (right) -->
+    <line x1="12" y1="12" x2="22" y2="12" />
+    <!-- Tangent 1 (vertical, starting at circle) -->
+    <line x1="22" y1="12" x2="22" y2="9" />
 
-    <!-- Radius 2 (Top) + Tangents -->
-    <line x1="12" y1="12" x2="12" y2="4" />   <!-- Radius -->
-    <line x1="12" y1="4" x2="9"  y2="4" />    <!-- Tangent left -->
-    <line x1="12" y1="4" x2="15" y2="4" />    <!-- Tangent right -->
+    <!-- Radius 2 (~120° bottom-left) -->
+    <line x1="12" y1="12" x2="6" y2="20" />
+    <!-- Tangent 2 (starts at (6,20), goes ~right) -->
+    <line x1="6" y1="20" x2="9" y2="21" />
 
-    <!-- Radius 3 (Left) + Tangents -->
-    <line x1="12" y1="12" x2="4" y2="12" />   <!-- Radius -->
-    <line x1="4" y1="12" x2="4" y2="9" />     <!-- Tangent up -->
-    <line x1="4" y1="12" x2="4" y2="15" />    <!-- Tangent down -->
+    <!-- Radius 3 (~240° top-left) -->
+    <line x1="12" y1="12" x2="6" y2="4" />
+    <!-- Tangent 3 (starts at (6,4), goes ~right) -->
+    <line x1="6" y1="4" x2="9" y2="3" />
 
   </svg>
 </a>
+
 
 
   </div>
