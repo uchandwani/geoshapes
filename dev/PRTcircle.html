@@ -9,41 +9,23 @@
   <link rel="stylesheet" href="./css/style.css" />
 
   <style>
-    /* Seamless styling for definition + instruction section */
-    .left-container {
-      background-color: #f8f9fa;
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-
     #theorem-definition {
-      margin-bottom: 16px;
-    }
-
-    #theorem-definition p {
+      background-color: #fffaf0;
+      border-left: 4px solid #ff8c00;
+      padding: 10px;
+      margin: 10px;
       font-weight: bold;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #theorem-text {
       color: #333;
-      background-color: #fff3e0;
-      padding: 12px;
-      border-left: 4px solid darkorange;
-      border-radius: 4px;
-      margin: 0;
-    }
-
-    #left-sidebar h3 {
-      margin-top: 0;
-      color: #444;
-    }
-
-    #left-sidebar ul {
-      padding-left: 20px;
+      font-size: 15px;
+      line-height: 1.4;
     }
   </style>
 
   <!-- JS Modules -->
   <script type="module" src="./js/circleTheoremPage.js" defer></script>
-
   <script type="module">
     import { sumMeasures, compareMeasures } from './js/circleTheoremPage.js';
     window.sumMeasures = sumMeasures;
@@ -127,9 +109,7 @@
     </div>
   </div>
 
-  <footer>
-    <p></p>
-  </footer>
+  <footer><p></p></footer>
 
   <!-- Scripts -->
   <script type="module" src="./shapes.js"></script>
@@ -137,35 +117,34 @@
 
   <!-- Load header dynamically -->
   <script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(html => {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
+    fetch('header.html')
+      .then(res => res.text())
+      .then(html => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = html;
 
-      const rightSection = tempDiv.querySelector('#right-section');
-      if (rightSection) {
-        rightSection.insertAdjacentHTML('beforeend', `
-          <div class="navigation-buttons">
-            <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
-            <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
-            <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
-            <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
-            <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
-          </div>
-        `);
-      }
+        const rightSection = tempDiv.querySelector('#right-section');
+        if (rightSection) {
+          rightSection.insertAdjacentHTML('beforeend', `
+            <div class="navigation-buttons">
+              <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
+              <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
+              <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
+              <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
+              <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
+            </div>
+          `);
+        }
 
-      document.getElementById('header-placeholder').innerHTML = tempDiv.innerHTML;
+        document.getElementById('header-placeholder').innerHTML = tempDiv.innerHTML;
 
-      const script = document.createElement('script');
-      script.src = './js/header.js';
-      script.onload = () => {
-        if (typeof updatePageTitle === 'function') updatePageTitle();
-      };
-      document.head.appendChild(script);
-    });
-</script>
-
+        const script = document.createElement('script');
+        script.src = './js/header.js';
+        script.onload = () => {
+          if (typeof updatePageTitle === 'function') updatePageTitle();
+        };
+        document.head.appendChild(script);
+      });
+  </script>
 </body>
 </html>
