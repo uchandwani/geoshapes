@@ -8,53 +8,47 @@
   <link rel="stylesheet" href="./css/header_styles.css" />
   <link rel="stylesheet" href="./css/style.css" />
 
+  <style>
+    /* Seamless styling for definition + instruction section */
+    .left-container {
+      background-color: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    #theorem-definition {
+      margin-bottom: 16px;
+    }
+
+    #theorem-definition p {
+      font-weight: bold;
+      color: #333;
+      background-color: #fff3e0;
+      padding: 12px;
+      border-left: 4px solid darkorange;
+      border-radius: 4px;
+      margin: 0;
+    }
+
+    #left-sidebar h3 {
+      margin-top: 0;
+      color: #444;
+    }
+
+    #left-sidebar ul {
+      padding-left: 20px;
+    }
+  </style>
+
   <!-- JS Modules -->
   <script type="module" src="./js/circleTheoremPage.js" defer></script>
 
-   <script type="module">
+  <script type="module">
     import { sumMeasures, compareMeasures } from './js/circleTheoremPage.js';
     window.sumMeasures = sumMeasures;
     window.compareMeasures = compareMeasures;
   </script>
-
-<style>
-  /* Visually merge #theorem-definition into left sidebar */
-  .left-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  #theorem-definition {
-    background-color: #eef6ff;
-    border-left: 5px solid #4682b4;
-    padding: 10px 15px;
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 0;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-  }
-
-  #theorem-text {
-    color: #003366;
-    margin: 0;
-  }
-
-  #left-sidebar h3 {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    color: #333;
-  }
-
-  #left-sidebar ul li {
-    margin-left: 1rem;
-    padding: 4px 0;
-  }
-</style>
-
-<!-- Just include this <style> block inside the <head> or near the bottom of the <body> section --> 
-
-
 </head>
 
 <body>
@@ -62,40 +56,25 @@
 
   <div class="container">
     <!-- LEFT SIDEBAR -->
-
     <div class="left-container">
-  
-  <!-- Static definition block (won’t be overwritten by JS) -->
-  <div id="theorem-definition" class="theorem-definition">
-    <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-  </div>
+      <!-- Static definition block (won’t be overwritten by JS) -->
+      <div id="theorem-definition" class="theorem-definition">
+        <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+      </div>
 
-  <!-- Dynamic content gets inserted here -->
-    <div id="left-sidebar" class="sidebar left">
-    <!-- Theorem Definition Section (added at runtime) -->
-    
-    <!-- Instructional content (existing leftSidebarContent) below -->
-    <h3 style="color: darkblue;">Instructions – Two Tangent Theorem</h3>
-    <ul>
-       <li>Select a pair of tangents (LA and LB) and measure their lengths…</li>
-       <!-- ... other steps ... -->
-    </ul>
-</div>
-
-</div>
+      <!-- Dynamic content gets inserted here -->
+      <div id="left-sidebar" class="sidebar left">
+        <!-- Instructional content (existing leftSidebarContent) below -->
+        <h3>Instructions – Two Tangent Theorem</h3>
+        <ul>
+          <li>Select a pair of tangents (LA and LB) and measure their lengths…</li>
+          <!-- ... other steps ... -->
+        </ul>
+      </div>
+    </div>
 
     <!-- CANVAS ZONE -->
     <div class="canvas-container">
-      <!-- Navigation Buttons -->
-      <div class="navigation-buttons">
-        <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
-        <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
-        <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
-        <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
-        <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT
-        </button>
-      </div>
-
       <!-- Optional Buttons -->
       <div id="dynamic-buttons" class="triangle-buttons">
         <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
@@ -161,7 +140,26 @@
     fetch('header.html')
       .then(res => res.text())
       .then(html => {
-        document.getElementById('header-placeholder').innerHTML = html;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Inject navigation buttons into right header area
+        const navHTML = `
+          <div class="navigation-buttons">
+            <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">RTT</button>
+            <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">TTT</button>
+            <button id="subtendedAngles-button" class="icon-btn" title="Subtended Angles Theorem">SAT</button>
+            <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment Theorem">AST</button>
+            <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">CQT</button>
+          </div>`;
+
+        const rightSection = doc.getElementById('right-section');
+        if (rightSection) {
+          rightSection.insertAdjacentHTML('beforeend', navHTML);
+        }
+
+        document.getElementById('header-placeholder').innerHTML = doc.body.innerHTML;
+
         const script = document.createElement('script');
         script.src = './js/header.js';
         script.onload = () => {
