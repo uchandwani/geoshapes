@@ -36,38 +36,48 @@
   <div id="header-content"></div>
   <div id="sub-header-container">
     <!-- Circle Theorem Icons with click handlers -->
-    <svg class="sub-header-icon" title="Radius Tangent Theorem" onclick="document.getElementById('sineTheta-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="12" x2="20" y2="12" />
-      <line x1="22" y1="12" x2="22" y2="24" />
-      <line x1="12" y1="12" x2="7" y2="19" />
-      <line x1="5" y1="21" x2="-5" y2="10" />
-      <line x1="12" y1="12" x2="7" y2="5" />
-      <line x1="7" y1="5" x2="12" y2="-4" />
-    </svg>
-    <svg class="sub-header-icon" title="Two Tangent Theorem" onclick="document.getElementById('cosineTheta-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="2" x2="4" y2="20" />
-      <line x1="12" y1="2" x2="20" y2="20" />
-    </svg>
-    <svg class="sub-header-icon" title="Subtended Angles Theorem" onclick="document.getElementById('subtendedAngles-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="12" y1="12" x2="19" y2="19" />
-      <line x1="12" y1="12" x2="6" y2="19" />
-      <line x1="17" y1="17" x2="12" y2="4" />
-      <line x1="7" y1="17" x2="12" y2="4" />
-    </svg>
-    <svg class="sub-header-icon" title="Alternate Segment Theorem" onclick="document.getElementById('alternateSegments-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="4" y1="12" x2="20" y2="4" />
-      <line x1="4" y1="12" x2="20" y2="20" />
-    </svg>
-    <svg class="sub-header-icon" title="Cyclic Quadrilateral" onclick="document.getElementById('quadrilaterals-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polygon points="5,5 19,5 17,19 7,19" />
-    </svg>
-  </div>
+   <!-- rest of page unchanged -->
+
+<!-- New Sub-header Icons with matching functionality -->
+<div class="header-right" style="display: flex; gap: 12px; align-items: center; margin-left: auto;">
+  <!-- RTT Icon -->
+  <svg id="sineTheta-button" class="sub-header-icon" title="Radius Tangent Theorem" onclick="document.getElementById('sineTheta-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="12" x2="20" y2="12" />
+    <line x1="22" y1="12" x2="22" y2="24" />
+    <line x1="12" y1="12" x2="7" y2="19" />
+    <line x1="5" y1="21" x2="-5" y2="10" />
+    <line x1="12" y1="12" x2="7" y2="5" />
+    <line x1="7" y1="5" x2="12" y2="-4" />
+  </svg>
+
+  <svg id="cosineTheta-button" class="sub-header-icon" title="Two Tangent Theorem" onclick="document.getElementById('cosineTheta-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="2" x2="4" y2="20" />
+    <line x1="12" y1="2" x2="20" y2="20" />
+  </svg>
+
+  <svg id="subtendedAngles-button" class="sub-header-icon" title="Subtended Angles Theorem" onclick="document.getElementById('subtendedAngles-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="12" x2="19" y2="19" />
+    <line x1="12" y1="12" x2="6" y2="19" />
+    <line x1="17" y1="17" x2="12" y2="4" />
+    <line x1="7" y1="17" x2="12" y2="4" />
+  </svg>
+
+  <svg id="alternateSegments-button" class="sub-header-icon" title="Alternate Segment Theorem" onclick="document.getElementById('alternateSegments-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="4" y1="12" x2="20" y2="4" />
+    <line x1="4" y1="12" x2="20" y2="20" />
+  </svg>
+
+  <svg id="quadrilaterals-button" class="sub-header-icon" title="Cyclic Quadrilateral" onclick="document.getElementById('quadrilaterals-button').click()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="5,5 19,5 17,19 7,19" />
+  </svg>
 </div>
+</div>
+
 
 <script>
   async function loadHeader() {
@@ -106,7 +116,7 @@
     };
     document.head.appendChild(script);
   });
-</script>
+</script>   
 
 <div class="container">
   <div class="sidebar left" id="left-sidebar">
@@ -115,17 +125,17 @@
   </div>
 
   <div class="canvas-container">
-    <div class="navigation-buttons">
+   <!--div class="navigation-buttons">
       <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">Radius Tangent Theorem</button>
       <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">Two Tangent Theorem</button>
       <button id="subtendedAngles-button" class="icon-btn" title="Theorem C">Subtended Angles Theorems</button>
       <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment">Alternate Segment Theorem</button>
       <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">Cyclic Quadrilateral</button>
-    </div>
+    </div> */
 
     <div id="theorem-definition" class="theorem-definition">
       <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-    </div>
+    </div-->
 
     <div id="dynamic-buttons" class="triangle-buttons">
       <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
