@@ -43,7 +43,8 @@
         const subHeaderHtml = await fetch(`subheaders/${subHeaderFile}`).then(res => res.text());
         const subHeaderDiv = document.createElement('div');
         subHeaderDiv.innerHTML = subHeaderHtml;
-        document.getElementById('main-header').appendChild(subHeaderDiv);
+        const placeholder = document.querySelector('#main-header .header-right');
+        if (placeholder) placeholder.replaceWith(subHeaderDiv.firstChild);
       }
     }
     loadHeader();
