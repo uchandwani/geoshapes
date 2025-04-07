@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <!-- Load shared header with navigation icons and title -->
+  <!-- Load shared header with dynamic title only -->
   <div id="main-header"></div>
   <script>
     async function loadHeader() {
@@ -43,8 +43,7 @@
         const subHeaderHtml = await fetch(`subheaders/${subHeaderFile}`).then(res => res.text());
         const subHeaderDiv = document.createElement('div');
         subHeaderDiv.innerHTML = subHeaderHtml;
-        const placeholder = document.querySelector('#main-header .header-right');
-        if (placeholder) placeholder.replaceWith(subHeaderDiv.firstChild);
+        document.getElementById('main-header').appendChild(subHeaderDiv);
       }
     }
     loadHeader();
