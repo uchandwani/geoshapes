@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3️⃣ Fix: Ensure No Transformation is Applied Before Drawing
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
+
+     document.querySelectorAll('[id$="-button"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const subtype = btn.id.replace('-button', '');
+      switchFunctionality(subtype);
+             });
+         });
+    });
+
     
    /* console.log('Current Mode:', mode);
     const buttonActions = {
