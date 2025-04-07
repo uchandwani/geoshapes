@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="./css/header_styles.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    .header-right svg,
-    .nav-icons svg.rtt-icon {
+    .header-right svg {
       width: 36px;
       height: 36px;
       stroke: #1E88E5;
@@ -21,34 +20,38 @@
   <!-- Load shared header with navigation icons and title -->
   <div id="main-header"></div>
   <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('main-header').innerHTML = html;
+    async function loadHeader() {
+      const headerHtml = await fetch('header.html').then(res => res.text());
+      document.getElementById('main-header').innerHTML = headerHtml;
 
-        // Add RTT icon next to left nav icons temporarily for comparison
-        const navIcons = document.querySelector('.nav-icons');
-        if (navIcons) {
-          const rttIcon = document.createElement('a');
-          rttIcon.href = "#";
-          rttIcon.title = "Radius Tangent Theorem";
-          rttIcon.innerHTML = `
-            <svg class="rtt-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="50" cy="50" r="28" />
-              <line x1="50" y1="50" x2="78" y2="50" />
-              <line x1="78" y1="50" x2="78" y2="32" />
-              <line x1="78" y1="50" x2="78" y2="68" />
-            </svg>
-          `;
-          navIcons.appendChild(rttIcon);
-        }
-      });
+      // Load corresponding sub-header based on current page
+      const pageMap = {
+        "PRTcircle.html": "circle-sub-header.html",
+        "SATcircle.html": "circle-sub-header.html",
+        "ASTcircle.html": "circle-sub-header.html",
+        "CQTcircle.html": "circle-sub-header.html",
+        "TTTcircle.html": "circle-sub-header.html",
+        "parallel_lines_04.html": "parallel-sub-header.html",
+        "triangle_theorem_07.html": "triangle-sub-header.html",
+        "trig_properties_09.html": "trig-sub-header.html"
+      };
+
+      const currentPage = window.location.pathname.split("/").pop();
+      const subHeaderFile = pageMap[currentPage];
+
+      if (subHeaderFile) {
+        const subHeaderHtml = await fetch(`subheaders/${subHeaderFile}`).then(res => res.text());
+        const subHeaderDiv = document.createElement('div');
+        subHeaderDiv.innerHTML = subHeaderHtml;
+        document.getElementById('main-header').appendChild(subHeaderDiv);
+      }
+    }
+    loadHeader();
   </script>
 
   <div class="container">
     <!-- LEFT SIDEBAR -->
     <div class="left-container">
-      <!-- Static definition block (won’t be overwritten by JS) -->
       <div id="theorem-definition" class="theorem-definition">
         <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
       </div>
