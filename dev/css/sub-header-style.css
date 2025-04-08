@@ -1,34 +1,29 @@
 .sub-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Align to the right */
   align-items: center;
-  padding: 8px 16px;
+  padding: 6px 16px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #ccc;
-  white-space: nowrap; /* Prevent title wrap */
-}
-
-.left-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #2f80ed;
-  flex-shrink: 0;  /* Prevent shrinking the title */
+  height: 56px;             /* ✅ Fixed height for consistency */
+  box-sizing: border-box;
 }
 
 .header-right {
   display: flex;
-  align-items: center;
   gap: 16px;
-  flex-wrap: nowrap;     /* ✅ Prevent wrapping */
-  overflow-x: auto;       /* ✅ Enable horizontal scroll if needed */
+  align-items: center;
+  flex-wrap: nowrap;       /* ✅ Prevent wrapping */
+  overflow-x: auto;        /* ✅ Scroll if too many icons */
 }
 
+
 .sub-header-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   transition: transform 0.2s ease;
-  flex-shrink: 0;         /* ✅ Prevent icons from shrinking too much */
+  flex-shrink: 0;
 }
 
 .sub-header-icon:hover {
