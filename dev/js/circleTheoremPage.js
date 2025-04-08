@@ -7,6 +7,8 @@ import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
 import {Circle} from '../shapes/Circle.js';
 
+
+window.switchFunctionality = switchFunctionality;
     
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Triangle Properties Page Loaded");
@@ -38,60 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     
-   /* console.log('Current Mode:', mode);
-    const buttonActions = {
-        
-        'icon-btn-1': () => console.log('Placeholder Icon 1 Clicked'),
-        'icon-btn-2': () => console.log('Placeholder Icon 2 Clicked'),
-        'icon-btn-3': () => console.log('Placeholder Icon 3 Clicked'),
-        'icon-btn-4': () => console.log('Placeholder Icon 4 Clicked'),
-        'icon-btn-5': () => console.log('Placeholder Icon 5 Clicked'),
-        'icon-btn-6': () => console.log('Placeholder Icon 6 Clicked'),
-        'icon-btn-7': () => console.log('Placeholder Icon 7 Clicked'),
-        'icon-btn-8': () => console.log('Placeholder Icon 8 Clicked'),
-        'icon-btn-14': () => console.log('Placeholder Icon 14 Clicked'),
-        'icon-btn-16': () => console.log('Placeholder Icon 16 Clicked'),
-        'icon-btn-9': () => console.log('Placeholder Icon 9 Clicked'),
-        'icon-btn-10': () => console.log('Placeholder Icon 10 Clicked'),
-        'icon-btn-11': () => console.log('Placeholder Icon 11 Clicked'),
-        'icon-btn-12': () => console.log('Placeholder Icon 12 Clicked'),
-        'icon-btn-13': () => console.log('Placeholder Icon 13 Clicked'),
-         'icon-btn-15': () => console.log('Placeholder Icon 15 Clicked'),
-    };
-
-    Object.keys(buttonActions).forEach((id) => {
-        const button = document.getElementById(id);
-        if (button) {
-            button.addEventListener('click', buttonActions[id]);
-            console.log(`Listener attached to button: ${id}`);
-        } else {
-            console.warn(`Button with ID ${id} not found.`);
-        }
-    });//});
- */
+  
     
     attachNavBarListeners(); // Set up listeners for nav buttons
     const defaultFunctionality = 'sineTheta';
     const defaultType = 'sin';
 
-    switchFunctionality(defaultFunctionality, defaultType);
-    // Function to handle button activation
-    // Step 3: Set the default button as active
-   /* const defaultButton = document.getElementById(`${defaultFunctionality}-button`);
-    if (defaultButton) {
-        defaultButton.classList.add('active');
-    console.log("active button changed")  ;  
-    } */
-    });
+        switchFunctionality(defaultFunctionality, defaultType);
+  
+    
     // Default state: Activate Sin Theta and load default functionality
         
-   
-  //setupEventHandlers(ctx, canvas);
-  //  loadTriangle('default');
-    // Draw a default triangle on page load
-  // drawDefaultCircle(ctx, canvas);
-  // a(ctx, canvas)
-
+    
 
 // Function to draw the default triangle on page load
 function drawDefaultCircle(ctx,canvas) {
