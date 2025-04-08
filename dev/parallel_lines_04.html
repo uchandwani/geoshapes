@@ -9,36 +9,30 @@
   <link rel="stylesheet" href="./css/header_styles.css">
   <link rel="stylesheet" href="./css/style.css">  
   <link rel="stylesheet" href="./css/sub-header-style.css">
-
 </head>
 
 <body>
   <!-- Header Section -->
   <div id="header-placeholder"></div>   
-  
+
+  <!-- 🔧 Sub Header Container (required for subheaders to load) -->
+  <div id="sub-header-container"></div>
 
   <!-- Main App Container -->
   <div class="container">
-    <div style="background: red; color: white; padding: 8px;">
-  🔴 LIVE MARKER TEST – parallel_lines_04.html
-</div>
+  
     <!-- Left Sidebar -->
     <div class="sidebar left" id="left-sidebar">
-
-       <!-- Theorem Definition Area -->
+      <!-- Theorem Definition Area -->
       <div id="theorem-definition" class="theorem-definition">
         <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
       </div>
-
       <h3>Instructions</h3>
       <p>Select a theorem from the navigation bar above to see its instructions here.</p>
     </div>
 
-    <!-- 🔴 TEST MARKER: PARALLEL_LINES_04.HTML LOADED -->
-
     <!-- Canvas + Tools -->
     <div class="canvas-container">
-      
       <!-- Hidden Navigation Buttons (Used by JS for SVG Triggers) -->
       <div class="navigation-buttons" style="display: none;">
         <button id="sineTheta-button">Vertically Opposite Angles</button>
@@ -46,8 +40,6 @@
         <button id="trigonoIdentities-button">Triangle Exterior Angle</button>
         <button id="trigonoRatios-button">Triangle Angle Sum</button>
       </div>
-
-     
 
       <!-- Dynamic Tab Buttons -->
       <div id="dynamic-buttons" class="triangle-buttons">
@@ -156,21 +148,12 @@
   </script>
 
   <!-- Load Sub Header -->
-
-
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ DOM is fully loaded");
-
-    const def = document.querySelector("#theorem-definition");
-    if (def) {
-      def.innerHTML = "<p>✅ Theorem definition injected!</p>";
-    } else {
-      console.log("❌ #theorem-definition not found in DOM");
-    }
-  });
-</script>
-s
-  
+    fetch('subheaders/parallel-sub-header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sub-header-container').innerHTML = html;
+      });
+  </script>
 </body>
 </html>
