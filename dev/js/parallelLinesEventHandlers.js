@@ -398,7 +398,7 @@ function updateUI(config, functionalityKey, subButtonType = null) {
     // ✅ Ensure theorem text is updated based on functionalityKey and subButtonType
     if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
         console.log("Inside multiple definition", config.theoremDefinitions);
-        updateTheoremText(config.theoremDefinitions[subButtonType]); // Use specific theorem text
+        update  (config.theoremDefinitions[subButtonType]); // Use specific theorem text
     } else {
         console.log("Inside single definition", config.theoremDefinition);
         updateTheoremText(config.theoremDefinition || "No theorem available for this selection.");
@@ -574,8 +574,8 @@ function  updateTheoremText(definition) {
     console.log("Inside updateTheoremText", definition);
     const theoremText = document.getElementById('theoremtext');
     console.log("theorem-text", theoremText);
-    if (theoremText) {  
+  //  if (theoremText) {  
         console.log(`Updating theorem definition to: ${definition}`);
         theoremText.textContent = definition || 'No definition available for this theorem.';
-    }
-}
+  //  }
+}   
