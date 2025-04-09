@@ -258,7 +258,7 @@ export function addSpecificPoints(points, ctx) {
 export function switchFunctionality(functionalityKey, buttontype) {
 
     console.log(`Switching to functionality: ${functionalityKey}`);
-  //  console.log("🔧 [eventHandlers.js] switchFunctionality called with:", functionalityKey, buttonType);
+    console.log("switchFunctionality called with:", functionalityKey, buttonType);  
 
     canvasManager.clearSpecificPoints();
     // Get the selected functionality configuration
