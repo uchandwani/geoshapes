@@ -255,7 +255,7 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-export function switchFunctionality(functionalityKey, buttontype) {
+export function switchFunctionality(functionalityKey, buttontype = null) {
 
     console.log(`Switching to functionality: ${functionalityKey}`);
     console.log("switchFunctionality called with:", functionalityKey, buttonType);  
