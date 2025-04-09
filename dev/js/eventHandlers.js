@@ -345,9 +345,10 @@ function logDynamicButtons() {
 }
     
 function updateTheoremText(config, subtype = null) {
-    console.log("Inside updateTheoremText", config);
+    
 
     let definition = config.theoremDefinition;
+    console.log("Inside updateTheoremText", definition, config);
     if (typeof definition === 'object' && subtype && definition[subtype]) {
         definition = definition[subtype];
     }
