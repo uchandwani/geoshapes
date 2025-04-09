@@ -570,9 +570,10 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-function updateTheoremText(definition) {
+function  updateTheoremText(definition) {
     console.log("Inside updateTheoremText", definition);
     const theoremText = document.getElementById('theorem-text');
+    console.log("theorem-text", theoremText);
     if (theoremText) {
         console.log(`Updating theorem definition to: ${definition}`);
         theoremText.textContent = definition || 'No definition available for this theorem.';
