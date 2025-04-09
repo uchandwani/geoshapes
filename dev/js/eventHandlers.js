@@ -344,25 +344,27 @@ function logDynamicButtons() {
     });
 }
     
-function updateTheoremText(config, subtype) {
+function updateTheoremText(config, subtype = null) {
     console.log("Inside updateTheoremText", config);
-    console.log("📘 Setting theorem definition from config.theoremDefinition:", config.theoremDefinition);
 
     let definition = config.theoremDefinition;
-     console.log("DEFINITIOAN", definition);
-    // Check if it's an object and subtype is defined
     if (typeof definition === 'object' && subtype && definition[subtype]) {
-        console.log("The typy of definition is object",definition[subtype]);
         definition = definition[subtype];
     }
 
-    // Fall back to a default string if not found
     if (typeof definition !== 'string') {
         definition = "Definition not available.";
     }
-    console.log("DEFINITIOAN after if blocks", definition);
-    document.getElementById("theorem-text").innerHTML = definition;
+
+    const theoremTextElement = document.getElementById("theorem-text");
+    if (!theoremTextElement) {
+        console.warn("⚠️ Theorem text element not found in DOM.");
+        return;
+    }
+
+    theoremTextElement.innerHTML = definition;
 }
+
 
 export function updateLeftSidebar(functionalityKey, subClassification) {
     console.log('%cFunction ULS : Functionality Key, Subclassification:', 'color: green;', functionalityKey, subClassification);
