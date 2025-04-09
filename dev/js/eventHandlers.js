@@ -357,7 +357,7 @@ function updateTheoremText(config, subtype = null) {
         definition = "Definition not available.";
     }
 
-    const theoremTextElement = document.getElementById("theorem-text");
+    const theoremTextElement = document.getElementById("theoremDefinition");
     if (!theoremTextElement) {
         console.warn("⚠️ Theorem text element not found in DOM.");
         return;
@@ -403,7 +403,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     leftSidebar.innerHTML = content;
 
     // ✅ This will now always work
-    if (config.theoremDefinition && document.getElementById("theorem-text")) {
+    if (config.theoremDefinition && document.getElementById("theoremDefinition")) {
         updateTheoremText(config, subClassification);
     } else {
         console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
