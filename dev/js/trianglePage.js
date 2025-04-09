@@ -1,13 +1,20 @@
-        import { Triangle } from '../shapes/Triangle.js';
-        import { canvasManager } from '../shapes/CanvasManager.js';
         import { functionalityConfig } from './functionalityConfig.js';
         import { pageFeatures  } from './functionalityConfig.js';
+
+
+        import { Triangle } from '../shapes/Triangle.js';
+        import { canvasManager } from '../shapes/CanvasManager.js';
+        
         import { switchFunctionality } from './eventHandlers.js';
         import { attachNavBarListeners } from './eventHandlers.js';
         import { handleTriangleType } from './eventHandlers.js';
         import {Line} from '../shapes/Lines.js';
         import {Protractor} from '../shapes/Protractor.js';
         import {updateRightSidebar} from './eventHandlers.js';
+
+
+
+        window.switchFunctionality = switchFunctionality;
 
             
         document.addEventListener('DOMContentLoaded', () => {
@@ -29,8 +36,12 @@
                 });
             });
 
-             console.log("Calling switchFunctionality with" , defaultFunctionality);
-              switchFunctionality(defaultFunctionality);
+
+            attachNavBarListeners(); // Set up listeners for nav buttons
+            
+           // switchFunctionality(defaultFunctionality, defaultSubClassification);
+           
+
 
             // Initialize right sidebar with the default sub-classification
             updateRightSidebar(defaultFunctionality, defaultSubClassification);
@@ -49,8 +60,9 @@
 
             console.log('Adjusted Canvas Dimensions:', canvas.width, canvas.height); 
 
-            attachNavBarListeners(); // Set up listeners for nav buttons
-            switchFunctionality('midSegmentTheorem');
+            console.log("Calling switchFunctionality with", defaultFunctionality, defaultSubClassification);
+            switchFunctionality('midSegmentTheorem', defaultSubClassification);
+            console.log("✅ switchFunctionality call completed");
 
             // Set the default triangle type to "Right Angle Triangle"
             handleTriangleType('midSegmentTheorem','right');
