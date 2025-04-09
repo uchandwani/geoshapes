@@ -3,7 +3,7 @@ export  const functionalityConfig = {
 // Define the feature configuration
    
     midSegmentTheorem: {
-        theorem-text: "If a line segment joins the midpoints of the two sides of a triangle, then the segment is parallel to third side and is of half its length.",
+        theoremDefinition: "If a line segment joins the midpoints of the two sides of a triangle, then the segment is parallel to third side and is of half its length.",
         
         canvasConfig: {
             autoloadShape: 'triangle',
