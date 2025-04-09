@@ -261,7 +261,7 @@ export function switchFunctionality(functionalityKey, buttontype = null) {
     console.log("switchFunctionality called with:", functionalityKey, buttontype);  
 
     canvasManager.clearSpecificPoints();
-    // Get the selected functionality configuration
+    // Get the selected functionality configurationfun
 
     if (!functionalityConfig || !functionalityConfig[functionalityKey]) {
     console.error("❌ Config or functionality key not found", functionalityKey, functionalityConfig);
@@ -277,7 +277,7 @@ export function switchFunctionality(functionalityKey, buttontype = null) {
     }
 
    
-    updateTheoremText(config, buttontype);
+    
     /* const theoremText = document.getElementById('theorem-text');
     if (theoremText) {
         console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
@@ -290,6 +290,8 @@ export function switchFunctionality(functionalityKey, buttontype = null) {
     if (leftSidebar) {
         leftSidebar.innerHTML = config.leftSidebarContent;
     }
+
+    updateTheoremText(config, buttontype);
 
    // Update right sidebar for the default sub-classification
     let defaultType = config.buttonSet[0].type; // Default to the first button type
