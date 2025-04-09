@@ -255,11 +255,19 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-export function switchFunctionality(functionalityKey) {
+export function switchFunctionality(functionalityKey, buttontype) {
 
     console.log(`Switching to functionality: ${functionalityKey}`);
+    console.log("🔧 [eventHandlers.js] switchFunctionality called with:", functionalityKey, buttonType);
+
     canvasManager.clearSpecificPoints();
     // Get the selected functionality configuration
+
+    if (!functionalityConfig || !functionalityConfig[functionalityKey]) {
+    console.error("❌ Config or functionality key not found", functionalityKey, functionalityConfig);
+    return;
+}
+
     const config = functionalityConfig[functionalityKey];
     console.log("The functionality key in configuration is", functionalityKey, functionalityConfig[functionalityKey]);
 
@@ -268,11 +276,13 @@ export function switchFunctionality(functionalityKey) {
         return;
     }
 
-    const theoremText = document.getElementById('theorem-text');
+   
+    updateTheoremText(config, buttontype);
+    /* const theoremText = document.getElementById('theorem-text');
     if (theoremText) {
         console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
         theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
-    }
+    }*/
 
 
     // Update the left sidebar content
@@ -332,6 +342,69 @@ function logDynamicButtons() {
     buttons.forEach((button, index) => {
         console.log(`Button ${index + 1}:`, button.textContent, button.dataset.type);
     });
+}
+    
+function updateTheoremText(config, subtype) {
+    console.log("Inside updateTheoremText", config);
+    console.log("📘 Setting theorem definition from config.theoremDefinition:", config.theoremDefinition);
+
+    let definition = config.theoremDefinition;
+     console.log("DEFINITIOAN", definition);
+    // Check if it's an object and subtype is defined
+    if (typeof definition === 'object' && subtype && definition[subtype]) {
+        console.log("The typy of definition is object",definition[subtype]);
+        definition = definition[subtype];
+    }
+
+    // Fall back to a default string if not found
+    if (typeof definition !== 'string') {
+        definition = "Definition not available.";
+    }
+    console.log("DEFINITIOAN after if blocks", definition);
+    document.getElementById("theorem-text").innerHTML = definition;
+}
+
+export function updateLeftSidebar(functionalityKey, subClassification) {
+    console.log('%cFunction ULS : Functionality Key, Subclassification:', 'color: green;', functionalityKey, subClassification);
+
+    const config = functionalityConfig[functionalityKey];
+    if (!config) {
+        console.error(`No configuration found for functionality key: ${functionalityKey}`);
+        return;
+    }
+
+    const leftSidebarContent = config.leftSidebarContent;
+
+    let content;
+    if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
+        content = leftSidebarContent;
+    } else {
+        content = typeof leftSidebarContent === 'object'
+            ? leftSidebarContent[subClassification]
+            : leftSidebarContent;
+    }
+
+    if (!content) {
+        console.error(`No valid content found for subClassification: ${subClassification}`);
+        document.querySelector('.sidebar.left').innerHTML = `<p>Instructions not available.</p>`;
+        return;
+    }
+
+    const leftSidebar = document.querySelector('.sidebar.left');
+    if (!leftSidebar) {
+        console.warn("⚠️ Sidebar element not found");
+        return;
+    }
+
+    // ✅ Safe to update now
+    leftSidebar.innerHTML = content;
+
+    // ✅ This will now always work
+    if (config.theoremDefinition && document.getElementById("theorem-text")) {
+        updateTheoremText(config, subClassification);
+    } else {
+        console.log("ℹ️ Skipping updateTheoremText — placeholder not found or no definition.");
+    }
 }
 
 export function attachNavBarListeners() {
