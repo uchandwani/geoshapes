@@ -1,11 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triangle Theorems</title>
-    <!--link rel="stylesheet" href="../css/header_styles.css"-->
-    
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/trianglePage.js"></script>
@@ -13,180 +12,85 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
     <script type="module">
     import { compareMeasures, compareDividedMeasures, calculateRatio, updateMessage } from './js/trianglePage.js';
-
-    // Expose functions globally
     window.compareMeasures = compareMeasures;
     window.compareDividedMeasures = compareDividedMeasures;
     window.calculateRatio = calculateRatio;
     window.updateMessage = updateMessage;
-
     </script>
 </head>
 <body>
     <div id="header-placeholder"></div>
-
-    
-    <!-- Theorem Definition Section -->
-    
     <div class="container">
-        <!-- Left Sidebar -->
         <div class="sidebar left" id="left-sidebar">
-
-             <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+            <div id="theorem-definition" class="theorem-definition">
+                <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
             </div>
-
             <h3>Instructions</h3>
             <p>Select a theorem from the navigation bar above to see its instructions here.</p>
         </div>
-            
-
-        <!-- Main Canvas -->
         <div class="canvas-container">
             <div class="navigation-buttons">
-          
-                
-                <button id="midSegmentTheorem-button" class="icon-btn" title="Mid Segment Theorem">Mid Segment Theorem</button>
-                <button id="basicProportionalityTheorem-button" class="icon-btn" title="Basic Proportionality Theorem">Basic Proportionality Theorem</button>
-                <button id="angleBisectorTheorem-button" class="icon-btn" title="Angle Bisector Theorem">Angle Bisector Theorem</button>
-                <button id="propertiesOfTriangles-button" class="icon-btn" title="Properties of Triangles">Properties of Triangles</button>
-                        
+                <button id="midSegmentTheorem-button">Mid Segment Theorem</button>
+                <button id="basicProportionalityTheorem-button">Basic Proportionality Theorem</button>
+                <button id="angleBisectorTheorem-button">Angle Bisector Theorem</button>
+                <button id="propertiesOfTriangles-button">Properties of Triangles</button>
+            </div>
+            <div id="dynamic-buttons" class="triangle-buttons"></div>
+            <div class="canvas-wrapper">
+                <div class="additional-div">
+                    <button id="draw-line"><img src="icons/line-icon.png" /></button>
+                    <button id="draw-scale">Add Scale</button>
+                    <button id="add-divider"><img src="icons/divider-icon.png" /></button>
+                    <button id="draw-triangle"><img src="icons/triangle-icon.png" /></button>
+                    <button id="draw-protractor"><img src="icons/protractor-icon.png" /></button>
+                    <button id="modify-shape"><img src="icons/modify-icon.png" /></button>
+                    <button id="delete-shape"><img src="icons/delete-icon.png" /></button>
                 </div>
-           
-
-             <div id="dynamic-buttons" class="triangle-buttons"></div>
-                      <div class="canvas-wrapper">
-             <div class="additional-div">
-        
-         <button id="draw-line" class="icon-btn" title="Draw Line">
-            <img src="icons/line-icon.png" alt="Line Icon" />
-          </button>
-          <button id="draw-scale"class="icon-btn" title="Show Scale">Add Scale</button>
-
-          <button id="add-divider" class="icon-btn" title="Add Divider">
-          <img src="./icons/divider-icon.png" alt="Add Divider" />
-          </button>
-
-          
-
-          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
-            <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
-          </button>
-          
-
-          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
-            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
-          </button>
-          <button id="modify-shape" class="icon-btn" title="Modify Shape">
-            <img src="icons/modify-icon.png" alt="Modify Icon" />
-          </button>
-          <button id="delete-shape" class="icon-btn" title="Delete Shape">
-            <img src="icons/delete-icon.png" alt="Delete Icon" />
-          </button>
-         </div>
-        
-                    <canvas id="canvas" width="800" height="600" ></canvas>
-                </div>
+                <canvas id="canvas" width="800" height="600"></canvas>
+            </div>
         </div>
-
-        <!-- Right Sidebar -->
         <div class="sidebar right">
             <h3>Exercises / Results</h3>
-            <ul>
-                <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
-    <thead>
-        <tr>
-            <th>Readings</th>
-            <th>Measure of Angle ABD</th>
-            <th>Corresponding Angle ACF</th>
-            <th>Remarks</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
-            <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
-            <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
-            <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
-            <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
-        </tr>
-    </tbody>
-</table>
-
-            </ul>
+            <table border="1">
+                <thead>
+                    <tr><th>Readings</th><th>Angle ABD</th><th>Angle ACF</th><th>Remarks</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><input /></td><td><input /></td><td><input /></td></tr>
+                    <tr><td>2</td><td><input /></td><td><input /></td><td><input /></td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <footer>
-        <p></p>
-    </footer>
-
-    <!-- Toggle button -->
-    <!--button id="toggle-dimensions" style="margin: 20px;">Toggle Dimensions</button-->
-
-    <!-- JavaScript to handle dimension labeling -->
-    <!--script>
-        let dimensionsVisible = false;
-
-        document.getElementById('toggle-dimensions').addEventListener('click', () => {
-            if (dimensionsVisible) {
-                // Remove existing labels
-                document.querySelectorAll('.dimension-label').forEach(label => label.remove());
-                dimensionsVisible = false;
-            } else {
-                // Add dimension labels
-                document.querySelectorAll('div').forEach((div) => {
-                    const rect = div.getBoundingClientRect();
-                    const label = document.createElement('div');
-                    label.classList.add('dimension-label');
-                    label.style.position = 'absolute';
-                    label.style.top = `${rect.top + window.scrollY}px`;
-                    label.style.left = `${rect.left + window.scrollX}px`;
-                    label.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                    label.style.color = 'white';
-                    label.style.padding = '2px 5px';
-                    label.style.fontSize = '14px';
-                    label.style.zIndex = '1000';
-                    label.textContent = `${rect.width}px × ${rect.height}px`;
-                    document.body.appendChild(label);
-                });
-                const screenWidth = window.innerWidth;
-                const screenHeight = window.innerHeight;
-
-                screenDimensions.textContent = `Screen: ${screenWidth}px × ${screenHeight}px`;
-                dimensionsVisible = true;
-                
+    <footer><p></p></footer>
+    <script type="module" src="./shapes.js"></script>
+    <script type="module" src="./shapes/CanvasManager.js"></script>
+    <script>
+      fetch('header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('header-placeholder').innerHTML = html;
+          const script = document.createElement('script');
+          script.src = './js/header.js';
+          script.onload = () => {
+            if (typeof updatePageTitle === "function") {
+              updatePageTitle();
             }
+          };
+          document.head.appendChild(script);
         });
-    </script-->
-     <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
-  <script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
+    </script>
 
-      // Dynamically load header.js *after* header.html is loaded
-      const script = document.createElement('script');
-      script.src = './js/header.js';
-      script.onload = () => {
-        if (typeof updatePageTitle === "function") {
-          updatePageTitle();  // ✅ This should be defined in header.js
-        } else {
-          console.warn("⚠️ updatePageTitle not found.");
-        }
-      };
-      document.head.appendChild(script);
-    });
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const txt = document.getElementById('theorem-text');
+    if (txt) {
+      txt.innerText = "✅ Theorem text loaded correctly!";
+    } else {
+      console.warn("❌ #theorem-text not found in DOM");
+    }
+  });
 </script>
-
-
-  
 
 </body>
 </html>
