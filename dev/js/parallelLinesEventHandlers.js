@@ -573,16 +573,17 @@ function updateSidebars(config) {
 export function updateTheoremText(functionalityConfig) {
     console.log("Inside updateTheoremText with config:", functionalityConfig);
 
-    window.setTimeout(() => {
+    window.onload = () => {
         const theoremTextElem = document.getElementById('theorem-text');
         console.log("theorem-text element is:", theoremTextElem);
 
         if (!theoremTextElem) {
-            console.warn("⚠️ theorem-text is still null even after timeout.");
+            console.warn("⚠️ theorem-text is still null even after window.onload");
         } else {
             theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
             console.log("✅ theorem-text updated successfully.");
         }
-    }, 300);  // You can tune this to 500 if needed, but 300ms is usually good.
+    }
 }
+
 
