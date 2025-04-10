@@ -476,7 +476,7 @@ function updateUI(config, functionalityKey, subButtonType = null) {
 
 
 
-export function updateRightSidebar(functionalityKey, subClassification) {
+/* export function updateRightSidebar(functionalityKey, subClassification) {
     console.log('%c' + "Function URS : Functionality Key,Subclassification: ", 'color: green;', functionalityKey, subClassification);
    
     
@@ -559,7 +559,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
 
 
 
-
+*/
     
 
 function updateSidebars(config) {
@@ -570,20 +570,99 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-export function updateTheoremText(functionalityConfig) {
-    console.log("Inside updateTheoremText with config:", functionalityConfig);
+export function updateTheoremText(config, subButtonType = null) {
+    console.log("Function UTT - Updating Theorem Text with:", config, subButtonType);
 
-    window.onload = () => {
-        const theoremTextElem = document.getElementById('theorem-text');
-        console.log("theorem-text element is:", theoremTextElem);
+    const theoremTextElem = document.getElementById('theorem-text');
 
-        if (!theoremTextElem) {
-            console.warn("⚠️ theorem-text is still null even after window.onload");
-        } else {
-            theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
-            console.log("✅ theorem-text updated successfully.");
-        }
+    if (!theoremTextElem) {
+        console.warn("⚠️ theorem-text element not found in DOM");
+        return;
+    }
+
+    if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
+        theoremTextElem.innerHTML = config.theoremDefinitions[subButtonType];
+        console.log("✅ Updated with subType definition:", config.theoremDefinitions[subButtonType]);
+    } else {
+        theoremTextElem.innerHTML = config.theoremDefinition || "No theorem available for this selection.";
+        console.log("✅ Updated with main definition:", config.theoremDefinition);
     }
 }
+
+export function updateUI(config, functionalityKey, subButtonType = null) {
+    console.log("Function UUI - Updating UI for:", functionalityKey, subButtonType, config);
+
+    updateTheoremText(config, subButtonType);
+    updateLeftSidebar(config);
+    updateRightSidebar(config);
+
+    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
+
+    if (!dynamicButtonsContainer) {
+        console.warn("⚠️ dynamic-buttons element not found in DOM");
+        return;
+    }
+
+    if (config.buttonSet && Array.isArray(config.buttonSet)) {
+        dynamicButtonsContainer.innerHTML = "";
+
+        config.buttonSet.forEach(buttonConfig => {
+            const btn = document.createElement("button");
+            btn.classList.add("triangle-button");
+            btn.textContent = buttonConfig.label;
+            btn.dataset.type = buttonConfig.type;
+            btn.dataset.functionalityKey = functionalityKey;
+
+            btn.addEventListener("click", () => {
+                console.log(`🔵 Sub-Button Clicked: ${buttonConfig.type}`);
+                
+                document.querySelectorAll(".triangle-button").forEach(button => {
+                    button.classList.remove("active");
+                });
+
+                btn.classList.add("active");
+
+                switchFunctionality(functionalityKey, buttonConfig.type);
+            });
+
+            dynamicButtonsContainer.appendChild(btn);
+        });
+
+        dynamicButtonsContainer.style.display = "block";
+
+    } else {
+        dynamicButtonsContainer.style.display = "none";
+    }
+}
+
+
+export function updateLeftSidebar(config) {
+    console.log("Function ULS - Updating Left Sidebar with:", config);
+
+    const leftSidebar = document.getElementById('left-sidebar-content');
+
+    if (!leftSidebar) {
+        console.warn("⚠️ left-sidebar-content element not found in DOM");
+        return;
+    }
+
+    leftSidebar.innerHTML = config.leftSidebarContent || "";
+}
+
+
+export function updateRightSidebar(config) {
+    console.log("Function URS - Updating Right Sidebar with:", config);
+
+    const rightSidebar = document.getElementById('right-sidebar-content');
+
+    if (!rightSidebar) {
+        console.warn("⚠️ right-sidebar-content element not found in DOM");
+        return;
+    }
+
+    rightSidebar.innerHTML = config.rightSidebarContent || "";
+}
+
+
 
 
