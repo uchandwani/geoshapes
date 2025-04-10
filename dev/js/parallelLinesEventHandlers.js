@@ -570,12 +570,18 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-function  updateTheoremText(config) {
-    console.log("Inside updateTheoremText", config);
-    const theoremText = document.getElementById('theorem-text');
-    console.log("theorem-text", theoremText);
-    if (theoremText) {  
-        console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
-        theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
-    }
-}   
+export function updateTheoremText(functionalityConfig) {
+    console.log("Inside updateTheoremText with config:", functionalityConfig);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const theoremTextElem = document.getElementById('theorem-text');
+        console.log("theorem-text element is:", theoremTextElem);
+
+        if (!theoremTextElem) {
+            console.warn("⚠️ theorem-text is null — even after DOM ready");
+        } else {
+            theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
+            console.log("✅ theorem-text updated successfully.");
+        }
+    });
+}
