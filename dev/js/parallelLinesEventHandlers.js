@@ -398,10 +398,10 @@ function updateUI(config, functionalityKey, subButtonType = null) {
     // ✅ Ensure theorem text is updated based on functionalityKey and subButtonType
     if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
         console.log("Inside multiple definition", config.theoremDefinitions);
-        updateTheoremText(config.theoremDefinitions[subButtonType]); // Use specific theorem text
+        updateTheoremText(config.theoremDefinitions[subButtonType], subButtonType); // Use specific theorem text
     } else {
         console.log("Inside single definition", config.theoremDefinition);
-        updateTheoremText(config.theoremDefinition || "No theorem available for this selection.");
+        updateTheoremText(config.theoremDefinition || "No theorem available for this selection.", subButtonType);
     }
 
     // ✅ Handle dynamic sub-buttons
@@ -438,9 +438,9 @@ function updateUI(config, functionalityKey, subButtonType = null) {
 
                 // ✅ Update theorem text dynamically based on sub-button selection
                 if (config.theoremDefinitions && config.theoremDefinitions[buttonConfig.type]) {
-                    updateTheoremText(config.theoremDefinitions[buttonConfig.type]);
+                    updateTheoremText(config.theoremDefinitions[buttonConfig.type], subButtonType);
                 } else {
-                    updateTheoremText(config.theoremDefinition || "No theorem available for this selection.");
+                    updateTheoremText(config.theoremDefinition || "No theorem available for this selection.",  subButtonType);
                 }
             });
 
@@ -466,7 +466,7 @@ function updateUI(config, functionalityKey, subButtonType = null) {
 
             // ✅ Update theorem text for the default sub-button
             if (config.theoremDefinitions && config.theoremDefinitions[effectiveSubButton.dataset.type]) {
-                updateTheoremText(config.theoremDefinitions[effectiveSubButton.dataset.type]);
+                updateTheoremText(config.theoremDefinitions[effectiveSubButton.dataset.type], subButtonType);
             }
         }
     } else {
@@ -570,18 +570,15 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-export function updateTheoremText(functionalityConfig) {
-    console.log("Inside updateTheoremText with config:", functionalityConfig);
+export function updateTheoremText(functionalityConfig, buttonType) {
+   console.log("Inside updateTheoremText with config:", functionalityConfig, "and buttonType:", buttonType);
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const theoremTextElem = document.getElementById('theorem-text');
-        console.log("theorem-text element is:", theoremTextElem);
-
-        if (!theoremTextElem) {
-            console.warn("⚠️ theorem-text is null — even after DOM ready");
-        } else {
-            theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
-            console.log("✅ theorem-text updated successfully.");
-        }
-    });
+   const theoremTextElem = document.getElementById('theorem-text');
+   if (!theoremTextElem) {
+      console.warn("⚠️ theorem-text is null");
+   } else {
+      theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
+      console.log("✅ Theorem text updated.");
+   }
 }
+
