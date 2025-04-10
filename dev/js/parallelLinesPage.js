@@ -15,37 +15,18 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         
-       /* console.log('Current Mode:', mode);
-        const buttonActions = {
-            
-            'icon-btn-1': () => console.log('Placeholder Icon 1 Clicked'),
-            'icon-btn-2': () => console.log('Placeholder Icon 2 Clicked'),
-            'icon-btn-3': () => console.log('Placeholder Icon 3 Clicked'),
-            'icon-btn-4': () => console.log('Placeholder Icon 4 Clicked'),
-            'icon-btn-5': () => console.log('Placeholder Icon 5 Clicked'),
-            'icon-btn-6': () => console.log('Placeholder Icon 6 Clicked'),
-            'icon-btn-7': () => console.log('Placeholder Icon 7 Clicked'),
-            'icon-btn-8': () => console.log('Placeholder Icon 8 Clicked'),
-            'icon-btn-14': () => console.log('Placeholder Icon 14 Clicked'),
-            'icon-btn-16': () => console.log('Placeholder Icon 16 Clicked'),
-            'icon-btn-9': () => console.log('Placeholder Icon 9 Clicked'),
-            'icon-btn-10': () => console.log('Placeholder Icon 10 Clicked'),
-            'icon-btn-11': () => console.log('Placeholder Icon 11 Clicked'),
-            'icon-btn-12': () => console.log('Placeholder Icon 12 Clicked'),
-            'icon-btn-13': () => console.log('Placeholder Icon 13 Clicked'),
-             'icon-btn-15': () => console.log('Placeholder Icon 15 Clicked'),
-        };
-
-        Object.keys(buttonActions).forEach((id) => {
-            const button = document.getElementById(id);
-            if (button) {
-                button.addEventListener('click', buttonActions[id]);
-                console.log(`Listener attached to button: ${id}`);
+      document.querySelectorAll('svg[id$="-button"]').forEach(svgBtn => {
+          svgBtn.addEventListener('click', () => {
+            const btnId = svgBtn.id;
+            const navBtn = document.querySelector(`.navigation-buttons #${btnId}`);
+            if (navBtn) {
+              navBtn.click();  // ✅ Triggers full logic: canvas + sidebars + theorems
             } else {
-                console.warn(`Button with ID ${id} not found.`);
+              console.warn(`Nav button not found for ID: ${btnId}`);
             }
-        });//});
-     */
+          });
+        });
+
         
         attachNavBarListeners(); // Set up listeners for nav buttons
         const defaultFunctionality = 'sineTheta';
