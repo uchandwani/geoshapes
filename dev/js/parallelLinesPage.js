@@ -10,7 +10,7 @@
 
         
     document.addEventListener('DOMContentLoaded', () => {
-        console.log("Triangle Properties Page Loaded");
+        console.log("Parallel Lines Page Loaded");
 
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
