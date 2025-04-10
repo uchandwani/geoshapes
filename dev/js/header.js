@@ -8,7 +8,7 @@ const pageTitles = {
   "parallel_lines_04.html": "Parallel Lines",
   "triangle_theorem_07.html": "Triangle Theorems",
   "trig_properties_09.html": "Trigonometric Properties",
-  "circle_theorems_02.html": "Circle Theorems"
+  "circle_theorems_02.html": "Circle Theorems",
    "PLT.html": "Referenct Theorems"
 };
 console.log("PageTitle is now declared");
