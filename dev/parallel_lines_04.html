@@ -153,6 +153,29 @@
       });
   </script>
 
+
+
+<script>
+f<script>
+fetch('header.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('header-placeholder').innerHTML = html;
+    
+    const script = document.createElement('script');
+    script.src = './js/header.js';
+    script.onload = () => {
+      updatePageTitle();
+      updateUI("SineTheta");
+    };
+    document.head.appendChild(script);
+  });
+</script>
+
+</script>
+
+
+
   <!-- Load Sub Header -->
 
 
