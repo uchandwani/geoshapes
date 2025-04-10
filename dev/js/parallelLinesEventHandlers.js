@@ -570,15 +570,19 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-export function updateTheoremText(functionalityConfig, buttonType) {
-   console.log("Inside updateTheoremText with config:", functionalityConfig, "and buttonType:", buttonType);
+export function updateTheoremText(functionalityConfig) {
+    console.log("Inside updateTheoremText with config:", functionalityConfig);
 
-   const theoremTextElem = document.getElementById('theorem-text');
-   if (!theoremTextElem) {
-      console.warn("⚠️ theorem-text is null");
-   } else {
-      theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
-      console.log("✅ Theorem text updated.");
-   }
+    window.setTimeout(() => {
+        const theoremTextElem = document.getElementById('theorem-text');
+        console.log("theorem-text element is:", theoremTextElem);
+
+        if (!theoremTextElem) {
+            console.warn("⚠️ theorem-text is still null even after timeout.");
+        } else {
+            theoremTextElem.innerHTML = functionalityConfig.theoremDefinition;
+            console.log("✅ theorem-text updated successfully.");
+        }
+    }, 300);  // You can tune this to 500 if needed, but 300ms is usually good.
 }
 
