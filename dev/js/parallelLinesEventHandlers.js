@@ -392,7 +392,7 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey, subButtonType = null) {
+/* function updateUI(config, functionalityKey, subButtonType = null) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config, subButtonType);
 
     // ✅ Ensure theorem text is updated based on functionalityKey and subButtonType
@@ -476,7 +476,7 @@ function updateUI(config, functionalityKey, subButtonType = null) {
 
 
 
-/* export function updateRightSidebar(functionalityKey, subClassification) {
+    export function updateRightSidebar(functionalityKey, subClassification) {
     console.log('%c' + "Function URS : Functionality Key,Subclassification: ", 'color: green;', functionalityKey, subClassification);
    
     
