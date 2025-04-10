@@ -578,4 +578,4 @@ function  updateTheoremText(config) {
         console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
         theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
     }
-}   a
+}   
