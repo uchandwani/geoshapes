@@ -168,6 +168,7 @@
         }
     }
 
+    
 
     function drawDefaultTriangle(ctx, canvas) {
         console.log("Drawing default triangle on load...");
@@ -676,6 +677,26 @@ function resetInputStyles(inputs, result) {
     canvasManager.render();
 }
 
+
+// Auto-Resize Function
+function resizeCanvas() {
+  const container = document.querySelector('.canvas-scroll-container');
+
+  const availableWidth = container.clientWidth - 20;  // Optional padding/margin
+  const availableHeight = container.clientHeight - 20;
+
+  let newSize = Math.min(availableWidth, availableHeight);
+
+  // Optional: Max / Min limits
+  newSize = Math.max(600, Math.min(newSize, 800));  // canvas between 600-800px
+
+  canvas.width = newSize;
+  canvas.height = newSize;
+}
+
+// Auto-trigger on window size change and page load
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('load', resizeCanvas);
 
 
     // Call renderCanvas with the desired configuration
