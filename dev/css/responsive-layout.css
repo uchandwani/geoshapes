@@ -115,7 +115,7 @@ header h1 {
 @media (max-height: 768px) {
   .canvas-scroll-container canvas {
     height: 600px;
-    
+      
   }
 }
 
