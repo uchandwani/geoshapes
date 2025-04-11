@@ -81,14 +81,14 @@ header h1 {
   height: 30px;
 }
 
-/* Canvas Wrapper */
 .canvas-container {
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding: 0;
   background-color: #f1f1f1;
-  padding: 10px 0;
 }
 
 .canvas-wrapper {
@@ -115,7 +115,7 @@ header h1 {
 @media (max-height: 768px) {
   .canvas-scroll-container canvas {
     height: 600px;
-    margin-top: -10px;
+    
   }
 }
 
