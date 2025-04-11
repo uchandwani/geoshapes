@@ -419,7 +419,7 @@
                 position: relative;
                 justify-content: center;
                 align-items: center;
-                overflow: hidden;
+                overflow-y: auto;
             }
 
     .scale-label {
