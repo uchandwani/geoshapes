@@ -15,14 +15,7 @@
        const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        canvas.width = 700;
-        canvas.height = 600;
-
-        console.log("Canvas width now is:", canvas.width);
-        console.log("Canvas height now is:", canvas.height);
-
-
-        
+               
       document.querySelectorAll('svg[id$="-button"]').forEach(svgBtn => {
           svgBtn.addEventListener('click', () => {
             const btnId = svgBtn.id;
