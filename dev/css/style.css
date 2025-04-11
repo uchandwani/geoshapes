@@ -1,3 +1,9 @@
+
+html {
+    overflow-x: hidden;   /* No horizontal scroll */
+    overflow-y: auto;     /* Allow vertical scroll for whole page */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -104,7 +110,7 @@ header h1 {
     flex: 1; /* Fill remaining space */
     display: flex;
     min-height: 0;
-    overflow-y: auto; /* Prevent scrolling within the container */
+   
     overflow-x:hidden;
 }
    .sidebar.left {
