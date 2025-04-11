@@ -615,4 +615,12 @@
       color: #3366cc;
     }
 
+    canvas {
+  width: 700px !important;
+  height: 600px !important;
+  display: block;
+  background-color: white;
+}
+
+
 
