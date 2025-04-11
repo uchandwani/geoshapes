@@ -83,20 +83,40 @@ html, body {
 }
 
 
-.canvas-scroll-container canvas {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    max-height: 700px;
-    background-color: white;
-    border: 1px solid #ccc;
-}
 
 @media (max-height: 749px) {
   .canvas-scroll-container canvas {
     max-height: 600px;
   }
 }
+
+/* Generic canvas styling */
+.canvas-scroll-container canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Default for small-medium screens (like 1366x768) */
+@media (max-width: 1400px) {
+  .canvas-scroll-container canvas {
+    width: 700px;
+    height: 600px;
+    margin-top: -50px;  /* Move up to create space below */
+  }
+}
+
+/* For large screens (like 1920x1080 and above) */
+@media (min-width: 1401px) {
+  .canvas-scroll-container canvas {
+    width: 800px;
+    height: 700px;
+    margin-top: 0; /* Centered naturally */
+  }
+}
+
 
 
 canvas {
