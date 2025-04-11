@@ -622,5 +622,23 @@
   background-color: white;
 }
 
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;   /* Allow wrap */
+  align-items: flex-start;
+}
+
+.canvas-container {
+  overflow-y: auto;
+  max-height: none;
+}
+
+
 
 
