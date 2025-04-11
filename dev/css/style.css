@@ -612,5 +612,10 @@ body {
       color: #3366cc;
     }
 
-   
+    .sidebar.left,
+.sidebar.right {
+    width: 220px;   /* Fixed width */
+    overflow-y: auto;
+}
+
 
