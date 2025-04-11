@@ -123,6 +123,20 @@
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
+.container {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+
+    width: 100%;             /* Occupy full width on small screens */
+    max-width: 1200px;       /* Restrict max width on large screens */
+    margin: 0 auto;          /* Center horizontally */
+    padding: 10px;           /* Optional breathing space */
+    box-sizing: border-box;
+}
+
+
 
 
        .sidebar.left {
@@ -626,13 +640,14 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+/*
 
 .container {
   flex: 1;
   display: flex;
   flex-wrap: wrap;   /* Allow wrap */
   align-items: flex-start;
-}
+} */
 
 .canvas-container {
   overflow-y: auto;
