@@ -114,12 +114,14 @@
     }
 
     /* Main container */
-    .container {
+  .container {
     display: flex;
-    flex-wrap: wrap;             /* For smaller screens */
-    min-height: auto;            /* Remove 0 constraint */
-    overflow-x: hidden;          /* No horizontal scroll */
+    flex-wrap: wrap;     /* allow content wrap if screen is small */
+    min-height: auto;    /* allow container to grow */
+    overflow-x: hidden;  /* prevent horizontal scroll */
+    overflow-y: visible; /* allow vertical growth */
 }
+
 
        .sidebar.left {
         background-color: #f4f4f9; /* Light background for readability */
