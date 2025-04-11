@@ -99,7 +99,12 @@
 
 
     /* Header styling */
-
+      .canvas-scroll-container {
+  max-height: 80vh; /* Adjust as needed */
+  overflow-y: auto;
+  border: 1px solid #ccc; /* Optional: for visual reference */
+}
+  
 
     /* Subheader styling */
     .subheader {
