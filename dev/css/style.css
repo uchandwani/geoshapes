@@ -2,6 +2,7 @@
     html {
         overflow-x: hidden;   /* No horizontal scroll */
         overflow-y: auto;     /* Allow vertical scroll for whole page */
+        scrollbar-gutter: stable;
     }
 
     body {
