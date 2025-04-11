@@ -682,17 +682,17 @@ function resetInputStyles(inputs, result) {
 function resizeCanvas() {
   const container = document.querySelector('.canvas-scroll-container');
 
-  const availableWidth = container.clientWidth - 20;  // Optional padding/margin
-  const availableHeight = container.clientHeight - 20;
+  const availableWidth = container.offsetWidth - 20;  
+  const availableHeight = container.offsetHeight - 20;
 
   let newSize = Math.min(availableWidth, availableHeight);
 
-  // Optional: Max / Min limits
-  newSize = Math.max(600, Math.min(newSize, 800));  // canvas between 600-800px
+  newSize = Math.max(600, Math.min(newSize, 800));  // Canvas between 600-800px
 
   canvas.width = newSize;
   canvas.height = newSize;
 }
+
 
 // Auto-trigger on window size change and page load
 window.addEventListener('resize', resizeCanvas);
