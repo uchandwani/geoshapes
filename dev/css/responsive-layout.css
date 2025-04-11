@@ -1,0 +1,48 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  height: calc(100vh - 5vh); /* Adjust if header is 5vh */
+  width: 100%;
+}
+
+.sidebar.left, .sidebar.right {
+  width: 20vw;
+  min-width: 200px;
+  max-width: 300px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.canvas-container {
+  flex-grow: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  max-height: 90vh; /* So it doesn't overflow */
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+}
