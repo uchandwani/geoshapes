@@ -570,8 +570,9 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-export function updateTheoremText(config, subButtonType = null) {
-    console.log("Function UTT - Updating Theorem Text with:", config, subButtonType);
+export function updateTheoremText(theoremDefinition, subButtonType) {
+    console.log("Function UTT - Updating Theorem Text. Definition:", theoremDefinition, " SubButtonType:", subButtonType);
+    debugger;
 
     const theoremTextElem = document.getElementById('theorem-text');
 
@@ -580,20 +581,29 @@ export function updateTheoremText(config, subButtonType = null) {
         return;
     }
 
-    if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
-        theoremTextElem.innerHTML = config.theoremDefinitions[subButtonType];
-        console.log("✅ Updated with subType definition:", config.theoremDefinitions[subButtonType]);
-    } else {
-        theoremTextElem.innerHTML = config.theoremDefinition || "No theorem available for this selection.";
-        console.log("✅ Updated with main definition:", config.theoremDefinition);
-    }
-}
+    theoremTextElem.innerHTML = theoremDefinition || "No theorem available for this selection.";
+}   
+
 
 export function updateUI(config, functionalityKey, subButtonType = null) {
     console.log("Function UUI - Updating UI for:", functionalityKey, subButtonType, config);
 
-    updateTheoremText(config, subButtonType);
+        console.log("Function UUI - Updating UI for Functionality Key:", functionalityKey, " Config:", config, " SubButtonType:", subButtonType);
+    debugger;
+
+    // Update Theorem Text
+    if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
+        console.log("Inside Multiple Definitions block.");
+        updateTheoremText(config.theoremDefinitions[subButtonType], subButtonType);
+    } else {
+        console.log("Inside Single Definition block.");
+        updateTheoremText(config.theoremDefinition, subButtonType);
+    }
+
+    // Update Left Sidebar
     updateLeftSidebar(config);
+
+    // Update Right Sidebar
     updateRightSidebar(config);
 
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
@@ -637,7 +647,8 @@ export function updateUI(config, functionalityKey, subButtonType = null) {
 
 
 export function updateLeftSidebar(config) {
-    console.log("Function ULS - Updating Left Sidebar with:", config);
+    console.log("Function ULS - Updating Left Sidebar with config:", config);
+    debugger;
 
     const leftSidebar = document.getElementById('left-sidebar-content');
 
@@ -651,7 +662,8 @@ export function updateLeftSidebar(config) {
 
 
 export function updateRightSidebar(config) {
-    console.log("Function URS - Updating Right Sidebar with:", config);
+    console.log("Function URS - Updating Right Sidebar with config:", config);
+    debugger;
 
     const rightSidebar = document.getElementById('right-sidebar-content');
 
