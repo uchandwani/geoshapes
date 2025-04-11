@@ -1,78 +1,91 @@
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  height: calc(100vh - 5vh); /* Adjust if header is 5vh */
-  width: 100%;
+    display: flex;
+    min-height: 100vh;
 }
 
 .sidebar.left, .sidebar.right {
-  width: 20vw;
-  min-width: 200px;
-  max-width: 300px;
-  overflow-y: auto;
-  padding: 10px;
+    background-color: #f4f4f9;
+    padding: 10px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+
+.sidebar.left {
+    width: 20vw;
+}
+
+.sidebar.right {
+    width: 20vw;
 }
 
 .canvas-container {
-  flex-grow: 1;
-  overflow: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f1f1f1;
 }
 
 .canvas-wrapper {
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
-  max-height: 90vh; /* So it doesn't overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    gap: 10px;
 }
 
- .additional-div {
-                width: 60px;
-                background-color: #f1f1f1;
-                border-right: 1px solid #ccc;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 10px;
-                box-sizing: border-box;
-            }
+.additional-div {
+    width: 60px;
+    background-color: #f1f1f1;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
 .additional-div .icon-btn {
-                background: none;
-                border: none;
-                margin: 10px 0;
-                cursor: pointer;
-                transition: transform 0.2s, background-color 0.3s;
-            }
+    background: none;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
 
 .additional-div .icon-btn img {
-                width: 30px;
-                height: 30px;
-            }
+    width: 30px;
+    height: 30px;
+}
 
 .additional-div .icon-btn:hover {
-              transform: scale(1.1);
-                background-color: #eaeaea;
-                border-radius: 5px;
-            }
+    transform: scale(1.1);
+    background-color: #eaeaea;
+    border-radius: 5px;
+}
 
-.canvas {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  display: block;
+.canvas-scroll-container {
+    overflow: auto;
+    max-width: calc(100vw - 300px); /* Adjust for sidebar widths */
+}
+
+canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
 }
