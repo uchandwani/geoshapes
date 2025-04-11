@@ -5,21 +5,17 @@
         scrollbar-gutter: stable;
     }
 
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* Allow page to grow beyond viewport */
-        overflow-x: hidden; /* No horizontal scroll */
-    }
+    
 
     html, body {
-    height: auto;
-    min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;  /* allow vertical scroll */
-}
+   margin: 0;
+   padding: 0;
+   height: auto;
+   min-height: 100vh;
+   overflow-x: hidden;
+   overflow-y: auto;  /* vertical scroll */
+    }
+
 
 
 
@@ -117,7 +113,7 @@
     /* Main container */
   .container {
   flex: 1;
-  display: flex;
+  
   min-height: 0;
   overflow-y: auto; /* Enable vertical scrolling */
 }
