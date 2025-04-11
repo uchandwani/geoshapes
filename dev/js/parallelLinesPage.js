@@ -9,7 +9,7 @@
     import {Circle} from '../shapes/Circle.js';
 
         
-    document.addEventListener('DOMContentLoaded', () => {
+   
         console.log("Parallel Lines Page Loaded");
 
         const canvas = document.getElementById('canvas');
@@ -40,7 +40,7 @@
             defaultButton.classList.add('active');
         console.log("active button changed")  ;  
         } */
-        });
+        
         // Default state: Activate Sin Theta and load default functionality
             
        
