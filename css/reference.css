@@ -1,80 +1,77 @@
-/* Reset and Base Styling */
 body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-/* Main Container with 3 regions */
+/* Header */
+.header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid red;
+}
+
+/* Layout */
 .container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
+  display: flex;
+  height: calc(100vh - 50px);  /* header height considered */
 }
 
-/* LEFT SIDEBAR */
-.left-sidebar {
-    width: 18vw;
-    padding: 10px;
-    overflow-y: auto;
-    border: 1px solid red;
-    box-sizing: border-box;
+/* Sidebars */
+.left-sidebar, .right-sidebar {
+  width: 18vw;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border: 1px solid red;
 }
 
-/* RIGHT SIDEBAR */
+/* Right sidebar specific */
 .right-sidebar {
-    width: 20vw;
-    padding: 10px;
-    overflow-y: auto;
-    border: 1px solid red;
-    box-sizing: border-box;
+  width: 20vw;
 }
 
-/* MAIN CONTENT - Between Left & Right Sidebar */
+/* Main Content */
 .main-content {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    padding: 10px 5px;
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  padding: 5px;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
-/* TOOLBAR (Vertical Left of Canvas) */
+/* Toolbar */
 .toolbar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid red;
-    padding: 10px;
-    width: 60px;
-    align-self: stretch;
-    justify-content: center;
-    background-color: #f4f4f4;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid red;
+  padding: 10px;
+  background-color: #f4f4f4;
+  width: 60px;
+  box-sizing: border-box;
 }
 
-/* CANVAS WRAPPER */
+/* Canvas Area */
 .canvas-area {
-    flex: 1;
-    border: 1px solid red;
-    background-color: #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: auto;
+  background-color: #ccc;
+  flex: 1;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
 }
 
-/* CANVAS Settings */
+/* Canvas Responsive */
 canvas {
-    max-width: 100%;
-    max-height: 80vh;
-    background-color: white;
+  max-width: 100%;
+  max-height: 80vh;
+  background-color: white;
 }
