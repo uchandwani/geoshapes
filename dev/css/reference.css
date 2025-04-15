@@ -1,0 +1,83 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+.left-sidebar {
+    width: 18vw;
+    padding: 10px;
+    border: 1px solid red;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.right-sidebar {
+    width: 20vw;
+    padding: 10px;
+    border: 1px solid red;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    padding: 10px;
+    gap: 10px;
+}
+
+.canvas-area {
+    background-color: #ccc;
+    flex: 1;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid red;
+    padding: 10px;
+    box-sizing: border-box;
+    align-self: stretch;
+    justify-content: center;
+}
+
+
+.canvas-wrapper {
+  display: flex;
+  flex-direction: row;  /* Side-by-side: toolbar | canvas */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Position the toolbar to the left of canvas */
+.toolbar-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: fit-content;
+}
