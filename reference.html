@@ -4,72 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Responsive Layout - Reference</title>
-  <link rel="stylesheet" href="reference.css">
+  <link rel="stylesheet" href="css/reference.css">
   <style>
-    /* Optional - Debug visuals */
     .debug { border: 1px dashed red; }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <div id="header-placeholder"></div>
+<!-- HEADER -->
+<div id="header-placeholder"></div>
 
-  <div class="container">
+<div class="container">
 
-    <!-- LEFT SIDEBAR -->
-    <div class="sidebar left debug">
-      <div id="theorem-definition">
-        <p id="theorem-text">Dummy Theorem Definition appears here for testing layout purposes only.</p>
-      </div>
-      <h3>Instructions</h3>
-      <ul>
-        <li>Dummy step 1</li>
-        <li>Dummy step 2</li>
-        <li>Dummy step 3</li>
-      </ul>
+  <!-- LEFT SIDEBAR -->
+  <div class="left-sidebar debug">
+    <div id="theorem-definition">
+      <p id="theorem-text">
+        Dummy Theorem Definition appears here for testing layout purposes only.
+      </p>
+    </div>
+    <h3>INSTRUCTIONS</h3>
+    <ul>
+      <li>Dummy step 1</li>
+      <li>Dummy step 2</li>
+      <li>Dummy step 3</li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="main-content debug">
+
+    <!-- TOOLBAR -->
+    <div class="toolbar debug">
+      <button class="icon-btn">T1</button>
+      <button class="icon-btn">T2</button>
+      <button class="icon-btn">T3</button>
     </div>
 
-    <!-- CANVAS AREA -->
-    <div class="canvas-container">
-
-      <div class="canvas-wrapper">
-        <!-- Left Tools -->
-        <div class="additional-div debug">
-          <button class="icon-btn">T1</button>
-          <button class="icon-btn">T2</button>
-          <button class="icon-btn">T3</button>
-        </div>
-
-        <div class="canvas-scroll-container debug">
-          <canvas id="canvas" width="800" height="600"></canvas>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT SIDEBAR -->
-    <div class="sidebar right debug">
-      <h3>Results</h3>
-      <ul>
-        <li>Dummy Result 1</li>
-        <li>Dummy Result 2</li>
-      </ul>
+    <!-- CANVAS -->
+    <div class="canvas-area debug">
+      <canvas id="canvas" width="800" height="600"></canvas>
     </div>
 
   </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="right-sidebar debug">
+    <h3>RESULTS</h3>
+    <ul>
+      <li>Dummy Result 1</li>
+      <li>Dummy Result 2</li>
+    </ul>
+  </div>
+
+</div>
 
 <script>
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 function resizeCanvas() {
-  const maxWidth = 900;  // Optional max limits
+  const maxWidth = 900;
   const maxHeight = 700;
 
-  const availableWidth = window.innerWidth - 300;  // adjust based on sidebar width
-  const availableHeight = window.innerHeight - 150; // adjust based on header/footer height
+  const availableWidth = window.innerWidth - 350;  // adjust for sidebars + toolbar
+  const availableHeight = window.innerHeight - 150; // adjust for header etc.
 
   const width = Math.min(availableWidth, maxWidth);
   const height = Math.min(availableHeight, maxHeight);
