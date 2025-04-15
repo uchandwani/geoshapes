@@ -1,0 +1,621 @@
+
+    html {
+        overflow-x: hidden;   /* No horizontal scroll */
+        overflow-y: auto;     /* Allow vertical scroll for whole page */
+        scrollbar-gutter: stable;
+    }
+
+    
+
+    html, body {
+   margin: 0;
+   padding: 0;
+   height: auto;
+   min-height: 100vh;
+   overflow-x: hidden;
+   overflow-y: auto;  /* vertical scroll */
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #6a9be8;
+        color: white;
+        height: 5vh; /* Adjusted for larger icons */
+        padding: 0 20px;
+        position: relative;
+    }
+
+    /* Centered Title */
+    header h1 {
+        margin: 0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 24px;
+        color: white;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .responsive-canvas-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        aspect-ratio: 1 / 1;
+        margin: 0 auto;
+    }
+
+    .responsive-canvas-container canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: white;
+    }
+
+
+
+    /* Navigation Bar Left and Right */
+    .nav-bar-left,
+    .nav-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Adjust spacing between icons */
+    }
+
+    /* Icon Button Styling */
+    .nav-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.3s;
+        padding: 5px;
+    }
+
+    .nav-icon-btn img {
+        width: 30px; /* Fixed size for icons */
+        height: 30px;
+    }
+
+    .nav-icon-btn:hover {
+        transform: scale(1.1); /* Slightly enlarge on hover */
+        background-color: rgba(255, 255, 255, 0.2); /* Add hover background */
+        border-radius: 5px;
+    }
+
+    .nav-icon-btn:active {
+        transform: scale(1);
+        background-color: rgba(255, 255, 255, 0.4); /* Slightly darker on click */
+    }
+
+
+    /* Header styling */
+
+
+    /* Subheader styling */
+    .subheader {
+        flex-shrink: 0; /* Prevent shrinking */
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+    }
+
+    /* Main container */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    max-width: 1200px;  /* Fixed width for 1366px screens */
+    margin: 0 auto;     /* Center align */
+    padding: 10px;
+    gap: 10px;
+}
+
+
+
+       .sidebar.left {
+        background-color: #f4f4f9; /* Light background for readability */
+        padding: 15px; /* Add spacing */
+        width: 21vw; /* Fixed width */
+        height: 100%; /* Make it stretch the full height of the container */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        overflow-y: auto; /* Enable scrolling for overflowing content */
+        border-right: 1px solid #ccc; /* Subtle border for separation */
+        font-family: 'Arial', sans-serif; /* Professional font */
+        font-size: 14px; /* Adjust font size */
+        line-height: 1.6; /* Improve readability */
+        color: #333; /* Neutral text color */
+    }
+
+    .sidebar.right {
+        background-color: #f4f4f9; /* Light background for readability */
+        padding: 15px; /* Add padding for spacing */
+        width: 20vw; /* Slightly increase the width */
+        border-left: 1px solid #ccc; /* Subtle border for separation */
+        font-family: 'Arial', sans-serif; /* Professional font */
+        font-size: 14px; /* Reduce font size slightly for compactness */
+        line-height: 1.5; /* Improved line spacing */
+        color: #333; /* Neutral text color */
+        overflow-y: auto; /* Enable scrolling for long content */
+    }
+
+    /* Additional div for tools */
+    .additional-div {
+                width: 60px;
+                background-color: #f1f1f1;
+                border-right: 1px solid #ccc;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+    .additional-div .icon-btn {
+                background: none;
+                border: none;
+                margin: 10px 0;
+                cursor: pointer;
+                transition: transform 0.2s, background-color 0.3s;
+            }
+
+            .additional-div .icon-btn img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .additional-div .icon-btn:hover {
+                transform: scale(1.1);
+                background-color: #eaeaea;
+                border-radius: 5px;
+            }
+    /* Right Sidebar */
+
+    .scale-label {
+        color: #333; /* Darker color for scale labels */
+        font-size: 12px;
+        font-weight: bold; /* Make labels more readable */
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); /* Subtle shadow for contrast */
+    }
+
+    .grid-line {
+        stroke: #aaa; /* Slightly darker for better visibility */
+    }
+
+    .grid-line-blue {
+        stroke: #0056b3; /* Darker blue for major grid lines */
+        stroke-width: 1.5; /* Thicker line for emphasis */
+    }
+
+    /* Main Canvas Container */
+
+
+    /* Footer */
+      
+            .activity-buttons button {
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 14px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .activity-buttons button:hover {
+                background-color: #45a049;
+            }
+
+
+    .sidebar.left h3 {
+        font-size: 18px; /* Highlight the title */
+        margin-bottom: 5px; /* Add spacing below title */
+        color: #4a90e2; /* Use a professional accent color */
+        text-transform: uppercase; /* Capitalize for emphasis */
+        font-weight: bold; /* Bold title */
+        text-align: center; /* Center-align the title */
+        border-bottom: 1px solid #4a90e2; /* Add a bottom border for styling */
+        padding-bottom: 25px; /* Add padding for the title */
+    }
+
+    .sidebar.left ul {
+        list-style: none; /* Remove default bullet points */
+        padding: 0; /* Remove default padding */
+        margin: 0; /* Remove default margin */
+    }
+
+    .sidebar.left ul li {
+        margin-bottom: 5px; /* Add spacing between items */
+        padding-left: 15px; /* Add left padding for custom icons */
+        position: relative; /* For custom bullets */
+    }
+
+    .sidebar.left ul li:before {
+        content: '•'; /* Use a bullet point */
+        color: #4a90e2; /* Use an accent color for the bullet */
+        font-size: 15px; /* Adjust bullet size */
+        position: absolute; /* Position the bullet */
+        left: 0; /* Align bullet with padding */
+        top: 2px; /* Center the bullet */
+    }
+
+    .sidebar.left ul li strong {
+        color: #4a90e2; /* Highlight key points */
+        font-weight: bold; /* Make them bold */
+    }
+
+    .sidebar.left ul li span {
+        font-style: italic; /* Add variety to secondary text */
+        color: #666; /* Use a lighter color for secondary text */
+    }
+
+
+    .sidebar.right h3 {
+        font-size: 18px; /* Highlight the title */
+        margin-bottom: 15px; /* Add spacing below the title */
+        color: #4a90e2; /* Accent color for the title */
+        text-transform: uppercase; /* Capitalize for emphasis */
+        font-weight: bold; /* Make it bold */
+        text-align: center; /* Center-align the title */
+        border-bottom: 2px solid #4a90e2; /* Add a bottom border */
+        padding-bottom: 10px; /* Add padding for the title */
+    }
+
+    .sidebar.right table {
+        width: 100%; /* Take full width */
+        border-collapse: collapse; /* Remove gaps between cells */
+        margin-top: 10px; /* Add spacing above the table */
+        background-color: #fff; /* White background for the table */
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    .sidebar.right table thead {
+        background-color: #4a90e2; /* Accent color for the header */
+        color: white; /* White text for contrast */
+        font-weight: bold; /* Bold header text */
+    }
+
+    .sidebar.right table th, 
+    .sidebar.right table td {
+        border: 1px solid #ccc; /* Subtle border */
+        padding: 8px; /* Add padding for cells */
+        text-align: center; /* Center-align content */
+        font-size: 12px; /* Adjust font size */
+    }
+
+    .sidebar.right table input[type="text"] {
+        width: 85%; /* Reduce width to fit */
+        padding: 5px; /* Add padding */
+        border: 1px solid #ccc; /* Subtle border */
+        border-radius: 4px; /* Rounded corners */
+        font-size: 12px; /* Match the font size */
+        background-color: #fefefe; /* Slight background contrast */
+    }
+
+    .sidebar.right ul {
+        list-style: none; /* Remove bullet points */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+    }
+
+    .sidebar.right ul li {
+        margin-bottom: 10px; /* Spacing between list items */
+        color: #333; /* Neutral text color */
+        font-size: 12px; /* Adjust font size */
+    }
+
+    .sidebar.right ul li strong {
+        color: #4a90e2; /* Highlight important text */
+    }
+
+    #theorem-definition {
+      background-color: #eef5ff;
+      padding: 10px;
+      border-left: 4px solid #3366cc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #3366cc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .canvas-buttons {
+        position: absolute; /* Position over the canvas */
+        top: 10px; /* Adjust as needed */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center the group relative to its container */
+        display: flex;
+        gap: 10px; /* Space between buttons */
+    }
+
+    .canvas-buttons button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .canvas-buttons button:hover {
+        background-color: #45a049;
+    }
+
+    .canvas-buttons button:active {
+        background-color: #388E3C;
+    }
+
+
+    .navigation-buttons {
+        display: flex;
+        justify-content: space-around; /* Ensure buttons are evenly spaced */
+        align-items: center; /* Center the buttons vertically */
+        height : auto; /* Reduce height */
+        padding: 5px; /* Reduce padding */
+        margin: 0;
+        background-color: #f1f1f1; /* Optional: Keep a subtle background */
+
+        border-bottom: 1px solid #ddd; /* Optional: Add a subtle bottom border */
+    }
+
+    .navigation-buttons button {
+        font-size: 14px; /* Adjust font size for better readability */
+        padding: 5px 10px; /* Adjust button padding */
+        margin: 0 5px; /* Add a bit of spacing between buttons */
+        border-radius: 4px; /* Optional: Add rounded corners */
+        border: 1px solid #ccc; /* Optional: Add a border */
+        background-color: #fff; /* Button background color */
+        cursor: pointer;
+        transition: background-color 0.3s, box-shadow 0.2s;
+    }
+
+    .navigation-buttons button:hover {
+        background-color: #e6e6e6; /* Subtle hover effect */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Shadow effect */
+    }
+
+    .navigation-buttons button:active {
+        background-color: #d9d9d9; /* Darker background on click */
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for pressed state */
+    }
+
+
+
+    .canvas-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 90vh;
+    width: 700px;   /* Fixed for stable layout */
+}
+
+     .canvas-wrapper {
+                display: flex;
+                flex: 1;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+    .scale-label {
+        color: #333; /* Darker color for scale labels */
+        font-size: 12px;
+        font-weight: bold; /* Make labels more readable */
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); /* Subtle shadow for contrast */
+    }
+    .triangle-buttons {
+        position: absolute;
+        padding: 6px 14px;
+        top: 150px; /* Adjust positioning if needed */
+        left: 60%; /* Keep it centered */
+        transform: translateX(-50%);
+        display: flex;
+        flex-wrap: wrap;  /* Allow buttons to wrap if needed */
+        justify-content: center; /* Center the buttons */
+        gap: 15px; /* Reduce spacing */
+        max-width: 90%; /* Prevent overflow */
+        overflow: hidden; /* Hide extra content */
+        padding: 5px;
+    }
+
+
+    .triangle-buttons button {
+        padding: 10px 20px;
+        font-size: 12px;
+        background-color: #e6e6e6; /* Blue background */
+        color: black;
+        border: 1 px solid;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+
+    .triangle-buttons button:hover {
+        background-color: #3495eb; /* Darker green on hover */
+    }
+
+    .triangle-buttons button.active {
+        background-color: #6a9be8;
+        color:white ;/* Darker background on click */
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for pressed state */
+    }
+
+
+    .triangle-button {
+        flex: 1 1 auto; /* Allow buttons to grow/shrink dynamically */
+        min-width: 80px; /* Prevent tiny buttons */
+        max-width: 140px; /* Prevent too large buttons */
+        text-align: center;
+        padding: 6px 10px; /* Reduce padding slightly */
+        font-size: 14px; /* Adjust for readability */
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .triangle-button.active {
+        background-color: #007BFF; /* Change to preferred active color */
+        color: white;
+        border: 2px solid darkblue;
+    }
+
+
+      .table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+            .table th, .table td {
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: center;
+            }
+            .table th {
+                background-color: #6a9be8;
+                color: white;
+            }
+            .answer {
+                font-weight: bold;
+                color: green;
+            }
+
+            .highlight {
+                background-color: #F0F8FF;
+                padding: 5px;
+                border: 1px solid #000;
+                display: inline-block;
+            }
+
+    .grid-line {
+        stroke: #aaa; /* Slightly darker for better visibility */
+    }
+
+    .grid-line-blue {
+        stroke: #0056b3; /* Darker blue for major grid lines */
+        stroke-width: 1.5; /* Thicker line for emphasis */
+    }
+    .icon-btn {
+                background-color: transparent;
+                border: none;
+                margin: 10px;
+                padding: 10px;
+                cursor: pointer;
+                transition: transform 0.2s, background-color 0.3s;
+            }
+
+            /* Highlight the active button */
+    .icon-btn.active {
+        background-color: #6b9be8; /* Highlight color */
+        color: white; /* Text color for better visibility */
+        border-radius: 5px; /* Optional rounded corners */
+        transform: scale(1.1); /* Slightly larger */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    }
+
+    /* ✅ Ensure triangle-buttons are clickable */
+    #dynamic-buttons {
+        position: absolute;
+        z-index: 10;               /* Bring above canvas */
+        pointer-events: auto;      /* Allow clicks */
+    }
+
+    /* ✅ Ensure canvas does NOT block buttons */
+    canvas {
+       
+        z-index: 0;
+        position: relative;        /* Must be positioned to obey z-index */
+    }
+
+    /* 🟡 Theorem Definition inside Sidebar */
+    /* 🟡 Theorem Definition inside Sidebar */
+    #theorem-definition {
+      margin-top: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      max-height: 300px;       /* ✅ Prevent overflow */
+      overflow-y: auto;        /* ✅ Enable scroll if content is long */
+    }
+
+
+    #theorem-definition h4 {
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+    }
+
+    #theorem-text {
+      margin: 0;
+    }
+
+
+
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      width: 280px; /* ✅ Match the width of sidebar */
+      margin-left: 10px;
+      box-sizing: border-box;
+    }
+
+    /* The definition block itself */
+    #theorem-definition {
+      background-color: #eef5ff;
+      padding: 10px;
+      border-left: 4px solid #3366cc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #3366cc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .navigation-buttons {
+      display: none;
+    }
+
+    .sidebar.left #theorem-definition {
+      background-color: #eef5ff;
+      border-left: 4px solid #3366cc;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #3366cc;
+    }
+
+    .sidebar.left,
+.sidebar.right {
+    width: 220px;   /* Fixed width */
+    overflow-y: auto;
+}
+
+

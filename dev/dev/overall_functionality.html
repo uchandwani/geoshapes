@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shape Drawer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: grid;
+      grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+    }
+
+    header {
+      grid-area: header;
+      background-color: #6b9be8;;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    aside {
+      grid-area: sidebar;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+    }
+
+    main {
+      grid-area: main;
+      padding: 15px;
+    }
+
+    footer {
+      grid-area: footer;
+      background-color:#6b9be8;;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 60px;
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .icon-btn {
+        background: none;
+        border: none;
+        margin: 10px 0;
+        padding: 10px;
+        cursor: pointer;
+        transition: transform 0.2s, background-color 0.3s;
+      }
+
+      .icon-btn img {
+        width: 30px;
+        height: 30px;
+       /* filter: invert(100%);  Makes icons white for dark backgrounds */
+      }
+
+      .icon-btn:hover {
+        transform: scale(1.1);
+        background-color:  #d9d9d9;
+        border-radius: 5px;
+      }
+
+      .icon-btn:active {
+         transform: scale(1); /* Scale the icon */
+         background-color: rgba(3, 211, 252, 0.3); /* Light blue background */
+         opacity: 0.8; /* Slightly transparent */
+        }
+
+    .controls label, .controls button {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1> Exterior Angle property of triangle </h1>
+  </header>
+  
+    
+    <div id="sidebar">
+        <!--  <button id="draw-point" class="icon-btn" title="Draw Point">
+          <img src="./icons/point-icon.png" alt="Point Icon" /> 
+          </button> -->
+
+    <button id="detect-intersections">Detect Intersections</button>
+            <script type="module">
+                  import { canvasManager } from './shapes/CanvasManager.js';
+
+                  // Initialize CanvasManager and attach hover listener
+                  const canvas = document.getElementById('canvas');
+                  canvasManager.addHoverListener(canvas);
+
+                  // Bind button click to detectIntersections method
+                  document
+                      .getElementById('detect-intersections')
+                      .addEventListener('click', () => canvasManager.handleDetectIntersections());
+            </script>   
+
+    <button id="add-point" class="icon-btn" title="Add point">📏</button>      
+    <button id="toggle-measurements" class="icon-btn" title="Toggle Measurements">📏</button>
+    <button id="toggle-labels" class="icon-btn" title="Toggle Labels">📏 </button>
+    <button id="toggle-coordinates"class="icon-btn" title="Toggle Coordinates"> <img src="./icons/toggle-coordinates.png" alt="Toggle Coordinate" /> </button>
+
+          <button id="draw-line" class="icon-btn" title="Draw Line">
+            <img src="icons/line-icon.png" alt="Line Icon" />
+          </button>
+           <button id="add-divider" class="icon-btn" title="Add Divider">
+          <img src="./icons/divider-icon.png" alt="Add Divider" />
+          </button>
+          <button id="add-compass" class="icon-btn" title="Add Compass">
+          <img src="./icons/divider-icon.png" alt="Add Compass" />
+          </button>
+          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
+            <img src="./icons/triangle-icon.png" alt="Triangle Icon" /> 
+          </button>
+          <button id="draw-rectangle" class="icon-btn" title="Draw Rectangle">
+            <img src="./icons/rectangle-icon.png" alt="Protractor Icon" />
+          </button>
+
+        <button id="draw-circle" class="icon-btn" title="Draw Circle">
+            <img src="./icons/circle-icon.png" alt="Circle Icon" />
+          </button>
+          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
+          </button>
+          <button id="modify-shape" class="icon-btn" title="Modify Shape">
+            <img src="icons/modify-icon.png" alt="Modify Icon" />
+          </button>
+          <button id="delete-shape" class="icon-btn" title="Delete Shape">
+            <img src="icons/delete-icon.png" alt="Delete Icon" />
+          </button>
+          
+          <button id="toggle-grid" class="icon-btn" title="Grid Toggle">
+              <img src="icons/grid-icon.png" alt="Toggle Grid" />
+          </button>
+        
+
+        <div id="style-selector">
+          <button id="style-classic">Classic</button>
+         <button id="style-modern">Modern</button>
+        </div>
+
+        </div>
+      
+  <main>
+       <div id="geometry-container">
+          <canvas id="canvas" width="1600" height="800"></canvas>
+        </div>
+        
+   </main>
+  <footer>
+    <p>&copy; 2024 Shape Drawer. All Rights Reserved.</p>
+  </footer>
+  <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./shapes/CanvasManager.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circle Theorem Working</title>
+
+  <link rel="stylesheet" href="./css/header_styles.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .header-right svg {
+      width: 36px;
+      height: 36px;
+      stroke: #1E88E5;
+    }
+    #main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;       
+      padding: 10px;
+      background-color: #f5f5f5;
+    }
+    #sub-header-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .sub-header-icon {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+<div id="main-header">
+  <div id="header-content" style="flex: 1;"></div>
+ <div id="sub-header-container" style="display: flex; gap: 12px; align-items: center;">
+    <!-- Circle Theorem Icons with click handlers -->
+    <!-- rest of page unchanged -->
+
+<!-- New Sub-header Icons with working button mapping -->
+<div class="header-right" style="display: flex; gap: 12px; align-items: center;">
+  <!-- Radius Tangent Theorem -->
+  <svg class="sub-header-icon" id="sineTheta-button" title="Radius Tangent Theorem"
+       onclick="switchFunctionality('sineTheta')"
+       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="none" stroke="#1E88E5" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="12" x2="20" y2="12" />
+    <line x1="22" y1="12" x2="22" y2="24" />
+    <line x1="12" y1="12" x2="7" y2="19" />
+    <line x1="5" y1="21" x2="-5" y2="10" />
+    <line x1="12" y1="12" x2="7" y2="5" />
+    <line x1="7" y1="5" x2="12" y2="-4" />
+  </svg>
+
+  <!-- Two Tangent Theorem -->
+  <svg class="sub-header-icon" id="cosineTheta-button" title="Two Tangent Theorem"
+       onclick="switchFunctionality('cosineTheta')"
+       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="none" stroke="#1E88E5" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="2" x2="4" y2="20" />
+    <line x1="12" y1="2" x2="20" y2="20" />
+  </svg>
+
+  <!-- Subtended Angles Theorem -->
+  <svg class="sub-header-icon" id="subtendedAngles-button" title="Subtended Angles Theorem"
+       onclick="switchFunctionality('subtendedAngles')"
+       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="none" stroke="#1E88E5" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="12" x2="19" y2="19" />
+    <line x1="12" y1="12" x2="6" y2="19" />
+    <line x1="17" y1="17" x2="12" y2="4" />
+    <line x1="7" y1="17" x2="12" y2="4" />
+  </svg>
+
+  <!-- Alternate Segment Theorem -->
+  <svg class="sub-header-icon" id="alternateSegments-button" title="Alternate Segment Theorem"
+       onclick="switchFunctionality('alternateSegments')"
+       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="none" stroke="#1E88E5" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="4" y1="12" x2="20" y2="4" />
+    <line x1="4" y1="12" x2="20" y2="20" />
+  </svg>
+
+  <!-- Cyclic Quadrilateral -->
+  <svg class="sub-header-icon" id="quadrilaterals-button" title="Cyclic Quadrilateral"
+       onclick="switchFunctionality('quadrilaterals')"
+       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+       fill="none" stroke="#1E88E5" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="5,5 19,5 17,19 7,19" />
+  </svg>
+</div>
+</div>
+
+
+<script>
+  async function loadHeader() {
+    const headerHtml = await fetch('header.html').then(res => res.text());
+    document.getElementById('header-content').innerHTML = headerHtml;
+
+    const pageMap = {
+      "PRTcircle.html": "circle-sub-header.html",
+      "SATcircle.html": "circle-sub-header.html",
+      "ASTcircle.html": "circle-sub-header.html",
+      "CQTcircle.html": "circle-sub-header.html",
+      "TTTcircle.html": "circle-sub-header.html",
+      "circle_theorems_02.html": "circle-sub-header.html",
+      "circle_theorem_03.html": "circle-sub-header.html",
+      "parallel_lines_04.html": "parallel-sub-header.html",
+      "triangle_theorem_07.html": "triangle-sub-header.html",
+      "trig_properties_09.html": "trig-sub-header.html"
+    };
+
+    const currentPage = window.location.pathname.split("/").pop();
+    const subHeaderFile = pageMap[currentPage];
+
+    if (subHeaderFile) {
+      const subHeaderHtml = await fetch(`subheaders/${subHeaderFile}`).then(res => res.text());
+      document.getElementById('sub-header-container').innerHTML += subHeaderHtml;
+    }
+  }
+
+  loadHeader().then(() => {
+    const script = document.createElement('script');
+    script.src = './js/header.js';
+    script.onload = () => {
+      if (typeof updatePageTitle === 'function') {
+        updatePageTitle();
+      }
+    };
+    document.head.appendChild(script);
+  });
+</script>   
+
+<div class="container">
+  <div class="sidebar left" id="left-sidebar">
+    <h3>Instructions</h3>
+    <p>Select a theorem from the navigation bar above to see its instructions here.</p>
+  </div>
+
+  <div class="canvas-container">
+   <!--div class="navigation-buttons">
+      <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">Radius Tangent Theorem</button>
+      <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">Two Tangent Theorem</button>
+      <button id="subtendedAngles-button" class="icon-btn" title="Theorem C">Subtended Angles Theorems</button>
+      <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment">Alternate Segment Theorem</button>
+      <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral">Cyclic Quadrilateral</button>
+    </div> */
+
+    <div id="theorem-definition" class="theorem-definition">
+      <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+    </div-->
+
+    <div id="dynamic-buttons" class="triangle-buttons">
+      <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
+      <button id="tab-other" onclick="showTab('other')">Other Tab</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <div class="additional-div">
+        <button id="draw-line" class="icon-btn" title="Draw Line">
+          <img src="icons/line-icon.png" alt="Line Icon" />
+        </button>
+        <button id="draw-scale" class="icon-btn" title="Show Scale">Add Scale</button>
+        <button id="add-divider" class="icon-btn" title="Add Divider">
+          <img src="./icons/divider-icon.png" alt="Add Divider" />
+        </button>
+        <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
+          <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
+        </button>
+        <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+          <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
+        </button>
+        <button id="modify-shape" class="icon-btn" title="Modify Shape">
+          <img src="icons/modify-icon.png" alt="Modify Icon" />
+        </button>
+        <button id="delete-shape" class="icon-btn" title="Delete Shape">
+          <img src="icons/delete-icon.png" alt="Delete Icon" />
+        </button>
+      </div>
+      <canvas id="canvas" width="800" height="800"></canvas>
+    </div>
+  </div>
+
+  <div class="sidebar right" id="right-sidebar">
+    <h3>Exercises / Results</h3>
+    <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+      <thead>
+        <tr>
+          <th>Readings</th>
+          <th>Measure of Angle ABD</th>
+          <th>Corresponding Angle ACF</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
+          <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
+          <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;"></td>
+          <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;"></td>
+          <td><input type="text" placeholder="Enter remarks" style="width: 90%;"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p></p>
+</footer>
+
+<script type="module" src="./js/circleTheoremPage.js"></script>
+<script type="module" src="./shapes.js"></script>
+<script type="module" src="./shapes/CanvasManager.js"></script>
+</body>
+</html>
