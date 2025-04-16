@@ -680,18 +680,28 @@ function resetInputStyles(inputs, result) {
 
 // Auto-Resize Function
 function resizeCanvas() {
-  const container = document.querySelector('.responsive-canvas-container');
+  const container = document.querySelector('.responsive-canvas-container'); 
+  const canvas = document.getElementById('canvas');
+  
+  if (!container || !canvas) {
+    console.warn("⚠️ Cannot resize: container or canvas not found.");
+    return;
+  }
 
-  const availableWidth = container.offsetWidth - 20;  
+  const availableWidth = container.offsetWidth - 20;
   const availableHeight = container.offsetHeight - 20;
 
   let newSize = Math.min(availableWidth, availableHeight);
 
-  newSize = Math.max(600, Math.min(newSize, 800));  // Canvas between 600-800px
+  // Clamp size between 600 and 800 pixels
+  newSize = Math.max(600, Math.min(newSize, 800));
 
   canvas.width = newSize;
   canvas.height = newSize;
+
+  console.log(`📐 Canvas resized to: ${newSize}px × ${newSize}px`);
 }
+
 
 
 // Auto-trigger on window size change and page load
