@@ -680,7 +680,7 @@ function resetInputStyles(inputs, result) {
 
 // Auto-Resize Function
 function resizeCanvas() {
-  const container = document.querySelector('.canvas-scroll-container');
+  const container = document.querySelector('.responsive-canvas-container');
 
   const availableWidth = container.offsetWidth - 20;  
   const availableHeight = container.offsetHeight - 20;
