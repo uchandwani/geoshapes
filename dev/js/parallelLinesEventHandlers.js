@@ -572,7 +572,7 @@ function updateSidebars(config) {
 
 export function updateTheoremText(theoremDefinition, subButtonType) {
     console.log("Function UTT - Updating Theorem Text. Definition:", theoremDefinition, " SubButtonType:", subButtonType);
-    debugger;
+    
 
     const theoremTextElem = document.getElementById('theorem-text');
 
@@ -589,7 +589,7 @@ export function updateUI(config, functionalityKey, subButtonType = null) {
     console.log("Function UUI - Updating UI for:", functionalityKey, subButtonType, config);
 
         console.log("Function UUI - Updating UI for Functionality Key:", functionalityKey, " Config:", config, " SubButtonType:", subButtonType);
-    debugger;
+    
 
     // Update Theorem Text
     if (subButtonType && config.theoremDefinitions && config.theoremDefinitions[subButtonType]) {
@@ -648,7 +648,7 @@ export function updateUI(config, functionalityKey, subButtonType = null) {
 
 export function updateLeftSidebar(config) {
     console.log("Function ULS - Updating Left Sidebar with config:", config);
-    debugger;
+    
 
     const leftSidebar = document.getElementById('left-sidebar-content');
 
@@ -663,7 +663,7 @@ export function updateLeftSidebar(config) {
 
 export function updateRightSidebar(config) {
     console.log("Function URS - Updating Right Sidebar with config:", config);
-    debugger;
+    
 
     const rightSidebar = document.getElementById('right-sidebar-content');
 
