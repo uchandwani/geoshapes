@@ -9,75 +9,75 @@
     <link rel="stylesheet" href="./css/style-parallel-lines.css">
     <script type="module" src="./js/parallelLinesPage.js"></script>
     <script type="module">
-    import { calculateSin, calculateCos, calculateTrig, decimalToFraction, calcTrig } from './js/PLTPage.js';
+    import { calculateSin, calculateCos, calculateTrig, decimalToFraction, calcTrig } from './js/parallelLinesPage.js';
     window.calculateSin = calculateSin;
     window.calculateCos = calculateCos;
     window.calculateTrig = calculateTrig;
     window.calcTrig = calcTrig;
     window.decimalToFraction = decimalToFraction;
     </script>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        flex-direction: row;
-        height: calc(100vh - 60px);
-      }
-      .sidebar.left, .sidebar.right {
-        width: 20%;
-        padding: 10px;
-        overflow-y: auto;
-        box-sizing: border-box;
-      }
-      .canvas-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        box-sizing: border-box;
-      }
-      .canvas-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-      }
-      .responsive-canvas-container {
-        flex: 1;
-        position: relative;
-        background-color: #e3f2fd;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      canvas {
-        width: 90%;
-        aspect-ratio: 1 / 1;
-        background-color: white;
-        border: 1px solid #ccc;
-      }
-      .additional-div {
-        display: flex;
-        flex-direction: column;
-        margin-right: 10px;
-        gap: 10px;
-      }
-      header {
-        height: 60px;
-        background-color: #f8f8f8;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-        box-sizing: border-box;
-      }
-    </style>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+          }
+          .container {
+            display: flex;
+            flex-direction: row;
+            height: calc(100vh - 60px);
+          }
+          .sidebar.left, .sidebar.right {
+            width: 20%;
+            padding: 10px;
+            overflow-y: auto;
+            box-sizing: border-box;
+          }
+          .canvas-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+          }
+          .canvas-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+          }
+          .responsive-canvas-container {
+            flex: 1;
+            position: relative;
+            background-color: #e3f2fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          canvas {
+            width: 90%;
+            aspect-ratio: 1 / 1;
+            background-color: white;
+            border: 1px solid #ccc;
+          }
+          .additional-div {
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px;
+            gap: 10px;
+          }
+          header {
+            height: 60px;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+          }
+        </style>
 </head>
 <body>
 <header>
@@ -86,10 +86,13 @@
     <div class="nav-bar-right"></div>
 </header>
 <div class="container">
+
     <div class="sidebar left" id="left-sidebar">
+    <div id="left-sidebar-content">
         <h3>Instructions</h3>
         <p>Select a theorem from the navigation bar above to see its instructions here.</p>
     </div>
+</div>
     <div class="canvas-container">
         <div class="navigation-buttons">
             <button id="sineTheta-button" class="icon-btn">Vertically Opposite Angles</button>
@@ -119,6 +122,7 @@
         </div>
     </div>
     <div class="sidebar right" id="right-sidebar">
+        <div id="right-sidebar-content">
         <h3>Exercises / Results</h3>
         <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
             <thead>
@@ -144,6 +148,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 <footer><p></p></footer>
