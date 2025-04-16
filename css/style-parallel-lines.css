@@ -1,0 +1,68 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 60px); /* Header height assumed */
+}
+
+.sidebar.left,
+.sidebar.right {
+  width: 20%;
+  padding: 10px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.canvas-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.additional-div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  gap: 10px;
+}
+
+canvas {
+  width: 90%;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+/* Optional: better spacing for navigation buttons */
+.navigation-buttons,
+#dynamic-buttons {
+  margin-bottom: 10px;
+}
+
+#theorem-definition {
+  margin: 10px 0;
+}
+
+header {
+  height: 60px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
