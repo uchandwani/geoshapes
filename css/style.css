@@ -117,7 +117,6 @@ header h1 {
    .sidebar.left {
     background-color: #f4f4f9; /* Light background for readability */
     padding: 15px; /* Add spacing */
-    width: 21vw; /* Fixed width */
     flex-grow: 1;
     height: 100%; /* Make it stretch the full height of the container */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
@@ -136,18 +135,26 @@ header h1 {
   padding: 10px;
   background-color: #f0f8ff;
   box-sizing: border-box;
+  width: 21vw; 
+}
+
+#theorem-definition,
+#left-sidebar {
+  width: 100%; /* Take full width of container */
+  box-sizing: border-box; /* Prevent padding from overflowing */
 }
 
 #theorem-definition {
-  background-color: #e3f2fd;
-  border: 1px solid #90caf9;
+  background-color: #f0f8ff; /* Soft blue background */
+  border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   border-radius: 6px;
   font-size: 14px;
   color: #0d47a1;
   line-height: 1.4;
-}
+
+  }
 
 
 .sidebar.right {
