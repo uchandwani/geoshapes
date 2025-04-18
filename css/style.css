@@ -118,6 +118,7 @@ header h1 {
     background-color: #f4f4f9; /* Light background for readability */
     padding: 15px; /* Add spacing */
     width: 21vw; /* Fixed width */
+    flex-grow: 1;
     height: 100%; /* Make it stretch the full height of the container */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     overflow-y: auto; /* Enable scrolling for overflowing content */
@@ -127,6 +128,27 @@ header h1 {
     line-height: 1.6; /* Improve readability */
     color: #333; /* Neutral text color */
 }
+
+.left-sidebar-wrapper {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #f0f8ff;
+  box-sizing: border-box;
+}
+
+#theorem-definition {
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #0d47a1;
+  line-height: 1.4;
+}
+
 
 .sidebar.right {
     background-color: #f4f4f9; /* Light background for readability */
@@ -308,19 +330,6 @@ header h1 {
 .sidebar.right ul li strong {
     color: #4a90e2; /* Highlight important text */
 }
-
-#theorem-definition {
-  width: 240px;
-  min-height: 120px;
-  background-color: #e3f2fd;
-  padding: 12px;
-  margin: 10px;
-  border-radius: 8px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  line-height: 1.4;
-}
-
 
 
 .canvas-buttons {
