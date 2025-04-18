@@ -73,8 +73,7 @@
 <div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
   <div class="nav-bar-left">
     <button class="nav-icon-btn" onclick="location.href='index.html'" id="home-button"></button>
-    <button class="nav-icon-btn" id="sineTheta-button"></button>
-    <button class="nav-icon-btn" id="cosineTheta-button"></button>
+    
   </div>
 
   <h1>Parallel Lines Theorems</h1>
@@ -82,20 +81,26 @@
   <div class="nav-bar-right">
     <button class="nav-icon-btn" id="trigonoRatios-button"></button>
     <button class="nav-icon-btn" id="trigonoIdentities-button"></button>
+    <button class="nav-icon-btn" id="sineTheta-button"></button>
+    <button class="nav-icon-btn" id="cosineTheta-button"></button>
   </div>
 </div>
 
 <!-- 🔶 Theorem Definition and Layout -->
 <div class="container">
   <!-- Left Sidebar -->
-  <div id="theorem-definition" class="theorem-definition">
-    <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-  </div>
+
+  
 
   <div class="sidebar left" id="left-sidebar">
+    <div id="theorem-definition" class="theorem-definition">
+    <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+  </div>
+  <div>
     <h3>Instructions</h3>
     <p>Select a theorem from the navigation bar above to see its instructions here.</p>
   </div>
+</div>
 
   <!-- Main Canvas Area -->
   <div class="canvas-container">
