@@ -129,7 +129,7 @@ header h1 {
     color: #333; /* Neutral text color */
 }
 
-.left-sidebar-wrapper {
+.sidebar-container {
   width: 240px;
   display: flex;
   flex-direction: column;
