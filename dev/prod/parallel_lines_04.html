@@ -25,6 +25,13 @@
 
 <body>
  <!-- 🔵 SVG Navigation Header -->
+
+     <div id="svg-home-placeholder"></div>
+    <div id="svg-sin-placeholder"></div>
+    <div id="svg-cos-placeholder"></div>
+    <div id="svg-ratio-placeholder"></div>
+    <div id="svg-identity-placeholder"></div>
+
   <div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
     <div class="nav-bar-left">
       <button class="nav-icon-btn" onclick="location.href='index.html'">
@@ -175,7 +182,20 @@
   <!-- 🧠 Load Page Controller -->
   <script type="module" src="./js/parallelLinesPage.js"></script>
 
-  
+  <script>
+  function injectSVG(iconId, targetId) {
+    const template = document.querySelector('#shared-svg-icons');
+    const icon = template.content.querySelector(`#${iconId}`).cloneNode(true);
+    document.getElementById(targetId).appendChild(icon);
+  }
+
+  injectSVG('icon-home', 'svg-home-placeholder');
+  injectSVG('icon-sin', 'svg-sin-placeholder');
+  injectSVG('icon-cos', 'svg-cos-placeholder');
+  injectSVG('icon-ratio', 'svg-ratio-placeholder');
+  injectSVG('icon-identity', 'svg-identity-placeholder');
+</script>
+
 
 </body>
 </html>
