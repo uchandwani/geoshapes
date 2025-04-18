@@ -83,6 +83,18 @@ header h1 {
 }
 
 
+/* Fix for header icons: white circular background */
+.header-icon {
+  background-color: white !important;
+  border-radius: 50%;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+}
+
+
 .header-right {
   display: flex;
   gap: 10px;
