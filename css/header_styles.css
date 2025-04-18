@@ -72,7 +72,7 @@ header h1 {
 
 /* Ensure Proper Layout */
 
-##main-header {
+#main-header {
   display: flex;
   justify-content: space-between; /* icons on left, title centered */
   align-items: center;
