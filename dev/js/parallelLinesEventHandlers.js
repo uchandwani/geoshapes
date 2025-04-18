@@ -148,7 +148,7 @@ function drawCircle(canvasConfig) {
 
 function drawPoints(canvasConfig, buttonType) {
     console.log('%c' + "Function DWP - Drawing Points", 'color: green;', canvasConfig, buttonType);
-
+    debugger;
     if (!canvasConfig.points || !Array.isArray(canvasConfig.points)) {
         console.warn("⚠️ No points found in configuration.");
         return;
@@ -176,7 +176,7 @@ function drawPoints(canvasConfig, buttonType) {
  */
 function drawLines(canvasConfig) {
     console.log('%c' + "Function DWL - Drawing Lines", 'color: blue;', canvasConfig);
-
+    debugger;
     if (!canvasConfig.lines || !Array.isArray(canvasConfig.lines)) {
         console.warn("⚠️ No valid lines data in canvasConfig:", canvasConfig.lines);
         return;
@@ -350,7 +350,7 @@ export function handleTriangleType(fkey, type) {
 
 export function switchFunctionality(functionalityKey, buttonType) {
     console.log(`Switching functionality: ${functionalityKey}, buttonType: ${buttonType}`);
-
+    debugger;
     handleNavButtons(functionalityKey);
     const config = functionalityConfig[functionalityKey];
     if (!config) {
