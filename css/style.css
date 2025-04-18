@@ -51,6 +51,12 @@ header h1 {
     background-color: white;
 }
 
+.icon-btn img {
+  background-color: white;
+  border-radius: 6px;
+  padding: 4px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
 
 
 /* Navigation Bar Left and Right */
@@ -303,17 +309,17 @@ header h1 {
 }
 
 #theorem-definition {
-  background-color: #eef5ff;
-  padding: 10px;
-  border-left: 4px solid #3366cc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  font-weight: bold;
+  width: 240px;
+  min-height: 120px;
+  background-color: #e3f2fd;
+  padding: 12px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   font-size: 14px;
-  color: #3366cc;
-  width: 100%;
-  box-sizing: border-box;
+  line-height: 1.4;
 }
+
 
 .canvas-buttons {
     position: absolute; /* Position over the canvas */
