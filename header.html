@@ -39,30 +39,60 @@
     <h1 id="page-title" style="font-size: 20px; font-weight: 600; color: white;">Loading...</h1>
   </div>
 
-  <!-- 🔹 Sub-header icons to trigger functionalities -->
-  <div class="sub-header-icons" style="display: flex; gap: 12px;">
-    <svg class="sub-header-icon" id="sineTheta-button" title="Vertically Opposite Angles" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- 🔹 Sub-Header Icons on the Right -->
+<div class="sub-header-icons" style="display: flex; gap: 12px;">
+  
+  <!-- Vertically Opposite Angles -->
+  <div class="tooltip-container">
+    <svg class="sub-header-icon" id="sineTheta-button" title="Vertically Opposite Angles"
+         viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="12" x2="20" y2="12" />
+      <line x1="22" y1="12" x2="22" y2="24" />
+      <line x1="12" y1="12" x2="7" y2="19" />
+      <line x1="5" y1="21" x2="-5" y2="10" />
       <line x1="12" y1="12" x2="7" y2="5" />
+      <line x1="7" y1="5" x2="12" y2="-4" />
     </svg>
+    <span class="tooltip-text">Vertically Opposite Angles</span>
+  </div>
 
-    <svg class="sub-header-icon" id="cosineTheta-button" title="Parallel Line Properties" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Parallel Line Properties -->
+  <div class="tooltip-container">
+    <svg class="sub-header-icon" id="cosineTheta-button" title="Parallel Line Properties"
+         viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="2" x2="4" y2="20" />
       <line x1="12" y1="2" x2="20" y2="20" />
     </svg>
+    <span class="tooltip-text">Parallel Line Properties</span>
+  </div>
 
-    <svg class="sub-header-icon" id="trigonoIdentities-button" title="Triangle Exterior Angle" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Triangle Exterior Angle -->
+  <div class="tooltip-container">
+    <svg class="sub-header-icon" id="trigonoIdentities-button" title="Triangle Exterior Angle"
+         viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="12" x2="19" y2="19" />
       <line x1="12" y1="12" x2="6" y2="19" />
+      <line x1="17" y1="17" x2="12" y2="4" />
+      <line x1="7" y1="17" x2="12" y2="4" />
     </svg>
+    <span class="tooltip-text">Triangle Exterior Angle</span>
+  </div>
 
-    <svg class="sub-header-icon" id="trigonoRatios-button" title="Triangle Angle Sum" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Triangle Angle Sum -->
+  <div class="tooltip-container">
+    <svg class="sub-header-icon" id="trigonoRatios-button" title="Triangle Angle Sum"
+         viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10" />
       <line x1="4" y1="12" x2="20" y2="4" />
       <line x1="4" y1="12" x2="20" y2="20" />
     </svg>
+    <span class="tooltip-text">Triangle Angle Sum</span>
   </div>
 </div>
