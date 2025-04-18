@@ -21,6 +21,24 @@ header h1 {
     color: white;
 }
 
+#main-header svg,
+.sub-header-icon {
+  background-color: white;
+  border-radius: 50%;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); /* optional subtle shadow */
+}
+
+/* Optional: better spacing between them */
+#main-header .nav-icons a,
+#main-header .sub-header-icons .tooltip-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* Navigation Bar Left and Right */
 .nav-bar-left,
