@@ -1,33 +1,34 @@
 <!-- header.html -->
-<div id="main-header">
+<div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
+
   <!-- 🔹 Navigation Icons on the Left -->
-  <div class="nav-icons">
+  <div class="nav-icons" style="display: flex; gap: 8px;">
     <a href="index.html" title="Home">
-      <svg class="header-icon" viewBox="0 0 24 24">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 12L12 3l9 9" />
         <path d="M9 21V12h6v9" />
       </svg>
     </a>
     <a href="parallel_lines_04.html" title="Parallel Lines">
-      <svg class="header-icon" viewBox="0 0 24 24">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="4" y1="10" x2="20" y2="10" />
         <line x1="4" y1="16" x2="20" y2="16" />
         <line x1="6" y1="4" x2="16" y2="20" />
       </svg>
     </a>
     <a href="triangle_theorem_07.html" title="Triangle Theorems">
-      <svg class="header-icon" viewBox="0 0 24 24">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="12 4 20 20 4 20" />
       </svg>
     </a>
     <a href="trig_properties_09.html" title="Trigonometric Properties">
-      <svg class="header-icon" viewBox="0 0 24 24">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
         <path d="M8 12l2 2 4-4" />
       </svg>
     </a>
     <a href="circle_theorems_02.html" title="Circle Theorems">
-      <svg class="header-icon" viewBox="0 0 24 24">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
       </svg>
     </a>
@@ -35,42 +36,33 @@
 
   <!-- 🔹 Center Title -->
   <div class="header-center">
-    <h1 id="page-title">Parallel Lines Theorems</h1>
+    <h1 id="page-title" style="font-size: 20px; font-weight: 600; color: white;">Loading...</h1>
   </div>
 
-  <!-- 🔹 Sub-header SVG buttons (optional tooltip-container around each) -->
-  <div class="sub-header-icons">
-    <div class="tooltip-container" title="Vertically Opposite Angles">
-      <svg class="sub-header-icon" id="sineTheta-button" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" y1="12" x2="20" y2="12" />
-        <line x1="12" y1="12" x2="7" y2="19" />
-        <line x1="12" y1="12" x2="7" y2="5" />
-      </svg>
-    </div>
+  <!-- 🔹 Sub-header icons to trigger functionalities -->
+  <div class="sub-header-icons" style="display: flex; gap: 12px;">
+    <svg class="sub-header-icon" id="sineTheta-button" title="Vertically Opposite Angles" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="12" x2="20" y2="12" />
+      <line x1="12" y1="12" x2="7" y2="5" />
+    </svg>
 
-    <div class="tooltip-container" title="Parallel Line Properties">
-      <svg class="sub-header-icon" id="cosineTheta-button" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" y1="2" x2="4" y2="20" />
-        <line x1="12" y1="2" x2="20" y2="20" />
-      </svg>
-    </div>
+    <svg class="sub-header-icon" id="cosineTheta-button" title="Parallel Line Properties" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="2" x2="4" y2="20" />
+      <line x1="12" y1="2" x2="20" y2="20" />
+    </svg>
 
-    <div class="tooltip-container" title="Triangle Exterior Angle">
-      <svg class="sub-header-icon" id="trigonoIdentities-button" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="12" y1="12" x2="19" y2="19" />
-        <line x1="12" y1="12" x2="6" y2="19" />
-      </svg>
-    </div>
+    <svg class="sub-header-icon" id="trigonoIdentities-button" title="Triangle Exterior Angle" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="12" x2="19" y2="19" />
+      <line x1="12" y1="12" x2="6" y2="19" />
+    </svg>
 
-    <div class="tooltip-container" title="Triangle Angle Sum">
-      <svg class="sub-header-icon" id="trigonoRatios-button" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="4" y1="12" x2="20" y2="4" />
-        <line x1="4" y1="12" x2="20" y2="20" />
-      </svg>
-    </div>
+    <svg class="sub-header-icon" id="trigonoRatios-button" title="Triangle Angle Sum" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="4" y1="12" x2="20" y2="4" />
+      <line x1="4" y1="12" x2="20" y2="20" />
+    </svg>
   </div>
 </div>
