@@ -24,12 +24,39 @@
 </head>
 
 <body>
-  <div id="header-placeholder"></div>
+ <!-- 🔵 SVG Navigation Header -->
+  <div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
+    <div class="nav-bar-left">
+      <button class="nav-icon-btn" onclick="location.href='index.html'">
+        <img src="./assets/icons/home.svg" alt="Home" />
+      </button>
+      <button class="nav-icon-btn" id="sineTheta-button">
+        <img src="./assets/icons/sin.svg" alt="Sine" />
+      </button>
+      <button class="nav-icon-btn" id="cosineTheta-button">
+        <img src="./assets/icons/cos.svg" alt="Cosine" />
+      </button>
+    </div>
+
+    <h1>Parallel Lines Theorems</h1>
+
+    <div class="nav-bar-right">
+      <button class="nav-icon-btn" id="trigonoRatios-button">
+        <img src="./assets/icons/ratio.svg" alt="Trig Ratios" />
+      </button>
+      <button class="nav-icon-btn" id="trigonoIdentities-button">
+        <img src="./assets/icons/identity.svg" alt="Trig Identity" />
+      </button>
+    </div>
+  </div>
     
     <!-- Theorem Definition Section -->
     
     <div class="container">
         <!-- Left Sidebar -->
+         <div id="theorem-definition" class="theorem-definition">
+             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+             </div> 
         <div class="sidebar left" id="left-sidebar">
             <h3>Instructions</h3>
             <p>Select a theorem from the navigation bar above to see its instructions here.</p>
@@ -48,9 +75,7 @@
                 <button id="trigonoRatios-button" class="icon-btn" title="Trigono Ratios">Triangles -Angle Sum Properties </button>
                         
                 </div>
-            <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-             </div> 
+           
 
              <div id="dynamic-buttons" class="triangle-buttons">
     <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
@@ -129,7 +154,7 @@
     </footer>
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
- <script>
+ <!--script>
   fetch('header.html')
     .then(res => res.text())
     .then(html => {
@@ -143,8 +168,12 @@
       };
       document.head.appendChild(script);
     });
-</script>
+</script-->
 
+<!-- 🧠 Load Header JS -->
+  <script type="module" src="./header.js"></script>
+  <!-- 🧠 Load Page Controller -->
+  <script type="module" src="./js/parallelLinesPage.js"></script>
 
   
 
