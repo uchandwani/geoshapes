@@ -162,7 +162,7 @@
 <script type="module" src="./shapes/CanvasManager.js"></script>
 
 <!-- Load Header Logic -->
-<script type="module" src="./header.js"></script>
+<script type="module" src="./js/header.js"></script>
 <script type="module" src="./js/parallelLinesPage.js"></script>
 
 <!-- Inject SVG Icons -->
@@ -173,12 +173,16 @@ function injectSVG(iconId, buttonId) {
   document.getElementById(buttonId).appendChild(svgIcon);
 }
 
-injectSVG('icon-home', 'home-button');
-injectSVG('icon-sin', 'sineTheta-button');
-injectSVG('icon-cos', 'cosineTheta-button');
-injectSVG('icon-ratio', 'trigonoRatios-button');
-injectSVG('icon-identity', 'trigonoIdentities-button');
+// ✅ Wait for the full DOM to load before injecting icons
+document.addEventListener("DOMContentLoaded", () => {
+  injectSVG('icon-home', 'home-button');
+  injectSVG('icon-sin', 'sineTheta-button');
+  injectSVG('icon-cos', 'cosineTheta-button');
+  injectSVG('icon-ratio', 'trigonoRatios-button');
+  injectSVG('icon-identity', 'trigonoIdentities-button');
+});
 </script>
+
 
 </body>
 </html>
