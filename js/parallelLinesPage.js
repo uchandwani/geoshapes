@@ -25,15 +25,17 @@
     "trigonoRatios-button": "trigonoRatios"
   };
 
-  Object.entries(iconMap).forEach(([id, funcKey]) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("click", () => {
-        console.log(`🔘 ${funcKey} icon clicked`);
-        switchFunctionality(funcKey);
-      });
-    }
-  });
+ Object.entries(iconMap).forEach(([id, funcKey]) => {
+  const el = document.getElementById(id);
+  if (el && !el.dataset.listenerAttached) {
+    el.addEventListener("click", () => {
+      console.log(`🔘 ${funcKey} icon clicked`);
+      switchFunctionality(funcKey);
+    });
+    el.dataset.listenerAttached = "true"; // ✅ Prevents re-binding
+  }
+});
+
 });
 
         
