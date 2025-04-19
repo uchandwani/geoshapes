@@ -71,12 +71,24 @@
   </div>
 
   <!-- ✅ Dynamically Load Header (after everything else) -->
-  <script type="module">
-    const html = await fetch('header.html').then(res => res.text());
-    document.getElementById('header-placeholder').innerHTML = html;
+ <!-- ✅ Dynamically Load Header and Global Header.js -->
+<script type="module">
+  const html = await fetch('header.html').then(res => res.text());
+  document.getElementById('header-placeholder').innerHTML = html;
 
-    const { updatePageTitle } = await import('./js/header.js');
-    updatePageTitle(); // ✅ Safe to call now
-  </script>
-</body>
-</html>
+  // ✅ Load global script so window.setPageSubtitle etc. work
+  const script = document.createElement('script');
+  script.src = './js/header.js';
+  script.type = 'text/javascript';
+  document.head.appendChild(script);
+
+  // ✅ Wait for header to be set and update title
+  script.onload = () => {
+    if (typeof updatePageTitle === 'function') {
+      updatePageTitle();
+    } else {
+      console.warn("⚠️ updatePageTitle not available.");
+    }
+  };
+</script>
+
