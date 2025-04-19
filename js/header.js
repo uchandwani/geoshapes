@@ -21,7 +21,7 @@ function updatePageTitle() {
   if (subtitleEl) subtitleEl.textContent = ""; // Initially empty
 }
 
-export function setPageSubtitle(label) {
+function setPageSubtitle(label) {
   const subtitleEl = document.getElementById("page-subtitle");
   if (subtitleEl) {
     subtitleEl.textContent = label || "";
