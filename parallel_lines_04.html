@@ -72,18 +72,28 @@
 
   <!-- ✅ Dynamically Load Header (after everything else) -->
  <!-- ✅ Dynamically load header first, THEN load page logic -->
-<script type="module">
-  const html = await fetch('header.html').then(res => res.text());
-  document.getElementById('header-placeholder').innerHTML = html;
+ <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./shapes/CanvasManager.js"></script>
 
-  const headerModule = await import('./js/header.js');
-await import('./js/parallelLinesPage.js');
+  <!-- ✅ Load header, then logic -->
+  <script type="module">
+    // 1️⃣ Inject header.html
+    const html = await fetch('header.html').then(res => res.text());
+    document.getElementById('header-placeholder').innerHTML = html;
 
-// ✅ Now call attachNavBarListeners after SVG icons exist
-if (headerModule.attachNavBarListeners) {
-  headerModule.attachNavBarListeners();
-}
+    // 2️⃣ Import header module
+    const headerModule = await import('./js/header.js');
+    headerModule.updatePageTitle();
 
-</script>
+    // 3️⃣ Import core logic (e.g., switchFunctionality, default rendering)
+    await import('./js/parallelLinesPage.js');
+
+    // 4️⃣ Attach SVG icon listeners
+    if (headerModule.attachNavBarListeners) {
+      headerModule.attachNavBarListeners();
+    }
+  </script>
+
+
 
 
