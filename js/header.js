@@ -10,7 +10,7 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-function updatePageTitle() {
+export function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
 
@@ -21,7 +21,7 @@ function updatePageTitle() {
   if (subtitleEl) subtitleEl.textContent = ""; // Initially empty
 }
 
-function setPageSubtitle(label) {
+export function setPageSubtitle(label) {
   const subtitleEl = document.getElementById("page-subtitle");
   if (subtitleEl) {
     subtitleEl.textContent = label || "";
