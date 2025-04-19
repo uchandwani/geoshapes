@@ -109,11 +109,13 @@ function updateUI(config, functionalityKey, buttonType = null) {
 }
 
 export function updateLeftSidebar(functionalityKey, type) {
+    debugger;
     const content = functionalityConfig[functionalityKey]?.leftSidebarContent?.[type] || "<p>Content not available.</p>";
     document.querySelector(".sidebar.left").innerHTML = content;
 }
 
 export function updateRightSidebar(functionalityKey, type) {
+    debugger;
     const content = functionalityConfig[functionalityKey]?.rightSidebarContent?.[type] || "<p>Content not available.</p>";
     document.querySelector(".sidebar.right").innerHTML = content;
 }
