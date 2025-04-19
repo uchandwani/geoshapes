@@ -8,7 +8,6 @@
     import {Point} from '../shapes/Points.js';
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './parallelLinesEventHandlers.js';
-    import { setPageSubtitle, setActiveSubButtonLabel } from './header.js';
     window.setPageSubtitle = setPageSubtitle;
     window.setActiveSubButtonLabel = setActiveSubButtonLabel;
     window.switchFunctionality = switchFunctionality;
