@@ -110,24 +110,25 @@ function updateUI(config, functionalityKey, buttonType = null) {
     }
 }
 
-export function updateLeftSidebar(functionalityKey, type) {
+export function updateLeftSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
-    const allContent = config?.leftSidebarContent;
+    if (!config) return;
 
-    let content;
+    const sidebar = document.querySelector(".sidebar.left");
+    const allContent = config.leftSidebarContent;
+
+    let content = "<p>Content not available.</p>";
 
     if (typeof allContent === "string") {
-        // ✅ For theorems without subtypes (e.g., sineTheta)
         content = allContent;
-    } else if (typeof allContent === "object" && type && allContent[type]) {
-        // ✅ For subtyped content (e.g., sin, cos, tan)
-        content = allContent[type];
-    } else {
-        content = "<p>Content not available.</p>";
+    } else if (typeof allContent === "object") {
+        // ✅ Try in this order: specific subtype > defaultButtonType > fallback message
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
     }
 
-    document.querySelector(".sidebar.left").innerHTML = content;
+    sidebar.innerHTML = content;
 }
+
 
 
 export function updateRightSidebar(functionalityKey, type) {
