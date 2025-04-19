@@ -33,6 +33,16 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     const label = svgIcon?.getAttribute("title") || "";
     setPageSubtitle(label);
 
+    // ✅ Update active sub-button label
+    const subButtonSpan = document.getElementById("active-sub-button");
+
+    // If sub-buttons are defined and one is active, display its label
+    if (config.buttonSet && Array.isArray(config.buttonSet)) {
+        const activeButton = config.buttonSet.find(btn => btn.type === effectiveType);
+        subButtonSpan.textContent = activeButton ? `| ${activeButton.label}` : "";
+    } else {
+        subButtonSpan.textContent = ""; // No sub-button
+    }
 
     setPageSubtitle(label);  // ✅ Update subtitle next to page title
     // ✅ Clear canvas and redraw
