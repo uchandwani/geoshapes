@@ -145,10 +145,10 @@ export function updateRightSidebar(functionalityKey, type) {
 }
 
 export function updateTheoremText(functionalityKey, subtype = null) {
-    const config = functionalityConfig[functionalityKey];
+    const config = functionalityConfig?.[functionalityKey];
     debugger;
     if (!config) {
-        console.error("No config found for:", functionalityKey);
+        console.error("updateTheoremText(): Invalid or missing config for", functionalityKey);
         document.getElementById("theorem-text").textContent = "No definition available.";
         return;
     }
@@ -168,6 +168,7 @@ export function updateTheoremText(functionalityKey, subtype = null) {
 
     document.getElementById("theorem-text").textContent = definitionText;
 }
+
 
 
 
