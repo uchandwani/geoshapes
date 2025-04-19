@@ -1,6 +1,7 @@
 // header.js
 
-// 🔹 Page-specific main titles
+// js/header.js
+
 const pageTitles = {
   "index.html": "Home",
   "parallel_lines_04.html": "Parallel Lines",
@@ -9,29 +10,25 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-/**
- * ✅ Sets the page title on load
- */
-export function updatePageTitle() {
+window.updatePageTitle = function () {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
 
   const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
-  const subButtonEl = document.getElementById("active-sub-button");
+  const subBtnEl = document.getElementById("active-sub-button");
 
   if (titleEl) titleEl.textContent = title;
-  if (subtitleEl) subtitleEl.textContent = "";
-  if (subButtonEl) subButtonEl.textContent = "";
-}
+  if (subtitleEl) subtitleEl.textContent = ""; // clear subtitle
+  if (subBtnEl) subBtnEl.textContent = "";     // clear sub-button label
+};
 
-/**
- * ✅ Dynamically sets subtitle and sub-button label
- */
-export function setPageSubtitle(subtitleLabel = "", subButtonLabel = "") {
+window.setPageSubtitle = function (subtitleLabel = "") {
   const subtitleEl = document.getElementById("page-subtitle");
-  const subButtonEl = document.getElementById("active-sub-button");
+  if (subtitleEl) subtitleEl.textContent = subtitleLabel ? `→ ${subtitleLabel}` : "";
+};
 
-  if (subtitleEl) subtitleEl.textContent = subtitleLabel;
-  if (subButtonEl) subButtonEl.textContent = subButtonLabel;
-}
+window.setActiveSubButtonLabel = function (btnLabel = "") {
+  const subBtnEl = document.getElementById("active-sub-button");
+  if (subBtnEl) subBtnEl.textContent = btnLabel ? `→ ${btnLabel}` : "";
+};
