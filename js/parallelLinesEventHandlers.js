@@ -13,24 +13,33 @@ import { Point } from '../shapes/Points.js';
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
+
 export function switchFunctionality(functionalityKey, buttonType = null) {
-    console.log("🔁 switchFunctionality:", functionalityKey, buttonType);
+    console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
 
     const config = functionalityConfig[functionalityKey];
     if (!config) {
-        console.error("Invalid functionalityKey:", functionalityKey);
+        console.error("❌ Invalid functionalityKey:", functionalityKey);
         return;
     }
 
-    canvasManager.clearAllShapes();
-    debugger;
-    drawShapes(config.canvasConfig, buttonType);
-    updateUI(config,functionalityKey, buttonType);
-    updateLeftSidebar(functionalityKey, buttonType);
-    updateRightSidebar(functionalityKey, buttonType);
+    // ✅ Fallback to defaultButtonType if no subtype is passed
+    const effectiveType = buttonType || config.defaultButtonType || null;
+    console.log("🎯 Using subtype:", effectiveType);
 
+    // ✅ Clear canvas and redraw
+    canvasManager.clearAllShapes();
+    drawShapes(config.canvasConfig, effectiveType);
+
+    // ✅ Update all UI components
+    updateUI(config, functionalityKey, effectiveType);
+    updateLeftSidebar(functionalityKey, effectiveType);
+    updateRightSidebar(functionalityKey, effectiveType);
+
+    // ✅ Final render
     canvasManager.render();
 }
+
 
 /**
  * 🖌️ Draws points, lines, triangles, circles depending on config and buttonType
