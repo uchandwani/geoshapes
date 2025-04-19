@@ -109,10 +109,24 @@ function updateUI(config, functionalityKey, buttonType = null) {
 }
 
 export function updateLeftSidebar(functionalityKey, type) {
-    debugger;
-    const content = functionalityConfig[functionalityKey]?.leftSidebarContent?.[type] || "<p>Content not available.</p>";
+    const config = functionalityConfig[functionalityKey];
+    const allContent = config?.leftSidebarContent;
+
+    let content;
+
+    if (typeof allContent === "string") {
+        // ✅ For theorems without subtypes (e.g., sineTheta)
+        content = allContent;
+    } else if (typeof allContent === "object" && type && allContent[type]) {
+        // ✅ For subtyped content (e.g., sin, cos, tan)
+        content = allContent[type];
+    } else {
+        content = "<p>Content not available.</p>";
+    }
+
     document.querySelector(".sidebar.left").innerHTML = content;
 }
+
 
 export function updateRightSidebar(functionalityKey, type) {
     debugger;
