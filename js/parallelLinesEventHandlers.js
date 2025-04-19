@@ -27,7 +27,12 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     const effectiveType = buttonType || config.defaultButtonType || null;
     console.log("🎯 Using subtype:", effectiveType);
 
-     setPageSubtitle(label);  // ✅ Update subtitle next to page title
+     // ✅ Find label to display as subtitle
+    const label = config.titleLabel || "";
+    setPageSubtitle(label);
+
+
+    setPageSubtitle(label);  // ✅ Update subtitle next to page title
     // ✅ Clear canvas and redraw
     canvasManager.clearAllShapes();
     drawShapes(config.canvasConfig, effectiveType);
