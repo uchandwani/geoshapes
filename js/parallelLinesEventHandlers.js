@@ -146,7 +146,7 @@ export function updateRightSidebar(functionalityKey, type) {
 
 export function updateTheoremText(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
-
+    debugger;
     if (!config) {
         console.error("No config found for:", functionalityKey);
         document.getElementById("theorem-text").textContent = "No definition available.";
