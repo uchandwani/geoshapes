@@ -1,5 +1,3 @@
-// header.js
-
 // js/header.js
 
 const pageTitles = {
@@ -10,7 +8,7 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-window.updatePageTitle = function () {
+export function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
 
@@ -21,18 +19,18 @@ window.updatePageTitle = function () {
   if (titleEl) titleEl.textContent = title;
   if (subtitleEl) subtitleEl.textContent = ""; // clear subtitle
   if (subBtnEl) subBtnEl.textContent = "";     // clear sub-button label
-};
+}
 
-window.setPageSubtitle = function (label) {
+export function setPageSubtitle(label) {
   const subtitleEl = document.getElementById("page-subtitle");
   if (subtitleEl) {
     subtitleEl.textContent = label || "";
   }
-};
+}
 
-window.setActiveSubButtonLabel = function (label) {
+export function setActiveSubButtonLabel(label) {
   const btnLabelEl = document.getElementById("active-sub-button");
   if (btnLabelEl) {
     btnLabelEl.textContent = label || "";
   }
-};
+}
