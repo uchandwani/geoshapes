@@ -1,7 +1,6 @@
-
-
 // header.js
 
+// 🔹 Page-specific main titles
 const pageTitles = {
   "index.html": "Home",
   "parallel_lines_04.html": "Parallel Lines",
@@ -10,20 +9,29 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
+/**
+ * ✅ Sets the page title on load
+ */
 export function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
 
   const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
+  const subButtonEl = document.getElementById("active-sub-button");
 
-  if (titleEl) titleEl.childNodes[0].textContent = title;
-  if (subtitleEl) subtitleEl.textContent = ""; // Initially empty
+  if (titleEl) titleEl.textContent = title;
+  if (subtitleEl) subtitleEl.textContent = "";
+  if (subButtonEl) subButtonEl.textContent = "";
 }
 
-export function setPageSubtitle(label) {
+/**
+ * ✅ Dynamically sets subtitle and sub-button label
+ */
+export function setPageSubtitle(subtitleLabel = "", subButtonLabel = "") {
   const subtitleEl = document.getElementById("page-subtitle");
-  if (subtitleEl) {
-    subtitleEl.textContent = label || "";
-  }
+  const subButtonEl = document.getElementById("active-sub-button");
+
+  if (subtitleEl) subtitleEl.textContent = subtitleLabel;
+  if (subButtonEl) subButtonEl.textContent = subButtonLabel;
 }
