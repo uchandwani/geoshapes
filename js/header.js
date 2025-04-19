@@ -10,7 +10,7 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-export function updatePageTitle() {
+function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
 
