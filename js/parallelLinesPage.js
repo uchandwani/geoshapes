@@ -1,3 +1,4 @@
+    import { updatePageTitle, setPageSubtitle, setActiveSubButtonLabel } from './header.js';
     import { Triangle } from '../shapes/Triangle.js';
     import { canvasManager } from '../shapes/CanvasManager.js';
     import { functionalityConfig } from './parallelLinesConfig.js';
@@ -7,10 +8,17 @@
     import {Line} from '../shapes/Lines.js';
     import {Point} from '../shapes/Points.js';
     import {Circle} from '../shapes/Circle.js';
+    import { switchFunctionality } from './parallelLinesEventHandlers.js';
+    import { setPageSubtitle, setActiveSubButtonLabel } from './header.js';
+    window.setPageSubtitle = setPageSubtitle;
+    window.setActiveSubButtonLabel = setActiveSubButtonLabel;
+    window.switchFunctionality = switchFunctionality;
 
         
    document.addEventListener("DOMContentLoaded", () => {
   console.log("Parallel Lines Page Loaded");
+  updatePageTitle(); // sets the title from file name
+
 
   attachNavBarListeners(); // Nav bar logic
   const defaultFunctionality = 'sineTheta';
