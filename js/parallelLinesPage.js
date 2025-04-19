@@ -27,13 +27,17 @@
 
  Object.entries(iconMap).forEach(([id, funcKey]) => {
   const el = document.getElementById(id);
-  if (el && !el.dataset.listenerAttached) {
-    el.addEventListener("click", () => {
-      console.log(`🔘 ${funcKey} icon clicked`);
-      switchFunctionality(funcKey);
-    });
-    el.dataset.listenerAttached = "true"; // ✅ Prevents re-binding
-  }
+  console.log("🔍 Checking icon", id, el?.dataset.listenerAttached);
+
+if (el && !el.dataset.listenerAttached) {
+  console.log("✅ Binding click handler for:", id);
+  el.addEventListener("click", () => {
+    console.log(`🔘 ${funcKey} icon clicked`);
+    switchFunctionality(funcKey);
+  });
+  el.dataset.listenerAttached = "true";
+}
+
 });
 
 });
