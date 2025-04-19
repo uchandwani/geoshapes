@@ -89,7 +89,8 @@ function drawTriangles(canvasConfig, buttonType = null) {
  */
 function updateUI(config, functionalityKey, buttonType = null) {
     const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
-    updateTheoremText(theoremText, buttonType);
+ //   updateTheoremText(config, theoremText, buttonType);
+    updateTheoremText(config[functionalityKey], subtype);
 
     const dynamicButtons = document.getElementById("dynamic-buttons");
     if (Array.isArray(config.buttonSet)) {
@@ -144,30 +145,22 @@ export function updateRightSidebar(functionalityKey, type) {
     document.querySelector(".sidebar.right").innerHTML = content;
 }
 
-export function updateTheoremText(functionalityKey, subtype = null) {
-    const config = functionalityConfig?.[functionalityKey];
-    debugger;
-    if (!config) {
-        console.error("updateTheoremText(): Invalid or missing config for", functionalityKey);
-        document.getElementById("theorem-text").textContent = "No definition available.";
-        return;
+export function updateTheoremText(config, subtype = null) {
+    console.log("Inside updateTheoremText", config, subtype);
+    
+    let definition = config.theoremDefinition;
+
+    if (typeof definition === 'object' && subtype && definition[subtype]) {
+        definition = definition[subtype];
     }
 
-    const definitions = config.theoremDefinitions;
-    const defaultDefinition = config.theoremDefinition;
-
-    let definitionText = "";
-
-    if (definitions && typeof definitions === "object" && subtype && definitions[subtype]) {
-        definitionText = definitions[subtype];
-    } else if (defaultDefinition) {
-        definitionText = defaultDefinition;
-    } else {
-        definitionText = "No definition available.";
+    if (typeof definition !== 'string') {
+        definition = "Definition not available.";
     }
 
-    document.getElementById("theorem-text").textContent = definitionText;
+    document.getElementById("theorem-text").innerHTML = definition;
 }
+
 
 
 
