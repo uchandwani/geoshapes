@@ -3,6 +3,11 @@
  * Description: Handles dynamic drawing and UI updates for Parallel Lines Theorem with sub-button support.
  */
 
+/**
+ * Program: Parallel Lines Canvas Tool (Merged Final Version)
+ * Description: Handles dynamic drawing and UI updates for Parallel Lines Theorem with sub-button support.
+ */
+
 import { functionalityConfig } from './parallelLinesConfig.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
@@ -10,12 +15,13 @@ import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 
+// ✅ Import subtitle utility functions from header.js
+import { setPageSubtitle } from './header.js';
+import { setActiveSubButtonLabel } from './header.js';
+
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
-
-
-
 export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
 
@@ -49,8 +55,6 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
   updateRightSidebar(functionalityKey, effectiveType);
   canvasManager.render();
 }
-
-
 
 
 /**
