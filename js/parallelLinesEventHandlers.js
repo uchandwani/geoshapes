@@ -9,12 +9,12 @@ import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
-import { setPageSubtitle } from './header.js';
+
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
 
-import { setPageSubtitle } from "./header.js";
+
 
 export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
@@ -25,36 +25,31 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     return;
   }
 
-  // ✅ Determine final subtype (canvas variant)
   const effectiveType = buttonType || config.defaultButtonType || null;
   console.log("🎯 Using subtype:", effectiveType);
 
-  // 🔹 Get subtitle from corresponding SVG icon's title
-  const subtitleElement = document.getElementById(`${functionalityKey}-button`);
-  const subtitleLabel = subtitleElement?.getAttribute("title") || "";
+  // 🔹 Title and subtitle updates
+  const icon = document.getElementById(`${functionalityKey}-button`);
+  const subtitleLabel = icon?.getAttribute("title") || "";
 
-  // 🔹 Get sub-button label from buttonSet (if any)
-  let subButtonLabel = "";
-  if (config.buttonSet && Array.isArray(config.buttonSet)) {
+  let activeSubBtnLabel = "";
+  if (config.buttonSet && effectiveType) {
     const match = config.buttonSet.find(btn => btn.type === effectiveType);
-    subButtonLabel = match?.label || "";
+    activeSubBtnLabel = match?.label || "";
   }
 
-  // ✅ Set subtitle and sub-button text in header
-  setPageSubtitle(subtitleLabel, subButtonLabel);
+  setPageSubtitle(subtitleLabel);
+  setActiveSubButtonLabel(activeSubBtnLabel);
 
-  // 🔄 Clear and redraw canvas
+  // 🧹 Canvas and UI
   canvasManager.clearAllShapes();
   drawShapes(config.canvasConfig, effectiveType);
-
-  // 🧠 Update content
   updateUI(config, functionalityKey, effectiveType);
   updateLeftSidebar(functionalityKey, effectiveType);
   updateRightSidebar(functionalityKey, effectiveType);
-
-  // 🎨 Final render
   canvasManager.render();
 }
+
 
 
 
