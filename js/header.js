@@ -1,8 +1,7 @@
 
+
 // header.js
 
-// ✅ Declare only once
-console.log("Before PageTitles declaration line");
 const pageTitles = {
   "index.html": "Home",
   "parallel_lines_04.html": "Parallel Lines",
@@ -10,13 +9,21 @@ const pageTitles = {
   "trig_properties_09.html": "Trigonometric Properties",
   "circle_theorems_02.html": "Circle Theorems"
 };
-console.log("PageTitle is now declared");
-function updatePageTitle() {
+
+export function updatePageTitle() {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
-  const el = document.getElementById("page-title");
 
-  if (el) el.textContent = title;
-  else console.warn("⚠️ Could not find element with id 'page-title'");
+  const titleEl = document.getElementById("page-title");
+  const subtitleEl = document.getElementById("page-subtitle");
+
+  if (titleEl) titleEl.childNodes[0].textContent = title;
+  if (subtitleEl) subtitleEl.textContent = ""; // Initially empty
 }
 
+export function setPageSubtitle(label) {
+  const subtitleEl = document.getElementById("page-subtitle");
+  if (subtitleEl) {
+    subtitleEl.textContent = label || "";
+  }
+}
