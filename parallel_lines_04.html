@@ -9,20 +9,11 @@
   <link rel="stylesheet" href="./css/header_styles.css">
   <link rel="stylesheet" href="./css/style.css">
 
-  <!-- ✅ Page-specific JS -->
+  <!-- ✅ JS Modules for core logic -->
+  <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./shapes/CanvasManager.js"></script>
   <script type="module" src="./js/parallelLinesPage.js"></script>
-  <!--script type="module">
-    import { calculateSin, calculateCos, calculateTrig, decimalToFraction, calcTrig} from './js/trianglePropertiesPage.js';
-
-    // Expose functions globally
-   
-    window.calculateSin = calculateSin;
-    window.calculateCos = calculateCos;
-    window.calculateTrig = calculateTrig;
-    window.calcTrig = calcTrig;
-    window.decimalToFraction = decimalToFraction;
-    </script>
-</head-->
+</head>
 
 <body>
   <!-- ✅ Header Placeholder -->
@@ -53,9 +44,7 @@
           <button id="draw-line" class="icon-btn" title="Draw Line">
             <img src="./icons/line-icon.png" alt="Line Icon" />
           </button>
-          <button id="draw-scale" class="icon-btn" title="Add Scale">
-            Add Scale
-          </button>
+          <button id="draw-scale" class="icon-btn" title="Add Scale">Add Scale</button>
           <button id="add-divider" class="icon-btn" title="Add Divider">
             <img src="./icons/divider-icon.png" alt="Divider Icon" />
           </button>
@@ -78,32 +67,16 @@
     <!-- 🔹 Right Sidebar -->
     <div class="sidebar right" id="right-sidebar">
       <h3>Verification - Vertically Opposite Angles</h3>
-      <!-- Dynamic content from config will go here -->
     </div>
   </div>
 
-  <!-- ✅ JS Modules -->
-  <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
-  <script type="module" src="./js/parallelLinesPage.js"></script>
+  <!-- ✅ Dynamically Load Header (after everything else) -->
+  <script type="module">
+    const html = await fetch('header.html').then(res => res.text());
+    document.getElementById('header-placeholder').innerHTML = html;
 
-  <!-- ✅ Load shared header dynamically -->
-  <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('header-placeholder').innerHTML = html;
-        const script = document.createElement('script');
-        script.src = './js/header.js';
-        script.onload = () => {
-          if (typeof updatePageTitle === 'function') {
-            updatePageTitle();
-          } else {
-            console.warn('⚠️ updatePageTitle not found.');
-          }
-        };
-        document.head.appendChild(script);
-      });
+    const { updatePageTitle } = await import('./js/header.js');
+    updatePageTitle(); // ✅ Safe to call now
   </script>
 </body>
 </html>
