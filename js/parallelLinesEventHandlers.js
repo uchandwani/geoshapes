@@ -15,9 +15,6 @@ import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 
-// ✅ Import subtitle utility functions from header.js
-import { setPageSubtitle } from './header.js';
-import { setActiveSubButtonLabel } from './header.js';
 
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
