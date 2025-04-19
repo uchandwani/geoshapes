@@ -14,49 +14,48 @@ import { setPageSubtitle } from './header.js';
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
 
+import { setPageSubtitle } from "./header.js";
+
 export function switchFunctionality(functionalityKey, buttonType = null) {
-    console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+  console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
 
-    const config = functionalityConfig[functionalityKey];
-    if (!config) {
-        console.error("❌ Invalid functionalityKey:", functionalityKey);
-        return;
-    }
+  const config = functionalityConfig[functionalityKey];
+  if (!config) {
+    console.error("❌ Invalid functionalityKey:", functionalityKey);
+    return;
+  }
 
-    // ✅ Fallback to defaultButtonType if no subtype is passed
-    const effectiveType = buttonType || config.defaultButtonType || null;
-    console.log("🎯 Using subtype:", effectiveType);
-    debugger;
-     // ✅ Find label to display as subtitle
-    // ✅ Get label directly from SVG icon's title attribute
-    const svgIcon = document.getElementById(`${functionalityKey}-button`);
-    const label = svgIcon?.getAttribute("title") || "";
-    setPageSubtitle(label);
+  // ✅ Determine final subtype (canvas variant)
+  const effectiveType = buttonType || config.defaultButtonType || null;
+  console.log("🎯 Using subtype:", effectiveType);
 
-    // ✅ Update active sub-button label
-    const subButtonSpan = document.getElementById("active-sub-button");
+  // 🔹 Get subtitle from corresponding SVG icon's title
+  const subtitleElement = document.getElementById(`${functionalityKey}-button`);
+  const subtitleLabel = subtitleElement?.getAttribute("title") || "";
 
-    // If sub-buttons are defined and one is active, display its label
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        const activeButton = config.buttonSet.find(btn => btn.type === effectiveType);
-        subButtonSpan.textContent = activeButton ? `| ${activeButton.label}` : "";
-    } else {
-        subButtonSpan.textContent = ""; // No sub-button
-    }
+  // 🔹 Get sub-button label from buttonSet (if any)
+  let subButtonLabel = "";
+  if (config.buttonSet && Array.isArray(config.buttonSet)) {
+    const match = config.buttonSet.find(btn => btn.type === effectiveType);
+    subButtonLabel = match?.label || "";
+  }
 
-    setPageSubtitle(label);  // ✅ Update subtitle next to page title
-    // ✅ Clear canvas and redraw
-    canvasManager.clearAllShapes();
-    drawShapes(config.canvasConfig, effectiveType);
+  // ✅ Set subtitle and sub-button text in header
+  setPageSubtitle(subtitleLabel, subButtonLabel);
 
-    // ✅ Update all UI components
-    updateUI(config, functionalityKey, effectiveType);
-    updateLeftSidebar(functionalityKey, effectiveType);
-    updateRightSidebar(functionalityKey, effectiveType);
+  // 🔄 Clear and redraw canvas
+  canvasManager.clearAllShapes();
+  drawShapes(config.canvasConfig, effectiveType);
 
-    // ✅ Final render
-    canvasManager.render();
+  // 🧠 Update content
+  updateUI(config, functionalityKey, effectiveType);
+  updateLeftSidebar(functionalityKey, effectiveType);
+  updateRightSidebar(functionalityKey, effectiveType);
+
+  // 🎨 Final render
+  canvasManager.render();
 }
+
 
 
 /**
