@@ -131,21 +131,24 @@ export function updateLeftSidebar(functionalityKey, subtype = null) {
 
 
 
-export function updateRightSidebar(functionalityKey, type) {
+export function updateRightSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
-    const allContent = config?.rightSidebarContent;
-    let content;
+    if (!config) return;
+
+    const sidebar = document.querySelector(".sidebar.right");
+    const allContent = config.rightSidebarContent;
+
+    let content = "<p>Content not available.</p>";
 
     if (typeof allContent === "string") {
         content = allContent;
-    } else if (typeof allContent === "object" && type && allContent[type]) {
-        content = allContent[type];
-    } else {
-        content = "<p>Content not available.</p>";
+    } else if (typeof allContent === "object") {
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
     }
 
-    document.querySelector(".sidebar.right").innerHTML = content;
+    sidebar.innerHTML = content;
 }
+
 
 export function updateTheoremText(config, subtype = null) {
     console.log("Inside updateTheoremText", config, subtype);
