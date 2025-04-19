@@ -13,7 +13,6 @@
   console.log("Parallel Lines Page Loaded");
 
   attachNavBarListeners(); // Nav bar logic
-  debugger;
   const defaultFunctionality = 'sineTheta';
   switchFunctionality(defaultFunctionality); // Default load
 
