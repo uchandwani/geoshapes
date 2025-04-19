@@ -2,7 +2,6 @@
     import { Triangle } from '../shapes/Triangle.js';
     import { canvasManager } from '../shapes/CanvasManager.js';
     import { functionalityConfig } from './parallelLinesConfig.js';
-    import { switchFunctionality } from './parallelLinesEventHandlers.js';
     import { addSpecificPoints } from './parallelLinesEventHandlers.js';
     import { attachNavBarListeners } from './parallelLinesEventHandlers.js';
     import {Line} from '../shapes/Lines.js';
