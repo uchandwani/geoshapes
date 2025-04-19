@@ -12,7 +12,7 @@
   <!-- ✅ JS Modules for core logic -->
   <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
-  <script type="module" src="./js/parallelLinesPage.js"></script>
+  
 </head>
 
 <body>
@@ -71,24 +71,16 @@
   </div>
 
   <!-- ✅ Dynamically Load Header (after everything else) -->
- <!-- ✅ Dynamically Load Header and Global Header.js -->
+ <!-- ✅ Dynamically load header first, THEN load page logic -->
 <script type="module">
   const html = await fetch('header.html').then(res => res.text());
   document.getElementById('header-placeholder').innerHTML = html;
 
-  // ✅ Load global script so window.setPageSubtitle etc. work
-  const script = document.createElement('script');
-  script.src = './js/header.js';
-  script.type = 'text/javascript';
-  document.head.appendChild(script);
+  // ✅ Import header helpers (attached to window)
+  await import('./js/header.js');
 
-  // ✅ Wait for header to be set and update title
-  script.onload = () => {
-    if (typeof updatePageTitle === 'function') {
-      updatePageTitle();
-    } else {
-      console.warn("⚠️ updatePageTitle not available.");
-    }
-  };
+  // ✅ Now load main logic (after header is ready)
+  await import('./js/parallelLinesPage.js');
 </script>
+
 
