@@ -150,6 +150,7 @@ export function updateRightSidebar(functionalityKey, subtype = null) {
 }
 
 
+
 export function updateTheoremText(config, subtype = null) {
     console.log("Inside updateTheoremText", config, subtype);
 
