@@ -26,7 +26,7 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     // ✅ Fallback to defaultButtonType if no subtype is passed
     const effectiveType = buttonType || config.defaultButtonType || null;
     console.log("🎯 Using subtype:", effectiveType);
-
+    debugger;
      // ✅ Find label to display as subtitle
     const label = config.titleLabel || "";
     setPageSubtitle(label);
