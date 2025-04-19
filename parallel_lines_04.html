@@ -76,11 +76,14 @@
   const html = await fetch('header.html').then(res => res.text());
   document.getElementById('header-placeholder').innerHTML = html;
 
-  // ✅ Import header helpers (attached to window)
-  await import('./js/header.js');
+  const headerModule = await import('./js/header.js');
+await import('./js/parallelLinesPage.js');
 
-  // ✅ Now load main logic (after header is ready)
-  await import('./js/parallelLinesPage.js');
+// ✅ Now call attachNavBarListeners after SVG icons exist
+if (headerModule.attachNavBarListeners) {
+  headerModule.attachNavBarListeners();
+}
+
 </script>
 
 
