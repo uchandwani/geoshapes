@@ -144,39 +144,31 @@ export function updateRightSidebar(functionalityKey, type) {
     document.querySelector(".sidebar.right").innerHTML = content;
 }
 
-export function updateTheoremText(functionalityKey, buttonType = null) {
+export function updateTheoremText(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
 
-    let text = "<p>No definition available.</p>";
-
     if (!config) {
-        console.error("❌ Invalid functionalityKey in updateTheoremText:", functionalityKey);
-    } else if (typeof config.theoremDefinition === "string") {
-        // Case 1: Only a single definition exists
-        text = config.theoremDefinition;
-    } else if (
-        typeof config.theoremDefinitions === "object" &&
-        buttonType &&
-        config.theoremDefinitions[buttonType]
-    ) {
-        // Case 2: Subtype-specific definitions
-        text = config.theoremDefinitions[buttonType];
-    } else if (
-        typeof config.theoremDefinitions === "object" &&
-        Object.keys(config.theoremDefinitions).length === 1
-    ) {
-        // Case 3: Single entry object without subtype match (fallback to only key)
-        const [onlyKey] = Object.keys(config.theoremDefinitions);
-        text = config.theoremDefinitions[onlyKey];
+        console.error("No config found for:", functionalityKey);
+        document.getElementById("theorem-text").textContent = "No definition available.";
+        return;
     }
 
-    const theoremTextElement = document.getElementById("theorem-text");
-    if (theoremTextElement) {
-        theoremTextElement.innerHTML = text;
+    const definitions = config.theoremDefinitions;
+    const defaultDefinition = config.theoremDefinition;
+
+    let definitionText = "";
+
+    if (definitions && typeof definitions === "object" && subtype && definitions[subtype]) {
+        definitionText = definitions[subtype];
+    } else if (defaultDefinition) {
+        definitionText = defaultDefinition;
     } else {
-        console.warn("⚠️ #theorem-text element not found in DOM.");
+        definitionText = "No definition available.";
     }
+
+    document.getElementById("theorem-text").textContent = definitionText;
 }
+
 
 
 export function activateButton(containerSelector, button) {
