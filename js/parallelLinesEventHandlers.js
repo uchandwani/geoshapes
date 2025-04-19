@@ -21,6 +21,7 @@ import { Point } from '../shapes/Points.js';
  */
 export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+  updatePageTitle();  // ✅ Ensure title is shown even after dynamic load
 
   const config = functionalityConfig[functionalityKey];
   if (!config) {
