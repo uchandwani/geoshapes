@@ -1,4 +1,4 @@
-// ✅ js/header.js
+// js/header.js
 
 const pageTitles = {
   "index.html": "Home",
@@ -8,7 +8,6 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-// ✅ Make globally available for any module/script
 window.updatePageTitle = function () {
   const page = location.pathname.split("/").pop();
   const title = pageTitles[page] || "Math App";
@@ -18,16 +17,20 @@ window.updatePageTitle = function () {
   const subBtnEl = document.getElementById("active-sub-button");
 
   if (titleEl) titleEl.textContent = title;
-  if (subtitleEl) subtitleEl.textContent = "";
-  if (subBtnEl) subBtnEl.textContent = "";
+  if (subtitleEl) subtitleEl.textContent = ""; // clear subtitle
+  if (subBtnEl) subBtnEl.textContent = "";     // clear sub-button label
 };
 
 window.setPageSubtitle = function (label) {
-  const el = document.getElementById("page-subtitle");
-  if (el) el.textContent = label || "";
+  const subtitleEl = document.getElementById("page-subtitle");
+  if (subtitleEl) {
+    subtitleEl.textContent = label || "";
+  }
 };
 
 window.setActiveSubButtonLabel = function (label) {
-  const el = document.getElementById("active-sub-button");
-  if (el) el.textContent = label || "";
+  const btnLabelEl = document.getElementById("active-sub-button");
+  if (btnLabelEl) {
+    btnLabelEl.textContent = label || "";
+  }
 };
