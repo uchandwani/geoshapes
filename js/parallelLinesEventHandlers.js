@@ -89,7 +89,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
  */
 function updateUI(config, functionalityKey, buttonType = null) {
     const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
-    updateTheoremText(theoremText);
+    updateTheoremText(theoremText, buttonType);
 
     const dynamicButtons = document.getElementById("dynamic-buttons");
     if (Array.isArray(config.buttonSet)) {
@@ -129,14 +129,55 @@ export function updateLeftSidebar(functionalityKey, type) {
 
 
 export function updateRightSidebar(functionalityKey, type) {
-    debugger;
-    const content = functionalityConfig[functionalityKey]?.rightSidebarContent?.[type] || "<p>Content not available.</p>";
+    const config = functionalityConfig[functionalityKey];
+    const allContent = config?.rightSidebarContent;
+    let content;
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object" && type && allContent[type]) {
+        content = allContent[type];
+    } else {
+        content = "<p>Content not available.</p>";
+    }
+
     document.querySelector(".sidebar.right").innerHTML = content;
 }
 
-export function updateTheoremText(text) {
-    document.getElementById("theorem-text").textContent = text || "No definition available.";
+export function updateTheoremText(functionalityKey, buttonType = null) {
+    const config = functionalityConfig[functionalityKey];
+
+    let text = "<p>No definition available.</p>";
+
+    if (!config) {
+        console.error("❌ Invalid functionalityKey in updateTheoremText:", functionalityKey);
+    } else if (typeof config.theoremDefinition === "string") {
+        // Case 1: Only a single definition exists
+        text = config.theoremDefinition;
+    } else if (
+        typeof config.theoremDefinitions === "object" &&
+        buttonType &&
+        config.theoremDefinitions[buttonType]
+    ) {
+        // Case 2: Subtype-specific definitions
+        text = config.theoremDefinitions[buttonType];
+    } else if (
+        typeof config.theoremDefinitions === "object" &&
+        Object.keys(config.theoremDefinitions).length === 1
+    ) {
+        // Case 3: Single entry object without subtype match (fallback to only key)
+        const [onlyKey] = Object.keys(config.theoremDefinitions);
+        text = config.theoremDefinitions[onlyKey];
+    }
+
+    const theoremTextElement = document.getElementById("theorem-text");
+    if (theoremTextElement) {
+        theoremTextElement.innerHTML = text;
+    } else {
+        console.warn("⚠️ #theorem-text element not found in DOM.");
+    }
 }
+
 
 export function activateButton(containerSelector, button) {
     const container = document.querySelector(containerSelector);
