@@ -148,19 +148,35 @@ export function updateRightSidebar(functionalityKey, type) {
 
 export function updateTheoremText(config, subtype = null) {
     console.log("Inside updateTheoremText", config, subtype);
-    
-    let definition = config.theoremDefinition;
 
-    if (typeof definition === 'object' && subtype && definition[subtype]) {
-        definition = definition[subtype];
+    let definitionText = "";
+
+    // ✅ Try subtype-specific definition first
+    if (config.theoremDefinitions && typeof config.theoremDefinitions === 'object') {
+        if (subtype && config.theoremDefinitions[subtype]) {
+            definitionText = config.theoremDefinitions[subtype];
+        } else {
+            // ✅ Use any available definition as fallback
+            const values = Object.values(config.theoremDefinitions);
+            if (values.length > 0) {
+                definitionText = values[0];  // take the first available
+            }
+        }
     }
 
-    if (typeof definition !== 'string') {
-        definition = "Definition not available.";
+    // ✅ Fallback to single-string definition (optional)
+    if (!definitionText && typeof config.theoremDefinition === 'string') {
+        definitionText = config.theoremDefinition;
     }
 
-    document.getElementById("theorem-text").innerHTML = definition;
+    // ✅ Final fallback
+    if (!definitionText) {
+        definitionText = "Definition not available.";
+    }
+
+    document.getElementById("theorem-text").innerHTML = definitionText;
 }
+
 
 
 
