@@ -23,12 +23,16 @@ window.updatePageTitle = function () {
   if (subBtnEl) subBtnEl.textContent = "";     // clear sub-button label
 };
 
-window.setPageSubtitle = function (subtitleLabel = "") {
+window.setPageSubtitle = function (label) {
   const subtitleEl = document.getElementById("page-subtitle");
-  if (subtitleEl) subtitleEl.textContent = subtitleLabel ? `→ ${subtitleLabel}` : "";
+  if (subtitleEl) {
+    subtitleEl.textContent = label || "";
+  }
 };
 
-window.setActiveSubButtonLabel = function (btnLabel = "") {
-  const subBtnEl = document.getElementById("active-sub-button");
-  if (subBtnEl) subBtnEl.textContent = btnLabel ? `→ ${btnLabel}` : "";
+window.setActiveSubButtonLabel = function (label) {
+  const btnLabelEl = document.getElementById("active-sub-button");
+  if (btnLabelEl) {
+    btnLabelEl.textContent = label || "";
+  }
 };
