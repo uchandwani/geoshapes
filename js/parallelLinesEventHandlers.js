@@ -23,8 +23,8 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     }
 
     canvasManager.clearAllShapes();
-    drawShapes(config.canvasConfig, buttonType);
     debugger;
+    drawShapes(config.canvasConfig, buttonType);
     updateUI(config,functionalityKey, buttonType);
     updateLeftSidebar(functionalityKey, buttonType);
     updateRightSidebar(functionalityKey, buttonType);
@@ -89,8 +89,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
  */
 function updateUI(config, functionalityKey, buttonType = null) {
     const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
- //   updateTheoremText(config, theoremText, buttonType);
-    debugger;
+
     updateTheoremText(config, buttonType);
 
     const dynamicButtons = document.getElementById("dynamic-buttons");
