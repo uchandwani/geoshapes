@@ -91,7 +91,7 @@ function updateUI(config, functionalityKey, buttonType = null) {
     const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
  //   updateTheoremText(config, theoremText, buttonType);
     debugger;
-    updateTheoremText(config[functionalityKey], buttonType);
+    updateTheoremText(config, buttonType);
 
     const dynamicButtons = document.getElementById("dynamic-buttons");
     if (Array.isArray(config.buttonSet)) {
