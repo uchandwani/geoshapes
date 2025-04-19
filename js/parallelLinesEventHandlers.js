@@ -9,7 +9,7 @@ import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
-
+import { setPageSubtitle } from './header.js';
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
@@ -27,6 +27,7 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     const effectiveType = buttonType || config.defaultButtonType || null;
     console.log("🎯 Using subtype:", effectiveType);
 
+     setPageSubtitle(label);  // ✅ Update subtitle next to page title
     // ✅ Clear canvas and redraw
     canvasManager.clearAllShapes();
     drawShapes(config.canvasConfig, effectiveType);
