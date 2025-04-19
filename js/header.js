@@ -34,3 +34,25 @@ window.setActiveSubButtonLabel = function (label) {
     btnLabelEl.textContent = label || "";
   }
 };
+export function attachNavBarListeners() {
+  const navMap = {
+    sineTheta: "sin",
+    cosineTheta: "cos",
+    trigonoIdentities: "tan",
+    trigonoRatios: "tan"
+  };
+
+  Object.entries(navMap).forEach(([id, subtype]) => {
+    const button = document.getElementById(`${id}-button`);
+    if (button) {
+      button.addEventListener("click", () => {
+        const { switchFunctionality } = window; // Or import if needed
+        if (typeof switchFunctionality === "function") {
+          switchFunctionality(id, subtype);
+        } else {
+          console.warn("❌ switchFunctionality not available for", id);
+        }
+      });
+    }
+  });
+}
