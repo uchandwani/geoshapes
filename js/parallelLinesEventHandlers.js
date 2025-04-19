@@ -216,12 +216,11 @@ export function attachNavBarListeners() {
 
     Object.entries(navMap).forEach(([id, subtype]) => {
         const button = document.getElementById(`${id}-button`);
-        if (button && !button.dataset.listenerAttached) {
+        if (button) {
             button.addEventListener("click", () => {
                 console.log("🔘 Header/Nav button clicked:", id, subtype);
                 switchFunctionality(id, subtype);
-            });
-            button.dataset.listenerAttached = "true"; // ✅ Prevent rebinding
+            }, { once: true }); // ✅ Fires only once, prevents double trigger
         }
     });
 }
