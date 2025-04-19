@@ -14,6 +14,7 @@ import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
+import { updatePageTitle, setPageSubtitle, setActiveSubButtonLabel } from './header.js';
 
 
 /**
@@ -22,7 +23,7 @@ import { Point } from '../shapes/Points.js';
 export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
   debugger;
-  updatePageTitle();  // ✅ Ensure title is shown even after dynamic load
+ 
 
   const config = functionalityConfig[functionalityKey];
   if (!config) {
