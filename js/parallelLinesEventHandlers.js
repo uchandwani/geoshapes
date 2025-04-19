@@ -28,7 +28,9 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     console.log("🎯 Using subtype:", effectiveType);
     debugger;
      // ✅ Find label to display as subtitle
-    const label = config.titleLabel || "";
+    // ✅ Get label directly from SVG icon's title attribute
+    const svgIcon = document.getElementById(`${functionalityKey}-button`);
+    const label = svgIcon?.getAttribute("title") || "";
     setPageSubtitle(label);
 
 
