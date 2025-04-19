@@ -25,7 +25,7 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     canvasManager.clearAllShapes();
     drawShapes(config.canvasConfig, buttonType);
     debugger;
-    updateUI(functionalityKey, buttonType);
+    updateUI(config,functionalityKey, buttonType);
     updateLeftSidebar(functionalityKey, buttonType);
     updateRightSidebar(functionalityKey, buttonType);
 
