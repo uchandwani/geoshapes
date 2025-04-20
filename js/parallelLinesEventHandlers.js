@@ -141,45 +141,45 @@ function updateUI(config, functionalityKey, buttonType = null) {
   updateTheoremText(config, buttonType);
 
   const dynamicButtons = document.getElementById("dynamic-buttons");
-  if (Array.isArray(config.buttonSet)) {
-    dynamicButtons.innerHTML = "";
+if (Array.isArray(config.buttonSet)) {
+  dynamicButtons.innerHTML = "";
 
-    config.buttonSet.forEach(({ label, type, svg }) => {
-      // 🔹 Wrapper div with tooltip
-      const wrapper = document.createElement("div");
-      wrapper.className = "subbutton-wrapper";
-      wrapper.title = ""; // Avoid native tooltip
+  config.buttonSet.forEach(({ label, type, svg }) => {
+    // ✅ Use required tooltip container class
+    const wrapper = document.createElement("div");
+    wrapper.className = "tooltip-container";  // 👈 KEY FIX
 
-      // 🔹 Inject SVG or fallback to label
-      if (svg) {
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = svg.trim();
-        const svgEl = tempDiv.firstChild;
-        svgEl.classList.add("sub-button-svg");
-        wrapper.appendChild(svgEl);
-      } else {
-        const fallbackBtn = document.createElement("button");
-        fallbackBtn.classList.add("triangle-button");
-        fallbackBtn.textContent = label;
-        wrapper.appendChild(fallbackBtn);
-      }
+    // 🔹 Inject SVG or fallback to label
+    if (svg) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = svg.trim();
+      const svgEl = tempDiv.firstChild;
+      svgEl.classList.add("sub-button-svg");
+      wrapper.appendChild(svgEl);
+    } else {
+      const fallbackBtn = document.createElement("button");
+      fallbackBtn.classList.add("triangle-button");
+      fallbackBtn.textContent = label;
+      wrapper.appendChild(fallbackBtn);
+    }
 
-      // 🔹 Tooltip span
-      const tooltip = document.createElement("span");
-      tooltip.className = "tooltip";
-      tooltip.textContent = label;
-      wrapper.appendChild(tooltip);
+    // 🔹 Tooltip span (now styled correctly)
+    const tooltip = document.createElement("span");
+    tooltip.className = "tooltip-text";
+    tooltip.textContent = label;
+    wrapper.appendChild(tooltip);
 
-      // 🔹 Click handler
-      wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
+    // 🔹 Click handler
+    wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
 
-      dynamicButtons.appendChild(wrapper);
-    });
+    dynamicButtons.appendChild(wrapper);
+  });
 
-    dynamicButtons.style.display = "block";
-  } else {
-    dynamicButtons.style.display = "none";
-  }
+  dynamicButtons.style.display = "block";
+} else {
+  dynamicButtons.style.display = "none";
+}
+
 }
 
 
