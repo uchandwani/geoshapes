@@ -15,6 +15,32 @@ import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 import { updatePageTitle, setPageSubtitle, setActiveSubButtonLabel } from './header.js';
+import { updateHeaderLabels } from './header.js';
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
+
+const mainTitle = pageTitles[page] || "Math App";
+const icon = document.getElementById(`${functionalityKey}-button`);
+const subtitleLabel = icon?.getAttribute("title") || "";
+
+let activeSubBtnLabel = "";
+if (config.buttonSet && effectiveType) {
+  const match = config.buttonSet.find(btn => btn.type === effectiveType);
+  activeSubBtnLabel = match?.label || "";
+}
+
+updateHeaderLabels({
+  title: mainTitle,
+  subtitle: subtitleLabel,
+  subButton: activeSubBtnLabel
+});
 
 
 /**
