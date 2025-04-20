@@ -48,8 +48,6 @@ updateHeaderLabels({
  */
 export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
-  debugger;
- 
 
   const config = functionalityConfig[functionalityKey];
   if (!config) {
@@ -61,6 +59,16 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🎯 Using subtype:", effectiveType);
 
   // 🔹 Title and subtitle updates
+  const page = location.pathname.split("/").pop();
+  const pageTitles = {
+    "index.html": "Home",
+    "parallel_lines_04.html": "Parallel Lines",
+    "triangle_theorem_07.html": "Triangle Theorems",
+    "trig_properties_09.html": "Trigonometric Properties",
+    "circle_theorems_02.html": "Circle Theorems"
+  };
+  const mainTitle = pageTitles[page] || "Math App";
+
   const icon = document.getElementById(`${functionalityKey}-button`);
   const subtitleLabel = icon?.getAttribute("title") || "";
 
@@ -70,8 +78,12 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     activeSubBtnLabel = match?.label || "";
   }
 
-  setPageSubtitle(subtitleLabel);
-  setActiveSubButtonLabel(activeSubBtnLabel);
+  // ✅ Compose header with dividers only if parts are present
+  updateHeaderLabels({
+    title: mainTitle,
+    subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+    subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+  });
 
   // 🧹 Canvas and UI
   canvasManager.clearAllShapes();
@@ -81,6 +93,7 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
   updateRightSidebar(functionalityKey, effectiveType);
   canvasManager.render();
 }
+
 
 
 /**
