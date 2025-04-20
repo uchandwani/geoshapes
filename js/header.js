@@ -25,15 +25,16 @@ export function updatePageTitle() {
 }
 
 
-export function updateHeaderLabels({ title = "", subtitle = "", subButton = "" }) {
+export function updateHeaderLabels({ title, subtitle, subButton }) {
   const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
   const subBtnEl = document.getElementById("active-sub-button");
 
-  if (titleEl) titleEl.textContent = title;
-  if (subtitleEl) subtitleEl.textContent = subtitle;
-  if (subBtnEl) subBtnEl.textContent = subButton;
+  if (titleEl) titleEl.textContent = title || "";
+  if (subtitleEl) subtitleEl.textContent = subtitle || "";
+  if (subBtnEl) subBtnEl.textContent = subButton || "";
 }
+
 
 
 
