@@ -51,34 +51,38 @@
 <div class="sub-header-icons" style="display: flex; gap: 12px;">
   
   <!-- Vertically Opposite Angles -->
-  <div class="tooltip-container">
+ <div class="tooltip-container">
   <svg class="sub-header-icon" id="sineTheta-button" title="Vertically Opposite Angles"
        viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4"
        stroke-linecap="round" stroke-linejoin="round">
-    <!-- Parallel lines -->
-    <line x1="10" y1="30" x2="90" y2="30" />
-    <line x1="10" y1="70" x2="90" y2="70" />
-    <!-- Transversal -->
-    <line x1="30" y1="10" x2="70" y2="90" />
-    <!-- Angle highlights (for visual balance) -->
-    <circle cx="45" cy="45" r="3" fill="#1E88E5" />
-    <circle cx="55" cy="55" r="3" fill="#1E88E5" />
+    <!-- Intersecting lines -->
+    <line x1="10" y1="90" x2="90" y2="10" />
+    <line x1="10" y1="10" x2="90" y2="90" />
+
+    <!-- Opposite angle arcs -->
+    <path d="M50 50 A15 15 0 0 1 65 35" stroke="#1E88E5" fill="none" stroke-width="2"/>
+    <path d="M50 50 A15 15 0 0 1 35 65" stroke="#1E88E5" fill="none" stroke-width="2"/>
   </svg>
   <span class="tooltip-text">Vertically Opposite Angles</span>
 </div>
 
   <!-- Parallel Line Properties -->
   <div class="tooltip-container">
-  <svg class="sub-header-icon" id="cosineTheta-button" title="Parallel Line Properties"
+  <svg class="sub-header-icon" id="cosineTheta-button" title="Alternate Angles"
        viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4"
        stroke-linecap="round" stroke-linejoin="round">
     <!-- Parallel lines -->
-    <line x1="15" y1="25" x2="85" y2="25" />
-    <line x1="15" y1="75" x2="85" y2="75" />
-    <!-- Transversal cutting through -->
-    <line x1="25" y1="10" x2="75" y2="90" />
+    <line x1="10" y1="30" x2="90" y2="30" />
+    <line x1="10" y1="70" x2="90" y2="70" />
+    
+    <!-- Transversal -->
+    <line x1="30" y1="10" x2="70" y2="90" />
+
+    <!-- Alternate angle arcs -->
+    <path d="M30 30 A10 10 0 0 1 40 40" stroke="#1E88E5" fill="none" stroke-width="2"/>
+    <path d="M70 70 A10 10 0 0 1 60 60" stroke="#1E88E5" fill="none" stroke-width="2"/>
   </svg>
-  <span class="tooltip-text">Parallel Line Properties</span>
+   <span class="tooltip-text">Parallel Line Properties</span>
 </div>
 
   <!-- Triangle Exterior Angle -->
