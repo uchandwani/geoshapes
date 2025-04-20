@@ -14,7 +14,7 @@ import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
-import { updatePageTitle, setPageSubtitle, setActiveSubButtonLabel } from './header.js';
+import { updatePageTitle } from './header.js';
 import { updateHeaderLabels } from './header.js';
 
 const page = location.pathname.split("/").pop();
