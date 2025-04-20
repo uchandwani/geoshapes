@@ -26,22 +26,6 @@ const pageTitles = {
   "circle_theorems_02.html": "Circle Theorems"
 };
 
-const mainTitle = pageTitles[page] || "Math App";
-const icon = document.getElementById(`${functionalityKey}-button`);
-const subtitleLabel = icon?.getAttribute("title") || "";
-
-let activeSubBtnLabel = "";
-if (config.buttonSet && effectiveType) {
-  const match = config.buttonSet.find(btn => btn.type === effectiveType);
-  activeSubBtnLabel = match?.label || "";
-}
-
-updateHeaderLabels({
-  title: mainTitle,
-  subtitle: subtitleLabel,
-  subButton: activeSubBtnLabel
-});
-
 
 /**
  * 🔄 Switches functionality, redraws shapes, and updates UI.
