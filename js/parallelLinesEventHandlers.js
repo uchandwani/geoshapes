@@ -142,19 +142,20 @@ function updateUI(config, functionalityKey, buttonType = null) {
 
     const dynamicButtons = document.getElementById("dynamic-buttons");
     if (Array.isArray(config.buttonSet)) {
-        dynamicButtons.innerHTML = "";
-        config.buttonSet.forEach(({ label, type }) => {
+          dynamicButtons.innerHTML = "";
+          config.buttonSet.forEach(({ label, type, svg }) => {
             const btn = document.createElement("button");
             btn.classList.add("triangle-button");
-            btn.textContent = label;
             btn.dataset.type = type;
+            btn.innerHTML = svg || label;
             btn.addEventListener("click", () => switchFunctionality(functionalityKey, type));
             dynamicButtons.appendChild(btn);
-        });
-        dynamicButtons.style.display = "block";
-    } else {
-        dynamicButtons.style.display = "none";
-    }
+          });
+          dynamicButtons.style.display = "block";
+        } else {
+          dynamicButtons.style.display = "none";
+        }
+
 }
 
 export function updateLeftSidebar(functionalityKey, subtype = null) {
