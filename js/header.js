@@ -25,31 +25,21 @@ export function updatePageTitle() {
 }
 
 
-export function setPageSubtitle(label) {
-  const subtitleEl = document.getElementById("page-subtitle");
+export function updateHeaderLabels({ title, subtitle = "", subButton = "" }) {
   const titleEl = document.getElementById("page-title");
-
-  // Clear previous content
-  subtitleEl.textContent = "";
-
-  if (label && subtitleEl && titleEl) {
-    insertDivider(titleEl, subtitleEl);
-    subtitleEl.textContent = label;
-  }
-}
-
-export function setActiveSubButtonLabel(label) {
-  const subBtnEl = document.getElementById("active-sub-button");
   const subtitleEl = document.getElementById("page-subtitle");
+  const subBtnEl = document.getElementById("active-sub-button");
 
-  // Clear previous content
-  subBtnEl.textContent = "";
+  if (titleEl) titleEl.textContent = title || "";
 
-  if (label && subBtnEl && subtitleEl) {
-    insertDivider(subtitleEl, subBtnEl);
-    subBtnEl.textContent = label;
-  }
+  // Build subtitle with smart dividers
+  let fullSubtitle = "";
+  if (subtitle) fullSubtitle += `| ${subtitle}`;
+  if (subButton) fullSubtitle += ` | ${subButton}`;
+
+  if (subtitleEl) subtitleEl.textContent = fullSubtitle;
 }
+
 
 // 🔹 Dynamically insert divider between two elements
 function insertDivider(leftEl, rightEl) {
