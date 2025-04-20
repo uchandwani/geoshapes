@@ -40,7 +40,7 @@ export function updateHeaderLabels({ title = "", subtitle = "", subButton = "" }
 // 🔹 Dynamically insert divider between two elements
 function insertDivider(leftEl, rightEl) {
   const divider = document.createElement("span");
-  divider.textContent = "|";
+  divider.textContent = "";
   divider.className = "dynamic-divider";
   divider.style.margin = "0 10px";
   divider.style.color = "white";
