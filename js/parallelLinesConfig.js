@@ -282,8 +282,8 @@ export  const functionalityConfig = {
                
             ]
         },
-        buttonSet:  buttonSet: [
-    {
+        buttonSet: [
+                {
       label: "Corresponding Angles",
       type: "sin",
       svg: `
@@ -297,7 +297,7 @@ export  const functionalityConfig = {
         </svg>
       `
     },
-    {
+      {
       label: "Alternate Angles",
       type: "cos",
       svg: `
@@ -311,7 +311,7 @@ export  const functionalityConfig = {
         </svg>
       `
     },
-    {
+      {
       label: "Interior Angles",
       type: "tan",
       svg: `
@@ -324,8 +324,9 @@ export  const functionalityConfig = {
           <path d="M30 70 A10 10 0 0 1 40 60" stroke-width="2"/>
         </svg>
       `
-    }
-],
+    },
+                
+            ],
         
 
         leftSidebarContent: {
