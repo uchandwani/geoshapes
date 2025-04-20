@@ -708,3 +708,9 @@ canvas {
   visibility: visible;
   opacity: 1;
 }
+#dynamic-buttons,
+.sub-header-icons {
+  position: relative;
+  overflow: visible !important;
+  z-index: 1;
+}
