@@ -136,46 +136,52 @@ function drawTriangles(canvasConfig, buttonType = null) {
  * 🧠 Updates UI elements like theorem text and sub-buttons.
  */
 function updateUI(config, functionalityKey, buttonType = null) {
-    const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
+  const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
 
-    updateTheoremText(config, buttonType);
+  updateTheoremText(config, buttonType);
 
-   const dynamicButtons = document.getElementById("dynamic-buttons");
-dynamicButtons.innerHTML = "";
+  const dynamicButtons = document.getElementById("dynamic-buttons");
+  if (Array.isArray(config.buttonSet)) {
+    dynamicButtons.innerHTML = "";
 
-if (Array.isArray(config.buttonSet)) {
-  config.buttonSet.forEach(({ label, type, svg }) => {
-    // Create container div with tooltip
-    const wrapper = document.createElement("div");
-    wrapper.className = "tooltip-container";
+    config.buttonSet.forEach(({ label, type, svg }) => {
+      // 🔹 Wrapper div with tooltip
+      const wrapper = document.createElement("div");
+      wrapper.className = "subbutton-wrapper";
+      wrapper.title = ""; // Avoid native tooltip
 
-    // Create SVG element (as string into HTML element)
-    const svgWrapper = document.createElement("div");
-    svgWrapper.innerHTML = svg.trim();
-    const svgEl = svgWrapper.firstChild;
+      // 🔹 Inject SVG or fallback to label
+      if (svg) {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = svg.trim();
+        const svgEl = tempDiv.firstChild;
+        svgEl.classList.add("sub-button-svg");
+        wrapper.appendChild(svgEl);
+      } else {
+        const fallbackBtn = document.createElement("button");
+        fallbackBtn.classList.add("triangle-button");
+        fallbackBtn.textContent = label;
+        wrapper.appendChild(fallbackBtn);
+      }
 
-    svgEl.classList.add("sub-button-svg");
-    svgEl.setAttribute("data-type", type);
-    svgEl.addEventListener("click", () => switchFunctionality(functionalityKey, type));
+      // 🔹 Tooltip span
+      const tooltip = document.createElement("span");
+      tooltip.className = "tooltip";
+      tooltip.textContent = label;
+      wrapper.appendChild(tooltip);
 
-    // Tooltip text
-    const tooltip = document.createElement("span");
-    tooltip.className = "tooltip-text";
-    tooltip.textContent = label;
+      // 🔹 Click handler
+      wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
 
-    // Compose and add to DOM
-    wrapper.appendChild(svgEl);
-    wrapper.appendChild(tooltip);
-    dynamicButtons.appendChild(wrapper);
-  });
+      dynamicButtons.appendChild(wrapper);
+    });
 
-  dynamicButtons.style.display = "flex";
-} else {
-  dynamicButtons.style.display = "none";
+    dynamicButtons.style.display = "block";
+  } else {
+    dynamicButtons.style.display = "none";
+  }
 }
 
-
-}
 
 export function updateLeftSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
