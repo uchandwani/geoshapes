@@ -282,12 +282,50 @@ export  const functionalityConfig = {
                
             ]
         },
-        buttonSet: [
-                { label: "Corresponding Angles", type: "sin" },
-                { label: "Alternate Angles", type: "cos" },
-                { label: "Interior Angles", type: "tan" },
-                
-            ],
+        buttonSet:  buttonSet: [
+    {
+      label: "Corresponding Angles",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs for corresponding angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M30 70 A10 10 0 0 1 40 60" stroke-width="2"/>
+        </svg>
+      `
+    },
+    {
+      label: "Alternate Angles",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs for alternate angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
+        </svg>
+      `
+    },
+    {
+      label: "Interior Angles",
+      type: "tan",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs on same side to represent interior angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M30 70 A10 10 0 0 1 40 60" stroke-width="2"/>
+        </svg>
+      `
+    }
+],
         
 
         leftSidebarContent: {
