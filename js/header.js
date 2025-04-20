@@ -25,20 +25,16 @@ export function updatePageTitle() {
 }
 
 
-export function updateHeaderLabels({ title, subtitle = "", subButton = "" }) {
+export function updateHeaderLabels({ title = "", subtitle = "", subButton = "" }) {
   const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
   const subBtnEl = document.getElementById("active-sub-button");
 
-  if (titleEl) titleEl.textContent = title || "";
-
-  // Build subtitle with smart dividers
-  let fullSubtitle = "";
-  if (subtitle) fullSubtitle += `| ${subtitle}`;
-  if (subButton) fullSubtitle += ` | ${subButton}`;
-
-  if (subtitleEl) subtitleEl.textContent = fullSubtitle;
+  if (titleEl) titleEl.textContent = title;
+  if (subtitleEl) subtitleEl.textContent = subtitle;
+  if (subBtnEl) subBtnEl.textContent = subButton;
 }
+
 
 
 // 🔹 Dynamically insert divider between two elements
