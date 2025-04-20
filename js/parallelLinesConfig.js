@@ -926,9 +926,44 @@ export  const functionalityConfig = {
         
         },
          buttonSet: [
-                { label: "Acute Angle", type: "sin" },
-                { label: "Right Angle", type: "cos" },
-                { label: "Obtuse Angle", type: "tan" },
+                 {
+    type: "sin",
+    label: "Acute Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Acute Angle">
+        <!-- Short angle -->
+        <line x1="20" y1="80" x2="50" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "cos",
+    label: "Right Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Right Angle">
+        <!-- Right angle shape -->
+        <line x1="20" y1="80" x2="20" y2="30" />
+        <line x1="20" y1="80" x2="70" y2="80" />
+        <line x1="20" y1="30" x2="70" y2="80" />
+        <!-- Right angle indicator -->
+        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "tan",
+    label: "Obtuse Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Obtuse Angle">
+        <!-- Long angle -->
+        <line x1="20" y1="80" x2="60" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
             ],
        
         leftSidebarContent: {
@@ -1269,9 +1304,44 @@ trigonoRatios: {
         
         },
          buttonSet: [
-                { label: "Acute Angle", type: "sin" },
-                { label: "Right Angle", type: "cos" },
-                { label: "Obtuse Angle", type: "tan" },
+                 {
+    type: "sin",
+    label: "Acute Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Acute Angle">
+        <!-- Short angle -->
+        <line x1="20" y1="80" x2="50" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "cos",
+    label: "Right Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Right Angle">
+        <!-- Right angle shape -->
+        <line x1="20" y1="80" x2="20" y2="30" />
+        <line x1="20" y1="80" x2="70" y2="80" />
+        <line x1="20" y1="30" x2="70" y2="80" />
+        <!-- Right angle indicator -->
+        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "tan",
+    label: "Obtuse Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Obtuse Angle">
+        <!-- Long angle -->
+        <line x1="20" y1="80" x2="60" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
             ],
        
         leftSidebarContent: {
