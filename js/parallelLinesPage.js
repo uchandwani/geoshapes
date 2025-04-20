@@ -1,4 +1,4 @@
-    import { updatePageTitle, setPageSubtitle, setActiveSubButtonLabel } from './header.js';
+    import { updatePageTitle, setPageSubtitle} from './header.js';
     import { Triangle } from '../shapes/Triangle.js';
     import { canvasManager } from '../shapes/CanvasManager.js';
     import { functionalityConfig } from './parallelLinesConfig.js';
@@ -9,7 +9,6 @@
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './parallelLinesEventHandlers.js';
     window.setPageSubtitle = setPageSubtitle;
-    window.setActiveSubButtonLabel = setActiveSubButtonLabel;
     window.switchFunctionality = switchFunctionality;
 
         
