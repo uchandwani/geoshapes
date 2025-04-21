@@ -656,11 +656,11 @@ canvas {
   display: inline-block;
   padding: 6px;
   border-radius: 12px;
-  border: 4px solid #4DD0E1; /* Aqua outline */
+  border: 8px solid #4DD0E1; /* Aqua outline */
   background-color:rgba(255, 255, 255, 0.9);
   position: relative;
   backdrop-filter: blur(4px);
-  margin: 0 4px;
+  margin: 0 8px;
   transition: transform 0.2s ease, background-color 0.3s;
   cursor: pointer;
 }
@@ -671,8 +671,8 @@ canvas {
 }
 
 .sub-button-svg {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   stroke: #1E88E5;
   stroke-width: 4;
 }
@@ -720,8 +720,8 @@ canvas {
 
 #dynamic-buttons {
   position: absolute;
-  top: 40px;
-  right: 24px;
+  top: 80px;
+  right: 400px;
   z-index: 10;
   display: flex;
   gap: 10px;
