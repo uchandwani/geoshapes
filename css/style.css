@@ -63,7 +63,7 @@ header h1 {
 .sidebar-container {
   display: flex;
   flex-direction: column;
-  width: 22vw;
+  width: 25vw;
   box-sizing: border-box;
   background-color: #f4f4f9;
   padding: 10px;
@@ -90,7 +90,7 @@ header h1 {
 }
 
 .sidebar.left {
-  width: 22vw;
+  width: 25vw;
   padding: 15px;
   background-color: #f4f4f9;
   border-right: 1px solid #ccc;
@@ -264,7 +264,7 @@ canvas {
 }
 
 .sidebar-container {
-  width: 22vw;               /* 20% of viewport width */
+  width: 25vw;               /* 20% of viewport width */
   max-width: 300px;          /* cap it for ultra-wide screens */
   min-width: 200px;          /* prevent text overflow */
   display: flex;
@@ -281,7 +281,7 @@ canvas {
 @media screen and (max-width: 1366px) {
   .sidebar.left,
   .sidebar.right {
-    width: 22vw;
+    width: 25vw;
   }
 
   .additional-div {
@@ -307,7 +307,7 @@ canvas {
 @media screen and (min-width: 1920px) {
   .sidebar.left,
   .sidebar.right {
-    width: 22vw;
+    width: 25vw;
   }
 
   .canvas-container {
