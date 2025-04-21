@@ -371,3 +371,72 @@ canvas {
 #left-sidebar, #additional-div, .canvas-wrapper, #right-sidebar {
   position: relative;
 }
+
+
+.sidebar.left {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  padding-right: 12px;
+}
+
+.sidebar.left h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #1E88E5;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.sidebar.left p,
+.sidebar.left li {
+  margin-bottom: 8px;
+}
+
+.sidebar.left ul {
+  padding-left: 18px;
+  list-style-type: disc;
+}
+
+#right-sidebar h3 {
+  font-size: 16px;
+  color: #1E88E5;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+#right-sidebar table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+#right-sidebar th,
+#right-sidebar td {
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#right-sidebar input[type="text"] {
+  width: 60px;
+  padding: 4px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+#right-sidebar table {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px;
+}
+#right-sidebar table caption {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+}
