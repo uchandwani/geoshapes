@@ -380,7 +380,7 @@ if (el && !el.dataset.listenerAttached) {
     const input1 = document.getElementById(input1Id);
     const input2 = document.getElementById(input2Id);
     const result = document.getElementById(resultId);
-
+    debugger;
     if (!input1 || !input2 || !result) {
         console.error("❌ Error: One or more elements not found!", { input1, input2, result });
         return;
