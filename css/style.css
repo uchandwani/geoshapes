@@ -283,7 +283,7 @@ canvas {
 @media screen and (max-width: 1366px) {
   .sidebar.left,
   .sidebar.right {
-    width: 22vw;
+    width: 20vw;
   }
 
   .additional-div {
