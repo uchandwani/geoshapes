@@ -191,6 +191,13 @@ canvas {
   position: relative;
 }
 
+#dynamic-buttons .tooltip-container + .tooltip-container {
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+
 #dynamic-buttons {
   position: absolute;
   top: 5%;                  /* distance from top of canvas */
