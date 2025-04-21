@@ -17,8 +17,8 @@ function resizeCanvasToFit() {
     return;
   }
 
-  const containerWidth = container.clientWidth;
-  const containerHeight = container.clientHeight;
+  const containerWidth = container.clientWidth*.9;
+  const containerHeight = container.clientHeight*.9;
 
   // Maintain a square aspect ratio
   const size = Math.min(containerWidth, containerHeight);
