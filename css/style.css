@@ -50,6 +50,27 @@ header h1 {
 /* ===========================
    Sidebars
 =========================== */
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  box-sizing: border-box;
+  background-color: #f4f4f9;
+  padding: 10px;
+}
+
+#theorem-definition {
+  background-color: #eef5ff;
+  border-left: 4px solid #3366cc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3366cc;
+}
+
 .sidebar {
   padding: 15px;
   background-color: #f4f4f9;
