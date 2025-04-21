@@ -265,7 +265,7 @@ canvas {
 
 .sidebar-container {
   width: 25vw;               /* 20% of viewport width */
-  max-width: 300px;          /* cap it for ultra-wide screens */
+  max-width: none;          /* cap it for ultra-wide screens */
   min-width: 200px;          /* prevent text overflow */
   display: flex;
   flex-direction: column;
@@ -336,4 +336,20 @@ canvas {
 =========================== */
 .debug {
   border: 1px dashed red;
+}
+
+.size-label {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 10px;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 4px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+#left-sidebar, #additional-div, .canvas-wrapper, #right-sidebar {
+  position: relative;
 }
