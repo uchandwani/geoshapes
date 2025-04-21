@@ -193,7 +193,7 @@ canvas {
 
   #dynamic-buttons {
   position: absolute;
-  top: 5%;
+  top: 10%;
   left: 75%;
   transform: translateX(-50%);
   z-index: 10;
