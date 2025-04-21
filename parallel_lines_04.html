@@ -13,6 +13,7 @@
   <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"> </script>
   <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./js/debugDivSizes.js"> </script>
 </head>
 
 <body>
@@ -21,9 +22,10 @@
 
   <!-- ✅ Main Layout Container -->
   <div class="container">
-    
+   <div class="size-label"></div> 
     <!-- 🔹 Left Sidebar with Instructions -->
     <div class="sidebar-container">
+     <div class="size-label"></div> 
       <div id="theorem-definition">
         <p id="theorem-text">Definition text...</p>
       </div>
@@ -37,10 +39,12 @@
 
     <!-- 🔹 Canvas Area -->
     <div class="canvas-container">
+      <div class="size-label"></div>
       <!-- Sub-buttons (SVG) -->
       <div id="dynamic-buttons" class="triangle-buttons"></div>
 
       <div class="canvas-wrapper">
+        <div class="size-label"></div>
         <!-- Tool Buttons -->
         <div class="additional-div">
           <button id="draw-line" class="icon-btn" title="Draw Line">
@@ -63,13 +67,14 @@
 
         <!-- Canvas Element -->
         <div class="canvas-scroll-container">
-          <canvas id="canvas" width="800" height="800"></canvas>
+          <canvas id="canvas" ></canvas>
         </div>
       </div>
     </div>
 
     <!-- 🔹 Right Sidebar for Results -->
     <div class="sidebar right" id="right-sidebar">
+      <div class="size-label"></div>
       <h3>Verification - Vertically Opposite Angles</h3>
     </div>
 
