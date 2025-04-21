@@ -5,7 +5,7 @@
  */
 
 function resizeCanvasToFit() {
-  const canvas = document.getElementById("myCanvas");
+  const canvas = document.getElementById("canvas");
   if (!canvas) {
     console.warn("⚠️ Canvas with ID 'myCanvas' not found.");
     return;
