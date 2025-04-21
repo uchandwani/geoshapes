@@ -628,7 +628,7 @@ canvas {
   padding: 6px 8px;
   position: absolute;
   z-index: 999;
-  bottom: 120%;
+  top: 120%;
   left: 50%;
   transform: translateX(-50%);
   transition: opacity 0.3s;
@@ -644,7 +644,7 @@ canvas {
 .tooltip-text::after {
   content: '';
   position: absolute;
-  top: 100%; /* Arrow points downward */
+  bottom: 100%; /* Arrow points downward */
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
@@ -665,10 +665,6 @@ canvas {
   cursor: pointer;
 }
 
-.subbutton-wrapper:hover {
-  background-color: #d0f0f9; /* Lighter on hover */
-  transform: scale(1.05);
-}
 
 .sub-button-svg {
   width: 36px;
@@ -721,10 +717,10 @@ canvas {
 #dynamic-buttons {
   position: absolute;
   top: 80px;
-  right: 400px;
+  right: 350px;
   z-index: 10;
   display: flex;
-  gap: 10px;
+  gap: 20px;
   background-color: rgba(255, 255, 255, 0.75); /* Optional translucent bg */
   padding: 8px 10px;
   border-radius: 16px;
