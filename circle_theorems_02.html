@@ -8,6 +8,9 @@
     
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/responsiveCanvas.js"> </script>
+    <script type="module" src="./shapes.js"></script>
+    <script type="module" src="./shapes/CanvasManager.js"> </script>
     <script type="module" src="./js/circleTheoremPage.js"></script>
     <script type="module">
     import {sumMeasures, compareMeasures} from './js/circleTheoremPage.js';
@@ -28,12 +31,18 @@
     
     <div class="container">
         <!-- Left Sidebar -->
+         <div class="sidebar-container">
+
+         <div id="theorem-definition" class="theorem-definition">
+             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+             </div> 
+                
         <div class="sidebar left" id="left-sidebar">
             <h3>Instructions</h3>
             <p>Select a theorem from the navigation bar above to see its instructions here.</p>
         </div>
             
-
+    </div>
         <!-- Main Canvas -->
         <div class="canvas-container">
             <div class="navigation-buttons">
@@ -46,9 +55,7 @@
                 <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral"> Cyclic Quadrilateral</button>
                         
                 </div>
-            <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-             </div> 
+            
 
              <div id="dynamic-buttons" class="triangle-buttons">
     <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
