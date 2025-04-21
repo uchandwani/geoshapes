@@ -195,10 +195,6 @@ canvas {
   border-left: 1px solid #ccc;
   padding-left: 10px;
   margin-left: 10px;
-}
-
-
-#dynamic-buttons {
   position: absolute;
   top: 5%;                  /* distance from top of canvas */
   left: 80%;                /* ⬅️ shift toward right side of canvas */
@@ -207,7 +203,6 @@ canvas {
   display: flex;
   gap: 14px;
 
-  #dynamic-buttons {
   border: 1px solid rgba(0, 0, 0, 0.1); /* soft subtle edge */
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.75); /* slightly translucent */
@@ -221,7 +216,6 @@ canvas {
   border-color: red;
   backdrop-filter: blur(4px);
 }
-
 
 
 .subbutton-wrapper {
