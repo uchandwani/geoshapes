@@ -9,9 +9,9 @@
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './parallelLinesEventHandlers.js';
     window.switchFunctionality = switchFunctionality;
- debugger;
+
         
-   document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
   console.log("Parallel Lines Page Loaded");
   updatePageTitle(); // sets the title from file name
 
