@@ -193,17 +193,23 @@ canvas {
 
 #dynamic-buttons {
   position: absolute;
-  top: 10%;
-  left: 70%;
+  top: 5%;                  /* distance from top of canvas */
+  left: 75%;                /* ⬅️ shift toward right side of canvas */
   transform: translateX(-50%);
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: 8px 10px;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  gap: 14px;
+
+  /* visual styling */
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 6px 10px;
+  border-radius: 12px;
+  max-width: fit-content;   /* ✅ shrink-wrap background to contents */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-color: red;
   backdrop-filter: blur(4px);
-  display: none;
 }
+
 
 
 .subbutton-wrapper {
