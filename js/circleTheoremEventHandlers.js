@@ -622,69 +622,68 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey, buttonType) {
-    console.log("Function UUI - Updating UI for:", functionalityKey, config);
-    console.log("🔍 updateTheoremText call in updateUI below");
+function updateUI(config, functionalityKey, buttonType = null) {
+  const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
+  updateTheoremText(config, buttonType);
 
+  const dynamicButtons = document.getElementById("dynamic-buttons");
 
-   updateTheoremText(config);
+  if (Array.isArray(config.buttonSet)) {
+    dynamicButtons.innerHTML = "";
 
-    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
-    console.log("🧩 dynamicButtonsContainer:", dynamicButtonsContainer);
+    const buttonsMap = {};
 
-    if (functionalityKey === "sineTheta") {
-        dynamicButtonsContainer.style.display = "none";
-        return;
+    config.buttonSet.forEach(({ label, type, svg }) => {
+      // ✅ Tooltip wrapper
+      const wrapper = document.createElement("div");
+      wrapper.className = "tooltip-container";
+
+      // 🎯 Create SVG element
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = svg.trim();
+      const svgEl = tempDiv.firstChild;
+      svgEl.classList.add("sub-button-svg");
+      svgEl.dataset.type = type;
+
+      // 🔹 Add event listener
+      svgEl.addEventListener("click", () => {
+        // 🧼 Remove previous active
+        document.querySelectorAll(".sub-button-svg").forEach(el => el.classList.remove("active"));
+
+        // ✅ Activate selected
+        svgEl.classList.add("active");
+
+        // 🔁 Switch functionality
+        switchFunctionality(functionalityKey, type);
+      });
+
+      // 🏷️ Tooltip
+      const tooltip = document.createElement("span");
+      tooltip.className = "tooltip-text";
+      tooltip.textContent = label;
+
+      // 📦 Assemble button
+      wrapper.appendChild(svgEl);
+      wrapper.appendChild(tooltip);
+      dynamicButtons.appendChild(wrapper);
+
+      buttonsMap[type] = svgEl;
+    });
+
+    dynamicButtons.style.display = "flex";
+
+    // 🎯 Activate default or passed type
+    const activeType = buttonType || config.defaultButtonType || config.buttonSet[0]?.type;
+    if (buttonsMap[activeType]) {
+      buttonsMap[activeType].classList.add("active");
+      if (!buttonType) buttonsMap[activeType].click();
     }
 
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        console.log("🛠 Rendering buttons for:", functionalityKey);
-        console.log("🔍 buttonSet:", config.buttonSet);
-        console.log("📌 dynamicButtonsContainer found:", !!dynamicButtonsContainer);
-
-        dynamicButtonsContainer.innerHTML = "";
-
-        let buttonsMap = {};
-
-        config.buttonSet.forEach((buttonConfig) => {
-            const btn = document.createElement("button");
-            btn.classList.add("triangle-button");
-            btn.textContent = buttonConfig.label;
-            btn.dataset.type = buttonConfig.type;
-            btn.dataset.functionalityKey = functionalityKey;
-
-            // Store in map for later access
-            buttonsMap[buttonConfig.type] = btn;
-
-            btn.addEventListener("click", () => {
-                console.log(`🔵 Clicked Sub-Button: ${buttonConfig.type}`);
-                document.querySelectorAll(".triangle-button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                switchFunctionality(functionalityKey, buttonConfig.type);
-            });
-
-            dynamicButtonsContainer.appendChild(btn);
-        });
-
-        dynamicButtonsContainer.style.display = "block";
-
-        // ✅ Mark the right sub-button active (don't click it again!)
-        if (buttonType) {
-            if (buttonsMap[buttonType]) {
-                buttonsMap[buttonType].classList.add("active");
-            }
-        } else {
-            const defaultType = config.defaultButtonType || config.buttonSet[0]?.type;
-            if (buttonsMap[defaultType]) {
-                buttonsMap[defaultType].classList.add("active");
-                buttonsMap[defaultType].click(); // Trigger once at top level
-            }
-        }
-
-    } else {
-        dynamicButtonsContainer.style.display = "none";
-    }
+  } else {
+    dynamicButtons.style.display = "none";
+  }
 }
+
 
 
 
