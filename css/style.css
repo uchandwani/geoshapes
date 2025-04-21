@@ -121,13 +121,25 @@ canvas {
   background-color: #f1f1f1;
   border-right: 1px solid #ccc;
 }
-
 .icon-btn {
+  width: 36px;                  /* ✅ Fixed button width */
+  height: 36px;                 /* ✅ Fixed button height */
   background: transparent;
   border: none;
   margin: 10px 0;
+  padding: 6px;
   cursor: pointer;
+  display: flex;                /* ✅ Center icon inside */
+  justify-content: center;
+  align-items: center;
   transition: transform 0.2s, background-color 0.3s;
+}
+
+.icon-btn img {
+  width: 32px;                  /* ✅ Uniform icon size */
+  height: 32px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .icon-btn:hover {
@@ -135,6 +147,7 @@ canvas {
   background-color: #eaeaea;
   border-radius: 5px;
 }
+
 
 /* ===========================
    Dynamic SVG Sub-Buttons
