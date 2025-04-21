@@ -264,7 +264,7 @@ canvas {
 }
 
 .sidebar-container {
-  width: 20vw;               /* 20% of viewport width */
+  width: 22vw;               /* 20% of viewport width */
   max-width: 300px;          /* cap it for ultra-wide screens */
   min-width: 200px;          /* prevent text overflow */
   display: flex;
@@ -281,7 +281,7 @@ canvas {
 @media screen and (max-width: 1366px) {
   .sidebar.left,
   .sidebar.right {
-    width: 20vw;
+    width: 22vw;
   }
 
   .additional-div {
@@ -307,7 +307,7 @@ canvas {
 @media screen and (min-width: 1920px) {
   .sidebar.left,
   .sidebar.right {
-    width: 18vw;
+    width: 22vw;
   }
 
   .canvas-container {
