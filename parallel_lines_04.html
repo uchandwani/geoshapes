@@ -6,40 +6,37 @@
   <title>Parallel Lines Theorems</title>
 
   <!-- ✅ CSS Files -->
-  <link rel="stylesheet" href="./css/header_styles.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 
-  <!-- ✅ JS Modules for core logic -->
+  <!-- ✅ JS Modules -->
   <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
-  
 </head>
 
 <body>
   <!-- ✅ Header Placeholder -->
   <div id="header-placeholder"></div>
 
-  <!-- ✅ Main Layout Starts -->
+  <!-- ✅ Main Layout Container -->
   <div class="container">
-
-    <!-- 🔹 Left Sidebar -->
-    <div class="sidebar-container">
-      <div id="theorem-definition" class="theorem-definition">
+    
+    <!-- 🔹 Left Sidebar with Instructions -->
+    <div class="sidebar left">
+      <div id="theorem-definition">
         <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
       </div>
-      <div class="sidebar left" id="left-sidebar">
-        <h3>Instructions</h3>
-        <p>Select a theorem from the navigation bar above to see its instructions here.</p>
-      </div>
+      <h3>Instructions</h3>
+      <p>Select a theorem from the navigation bar above to see its instructions here.</p>
     </div>
 
     <!-- 🔹 Canvas Area -->
     <div class="canvas-container">
-      <div id="dynamic-buttons" class="triangle-buttons">
-        <!-- Dynamic sub-buttons will appear here -->
-      </div>
+      <!-- Sub-buttons (SVG) -->
+      <div id="dynamic-buttons" class="triangle-buttons"></div>
+
       <div class="canvas-wrapper">
-        <!-- Additional toolbar -->
+        <!-- Tool Buttons -->
         <div class="additional-div">
           <button id="draw-line" class="icon-btn" title="Draw Line">
             <img src="./icons/line-icon.png" alt="Line Icon" />
@@ -59,41 +56,31 @@
           </button>
         </div>
 
-        <!-- Main Canvas -->
-        <canvas id="canvas" width="800" height="800"></canvas>
+        <!-- Canvas Element -->
+        <div class="canvas-scroll-container">
+          <canvas id="canvas" width="800" height="800"></canvas>
+        </div>
       </div>
     </div>
 
-    <!-- 🔹 Right Sidebar -->
+    <!-- 🔹 Right Sidebar for Results -->
     <div class="sidebar right" id="right-sidebar">
       <h3>Verification - Vertically Opposite Angles</h3>
     </div>
+
   </div>
 
- 
- <!-- ✅ Dynamically load header first, THEN load page logic -->
- <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
+  <!-- ✅ Load Header and Initialize Logic -->
+  <script type="module">
+    const html = await fetch('./header.html').then(res => res.text());
+    document.getElementById('header-placeholder').innerHTML = html;
 
-  <!-- ✅ Load header, then logic -->
- <script type="module">
-  const html = await fetch('./header.html').then(res => res.text());
-  document.getElementById('header-placeholder').innerHTML = html;
+    const { updatePageTitle } = await import('./js/header.js');
+    updatePageTitle();
 
-  // ✅ Import header module only after header is inserted
-  const { updatePageTitle } = await import('./js/header.js');
-  updatePageTitle();
-
-  // ✅ Now import the actual app logic
-  const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
-
-  attachNavBarListeners(); // set up SVG icon listeners
-
-  // ✅ Ensure this fires AFTER header is available
-  switchFunctionality('sineTheta');
-</script>
-
-
-
-
-
+    const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
+    attachNavBarListeners();
+    switchFunctionality('sineTheta'); // Default functionality
+  </script>
+</body>
+</html>
