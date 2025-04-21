@@ -656,60 +656,77 @@ canvas {
   display: inline-block;
   padding: 6px;
   border-radius: 12px;
-  border: 2px solid #4DD0E1; /* Aqua Outline */
-  background-color: #f8f9fc;
+  border: 2px solid #4DD0E1; /* Aqua outline */
+  background-color: #f8fbff;
   position: relative;
-  margin: 0 6px;
-  transition: transform 0.2s ease;
+  margin: 0 4px;
+  transition: transform 0.2s ease, background-color 0.3s;
+  cursor: pointer;
 }
 
 .subbutton-wrapper:hover {
-  background-color: #bbdefb;
+  background-color: #d0f0f9; /* Lighter on hover */
+  transform: scale(1.05);
 }
 
 .sub-button-svg {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   stroke: #1E88E5;
   stroke-width: 2;
 }
 
 /* Tooltip */
-.subbutton-wrapper .tooltip {
+.subbutton-wrapper .tooltip-text {
   visibility: hidden;
+  opacity: 0;
+  width: max-content;
   background-color: #1E88E5;
-  color: white;
+  color: #fff;
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 5px 8px;
   border-radius: 6px;
   position: absolute;
   z-index: 10;
-  bottom: 125%;
+  bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   white-space: nowrap;
 }
 
-.subbutton-wrapper .tooltip::after {
-  content: '';
+.subbutton-wrapper .tooltip-text::after {
+  content: "";
   position: absolute;
   top: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
+  border-width: 6px;
   border-style: solid;
   border-color: #1E88E5 transparent transparent transparent;
 }
 
-.subbutton-wrapper:hover .tooltip {
+.subbutton-wrapper:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
 }
-#dynamic-buttons,
+
 .sub-header-icons {
   position: relative;
   overflow: visible !important;
   z-index: 1;
+}
+
+#dynamic-buttons {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.75); /* Optional translucent bg */
+  padding: 8px 10px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(4px); /* For modern aesthetic */
 }
