@@ -229,10 +229,51 @@ export  const functionalityConfig = {
         },
 
         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-                
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="15" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="30" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="80" y1="40" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="15" y1="75" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="5" x2="20" y2="75" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="75" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="85" y1="85" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+        `
+    },
+
+            
             ],
         
 
@@ -916,11 +957,56 @@ alternateSegments: {
   ]
 }
 ,
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-            ],
+       
+
+     buttonSet: [
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="50" x2="20" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="80" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="40" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="40" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+                `
+    },
+
+     ],
+
+
+
        
         leftSidebarContent: {
             
@@ -1192,11 +1278,44 @@ quadrilaterals: {
 }
 
 ,
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-            ],
+          buttonSet: [
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <polyline points="20,30 80,30 70,85 25,85 20,30"
+                    stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <rect x="25" y="25" width="50" height="50"
+                stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <polyline points="20,70 30,20 70,20 80,70 20,70"
+                    stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+                `
+    },
+
+     ],
        
         leftSidebarContent: {
             
