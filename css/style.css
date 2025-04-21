@@ -63,7 +63,7 @@ header h1 {
 .sidebar-container {
   display: flex;
   flex-direction: column;
-  width: 25vw;
+  width: 26vw;
   box-sizing: border-box;
   background-color: #f4f4f9;
   padding: 10px;
@@ -264,7 +264,7 @@ canvas {
 }
 
 .sidebar-container {
-  width: 25vw;               /* 20% of viewport width */
+  width: 26vw;               /* 20% of viewport width */
   max-width: none;          /* cap it for ultra-wide screens */
   min-width: 200px;          /* prevent text overflow */
   display: flex;
@@ -281,7 +281,7 @@ canvas {
 @media screen and (max-width: 1366px) {
   .sidebar-container,
   .sidebar.right {
-    width: 25vw;
+    width: 26vw;
   }
 
   .additional-div {
@@ -307,7 +307,7 @@ canvas {
 @media screen and (min-width: 1920px) {
   .sidebar.left,
   .sidebar.right {
-    width: 25vw;
+    width: 26vw;
   }
 
   .canvas-container {
