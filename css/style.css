@@ -63,7 +63,7 @@ header h1 {
 .sidebar-container {
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  width: 22vw;
   box-sizing: border-box;
   background-color: #f4f4f9;
   padding: 10px;
@@ -90,7 +90,7 @@ header h1 {
 }
 
 .sidebar.left {
-  width: 20vw;
+  width: 22vw;
   padding: 15px;
   background-color: #f4f4f9;
   border-right: 1px solid #ccc;
@@ -102,7 +102,7 @@ header h1 {
 }
 
 .sidebar.right {
-  width: 20vw;
+  width: 22vw;
   padding: 15px;
   background-color: #f4f4f9;
   border-left: 1px solid #ccc;
