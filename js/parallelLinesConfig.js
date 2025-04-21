@@ -1336,7 +1336,7 @@ trigonoRatios: {
     svg: `
       <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Obtuse Angle">
         <!-- Long angle -->
-        <line x1="20" y1="80" x2="60" y2="20" />
+        <line x1="20" y1="80" x2="0" y2="20" />
         <line x1="20" y1="80" x2="80" y2="80" />
         <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="2" fill="none"/>
       </svg>
