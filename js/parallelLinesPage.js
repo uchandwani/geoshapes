@@ -9,7 +9,7 @@
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './parallelLinesEventHandlers.js';
     window.switchFunctionality = switchFunctionality;
-
+ debugger;
         
    document.addEventListener("DOMContentLoaded", () => {
   console.log("Parallel Lines Page Loaded");
@@ -676,6 +676,21 @@ function resetInputStyles(inputs, result) {
     // Call renderCanvas with the desired configuration
     renderCanvas(functionalityConfig.sineTheta);
 
+    function logDivSizes() {
+      const elements = ['left-sidebar', 'additional-div', 'canvas-wrapper', 'right-sidebar'];
+      elements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          console.log(`${id} → width: ${rect.width}px, height: ${rect.height}px`);
+        } else {
+          console.warn(`⚠️ Element with ID "${id}" not found.`);
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', logDivSizes);
+    window.addEventListener('resize', logDivSizes);
 
 
 
