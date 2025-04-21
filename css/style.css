@@ -117,16 +117,14 @@ header h1 {
    Canvas Area
 =========================== */
 .canvas-container {
-  width: 56vw;
+  flex: 1; /* Let canvas take all remaining space */
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
   background-color: #f1f1f1;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
 }
+
 
 .canvas-wrapper {
   width: 100%;
