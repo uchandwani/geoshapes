@@ -653,15 +653,14 @@ canvas {
 }
 
 .subbutton-wrapper {
-  position: relative;
   display: inline-block;
-  margin: 0 6px;
-  cursor: pointer;
-  background-color: #e3f2fd;
-  border-radius: 8px;
   padding: 6px;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border: 2px solid #4DD0E1; /* Aqua Outline */
+  background-color: #f8f9fc;
+  position: relative;
+  margin: 0 6px;
+  transition: transform 0.2s ease;
 }
 
 .subbutton-wrapper:hover {
