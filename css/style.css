@@ -90,7 +90,7 @@ header h1 {
 }
 
 .sidebar.left {
-  width: 25vw;
+  
   padding: 15px;
   background-color: #f4f4f9;
   border-right: 1px solid #ccc;
@@ -279,7 +279,7 @@ canvas {
    Responsive Breakpoints
 =========================== */
 @media screen and (max-width: 1366px) {
-  .sidebar.left,
+  .sidebar-container,
   .sidebar.right {
     width: 25vw;
   }
