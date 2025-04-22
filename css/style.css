@@ -140,6 +140,24 @@ canvas {
   position: relative;
 }
 
+#theorem-definition,
+#left-sidebar {
+  width: 100%; /* Take full width of container */
+  box-sizing: border-box; /* Prevent padding from overflowing */
+}
+
+#theorem-definition {
+  background-color: #f0f8ff; /* Soft blue background */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #0d47a1;
+  line-height: 1.4;
+
+  }
+
 /* ===========================
    Left Tool Bar
 =========================== */
