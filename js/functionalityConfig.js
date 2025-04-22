@@ -5,16 +5,47 @@ export  const functionalityConfig = {
     midSegmentTheorem: {
         theoremDefinition: "If a line segment joins the midpoints of the two sides of a triangle, then the segment is parallel to third side and is of half its length.",
         
-        canvasConfig: {
-            autoloadShape: 'triangle',
-            triangleVertices: [
-                { x: 200, y: 600 }, // Vertex A
-                { x: 700, y: 600 }, // Vertex B
-                { x: 450, y: 200 }  // Vertex C
-            ],
-            vertexLabels: { A: 'C', B: 'E', C: 'A' }, // Custom vertex labels
-            midpointLabels: { M1: 'G', M2: 'D', M3: 'B' } // Custom mid-point labels
+         canvasConfig: {
+      autoloadShape: "triangle",
+      triangles: [
+        {
+          type: "right",
+          vertices: [
+            { x: 200, y: 400 },
+            { x: 600, y: 400 },
+            { x: 400, y: 100 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
         },
+        {
+          type: "acute",
+          vertices: [
+            { x: 240, y: 420 },
+            { x: 620, y: 430 },
+            { x: 400, y: 120 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        },
+        {
+          type: "obtuse",
+          vertices: [
+            { x: 180, y: 400 },
+            { x: 700, y: 420 },
+            { x: 380, y: 80 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        }
+      ]
+    },
         buttonSet: [
 
                 {
