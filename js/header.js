@@ -152,7 +152,7 @@ const pageIconsMap = {
   ],
   "circle_theorems_02.html": [
     {
-      id: "circleThm1-button",
+      id: "sineTheta-button",
       title: "Radius Tangent Theorem",
       svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
@@ -162,7 +162,35 @@ const pageIconsMap = {
             </svg>`
     },
     {
-      id: "circleThm2-button",
+      id: "cosineTheta-button",
+      title: "Two Tangent",
+      svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="40" />
+              <polygon points="30,30 70,30 70,70 30,70" />
+            </svg>`
+    },
+    {
+      id: "subtendedAngles-button",
+      title: "Subtended Angles",
+      svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="40" />
+              <line x1="50" y1="50" x2="90" y2="50" />
+              <line x1="50" y1="50" x2="50" y2="10" />
+            </svg>`
+    },
+    {
+      id: "alternateSegments-button",
+      title: "Alternate Segment",
+      svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="40" />
+              <polygon points="30,30 70,30 70,70 30,70" />
+            </svg>`
+    },
+    {
+      id: "quadrilaterals-button",
       title: "Cyclic Quadrilateral",
       svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
