@@ -522,6 +522,25 @@ if (Array.isArray(config.buttonSet)) {
 
 }
 
+export function updateLeftSidebar(functionalityKey, subtype = null) {
+    const config = functionalityConfig[functionalityKey];
+    if (!config) return;
+
+    const sidebar = document.querySelector(".sidebar.left");
+    const allContent = config.leftSidebarContent;
+
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
+        // ✅ Try in this order: specific subtype > defaultButtonType > fallback message
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
+    }
+
+    sidebar.innerHTML = content;
+}
+
 export function updateTheoremText(config, subtype = null) {
     console.log("Inside updateTheoremText", config, subtype);
 
