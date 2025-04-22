@@ -161,25 +161,18 @@
     </script-->
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
-  <script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
+  <script type="module">
+    const html = await fetch('./header.html').then(res => res.text());
+    document.getElementById('header-placeholder').innerHTML = html;
 
-      // Dynamically load header.js *after* header.html is loaded
-      const script = document.createElement('script');
-      script.src = './js/header.js';
-      script.onload = () => {
-        if (typeof updatePageTitle === "function") {
-          updatePageTitle();  // ✅ This should be defined in header.js
-        } else {
-          console.warn("⚠️ updatePageTitle not found.");
-        }
-      };
-      document.head.appendChild(script);
-    });
-</script>
+    const { updatePageTitle,loadSubHeaderIcons } = await import('./js/header.js');
+    updatePageTitle();
+    loadSubHeaderIcons();
+
+    const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
+    attachNavBarListeners();
+    switchFunctionality('sineTheta'); // Default functionality
+  </script>
 
 
   
