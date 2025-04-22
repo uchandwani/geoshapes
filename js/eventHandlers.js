@@ -285,6 +285,8 @@ export function addSpecificPoints(points, ctx) {
     return;
   }
 
+  debugger;
+
   const effectiveType = buttonType || config.defaultButtonType || null;
   console.log("🎯 Using subtype:", effectiveType);
 
