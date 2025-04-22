@@ -13,7 +13,7 @@ export  const functionalityConfig = {
           vertices: [
             { x: 200, y: 400 },
             { x: 600, y: 400 },
-            { x: 400, y: 100 }
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
