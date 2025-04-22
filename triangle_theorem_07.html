@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/header_styles.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/trianglePage.js"></script>
+    <script type="module" src="./js/responsiveCanvas.js"> </script>
     <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
     <script type="module">
@@ -169,7 +170,7 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
+    const { switchFunctionality, attachNavBarListeners } = await import('./js/eventHandlers.js');
     attachNavBarListeners();
     switchFunctionality('sineTheta'); // Default functionality
   </script>
