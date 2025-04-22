@@ -425,3 +425,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto-load the first functionality (e.g., Triangle Theorem) on page load
     switchFunctionality('midSegmentTheorem');
 });
+
+function drawShapes(canvasConfig, buttonType = null) {
+    if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
+    if (canvasConfig.circle) drawCircle(canvasConfig);
+    if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
+    if (canvasConfig.lines) drawLines(canvasConfig);
+}
+
+function drawPoints(canvasConfig, buttonType = null) {
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type }) => {
+        if (!type || type === buttonType) {
+            const point = new Point(x, y, label, color, radius);
+            canvasManager.addShape(point);
+        }
+    });
+}
+
+function drawLines(canvasConfig) {
+    canvasConfig.lines.forEach(({ endA, endB, color = "black" }) => {
+        if (endA && endB) {
+            const line = new Line(endA, endB, color);
+            line.setEnableDrag(canvasConfig.enableDrag ?? true);
+            canvasManager.addShape(line);
+        }
+    });
+}
+
+function drawCircle(canvasConfig) {
+    const [center, radius] = canvasConfig.circle;
+    const circle = new Circle(center, radius);
+    circle.setEnableDrag(canvasConfig.enableDrag ?? true);
+    canvasManager.addShape(circle);
+}
+
+function drawTriangles(canvasConfig, buttonType = null) {
+    const triangles = buttonType
+        ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
+        : canvasConfig.triangles;
+
+    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidPoints, showMeasurements }) => {
+        if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
+        const triangle = new Triangle(vertexA, vertexB, vertexC);
+        triangle.setVertexLabels(labels);
+        triangle.setEnableDrag(canvasConfig.enableDrag ?? true);
+        triangle.setShowMidpoints(showMidPoints);
+        triangle.setShowMeasurements(showMeasurements);
+        canvasManager.addShape(triangle);
+    });
+}
