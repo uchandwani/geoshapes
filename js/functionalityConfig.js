@@ -491,18 +491,47 @@ obtuse:
 },
     angleBisectorTheorem: {
         theoremDefinition: "If a ray bisects an angle of a triangle, then it divides the opposite side of the triangle into segments proportional to the other two sides.",
-        canvasConfig: {
-            autoloadShape: 'triangle',
-            triangleVertices: [
-                { x: 200, y: 400 }, // Vertex A
-                { x: 600, y: 400 }, // Vertex B
-                { x: 400, y: 100 }  // Vertex C
-            ],
-            
-            
-            vertexLabels: { A: 'C', B: 'E', C: 'A' }, // Custom vertex labels
-            midpointLabels: { M1: 'G', M2: 'D', M3: 'B' } 
+         canvasConfig: {
+      autoloadShape: "triangle",
+      triangles: [
+        {
+          type: "right",
+          vertices: [
+            { x: 200, y: 400 },
+            { x: 600, y: 400 },
+            { x: 400, y: 100 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
         },
+        {
+          type: "acute",
+          vertices: [
+            { x: 240, y: 420 },
+            { x: 620, y: 430 },
+            { x: 400, y: 120 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        },
+        {
+          type: "obtuse",
+          vertices: [
+            { x: 180, y: 400 },
+            { x: 700, y: 420 },
+            { x: 380, y: 80 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        }
+      ]
+    },
         buttonSet: [
 
                 {
@@ -843,16 +872,46 @@ obtuse:
     propertiesOfTriangles: {
         theoremDefinition: "All three sides of an equilateral triangle are equal. \n Angle opposite to equal sides of an isosceles triangle are equal.",
         canvasConfig: {
-            autoloadShape: 'triangle',
-            triangleVertices: [
-                { x: 200, y: 400 }, // Vertex A
-                { x: 600, y: 400 }, // Vertex B
-                { x: 400, y: 100 }  // Vertex C
-            ],
-            
-            vertexLabels: { A: 'C', B: 'E', C: 'A' }, // Custom vertex labels
-            midpointLabels: { M1: 'E', M2: 'D', M3: 'B' } 
+      autoloadShape: "triangle",
+      triangles: [
+        {
+          type: "right",
+          vertices: [
+            { x: 220, y: 450 },
+            { x: 620, y: 450 },
+            { x: 420, y: 100 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
         },
+        {
+          type: "acute",
+          vertices: [
+            { x: 260, y: 480 },
+            { x: 640, y: 470 },
+            { x: 430, y: 160 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        },
+        {
+          type: "obtuse",
+          vertices: [
+            { x: 180, y: 480 },
+            { x: 700, y: 470 },
+            { x: 420, y: 120 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        }
+      ]
+    },
        
          buttonSet: [
 
@@ -1170,17 +1229,47 @@ obtuse:
      },
     basicProportionalityTheorem: {
         theoremDefinition: "If the line segment divides any two sides of a triangle in the same ratio, then the line is parallel to the third side.",
-        canvasConfig: {
-            autoloadShape: 'triangle',
-            triangleVertices: [
-                { x: 200, y: 400 },
-                { x: 600, y: 400 },
-                { x: 400, y: 100 },
-            ],
-            
-            vertexLabels: { A: 'C', B: 'E', C: 'A' }, // Custom vertex labels
-            midpointLabels: { M1: 'G', M2: 'D', M3: 'B' } 
+         canvasConfig: {
+      autoloadShape: "triangle",
+      triangles: [
+        {
+          type: "right",
+          vertices: [
+            { x: 220, y: 450 },
+            { x: 620, y: 450 },
+            { x: 420, y: 100 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
         },
+        {
+          type: "acute",
+          vertices: [
+            { x: 260, y: 480 },
+            { x: 640, y: 470 },
+            { x: 430, y: 160 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        },
+        {
+          type: "obtuse",
+          vertices: [
+            { x: 180, y: 480 },
+            { x: 700, y: 470 },
+            { x: 420, y: 120 }
+          ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: true
+        }
+      ]
+    },
          buttonSet: [
 
                 {
