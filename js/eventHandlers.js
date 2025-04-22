@@ -352,6 +352,7 @@ export function attachNavBarListeners() {
         if (button) {
             button.addEventListener('click', () => {
                 // Switch to the corresponding functionality
+                debugger;
                 switchFunctionality(key);
 
                 // Remove the active class from all buttons
@@ -467,6 +468,7 @@ if (Array.isArray(config.buttonSet)) {
     tooltip.className = "tooltip-text";
     tooltip.textContent = label;
     wrapper.appendChild(tooltip);
+    debugger;
 
     // 🔹 Click handler
     wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
