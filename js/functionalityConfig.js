@@ -16,10 +16,49 @@ export  const functionalityConfig = {
             midpointLabels: { M1: 'G', M2: 'D', M3: 'B' } // Custom mid-point labels
         },
         buttonSet: [
-                { label: "Right Angle Triangle", type: "right" },
-                { label: "Acute Triangle", type: "acute" },
-                { label: "Obtuse Triangle", type: "obtuse" },
-            ],
+
+                {
+              label: "Right Angle Triangle",
+              type: "right",
+              svg: `
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+                  <line x1="50" y1="50" x2="20" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="50" y1="50" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="20" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="80" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+                </svg>
+                `
+                },
+                  {
+              label: "Acute Triangle",
+              type: "acute",
+              svg: `
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+                  <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="20" y1="80" x2="50" y2="40" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="50" y1="40" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                </svg>
+              `
+            },
+
+                      {
+              label: "Obtuse Triangle",
+              type: "obtuse",
+              svg: `
+               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+                  <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+                  <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+                </svg>
+                        `
+            },
+         ],
         leftSidebarContent: `
           
              <h3> Instructions</h3>
