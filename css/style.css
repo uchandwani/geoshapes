@@ -140,23 +140,28 @@ canvas {
   position: relative;
 }
 
-#theorem-definition,
-#left-sidebar {
-  width: 100%; /* Take full width of container */
-  box-sizing: border-box; /* Prevent padding from overflowing */
+#theorem-definition {
+  background-color: #eef5ff;
+  padding: 10px;
+  border-left: 4px solid #3366cc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #3366cc;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-#theorem-definition {
-  background-color: #f0f8ff; /* Soft blue background */
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #0d47a1;
-  line-height: 1.4;
 
-  }
+#theorem-definition h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+}
+
+#theorem-text {
+  margin: 0;
+}
 
 /* ===========================
    Left Tool Bar
