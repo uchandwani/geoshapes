@@ -491,8 +491,7 @@ obtuse:
 },
     angleBisectorTheorem: {
         theoremDefinition: "If a ray bisects an angle of a triangle, then it divides the opposite side of the triangle into segments proportional to the other two sides.",
-         canvasConfig: {
-      autoloadShape: "triangle",
+         
       canvasConfig: {
       autoloadShape: "triangle",
       triangles: [
@@ -871,6 +870,7 @@ obtuse:
           `,
     },
     },
+
     propertiesOfTriangles: {
         theoremDefinition: "All three sides of an equilateral triangle are equal. \n Angle opposite to equal sides of an isosceles triangle are equal.",
         canvasConfig: {
@@ -1711,8 +1711,8 @@ obtuse:
 </div>  `,
     },
 }
-}
-    export const pageFeatures = {
+
+export const pageFeatures = {
     'triangle_theorem_07.html': { enableProtractorSnapping: true },
     'circlePage.html': { enableProtractorSnapping: false },
 };
