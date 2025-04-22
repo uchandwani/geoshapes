@@ -340,53 +340,38 @@ export function addSpecificPoints(points, ctx) {
 
 
 export function attachNavBarListeners() {
-    
-    const navButtons = {
-       
-        midSegmentTheorem: document.getElementById('midSegmentTheorem-button'),
-        basicProportionalityTheorem: document.getElementById('basicProportionalityTheorem-button'),
-        angleBisectorTheorem: document.getElementById('angleBisectorTheorem-button'),
-        propertiesOfTriangles: document.getElementById('propertiesOfTriangles-button'),};
-      
+  const navMap = {
+    midSegmentTheorem: null,
+    basicProportionalityTheorem: null,
+    angleBisectorTheorem: null,
+    propertiesOfTriangles: null
+  };
 
-    // Add event listeners to each button
-    Object.entries(navButtons).forEach(([key, button]) => {
-        if (button) {
-            button.addEventListener('click', () => {
-                // Switch to the corresponding functionality
-                debugger;
-                switchFunctionality(key);
+  Object.entries(navMap).forEach(([id, subtype]) => {
+    const button = document.getElementById(`${id}-button`);
+    if (button) {
+      button.addEventListener("click", () => {
+        console.log("🔘 Header/Nav button clicked:", id, subtype);
+        switchFunctionality(id, subtype);
 
-                // Remove the active class from all buttons
-                Object.values(navButtons).forEach((btn) => {
-                    btn.classList.remove('active');
-                });
+        // Remove active from all sibling buttons inside same container
+        const allButtons = document.querySelectorAll("#sub-header-icons .sub-header-icon");
+        allButtons.forEach(btn => btn.classList.remove("active"));
 
-                // Add the active class to the clicked button
-                button.classList.add('active');
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
-        }
-    });
-
-    // Highlight the default button initially
-    const defaultKey = 'midSegmentTheorem'; // Change if a different default is desired
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
+        // Set active on this button
+        button.classList.add("active");
+      }, { once: true });  // Prevent double firing
+    } else {
+      console.warn(`❌ Button for ${id} not found.`);
     }
+  });
+
+  // Optional: mark default button active on page load
+  const defaultId = "midSegmentTheorem";
+  const defaultButton = document.getElementById(`${defaultId}-button`);
+  if (defaultButton) defaultButton.classList.add("active");
 }
 
-
-// Initialize event handlers
-document.addEventListener('DOMContentLoaded', () => {
-    attachNavBarListeners();
-
-    // Auto-load the first functionality (e.g., Triangle Theorem) on page load
-    switchFunctionality('midSegmentTheorem');
-});
 
 function drawShapes(canvasConfig, buttonType = null) {
     if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
