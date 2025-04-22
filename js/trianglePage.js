@@ -73,7 +73,8 @@ import {updateRightSidebar} from './eventHandlers.js';
 
   attachNavBarListeners(); // Nav bar logic
   const defaultFunctionality = 'midSegmentTheorem';
-  switchFunctionality(defaultFunctionality); // Default load
+  const defaultsubButton ='right'
+  switchFunctionality(defaultFunctionality, defaultsubButton); // Default load
 
   // 🟦 Header icon click listeners
   const iconMap = {
@@ -354,5 +355,4 @@ function loadTriangle(type) {
 
     console.log(`${type} triangle drawn.`);
 }
-
 
