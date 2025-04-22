@@ -2,7 +2,8 @@ import { functionalityConfig } from './functionalityConfig.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import {Point} from '../shapes/Points.js';
-
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
 // Function to handle navigation and update the screen
 let setShowMidpoints =true;
 
