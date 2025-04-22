@@ -173,7 +173,7 @@ const pageIconsMap = {
   ]
 };
 
-function loadSubHeaderIcons() {
+export function loadSubHeaderIcons() {
   const path = window.location.pathname;
   const filename = path.substring(path.lastIndexOf("/") + 1);
   const iconConfigs = pageIconsMap[filename];
