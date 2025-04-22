@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/trianglePage.js"></script>
     <script type="module" src="./js/responsiveCanvas.js"> </script>
-    <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="module" src="./js/responsiveCanvas.js"> </script>
+   
+   
+
     <script type="module">
     import { compareMeasures, compareDividedMeasures, calculateRatio, updateMessage } from './js/trianglePage.js';
 
@@ -31,26 +33,29 @@
     
     <div class="container">
         <!-- Left Sidebar -->
+        <div class="sidebar-container">
+        <div id="theorem-definition" class="theorem-definition">
+             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+         </div>
+
         <div class="sidebar left" id="left-sidebar">
             <h3>Instructions</h3>
             <p>Select a theorem from the navigation bar above to see its instructions here.</p>
         </div>
-            
+        </div>    
 
         <!-- Main Canvas -->
         <div class="canvas-container">
             <div class="navigation-buttons">
           
                 
-                <button id="midSegmentTheorem-button" class="icon-btn" title="Mid Segment Theorem">Mid Segment Theorem</button>
+                <!--button id="midSegmentTheorem-button" class="icon-btn" title="Mid Segment Theorem">Mid Segment Theorem</button>
                 <button id="basicProportionalityTheorem-button" class="icon-btn" title="Basic Proportionality Theorem">Basic Proportionality Theorem</button>
                 <button id="angleBisectorTheorem-button" class="icon-btn" title="Angle Bisector Theorem">Angle Bisector Theorem</button>
                 <button id="propertiesOfTriangles-button" class="icon-btn" title="Properties of Triangles">Properties of Triangles</button>
                         
-                </div>
-            <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-
+                </div-->
+            
              <div id="dynamic-buttons" class="triangle-buttons"></div>
                      </div> <div class="canvas-wrapper">
              <div class="additional-div">
