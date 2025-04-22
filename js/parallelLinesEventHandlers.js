@@ -39,6 +39,8 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
     return;
   }
 
+  debugger;
+
   const effectiveType = buttonType || config.defaultButtonType || null;
   console.log("🎯 Using subtype:", effectiveType);
 
