@@ -285,8 +285,7 @@ export function addSpecificPoints(points, ctx) {
     return;
   }
 
-  debugger;
-
+  
   const effectiveType = buttonType || config.defaultButtonType || null;
   console.log("🎯 Using subtype:", effectiveType);
 
@@ -374,6 +373,7 @@ export function attachNavBarListeners() {
 
 
 function drawShapes(canvasConfig, buttonType = null) {
+    debugger;
     if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
     if (canvasConfig.circle) drawCircle(canvasConfig);
     if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
@@ -455,7 +455,7 @@ if (Array.isArray(config.buttonSet)) {
     tooltip.className = "tooltip-text";
     tooltip.textContent = label;
     wrapper.appendChild(tooltip);
-    debugger;
+    
 
     // 🔹 Click handler
     wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
