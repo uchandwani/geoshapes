@@ -1706,10 +1706,3 @@ obtuse:
         },
 },
 }
-export const pageFeatures = {
-    'triangle_theorem_07.html': { enableProtractorSnapping: true },
-    'circlePage.html': { enableProtractorSnapping: false },
-};
-
-export const currentPage = location.pathname.split('/').pop(); // Get current page
-export const currentPageFeatures = pageFeatures[currentPage] || {}; // Get features for the current page
