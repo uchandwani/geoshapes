@@ -37,10 +37,10 @@
 
   <!-- ✅ Main Layout Container -->
   <div class="container">
-   <div class="size-label"></div> 
+  
     <!-- 🔹 Left Sidebar with Instructions -->
     <div class="sidebar-container">
-     <div class="size-label"></div> 
+   
       <div id="theorem-definition">
         <p id="theorem-text">Definition text...</p>
       </div>
@@ -90,7 +90,7 @@
 
     <!-- 🔹 Right Sidebar for Results -->
     <div class="sidebar right" id="right-sidebar">
-      <div class="size-label"></div>
+   
       <h3>Verification - Vertically Opposite Angles</h3>
     </div>
 
@@ -101,7 +101,7 @@
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
 
-    const { updatePageTitle } = await import('./js/header.js');
+    const { updatePageTitle,loadSubHeaderIcons } = await import('./js/header.js');
     updatePageTitle();
 
     const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
