@@ -23,9 +23,9 @@ export  const functionalityConfig = {
         {
           type: "acute",
           vertices: [
-            { x: 240, y: 420 },
-            { x: 620, y: 430 },
-            { x: 400, y: 120 }
+            { x: 300, y: 400 },
+            { x: 600, y: 400 },
+            { x: 300, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -35,9 +35,9 @@ export  const functionalityConfig = {
         {
           type: "obtuse",
           vertices: [
-            { x: 180, y: 400 },
-            { x: 700, y: 420 },
-            { x: 380, y: 80 }
+            { x: 100, y: 400 },
+            { x: 600, y: 400 },
+            { x: 300, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -493,13 +493,15 @@ obtuse:
         theoremDefinition: "If a ray bisects an angle of a triangle, then it divides the opposite side of the triangle into segments proportional to the other two sides.",
          canvasConfig: {
       autoloadShape: "triangle",
+      canvasConfig: {
+      autoloadShape: "triangle",
       triangles: [
         {
           type: "right",
           vertices: [
             { x: 200, y: 400 },
             { x: 600, y: 400 },
-            { x: 400, y: 100 }
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -509,9 +511,9 @@ obtuse:
         {
           type: "acute",
           vertices: [
-            { x: 240, y: 420 },
-            { x: 620, y: 430 },
-            { x: 400, y: 120 }
+            { x: 300, y: 400 },
+            { x: 600, y: 400 },
+            { x: 300, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -521,9 +523,9 @@ obtuse:
         {
           type: "obtuse",
           vertices: [
-            { x: 180, y: 400 },
-            { x: 700, y: 420 },
-            { x: 380, y: 80 }
+            { x: 100, y: 400 },
+            { x: 600, y: 400 },
+            { x: 300, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
