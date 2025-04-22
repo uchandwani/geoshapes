@@ -25,7 +25,7 @@ export  const functionalityConfig = {
           vertices: [
             { x: 300, y: 400 },
             { x: 600, y: 400 },
-            { x: 300, y: 100 }
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -37,7 +37,7 @@ export  const functionalityConfig = {
           vertices: [
             { x: 100, y: 400 },
             { x: 600, y: 400 },
-            { x: 300, y: 100 }
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -512,7 +512,7 @@ obtuse:
           vertices: [
             { x: 300, y: 400 },
             { x: 600, y: 400 },
-            { x: 300, y: 100 }
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
@@ -524,14 +524,8 @@ obtuse:
           vertices: [
             { x: 100, y: 400 },
             { x: 600, y: 400 },
-            { x: 300, y: 100 }
+            { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: true
-        }
-      ]
     },
         buttonSet: [
 
@@ -1709,7 +1703,7 @@ obtuse:
         Submit
     </button>
 </div>  `,
-    },
+        },
 },
 }
 export const pageFeatures = {
