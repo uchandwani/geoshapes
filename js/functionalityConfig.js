@@ -1710,8 +1710,8 @@ obtuse:
     </button>
 </div>  `,
     },
+},
 }
-
 export const pageFeatures = {
     'triangle_theorem_07.html': { enableProtractorSnapping: true },
     'circlePage.html': { enableProtractorSnapping: false },
