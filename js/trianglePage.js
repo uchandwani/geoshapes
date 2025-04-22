@@ -10,14 +10,15 @@ import {Protractor} from '../shapes/Protractor.js';
 import {updateRightSidebar} from './eventHandlers.js';
 
     
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     console.log("Triangle Theorem Page Loaded");
-
+    updatePageTitle();
+    
     const defaultFunctionality = 'midSegmentTheorem';
     const defaultSubClassification = 'right';
     const buttons = document.querySelectorAll('.nav-icon-btn');
 
-
+    attachNavBarListeners();    
 
 
     buttons.forEach(button => {
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
      console.log("Calling switchFunctionality with" , defaultFunctionality);
-      switchFunctionality(defaultFunctionality);
+     switchFunctionality(defaultFunctionality);
 
     // Initialize right sidebar with the default sub-classification
     updateRightSidebar(defaultFunctionality, defaultSubClassification);
@@ -60,8 +61,48 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("The page enables snap vertex functionality");
     
     }
-});
+});  */
     // TrianglePage.js
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+  console.log("Triangle Page Loaded");
+  updatePageTitle(); // sets the title from file name
+
+
+  attachNavBarListeners(); // Nav bar logic
+  const defaultFunctionality = 'midSegmentTheorem';
+  switchFunctionality(defaultFunctionality); // Default load
+
+  // 🟦 Header icon click listeners
+  const iconMap = {
+    "midSegmentTheorem-button": "midSegmentTheorem",
+    "basicProportionalityTheorem-button": "basicProportionalityTheorem",
+    "angleBisectorTheorem-button": "angleBisectorTheorem",
+    "propertiesOfTriangles-button": "propertiesOfTriangles"
+  };
+
+ Object.entries(iconMap).forEach(([id, funcKey]) => {
+  const el = document.getElementById(id);
+  console.log("🔍 Checking icon", id, el?.dataset.listenerAttached);
+
+if (el && !el.dataset.listenerAttached) {
+  console.log("✅ Binding click handler for:", id);
+  el.addEventListener("click", () => {
+    console.log(`🔘 ${funcKey} icon clicked`);
+    switchFunctionality(funcKey);
+  });
+  el.dataset.listenerAttached = "true";
+}
+
+});
+
+});
+   
+
+
+
+
 
 // Function to compare two measures (e.g., lengths or angles)
    export function compareMeasures(input1Name, input2Name, resultName) {
