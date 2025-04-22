@@ -1,7 +1,8 @@
-<!-- header.html -->
-<div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
 
-  <!-- 🔹 Navigation Icons on the Left -->
+<!-- ✅ Main Header -->
+<div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
+  
+  <!-- 🔹 Left Navigation Icons -->
   <div class="nav-icons" style="display: flex; gap: 8px;">
     <a href="index.html" title="Home">
       <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -34,106 +35,20 @@
     </a>
   </div>
 
-  
-      <!-- 🔹 Center Title -->
-<div class="header-center">
-  <h1 style="color: white; font-weight: 600; font-size: 28px;">
-    <span id="page-title" style="font-size: 28px; font-weight: 700; color: white;"></span>
-    
-    <span id="page-subtitle" style="font-size: 20px; font-weight: 400; color: white;"></span>
-  
-    <span id="active-sub-button" style="font-size: 20px; font-weight: 400; color: white;"></span>
-  </h1>
+  <!-- 🔹 Page Title -->
+  <div class="header-center">
+    <h1 style="color: white; font-weight: 600; font-size: 28px;">
+      <span id="page-title" style="font-size: 28px; font-weight: 700; color: white;"></span>
+      <span id="page-subtitle" style="font-size: 20px; font-weight: 400; color: white;"></span>
+      <span id="active-sub-button" style="font-size: 20px; font-weight: 400; color: white;"></span>
+    </h1>
+  </div>
+
+  <!-- 🔹 Dynamic Sub-Header Icons -->
+  <div class="sub-header-icons" id="sub-header-icons" style="display: flex; gap: 12px;">
+    <!-- Injected dynamically by header.js -->
+  </div>
 </div>
 
-
-  <!-- 🔹 Sub-Header Icons on the Right -->
-<div class="sub-header-icons" style="display: flex; gap: 12px;">
-  
-  <!-- Vertically Opposite Angles -->
- <div class="tooltip-container">
-  <svg class="sub-header-icon" id="sineTheta-button" title="Vertically Opposite Angles"
-       viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4"
-       stroke-linecap="round" stroke-linejoin="round">
-    <!-- Intersecting lines -->
-    <line x1="10" y1="90" x2="90" y2="10" />
-    <line x1="10" y1="10" x2="90" y2="90" />
-
-    <!-- Opposite angle arcs -->
-    <path d="M50 50 A15 15 0 0 1 65 35" stroke="#1E88E5" fill="none" stroke-width="2"/>
-    <path d="M50 50 A15 15 0 0 1 35 65" stroke="#1E88E5" fill="none" stroke-width="2"/>
-  </svg>
-  <span class="tooltip-text">Vertically Opposite Angles</span>
-</div>
-
-  <!-- Parallel Line Properties -->
-  <div class="tooltip-container">
-  <svg class="sub-header-icon" id="cosineTheta-button" title="Alternate Angles"
-       viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4"
-       stroke-linecap="round" stroke-linejoin="round">
-    <!-- Parallel lines -->
-    <line x1="10" y1="30" x2="90" y2="30" />
-    <line x1="10" y1="70" x2="90" y2="70" />
-    
-    <!-- Transversal -->
-    <line x1="30" y1="10" x2="70" y2="90" />
-
-    <!-- Alternate angle arcs -->
-    <path d="M30 30 A10 10 0 0 1 40 40" stroke="#1E88E5" fill="none" stroke-width="2"/>
-    <path d="M70 70 A10 10 0 0 1 60 60" stroke="#1E88E5" fill="none" stroke-width="2"/>
-  </svg>
-   <span class="tooltip-text">Parallel Line Properties</span>
-</div>
-
-  <!-- Triangle Exterior Angle -->
-  <div class="tooltip-container">
-  <svg class="sub-header-icon" id="trigonoIdentities-button" title="Triangle Exterior Angle"
-       viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="3"
-       stroke-linecap="round" stroke-linejoin="round">
-       
-    <!-- Triangle -->
-    <line x1="20" y1="80" x2="50" y2="30" />  <!-- Left side -->
-    <line x1="50" y1="30" x2="80" y2="80" />  <!-- Right side -->
-    <line x1="20" y1="80" x2="80" y2="80" />  <!-- Base -->
-
-    <!-- Extension of base to the right -->
-    <line x1="80" y1="80" x2="95" y2="80" stroke-dasharray="4 2" />
-
-    <!-- Arcs for angles -->
-    <!-- Exterior angle arc -->
-    <path d="M80 80 A12 12 0 0 1 92 72" stroke="#1E88E5" fill="none" stroke-width="2"/>
-
-    <!-- Two interior opposite angles -->
-    <path d="M20 80 A10 10 0 0 1 28 70" stroke="#1E88E5" fill="none" stroke-width="2"/>
-    <path d="M50 30 A10 10 0 0 1 60 38" stroke="#1E88E5" fill="none" stroke-width="2"/>
-  </svg>
-  <span class="tooltip-text">Triangle Exterior Angle</span>
-</div>
-
-
-  <div class="tooltip-container">
-  <svg class="sub-header-icon" id="trigonoRatios-button" title="Triangle Angle Sum"
-       viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="3"
-       stroke-linecap="round" stroke-linejoin="round">
-    
-    <!-- Triangle -->
-    <polygon points="50,20 20,80 80,80" />
-
-    <!-- Internal angle arcs -->
-    <!-- Bottom-left angle -->
-    <path d="M23 76 A6 6 0 0 1 30 70" stroke="#1E88E5" fill="none" stroke-width="2"/>
-    <!-- Bottom-right angle -->
-    <path d="M77 76 A6 6 0 0 0 70 70" stroke="#1E88E5" fill="none" stroke-width="2"/>
-    <!-- Top angle -->
-    <path d="M47 23 A6 6 0 0 1 53 23" stroke="#1E88E5" fill="none" stroke-width="2"/>
-
-    <!-- Equal side marks (short ticks) -->
-    <line x1="35" y1="50" x2="37" y2="55" stroke-width="2"/>
-    <line x1="65" y1="50" x2="63" y2="55" stroke-width="2"/>
-    <line x1="50" y1="80" x2="50" y2="75" stroke-width="2"/>
-
-  </svg>
-  <span class="tooltip-text">Triangle Angle Sum</span>
-</div>
 
 
