@@ -348,7 +348,7 @@ export function addSpecificPoints(points, ctx) {
   updateLeftSidebar(functionalityKey, effectiveType);
   updateRightSidebar(functionalityKey, effectiveType);
   canvasManager.render();
-}
+
 
 
     updateRightSidebar(functionalityKey, defaultType);
@@ -372,7 +372,7 @@ export function addSpecificPoints(points, ctx) {
 
     canvasManager.render();
 
-    } 
+  } 
 
 // Attach event listeners to navigation buttons
 
