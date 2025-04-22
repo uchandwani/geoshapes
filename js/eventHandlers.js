@@ -323,28 +323,14 @@ export function addSpecificPoints(points, ctx) {
   updateRightSidebar(functionalityKey, effectiveType);
   canvasManager.render();
 
-
-
-    updateRightSidebar(functionalityKey, defaultType);
-
-    if (config.buttonSet) {
-        console.log("Generating buttons for functionality:", functionalityKey);
-        generateButtons(config.buttonSet, defaultType);
-    } else {
-        console.warn(`No buttonSet defined for functionality: ${functionalityKey}`);
-        generateButtons(); // Clear existing buttons
-    }
-
-
-    // Update the canvas
    
- // Update the canvas with the default triangle using defaultType
+ /* Update the canvas with the default triangle using defaultType
     if (defaultType) {
         console.log("The functionalitykey and type", functionalityKey,defaultType);
         handleTriangleType(functionalityKey,defaultType); // Dynamically create and render the default triangle
     }
 
-    canvasManager.render();
+    canvasManager.render(); */
 
   } 
 
