@@ -213,33 +213,6 @@ export function handleTriangleType(fkey,type) {
     console.log(`${type} triangle drawn with vertexLabels:`, vertexLabels, "and midpointLabels:", midpointLabels);
 }
 
-export function updateRightSidebar(functionalityKey, subClassification) {
-    console.log('Functionality Key:', functionalityKey);
-    console.log('Subclassification:', subClassification);
-     console.log('Functionality Configuration:', functionalityConfig);
-
-    const config = functionalityConfig[functionalityKey];
-    if (!config) {
-        console.error(`No configuration found for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    const rightSidebarContent = config.rightSidebarContent;
-    if (!rightSidebarContent) {
-        console.error(`No rightSidebarContent defined for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    const content = rightSidebarContent[subClassification];
-    if (!content) {
-        console.error(`No content found for subClassification: ${subClassification}`);
-        document.querySelector('.sidebar.right').innerHTML = `<p>Content not available.</p>`;
-        return;
-    }
-
-    // Update the sidebar
-    document.querySelector('.sidebar.right').innerHTML = content;
-}
 
 export function addSpecificPoints(points, ctx) {
     if (!points || !Array.isArray(points)) {
@@ -535,6 +508,24 @@ export function updateLeftSidebar(functionalityKey, subtype = null) {
         content = allContent;
     } else if (typeof allContent === "object") {
         // ✅ Try in this order: specific subtype > defaultButtonType > fallback message
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
+    }
+
+    sidebar.innerHTML = content;
+}
+
+export function updateRightSidebar(functionalityKey, subtype = null) {
+    const config = functionalityConfig[functionalityKey];
+    if (!config) return;
+
+    const sidebar = document.querySelector(".sidebar.right");
+    const allContent = config.rightSidebarContent;
+
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
         content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
     }
 
