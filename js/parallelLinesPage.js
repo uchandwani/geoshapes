@@ -182,7 +182,7 @@ if (el && !el.dataset.listenerAttached) {
         // Add triangle to canvas manager and render it
         //canvasManager.addShape(triangle);
         //canvasManager.render();
-        renderCanvas(functionalityConfig.sineTheta);
+        renderCanvas(functionalityConfig.verticallyOpposite);
 
         console.log("Default triangle drawn.");
     }
@@ -674,7 +674,7 @@ function resetInputStyles(inputs, result) {
 
 
     // Call renderCanvas with the desired configuration
-    renderCanvas(functionalityConfig.sineTheta);
+    renderCanvas(functionalityConfig.verticallyOpposite);
 
     function logDivSizes() {
       const elements = ['left-sidebar', 'additional-div', 'canvas-wrapper', 'right-sidebar'];
