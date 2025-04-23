@@ -355,15 +355,17 @@
 
   export function compareMeasures(input1Id, input2Id, resultId) {
     console.log("Inside compareMeasures", input1Id, input2Id, resultId);
-    debugger;
+    
     const input1 = document.getElementById(input1Id);
     const input2 = document.getElementById(input2Id);
     const result = document.getElementById(resultId);
    
+
     if (!input1 || !input2 || !result) {
         console.error("❌ Error: One or more elements not found!", { input1, input2, result });
         return;
     }
+    debugger;
 
     const value1 = parseFloat(input1.textContent) || null;
     const value2 = parseFloat(input2.value) || null;
