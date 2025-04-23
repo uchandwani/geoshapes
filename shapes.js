@@ -342,9 +342,16 @@ canvas.addEventListener('mousedown', (e) => {
                             selectedShape.dragging = 'leg2';
                             console.log("📏 Dragging Divider Leg 2.");
                         } else {
-                            selectedShape.dragging = 'pivot';
-                            selectedShape.pivotDraggable = true; // ✅ Needed to change color
-                            console.log("📌 Dragging Divider Pivot.");
+                            selectedShape.pivotDraggable = !selectedShape.pivotDraggable;
+
+                            // Only set dragging = 'pivot' if it was enabled
+                            if (selectedShape.pivotDraggable) {
+                                selectedShape.dragging = 'pivot';
+                                console.log("📌 Dragging Divider Pivot. 🔴 pivotDraggable = true");
+                            } else {
+                                selectedShape.dragging = null;
+                                console.log("⚪ Pivot dragging disabled. Reverted to gray.");
+                            }
                         }
                     }
                     break;
