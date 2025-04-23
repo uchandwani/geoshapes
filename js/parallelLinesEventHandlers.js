@@ -284,22 +284,5 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-export function attachNavBarListeners() {
-  const navMap = {
-    "verticallyOpposite-button": "verticallyOpposite",
-    "parallelProperties-button": "parallelProperties",
-    "exteriorAngles-button": "exteriorAngles",
-    "angleSumProperties-button": "angleSumProperties"
-  };
-  Object.entries(navMap).forEach(([id, [functionalityKey, subtype]]) => {
-    const button = document.getElementById(id);
-    if (button) {
-      button.addEventListener("click", () => {
-        console.log("🔘 Header/Nav button clicked:", id, subtype);
-        switchFunctionality(functionalityKey, subtype);
-      }
-    }
-  });
-}
 
 
