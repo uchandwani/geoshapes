@@ -2,7 +2,7 @@ export  const functionalityConfig = {
 
         
     
-        sineTheta: {
+        verticallyOpposite: {
            
         theoremDefinition: "Vertically Opposite Angles theorem states that when two lines intersect each other, the vertically opposite angles are equal",
         canvasConfig: {
@@ -225,7 +225,7 @@ export  const functionalityConfig = {
 
         `,
 },
-    cosineTheta: {
+    parallelProperties: {
 
         defaultButtonType: 'sin',
        
@@ -861,7 +861,7 @@ export  const functionalityConfig = {
         `, 
 }},
    
-    trigonoIdentities: {
+    exteriorAngles: {
         defaultButtonType: 'sin',
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
@@ -1241,7 +1241,7 @@ export  const functionalityConfig = {
 
 },
 
-trigonoRatios: {
+angleSumProperties: {
         defaultButtonType: 'sin',
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
@@ -1312,7 +1312,7 @@ trigonoRatios: {
         <!-- Short angle -->
         <line x1="20" y1="80" x2="50" y2="20" />
         <line x1="20" y1="80" x2="80" y2="80" />
-        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="2" fill="none"/>
+        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="4" fill="none"/>
       </svg>
     `
   },
@@ -1326,7 +1326,7 @@ trigonoRatios: {
         <line x1="20" y1="80" x2="70" y2="80" />
         <line x1="20" y1="30" x2="70" y2="80" />
         <!-- Right angle indicator -->
-        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="2" fill="none"/>
+        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="4" fill="none"/>
       </svg>
     `
   },
@@ -1338,7 +1338,7 @@ trigonoRatios: {
         <!-- Long angle -->
         <line x1="20" y1="80" x2="0" y2="20" />
         <line x1="20" y1="80" x2="80" y2="80" />
-        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="2" fill="none"/>
+        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="4" fill="none"/>
       </svg>
     `
   },
