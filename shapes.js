@@ -335,10 +335,22 @@ canvas.addEventListener('mousedown', (e) => {
                     break;
                 case 'Divider':
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
-                        if (e.shiftKey) {
-                            selectedShape.rotating = true;
-                            console.log("🔄 Divider rotation initiated.");
+                       if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
+                            selectedShape.dragging = 'leg1';
+                            console.log("📏 Dragging Divider Leg 1.");
+                        } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
+                            selectedShape.dragging = 'leg2';
+                            console.log("📏 Dragging Divider Leg 2.");
                         } else {
+                            selectedShape.dragging = 'pivot';
+                            selectedShape.pivotDraggable = true; // ✅ Needed to change color
+                            console.log("📌 Dragging Divider Pivot.");
+                        }
+                    }
+                    break;
+
+
+                        /*else {
                             // Check where the click happened
                             const clickedPart = selectedShape.isPointInside(offsetX, offsetY); // custom method
 
@@ -361,7 +373,7 @@ canvas.addEventListener('mousedown', (e) => {
                             }
                         }
                     }
-                    break;
+                    break; */
 
 
                 case 'Compass':
@@ -455,29 +467,20 @@ canvas.addEventListener('mousemove', (e) => {
     
 
             case 'Divider':
-                console.log("Inside divider selectedShape is ", selectedShape);
-                if (selectedShape.rotating) {
-                    // Handle rotation logic
-                   const angleIncrement = Math.atan2(offsetY - selectedShape.pivot.y, offsetX - selectedShape.pivot.x) -
-                               Math.atan2(dragStart.y - selectedShape.pivot.y, dragStart.x - selectedShape.pivot.x);
+                    console.log("Inside divider selectedShape is ", selectedShape);
 
-                    // Step 4: Fine rotation step logic
-                    const rotationStep = Math.PI / 60; // 3 degrees in radians
-                    const adjustedIncrement = Math.round(angleIncrement / rotationStep) * rotationStep;
+                    if (selectedShape.dragging === 'pivot') {
+                        selectedShape.drag(dx, dy);
+                        console.log("📌 Dragging Divider Pivot.");
+                    } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
+                        selectedShape.adjustLeg(offsetX, offsetY);
+                        console.log(`📏 Adjusting Divider ${selectedShape.dragging}.`);
+                    } else {
+                        console.log("❌ No dragging action set for Divider.");
+                    }
 
-                    // Rotate the divider using the adjusted increment
-                    selectedShape.rotateDivider(adjustedIncrement);
+                    break;
 
-                     console.log(`Rotating Divider by: ${adjustedIncrement} radians (adjusted from ${angleIncrement} radians).`);
-                } else if (selectedShape.dragging === 'pivot') {
-                    selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
-                    console.log("Dragging Divider Pivot.");
-                } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
-                    selectedShape.adjustLeg(offsetX, offsetY);
-                    console.log(`Adjusting Divider ${selectedShape.dragging}.`);
-                }
-               // handleDividerMove(selectedShape,dx, dy,offsetX,offsetY);
-                break;
 
             case 'Compass':
                 console.log("Mouse down : Selected shape:", selectedShape);
@@ -544,11 +547,15 @@ canvas.addEventListener('mouseup', (e) => {
 
     switch (selectedShape.constructor.name) {
         case 'Divider':
-            selectedShape.draggingLeg = null;
-            selectedShape.rotating = false;
-            selectedShape.pivotDraggable = false;
-            canvasManager.render();  // Trigger redraw to revert to gray
-            break;
+        // Clear the dragging state (either 'pivot', 'leg1', or 'leg2')
+        selectedShape.dragging = null;
+
+        // No need for rotating or pivotDraggable flags now
+        // They can be safely removed unless you're using them elsewhere
+
+        console.log("🖱️ Mouse up: Reset Divider dragging state.");
+        canvasManager.render(); // Ensure any final position is rendered
+        break;
 
         case 'Compass':
             console.log("Mouse up on Compass. Finalizing changes.");
