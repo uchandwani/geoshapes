@@ -140,6 +140,8 @@ constrainToCanvas(canvasWidth, canvasHeight) {
         console.log("Rotation Buttons State:", this.buttons);
         ctx.beginPath();
         ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
+        console.log("🎨 Drawing pivot with color:", this.pivotDraggable ? "red" : "gray");
+
         ctx.fillStyle = this.pivotDraggable ? 'red' : '#ccc';
         ctx.fill();
         ctx.strokeStyle = '#555';
