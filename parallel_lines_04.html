@@ -105,7 +105,8 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality, attachNavBarListeners } = await import('./js/parallelLinesEventHandlers.js');
+    const {attachNavBarListeners } = await import('./js/header.js');
+    const { switchFunctionality } = await import('./js/parallelLinesEventHandlers.js');
     attachNavBarListeners();
     switchFunctionality('verticallyOpposite'); // Default functionality
   </script>
