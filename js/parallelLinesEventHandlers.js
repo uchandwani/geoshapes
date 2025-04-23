@@ -65,10 +65,11 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
   // ✅ Compose header with dividers only if parts are present
   updateHeaderLabels({
 
-    console.log(" Header Composition Check");
-    console.log("   Main Title:", mainTitle);
-    console.log("   Subtitle (from icon title):", subtitleLabel);
-    console.log("   Sub-button label (from config):", activeSubBtnLabel);
+    console.log("🧠 Header Composition Check");
+console.log("   Main Title:", mainTitle);
+console.log("   Subtitle (from icon title):", subtitleLabel);
+console.log("   Sub-button label (from config):", activeSubBtnLabel);
+
 
     title: mainTitle,
     subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
