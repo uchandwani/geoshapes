@@ -353,7 +353,7 @@
     }
 
 
-  export function compareMeasures(input1Id, input2Id, resultId) {
+  /*export function compareMeasures(input1Id, input2Id, resultId) {
     console.log("Inside compareMeasures", input1Id, input2Id, resultId);
     
     const input1 = document.getElementById(input1Id);
@@ -375,7 +375,30 @@
     } else {
         result.textContent = ""; // Clear result if inputs are empty
     }
+} */
+
+export function compareMeasures(id1, id2, resultId) {
+  console.log("Inside compareMeasures", id1, id2, resultId);
+
+  const input1 = document.getElementById(id1);
+  const input2 = document.getElementById(id2);
+  const result = document.getElementById(resultId);
+
+  if (!input1 || !input2 || !result) {
+    console.error("❌ Error: One or more elements not found!", { input1, input2, result });
+    return;
+  }
+
+  const val1 = parseFloat(input1.value);
+  const val2 = parseFloat(input2.value);
+
+  if (isNaN(val1) || isNaN(val2)) {
+    result.textContent = "❌ Invalid";
+  } else {
+    result.textContent = val1 === val2 ? "✅ Yes" : "❌ No";
+  }
 }
+
 
 
 export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null) {
