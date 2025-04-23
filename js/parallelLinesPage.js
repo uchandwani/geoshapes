@@ -17,7 +17,7 @@
 
 
   attachNavBarListeners(); // Nav bar logic
-  const defaultFunctionality = 'sineTheta';
+  const defaultFunctionality = 'verticallyOpposite';
   switchFunctionality(defaultFunctionality); // Default load
 
   // 🟦 Header icon click listeners
