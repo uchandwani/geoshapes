@@ -377,27 +377,34 @@
     }
 } */
 
-export function compareMeasures(id1, id2, resultId) {
-  console.log("Inside compareMeasures", id1, id2, resultId);
+export function compareMeasures(input1Name, input2Name, resultName) {
+  console.log("Inside compareMeasures", input1Name, input2Name, resultName);
 
-  const input1 = document.getElementById(id1);
-  const input2 = document.getElementById(id2);
-  const result = document.getElementById(resultId);
+  const input1 = document.getElementsByName(input1Name)[0];
+  const input2 = document.getElementsByName(input2Name)[0];
+  const result = document.getElementsByName(resultName)[0] || document.getElementById(resultName);
 
   if (!input1 || !input2 || !result) {
-    console.error("❌ Error: One or more elements not found!", { input1, input2, result });
+    console.error("❌ Element not found", { input1, input2, result });
     return;
   }
 
-  const val1 = parseFloat(input1.value);
-  const val2 = parseFloat(input2.value);
+  const val1 = input1.value.trim();
+  const val2 = input2.value.trim();
 
-  if (isNaN(val1) || isNaN(val2)) {
-    result.textContent = "❌ Invalid";
+  // ✅ Only run comparison when both inputs are filled
+  if (val1 !== "" && val2 !== "") {
+    const match = parseFloat(val1) === parseFloat(val2);
+    result.textContent = match ? "Yes" : "No";
+    input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+    input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
   } else {
-    result.textContent = val1 === val2 ? "✅ Yes" : "❌ No";
+    result.textContent = "";
+    input1.style.backgroundColor = "";
+    input2.style.backgroundColor = "";
   }
 }
+
 
 
 
