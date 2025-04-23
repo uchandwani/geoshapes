@@ -1,32 +1,28 @@
 // header.js
 
 export function attachNavBarListeners() {
-  const page = location.pathname.split("/").pop();
+  const navMap = {
+    "verticallyOpposite-button": { functionality: "verticallyOpposite", subtype: null },
+    "parallelProperties-button": { functionality: "parallelProperties", subtype: "sin" },
+    "exteriorAngles-button": { functionality: "exteriorAngles", subtype: "sin" },
+    "angleSumProperties-button": { functionality: "angleSumProperties", subtype: "sin" }
+  };
 
-  // Parallel Lines only for now
-  if (page === "parallel_lines_04.html") {
-    const navMap = {
-      "verticallyOpposite-button": "verticallyOpposite",
-      "parallelProperties-button": "parallelProperties",
-      "exteriorAngles-button": "exteriorAngles",
-      "angleSumProperties-button": "angleSumProperties"
-    };
-
-    Object.entries(navMap).forEach(([id, functionalityKey]) => {
-      const button = document.getElementById(id);
-      if (button) {
-        button.addEventListener("click", () => {
-          console.log("🔘 Header/Nav button clicked:", id, functionalityKey);
-          if (typeof window.switchFunctionality === "function") {
-            window.switchFunctionality(functionalityKey);
-          }
+  Object.entries(navMap).forEach(([id, { functionality, subtype }]) => {
+    const button = document.getElementById(id);
+    if (button) {
+      button.addEventListener("click", () => {
+        console.log("📣 Dispatching nav-select event:", functionality, subtype);
+        const event = new CustomEvent("nav-select", {
+          detail: { functionalityKey: functionality, subtype }
         });
-      } else {
-        console.warn(`❌ Button with ID '${id}' not found in DOM.`);
-      }
-    });
-  }
+        window.dispatchEvent(event);
+      });
+    }
+  });
 }
+
+
 
 export function updatePageTitle() {
   const pageTitles = {
