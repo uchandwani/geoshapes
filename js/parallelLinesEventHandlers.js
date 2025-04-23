@@ -54,7 +54,14 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
   const mainTitle = pageTitles[page] || "Math App";
 
   const icon = document.getElementById(`${functionalityKey}-button`);
-  const subtitleLabel = icon?.getAttribute("title") || "";
+  const subtitleMap = {
+  verticallyOpposite: "Vertically Opposite",
+  parallelProperties: "Parallel Line Properties",
+  exteriorAngles: "Exterior Angles",
+  angleSumProperties: "Angle Sum"
+    };
+ const subtitleLabel = subtitleMap[functionalityKey] || "";
+
 
   let activeSubBtnLabel = "";
   if (config.buttonSet && effectiveType) {
