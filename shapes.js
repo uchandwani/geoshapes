@@ -336,25 +336,33 @@ canvas.addEventListener('mousedown', (e) => {
                 case 'Divider':
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
                         if (e.shiftKey) {
-                            // Enable rotation mode for the divider
                             selectedShape.rotating = true;
                             console.log("🔄 Divider rotation initiated.");
                         } else {
-                            // Detect which part of the divider is clicked and set `dragging`
+                            // Check where the click happened
+                            const clickedPart = selectedShape.isPointInsideDivider(offsetX, offsetY); // custom method
+
+                            if (clickedPart === 'pivot') {
                                 selectedShape.dragging = 'pivot';
-                                console.log("📌 Dragging Divider Pivot.");
-                            } if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
+                                selectedShape.pivotDraggable = true;  // ✅ Set to true only here
+                                console.log("📌 Dragging Divider Pivot. 🔴 pivotDraggable = true");
+                            } else if (selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
                                 selectedShape.dragging = 'leg1';
+                                selectedShape.pivotDraggable = false;
                                 console.log("📏 Dragging Divider Leg 1.");
-                            } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
+                            } else if (selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
                                 selectedShape.dragging = 'leg2';
+                                selectedShape.pivotDraggable = false;
                                 console.log("📏 Dragging Divider Leg 2.");
                             } else {
+                                selectedShape.dragging = null;
+                                selectedShape.pivotDraggable = false;
                                 console.log("❌ Clicked inside divider but no part was selected.");
                             }
                         }
-                    
-                 break;
+                    }
+                    break;
+
 
                 case 'Compass':
                     const dx = offsetX - selectedShape.leg2.x;
