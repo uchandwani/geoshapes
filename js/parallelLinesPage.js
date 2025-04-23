@@ -355,7 +355,7 @@
 
   export function compareMeasures(input1Id, input2Id, resultId) {
     console.log("Inside compareMeasures", input1Id, input2Id, resultId);
-
+    debugger;
     const input1 = document.getElementById(input1Id);
     const input2 = document.getElementById(input2Id);
     const result = document.getElementById(resultId);
@@ -378,7 +378,7 @@
 
 export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null) {
     console.log("Inside sumMeasures", input1Id, input2Id, input3Id, resultId, target);
-
+    debugger;
     const input1 = document.getElementById(input1Id);
     const input2 = document.getElementById(input2Id);
     const input3 = input3Id ? document.getElementById(input3Id) : null;
@@ -436,7 +436,7 @@ function resetInputStyles(inputs, result) {
         const input1 = document.getElementsByName(input1Name)[0];
         const input2 = document.getElementsByName(input2Name)[0];
         const result = document.getElementsByName(resultName)[0];
-
+        debugger;
         if (input1.value && input2.value) {
             const value1 = parseFloat(input1.value);
             const value2 = parseFloat(input2.value) / divisor;
@@ -461,7 +461,7 @@ function resetInputStyles(inputs, result) {
         const ans1 = document.getElementsByName(ans1Name)[0]?.textContent.trim();
         const ans2 = document.getElementsByName(ans2Name)[0]?.textContent.trim();
         const messageArea = document.getElementById(messageAreaId);
-
+        debugger;
         if (!messageArea) {
             console.error(`Element with id "${messageAreaId}" not found.`);
             return;
