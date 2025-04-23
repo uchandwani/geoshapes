@@ -95,7 +95,7 @@ export function loadSubHeaderIcons() {
               <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
               <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
             </svg>` },
-      { id: "angleSum-button", title: "Angle Sum Properties", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+      { id: "angleSumProperties-button", title: "Angle Sum Properties", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
               <line x1="10" y1="30" x2="90" y2="30" />
               <line x1="10" y1="70" x2="90" y2="70" />
