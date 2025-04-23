@@ -31,7 +31,7 @@ constructor(pivotX, pivotY){
 
 
     drag(dx, dy, isShiftKey, ctx, mouseX, mouseY) {
-
+        debugger;
         if (!ctx) {
         console.error("❌ drag(): Canvas context is undefined!");
         return;
