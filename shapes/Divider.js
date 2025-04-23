@@ -136,13 +136,14 @@ constrainToCanvas(canvasWidth, canvasHeight) {
 
     draw(ctx) {
 
-        console.log("Drawing Divider:", this);
-        console.log("Rotation Buttons State:", this.buttons);
+        console.log("🎨 Drawing Divider:", this);
+        console.log("🎯 Rotation Buttons State:", this.buttons);
+
+        // 🟢 FIXED PIVOT COLOR SECTION
         ctx.beginPath();
         ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
-        console.log("🎨 Drawing pivot with color:", this.pivotDraggable ? "red" : "gray");
-
-        ctx.fillStyle = this.pivotDraggable ? 'red' : '#ccc';
+        const pivotColor = this.pivotDraggable ? 'red' : '#ccc';  // ✅ use correct condition
+        ctx.fillStyle = pivotColor;  // ✅ updated dynamically
         ctx.fill();
         ctx.strokeStyle = '#555';
         ctx.lineWidth = 2;
@@ -189,6 +190,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
             if (this.isPointInside({ x: mouseX, y: mouseY })) {
                 if (Math.hypot(this.pivot.x - mouseX, this.pivot.y - mouseY) <= 10) {
                 this.pivotDraggable = !this.pivotDraggable;
+                canvasManager.render(); // 🔁 Force redraw so color update is visible
                 console.log("✅ Pivot toggle. Now draggable?", this.pivotDraggable);
 
                     this.dragging = 'pivot';
@@ -199,7 +201,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
                 }
             console.log("Divider drag", this.dragging);
             }
-        canvasManager.render(); // 🔁 Force redraw so color update is visible
+        
 
         }
 
