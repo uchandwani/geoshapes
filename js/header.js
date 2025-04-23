@@ -9,7 +9,7 @@ export function attachNavBarListeners() {
       "verticallyOpposite-button": "verticallyOpposite",
       "parallelProperties-button": "parallelProperties",
       "exteriorAngles-button": "exteriorAngles",
-      "angleSum-button": "angleSumProperties"
+      "angleSumProperties-button": "angleSumProperties"
     };
 
     Object.entries(navMap).forEach(([id, functionalityKey]) => {
