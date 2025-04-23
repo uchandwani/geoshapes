@@ -470,7 +470,7 @@ canvas.addEventListener('mousemove', (e) => {
                     console.log("Inside divider selectedShape is ", selectedShape);
 
                     if (selectedShape.dragging === 'pivot') {
-                        selectedShape.drag(dx, dy);
+                        selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
                         console.log("📌 Dragging Divider Pivot.");
                     } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
                         selectedShape.adjustLeg(offsetX, offsetY);
