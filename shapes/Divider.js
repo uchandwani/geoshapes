@@ -134,55 +134,50 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     }
 
 
-    draw(ctx) {
+   draw(ctx) {
+    console.log("🎨 Drawing Divider:", this);
+    console.log("🎯 Rotation Buttons State:", this.buttons);
 
-        console.log("🎨 Drawing Divider:", this);
-        console.log("🎯 Rotation Buttons State:", this.buttons);
+    // 1️⃣ Draw the two legs from pivot to leg1 and leg2
+    ctx.beginPath();
+    ctx.moveTo(this.pivot.x, this.pivot.y);
+    ctx.lineTo(this.leg1.x, this.leg1.y);
+    ctx.moveTo(this.pivot.x, this.pivot.y);
+    ctx.lineTo(this.leg2.x, this.leg2.y);
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
 
-        // 🟢 FIXED PIVOT COLOR SECTION
-        ctx.beginPath();
-        ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
-        const pivotColor = this.pivotDraggable ? 'red' : '#ccc';  // ✅ use correct condition
-        ctx.fillStyle = pivotColor;  // ✅ updated dynamically
-        ctx.fill();
-        ctx.strokeStyle = '#555';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.closePath();
+    // 2️⃣ Draw the central screw
+    ctx.beginPath();
+    ctx.rect(this.screw.x - 5, this.screw.y - 10, 10, 20);
+    ctx.fillStyle = '#777';
+    ctx.fill();
+    ctx.closePath();
 
-        ctx.beginPath();
-        ctx.moveTo(this.pivot.x, this.pivot.y);
-        ctx.lineTo(this.leg1.x, this.leg1.y);
-        ctx.moveTo(this.pivot.x, this.pivot.y);
-        ctx.lineTo(this.leg2.x, this.leg2.y);
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        ctx.closePath();
+    // 3️⃣ Draw distance label between legs
+    const distance = Math.hypot(this.leg1.x - this.leg2.x, this.leg1.y - this.leg2.y);
+    ctx.font = '14px Arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText(`Distance: ${distance.toFixed(0)}`, this.pivot.x, this.pivot.y - 20);
 
-        ctx.beginPath();
-        ctx.rect(this.screw.x - 5, this.screw.y - 10, 10, 20);
-        ctx.fillStyle = '#777';
-        ctx.fill();
-        ctx.closePath();
+    // 4️⃣ Draw pivot circle last so color toggle is visible on top
+    ctx.beginPath();
+    ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
+    const pivotColor = this.pivotDraggable ? 'red' : 'gray';
+    console.log("🎨 Pivot color set to:", pivotColor);
+    ctx.fillStyle = pivotColor;
+    ctx.fill();
+    ctx.strokeStyle = '#555';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.closePath();
 
-         // Add rotation controls
-        this.updateRotationControls();
+    // 5️⃣ Optional: call helper to draw rotation arrows
+    this.updateRotationControls();
+}
 
-        // Draw pivot and leg ends
-      /*  [this.pivot, this.leg1, this.leg2].forEach((point, index) => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
-            ctx.fillStyle = index === 0 ? 'red' : 'blue';
-            ctx.fill();
-        });*/
-
-        // Show distance between legs
-        const distance = Math.hypot(this.leg1.x - this.leg2.x, this.leg1.y - this.leg2.y);
-        ctx.font = '14px Arial';
-        ctx.fillStyle = 'black';
-        ctx.fillText(`Distance: ${distance.toFixed(0)}`, this.pivot.x, this.pivot.y - 20);
-    }
 
     
         startDragging(mouseX, mouseY) {
