@@ -546,6 +546,8 @@ canvas.addEventListener('mouseup', (e) => {
         case 'Divider':
             selectedShape.draggingLeg = null;
             selectedShape.rotating = false;
+            selectedShape.pivotDraggable = false;
+            canvasManager.render();  // Trigger redraw to revert to gray
             break;
 
         case 'Compass':
