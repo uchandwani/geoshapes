@@ -62,7 +62,12 @@ constructor(pivotX, pivotY){
         }
 
         // Enforce canvas boundaries
-        this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
+        if (ctx && ctx.canvas) {
+            this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
+        } else {
+            console.warn("⚠️ Canvas reference not available; skipping constraint enforcement.");
+            }
+
         this.updateButtonPositions();
     }
 
