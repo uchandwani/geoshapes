@@ -31,6 +31,11 @@ constructor(pivotX, pivotY){
 
 
     drag(dx, dy, isShiftKey, ctx, mouseX, mouseY) {
+
+        if (!ctx) {
+        console.error("❌ drag(): Canvas context is undefined!");
+        return;
+        }
         if (isShiftKey) {
             this.rotateDivider(mouseX, mouseY); 
              this.updateRotationControls(); 
