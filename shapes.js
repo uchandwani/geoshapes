@@ -353,7 +353,7 @@ canvas.addEventListener('mousedown', (e) => {
                                 console.log("❌ Clicked inside divider but no part was selected.");
                             }
                         }
-                    }
+                    
                  break;
 
                 case 'Compass':
