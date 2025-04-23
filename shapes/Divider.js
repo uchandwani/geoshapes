@@ -182,22 +182,24 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     }
 
     
-    startDragging(mouseX, mouseY) {
-        console.log("Divider drag starts");
-        if (this.isPointInside({ x: mouseX, y: mouseY })) {
-            if (Math.hypot(this.pivot.x - mouseX, this.pivot.y - mouseY) <= 10) {
-            this.pivotDraggable = !this.pivotDraggable;
-            console.log("✅ Pivot toggle. Now draggable?", this.pivotDraggable);
+        startDragging(mouseX, mouseY) {
+            console.log("Divider drag starts");
+            if (this.isPointInside({ x: mouseX, y: mouseY })) {
+                if (Math.hypot(this.pivot.x - mouseX, this.pivot.y - mouseY) <= 10) {
+                this.pivotDraggable = !this.pivotDraggable;
+                console.log("✅ Pivot toggle. Now draggable?", this.pivotDraggable);
 
-                this.dragging = 'pivot';
-            } else if (Math.hypot(this.leg1.x - mouseX, this.leg1.y - mouseY) <= 10) {
-                this.dragging = 'leg1';
-            } else if (Math.hypot(this.leg2.x - mouseX, this.leg2.y - mouseY) <= 10) {
-                this.dragging = 'leg2';
+                    this.dragging = 'pivot';
+                } else if (Math.hypot(this.leg1.x - mouseX, this.leg1.y - mouseY) <= 10) {
+                    this.dragging = 'leg1';
+                } else if (Math.hypot(this.leg2.x - mouseX, this.leg2.y - mouseY) <= 10) {
+                    this.dragging = 'leg2';
+                }
+            console.log("Divider drag", this.dragging);
             }
-        console.log("Divider drag", this.dragging);
+        canvasManager.render(); // 🔁 Force redraw so color update is visible
+
         }
-    }
 
     isPointNearLeg(x, y, leg) {
         const legPoint = leg === 'leg1' ? this.leg1 : this.leg2;
