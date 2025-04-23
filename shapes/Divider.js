@@ -213,6 +213,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     const pivotDistance = Math.hypot(this.pivot.x - x, this.pivot.y - y);
     if (pivotDistance <= this.ringRadius + 2) { // include padding
         console.log("✅ Click detected on pivot circle.");
+        canvasManager.render();
         return true;
     }
 
