@@ -285,21 +285,20 @@ export function addSpecificPoints(points, ctx) {
 }
 
 export function attachNavBarListeners() {
-    const navMap = {
-        sineTheta: "sin",
-        cosineTheta: "cos",
-        trigonoRatios: "tan",
-        trigonoIdentities: "tan"
-    };
-
-    Object.entries(navMap).forEach(([id, subtype]) => {
-        const button = document.getElementById(`${id}-button`);
-        if (button) {
-            button.addEventListener("click", () => {
-                console.log("🔘 Header/Nav button clicked:", id, subtype);
-                switchFunctionality(id, subtype);
-            }, { once: true }); // ✅ Fires only once, prevents double trigger
-        }
-    });
+  const navMap = {
+    "verticallyOpposite-button": "verticallyOpposite",
+    "parallelProperties-button": "parallelProperties",
+    "exteriorAngles-button": "exteriorAngles",
+    "angleSumProperties-button": "angleSumProperties"
+  };
+  Object.entries(navMap).forEach(([id, subtype]) => {
+    const button = document.getElementById(id);
+    if (button) {
+      button.addEventListener("click", () => {
+        console.log("🔘 Header/Nav button clicked:", id, subtype);
+        switchFunctionality(subtype);
+      }, { once: true });
+    }
+  });
 }
 
