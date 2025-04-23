@@ -108,7 +108,7 @@ const pageIconsMap = {
             </svg>`
     },
     {
-      id: "cosineTheta-button",
+      id: "trigonoIdentities-button",
       title: "Alternate Angles",
       svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
@@ -120,7 +120,7 @@ const pageIconsMap = {
             </svg>`
     },
     {
-      id: "cosineTheta-button",
+      id: "trigonoRatios-button",
       title: "Alternate Angles",
       svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
