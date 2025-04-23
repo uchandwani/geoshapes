@@ -340,7 +340,7 @@ canvas.addEventListener('mousedown', (e) => {
                             console.log("🔄 Divider rotation initiated.");
                         } else {
                             // Check where the click happened
-                            const clickedPart = selectedShape.isPointInsideDivider(offsetX, offsetY); // custom method
+                            const clickedPart = selectedShape.isPointInside(offsetX, offsetY); // custom method
 
                             if (clickedPart === 'pivot') {
                                 selectedShape.dragging = 'pivot';
