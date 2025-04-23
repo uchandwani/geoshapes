@@ -24,6 +24,7 @@
       switchFunctionality(functionalityKey, subtype);
     });
 
+
  
     // Function to draw the default triangle on page load
     function drawDefaultCircle(ctx,canvas) {
@@ -352,23 +353,25 @@
     }
 
 
-  export function compareMeasures(input1Name, input2Name, resultName) {
-    console.log("Inside compareMeasures", input1Name, input2Name, resultName);
+  export function compareMeasures(input1Id, input2Id, resultId) {
+    console.log("Inside compareMeasures", input1Id, input2Id, resultId);
 
-    const input1 = document.getElementById(input1Name);
-    const input2 = document.getElementById(input2Name);
-    const result = document.getElementById(resultName);
+    const input1 = document.getElementById(input1Id);
+    const input2 = document.getElementById(input2Id);
+    const result = document.getElementById(resultId);
    
-    if (input1.value && input2.value) {
-        const match = parseFloat(input1.value) === parseFloat(input2.value);
-        result.textContent = match ? "Yes" : "No";
-        // Change background color
-        input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-        input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+    if (!input1 || !input2 || !result) {
+        console.error("❌ Error: One or more elements not found!", { input1, input2, result });
+        return;
+    }
+
+    const value1 = parseFloat(input1.textContent) || null;
+    const value2 = parseFloat(input2.value) || null;
+
+    if (value1 !== null && value2 !== null) {
+        result.textContent = value1 === value2 ? "Yes" : "No";
     } else {
-        result.textContent = ""; // Clear the content if values are not entered
-        input1.style.backgroundColor = ""; // Reset to default
-        input2.style.backgroundColor = ""; // Reset to default
+        result.textContent = ""; // Clear result if inputs are empty
     }
 }
 
