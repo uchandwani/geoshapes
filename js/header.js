@@ -76,10 +76,37 @@ export function loadSubHeaderIcons() {
 
   const pageIconsMap = {
     "parallel_lines_04.html": [
-      { id: "verticallyOpposite-button", title: "Vertically Opposite Angles", svg: `...` },
-      { id: "parallelProperties-button", title: "Parallel Lines - Properties", svg: `...` },
-      { id: "exteriorAngles-button", title: "Exterior Angles", svg: `...` },
-      { id: "angleSum-button", title: "Angle Sum Properties", svg: `...` }
+      { id: "verticallyOpposite-button", title: "Vertically Opposite Angles", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="90" x2="90" y2="10" />
+              <line x1="10" y1="10" x2="90" y2="90" />
+              <path d="M50 50 A15 15 0 0 1 65 35" stroke-width="2"/>
+              <path d="M50 50 A15 15 0 0 1 35 65" stroke-width="2"/>
+            </svg>` },
+      { id: "parallelProperties-button", title: "Parallel Lines - Properties", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="30" x2="90" y2="30" />
+              <line x1="10" y1="70" x2="90" y2="70" />
+              <line x1="30" y1="10" x2="70" y2="90" />
+              <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+              <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
+            </svg>` },
+      { id: "exteriorAngles-button", title: "Exterior Angles", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="30" x2="90" y2="30" />
+              <line x1="10" y1="70" x2="90" y2="70" />
+              <line x1="30" y1="10" x2="70" y2="90" />
+              <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+              <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
+            </svg>` },
+      { id: "angleSum-button", title: "Angle Sum Properties", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="10" y1="30" x2="90" y2="30" />
+              <line x1="10" y1="70" x2="90" y2="70" />
+              <line x1="30" y1="10" x2="70" y2="90" />
+              <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+              <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
+            </svg>` }
     ]
   };
 
