@@ -341,8 +341,7 @@ canvas.addEventListener('mousedown', (e) => {
                             console.log("🔄 Divider rotation initiated.");
                         } else {
                             // Detect which part of the divider is clicked and set `dragging`
-                            if (selectedShape.isNearPivot && selectedShape.isNearPivot(offsetX, offsetY)) {
-                                selectedShape.dragging = 'pivot';
+                             selectedShape.startDragging(offsetX, offsetY); // ✅ Let internal logic decide
                                 console.log("📌 Dragging Divider Pivot.");
                             } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
                                 selectedShape.dragging = 'leg1';
