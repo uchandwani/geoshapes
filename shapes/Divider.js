@@ -210,6 +210,13 @@ constrainToCanvas(canvasWidth, canvasHeight) {
  isPointInside(x, y) {
     console.log(`🔍 Checking if point (${x}, ${y}) is inside the divider`);
 
+    const pivotDistance = Math.hypot(this.pivot.x - x, this.pivot.y - y);
+    if (pivotDistance <= this.ringRadius + 2) { // include padding
+        console.log("✅ Click detected on pivot circle.");
+        return true;
+    }
+
+    // Old area-based triangle detection (optional now)
     const { pivot, leg1, leg2 } = this;
 
     function area(p1, p2, p3) {
@@ -236,6 +243,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
 
     return inside;
 }
+
 
 
 
