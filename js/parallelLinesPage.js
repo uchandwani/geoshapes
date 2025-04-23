@@ -3,50 +3,28 @@
     import { canvasManager } from '../shapes/CanvasManager.js';
     import { functionalityConfig } from './parallelLinesConfig.js';
     import { addSpecificPoints } from './parallelLinesEventHandlers.js';
-    import { attachNavBarListeners } from './parallelLinesEventHandlers.js';
     import {Line} from '../shapes/Lines.js';
     import {Point} from '../shapes/Points.js';
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './parallelLinesEventHandlers.js';
     window.switchFunctionality = switchFunctionality;
 
-        
-  document.addEventListener("DOMContentLoaded", () => {
-  console.log("Parallel Lines Page Loaded");
-  updatePageTitle(); // sets the title from file name
 
+    window.switchFunctionality = switchFunctionality;
 
-  attachNavBarListeners(); // Nav bar logic
-  const defaultFunctionality = 'verticallyOpposite';
-  switchFunctionality(defaultFunctionality); // Default load
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Parallel Lines Page Loaded");
+      updatePageTitle();
+      switchFunctionality('verticallyOpposite'); // default
+    });
 
-  // 🟦 Header icon click listeners
-  const iconMap = {
-    "verticallyOpposite-button": "verticallyOpposite",
-    "parallelProperties-button": "parallelProperties",
-    "exteriorAngles-button": "exteriorAngles",
-    "angleSumProperties-button": "angleSumProperties"
-  };
+    window.addEventListener("nav-select", (e) => {
+      const { functionalityKey, subtype } = e.detail;
+      console.log("📥 Received nav-select:", functionalityKey, subtype);
+      switchFunctionality(functionalityKey, subtype);
+    });
 
- Object.entries(iconMap).forEach(([id, funcKey]) => {
-  const el = document.getElementById(id);
-  console.log("🔍 Checking icon", id, el?.dataset.listenerAttached);
-
-if (el && !el.dataset.listenerAttached) {
-  console.log("✅ Binding click handler for:", id);
-  el.addEventListener("click", () => {
-    console.log(`🔘 ${funcKey} icon clicked`);
-    switchFunctionality(funcKey);
-  });
-  el.dataset.listenerAttached = "true";
-}
-
-});
-
-});
-
-        
-
+ 
     // Function to draw the default triangle on page load
     function drawDefaultCircle(ctx,canvas) {
         const centerPoint = new Point(300, 300);
