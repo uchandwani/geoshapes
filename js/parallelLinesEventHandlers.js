@@ -64,6 +64,12 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
 
   // ✅ Compose header with dividers only if parts are present
   updateHeaderLabels({
+
+    console.log("🧠 Header Composition Check");
+    console.log("   Main Title:", mainTitle);
+    console.log("   Subtitle (from icon title):", subtitleLabel);
+    console.log("   Sub-button label (from config):", activeSubBtnLabel);
+
     title: mainTitle,
     subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
     subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
@@ -256,10 +262,6 @@ export function updateTheoremText(config, subtype = null) {
 }
 
 
-
-
-
-
 export function activateButton(containerSelector, button) {
     const container = document.querySelector(containerSelector);
     if (!container) return;
@@ -283,6 +285,4 @@ export function addSpecificPoints(points, ctx) {
     });
     canvasManager.render();
 }
-
-
 
