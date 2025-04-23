@@ -22,10 +22,10 @@
 
   // 🟦 Header icon click listeners
   const iconMap = {
-    "sineTheta-button": "sineTheta",
-    "cosineTheta-button": "cosineTheta",
-    "trigonoIdentities-button": "trigonoIdentities",
-    "trigonoRatios-button": "trigonoRatios"
+    "verticallyOpposite-button": "verticallyOpposite",
+    "parallelProperties-button": "parallelProperties",
+    "exteriorAngles-button": "exteriorAngles",
+    "angleSumProperties-button": "angleSumProperties"
   };
 
  Object.entries(iconMap).forEach(([id, funcKey]) => {
