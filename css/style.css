@@ -166,36 +166,42 @@ canvas {
 /* ===========================
    Left Tool Bar
 =========================== */
-.additional-div {
-  width: 4vw;
-  min-width: 40px;
-  background-color: #f1f1f1;
-  border-right: 1px solid #ccc;
+#additional-div {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 10px;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+  max-width: 60px;
 }
 
-.additional-div .icon-btn {
-  background: none;
-  border: none;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
-}
-
-.additional-div .icon-btn:hover {
-  transform: scale(1.1);
-  background-color: #eaeaea;
-  border-radius: 5px;
-}
-
-.additional-div .icon-btn img {
+#additional-div button.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 30px;
+  padding: 4px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: transform 0.2s;
 }
+
+#additional-div button.icon-btn:hover {
+  transform: scale(1.1);
+  border-color: #007bff;
+}
+
+#additional-div button.icon-btn img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 
 /* ===========================
    Dynamic SVG Sub-Buttons
