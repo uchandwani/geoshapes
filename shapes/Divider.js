@@ -256,17 +256,23 @@ constrainToCanvas(canvasWidth, canvasHeight) {
 
     isPointInside(x, y) {
     if (this.isNearPivot(x, y)) {
-        this.pivotDraggable = !this.pivotDraggable; // Toggle state
+        this.pivotDraggable = !this.pivotDraggable;
         console.log(`🔄 Toggled pivotDraggable to ${this.pivotDraggable}`);
+
+        // ✅ Trigger re-render so the color changes instantly
+        if (typeof canvasManager !== 'undefined') {
+            canvasManager.render();
+        }
+
         return true;
     }
 
-
-    if (this.isNearLeg && this.isNearLeg(x, y, 'leg1')) return true;
-    if (this.isNearLeg && this.isNearLeg(x, y, 'leg2')) return true;
+    if (this.isNearLeg(x, y, 'leg1')) return true;
+    if (this.isNearLeg(x, y, 'leg2')) return true;
 
     return false;
 }
+
 
 
 
@@ -329,12 +335,14 @@ rotatePointAroundPivot(point, angle) {
 
 isNearPivot(x, y) {
     const distance = Math.hypot(x - this.pivot.x, y - this.pivot.y);
+    console.log("Checking inside pivot : distance is", distance);
     return distance < 15; // or whatever feels accurate
 }
 
 isNearLeg(x, y, leg) {
     const legPoint = leg === 'leg1' ? this.leg1 : this.leg2;
     const distance = Math.hypot(x - legPoint.x, y - legPoint.y);
+    console.log("Checking near leg: distance is", leg, distance);
     return distance < 15;
 }
 
