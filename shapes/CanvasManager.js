@@ -360,10 +360,18 @@ calculatemidPoints(vertices) {
         });
     }
 
-    clearAllShapes() {
-    console.log("Clearing all shapes! Shapes before clearing:", canvasManager.shapes);
-    
+   clearAllShapes() {
+    console.log("Clearing all shapes! Shapes before clearing:", this.shapes);
+
+    this.shapes.forEach(shape => {
+        shape.removeDOMElements?.(); // ✅ Clean up buttons or overlays
+    });
+
     this.shapes = [];
+    this.specificPoints = [];
+    this.midPoints = [];
+    this.intersections = [];
+
     const ctx = this.canvas.getContext('2d');
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
@@ -492,6 +500,11 @@ calculatemidPoints(vertices) {
     canvasManager.addProgrammaticShape(circle);
     
 }}
+
+removeDOMElements() {
+    this.removeRotationControls?.();
+}
+
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
