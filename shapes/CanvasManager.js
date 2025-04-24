@@ -376,6 +376,7 @@ calculatemidPoints(vertices) {
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
 
+
     addProgrammaticShape(shape) {
     this.shapes.push(shape);
     this.render(); // Re-render the canvas to include the new shape
@@ -499,12 +500,7 @@ calculatemidPoints(vertices) {
 
     canvasManager.addProgrammaticShape(circle);
     
-}}
-
-removeDOMElements() {
-    this.removeRotationControls?.();
 }
-
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
