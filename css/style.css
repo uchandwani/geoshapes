@@ -175,23 +175,27 @@ canvas-wrapper {
   top: 10px;
   left: 10px;
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 4px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px;
   border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 50; /* Ensure it's above canvas */
+  min-width: 150px;  /* Ensures layout space */
+  min-height: 36px;  /* Prevent collapse */
+  z-index: 50;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+
 #additional-div .icon-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 4px;
+  background: #fff;
   border: none;
-  background-color: white;
   border-radius: 4px;
-  cursor: pointer;
 }
 
 #additional-div .icon-btn img {
@@ -199,6 +203,7 @@ canvas-wrapper {
   height: 100%;
   object-fit: contain;
 }
+
 /* ===========================
    Dynamic SVG Sub-Buttons
 =========================== */
