@@ -119,18 +119,25 @@ rotatePoint(point, pivot, angle) {
     }
 
 updateButtonPositions() {
-    const setPosition = (button, x, y) => {
-        button.style.left = `${x}px`;
-        button.style.top = `${y}px`;
-        console.log("The position is ", button.style.left, button.style.top);
-    };
+    if (this._throttleUpdate) return;
+    this._throttleUpdate = true;
 
-    // Place rotation buttons near the left and right legs for aesthetics
-    setPosition(this.buttons.rotate.minus1, this.leg1.x - 10, this.leg1.y - 30);
-    setPosition(this.buttons.rotate.minus5, this.leg1.x - 30, this.leg1.y );
-    setPosition(this.buttons.rotate.plus1, this.leg2.x + 10, this.leg2.y - 30);
-    setPosition(this.buttons.rotate.plus5, this.leg2.x + 10, this.leg2.y) ;
+    setTimeout(() => {
+        const setPosition = (button, x, y) => {
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        };
+
+        // Position logic...
+        setPosition(this.buttons.rotate.minus1, this.leg1.x - 10, this.leg1.y - 30);
+        setPosition(this.buttons.rotate.minus5, this.leg1.x - 30, this.leg1.y);
+        setPosition(this.buttons.rotate.plus1, this.leg2.x + 10, this.leg2.y - 30);
+        setPosition(this.buttons.rotate.plus5, this.leg2.x + 10, this.leg2.y);
+
+        this._throttleUpdate = false;
+    }, 50); // 🕒 Reduce update frequency to ~20 FPS
 }
+
 
 
 
