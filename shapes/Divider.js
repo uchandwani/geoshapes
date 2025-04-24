@@ -406,6 +406,30 @@ removeDOMElements() {
 }
 
 
+updateButtonPositions() {
+    // ✅ Throttle DOM updates to avoid layout reflow flicker
+    if (!this.lastUpdate) this.lastUpdate = 0;
+    const now = performance.now();
+    if (now - this.lastUpdate < 30) return;
+    this.lastUpdate = now;
+
+    const canvasRect = document.querySelector('canvas').getBoundingClientRect();
+    const offsetX = canvasRect.left;
+    const offsetY = canvasRect.top;
+
+    const setTransform = (button, x, y) => {
+        // 🔁 Use GPU-friendly transform instead of top/left
+        button.style.transform = `translate(${x + offsetX}px, ${y + offsetY}px)`;
+    };
+
+    const offset = 10;
+
+    // 🧠 Position relative to pivot
+    setTransform(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);
+    setTransform(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);
+    setTransform(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset);
+    setTransform(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30);
+}
 
 
 /* 
