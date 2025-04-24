@@ -10,9 +10,10 @@
   <link rel="stylesheet" href="./css/style.css" />
 
   <!-- ✅ JS Modules -->
-  <script type="module" src="./shapes.js"></script>
+
   <script type="module" src="./shapes/CanvasManager.js"> </script>
   <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./shapes.js"></script>
   <script type="module" src="./js/debugDivSizes.js"> </script>
 
 
@@ -98,9 +99,11 @@
         </div>
 
         <!-- Canvas Element -->
-        <div class="canvas-scroll-container">
-          <canvas id="canvas" ></canvas>
+        <div class="canvas-scroll-container" style="position: relative;">
+          <canvas id="canvas"></canvas>
+          <div id="canvas-overlay" style="position: absolute; top: 0; left: 0; pointer-events: none;"></div>
         </div>
+
       </div>
     </div>
 
