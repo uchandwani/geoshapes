@@ -50,7 +50,7 @@ header h1 {
    Sidebars
 =========================== */
 .sidebar-container {
-  width: 26vw;               /* 26% of viewport width – matches .sidebar.left */
+  width: 22vw;               /* 26% of viewport width – matches .sidebar.left */
   max-width: none;
   min-width: 200px;
   display: flex;
@@ -61,7 +61,7 @@ header h1 {
 }
 
 .sidebar.left {
-  width: 26vw;
+  width: 22vw;
   padding: 15px;
   background-color: #f4f4f9;
   border-right: 1px solid #ccc;
@@ -351,7 +351,7 @@ canvas {
 @media screen and (max-width: 1366px) {
   .sidebar-container,
   .sidebar.right {
-    width: 26vw;
+    width: 22vw;
   }
 
   .additional-div {
@@ -378,7 +378,7 @@ canvas {
 @media screen and (min-width: 1920px) {
   .sidebar.left,
   .sidebar.right {
-    width: 26vw;
+    width: 22vw;
   }
 
   .canvas-container {
