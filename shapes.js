@@ -334,27 +334,24 @@ canvas.addEventListener('mousedown', (e) => {
                     console.log(`Dragging vertex for: ${shapeType}`);
                     break;
                 case 'Divider':
+                    
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
-                       if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
+                        if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
                             selectedShape.dragging = 'leg1';
                             console.log("📏 Dragging Divider Leg 1.");
                         } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
                             selectedShape.dragging = 'leg2';
                             console.log("📏 Dragging Divider Leg 2.");
+                        } else if (selectedShape.pivotDraggable) {
+                            selectedShape.dragging = 'pivot';
+                            console.log("📌 Dragging Divider Pivot.");
                         } else {
-                            selectedShape.pivotDraggable = !selectedShape.pivotDraggable;
-
-                            // Only set dragging = 'pivot' if it was enabled
-                            if (selectedShape.pivotDraggable) {
-                                selectedShape.dragging = 'pivot';
-                                console.log("📌 Dragging Divider Pivot. 🔴 pivotDraggable = true");
-                            } else {
-                                selectedShape.dragging = null;
-                                console.log("⚪ Pivot dragging disabled. Reverted to gray.");
-                            }
+                            selectedShape.dragging = null;
+                            console.log("🚫 Divider not draggable now.");
                         }
                     }
                     break;
+
 
 
                         /*else {
