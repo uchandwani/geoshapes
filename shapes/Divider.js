@@ -119,24 +119,30 @@ rotatePoint(point, pivot, angle) {
     }
 
 updateButtonPositions() {
-    if (this._throttleUpdate) return;
-    this._throttleUpdate = true;
+    // ✅ Throttle DOM updates to avoid layout reflow flicker
+    if (!this.lastUpdate) this.lastUpdate = 0;
+    const now = performance.now();
+    if (now - this.lastUpdate < 30) return;
+    this.lastUpdate = now;
 
-    setTimeout(() => {
-        const setPosition = (button, x, y) => {
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-        };
+    const canvasRect = document.querySelector('canvas').getBoundingClientRect();
+    const offsetX = canvasRect.left;
+    const offsetY = canvasRect.top;
 
-        // Position logic...
-        setPosition(this.buttons.rotate.minus1, this.leg1.x - 10, this.leg1.y - 30);
-        setPosition(this.buttons.rotate.minus5, this.leg1.x - 30, this.leg1.y);
-        setPosition(this.buttons.rotate.plus1, this.leg2.x + 10, this.leg2.y - 30);
-        setPosition(this.buttons.rotate.plus5, this.leg2.x + 10, this.leg2.y);
+    const setTransform = (button, x, y) => {
+        // 🔁 Use GPU-friendly transform instead of top/left
+        button.style.transform = `translate(${x + offsetX}px, ${y + offsetY}px)`;
+    };
 
-        this._throttleUpdate = false;
-    }, 50); // 🕒 Reduce update frequency to ~20 FPS
+    const offset = 10;
+
+    // 🧠 Position relative to pivot
+    setTransform(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);
+    setTransform(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);
+    setTransform(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset);
+    setTransform(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30);
 }
+
 
 
 
