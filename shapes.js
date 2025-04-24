@@ -545,7 +545,8 @@ canvas.addEventListener('mousemove', (e) => {
        // console.log('Rendering updated shape compass with arc', selectedShape.arc?.currentAngle);
 
         // Re-render the canvas
-        canvasManager.render(ctx, canvas);
+        canvasManager.renderOnly(selectedShape);
+
     }
 });
 
