@@ -73,6 +73,19 @@ calculatemidPoints(vertices) {
     this.midPoints.push(...midPoints); // Add midPoints to CanvasManager
     return midPoints;
 }
+    renderOnly(shape) {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (shape && typeof shape.draw === 'function') {
+        shape.draw(this.ctx);
+
+        // If it’s a Divider, update button positions explicitly
+        if (shape instanceof Divider && shape.updateRotationControls) {
+            shape.updateRotationControls();
+        }
+    }
+}
+
 
 
     clearTrianglesOnly() {
