@@ -216,7 +216,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
         return distance < 10;
     }
 
- isPointInside(x, y) {
+ /* isPointInside(x, y) {
     console.log(`🔍 Checking if point (${x}, ${y}) is inside the divider`);
 
     const pivotDistance = Math.hypot(this.pivot.x - x, this.pivot.y - y);
@@ -252,7 +252,22 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     }
 
     return inside;
+} */
+
+    isPointInside(x, y) {
+    if (this.isNearPivot(x, y)) {
+        this.pivotDraggable = !this.pivotDraggable; // Toggle state
+        console.log(`🔄 Toggled pivotDraggable to ${this.pivotDraggable}`);
+        return true;
+    }
+
+
+    if (this.isNearLeg && this.isNearLeg(x, y, 'leg1')) return true;
+    if (this.isNearLeg && this.isNearLeg(x, y, 'leg2')) return true;
+
+    return false;
 }
+
 
 
 
