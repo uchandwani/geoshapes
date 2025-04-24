@@ -490,17 +490,10 @@ calculatemidPoints(vertices) {
             }
         });
     });
-}
+}}
 
 
-    drawCircleProgrammatically(centerX, centerY, radius, color = 'black') {
-    const center = new Point(centerX, centerY);
-    const circle = new Circle(center, radius);
-    circle.color = color;
-
-    canvasManager.addProgrammaticShape(circle);
     
-}
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
