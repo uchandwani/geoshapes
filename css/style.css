@@ -166,42 +166,45 @@ canvas {
 /* ===========================
    Left Tool Bar
 =========================== */
-#additional-div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 8px;
-  background: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  margin-top: 12px;
-  max-width: 60px;
+/* Make sure the canvas-wrapper is positioned relatively */
+.canvas-wrapper {
+  position: relative; /* Important: enable absolute children like toolbar */
 }
 
-#additional-div button.icon-btn {
+/* Position the toolbar absolutely inside the canvas-wrapper */
+#additional-div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  background: #ffffffee; /* translucent white */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 20; /* Ensure it's above canvas */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon button styles */
+#additional-div .icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  padding: 4px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  transition: transform 0.2s;
 }
 
-#additional-div button.icon-btn:hover {
-  transform: scale(1.1);
-  border-color: #007bff;
-}
-
-#additional-div button.icon-btn img {
+#additional-div .icon-btn img {
   max-width: 100%;
   max-height: 100%;
 }
-
 
 /* ===========================
    Dynamic SVG Sub-Buttons
