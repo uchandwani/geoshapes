@@ -184,6 +184,19 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     ctx.stroke();
     ctx.closePath();
 
+    // SCREW ring (for disabling drag)
+    ctx.beginPath();
+    ctx.arc(this.screw.x, this.screw.y, this.ringRadius, 0, 2 * Math.PI);
+
+    // Change appearance if pivotDraggable is true
+    ctx.fillStyle = this.pivotDraggable ? '#aaa' : 'gray';
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+
     // 5️⃣ Optional: call helper to draw rotation arrows
     this.updateRotationControls();
 }
@@ -253,30 +266,34 @@ constrainToCanvas(canvasWidth, canvasHeight) {
 
     return inside;
 } */
+  isNearScrew(x, y) {
+    const distance = Math.hypot(x - this.screw.x, y - this.screw.y);
+    return distance < 15; // Same radius as pivot
+}
+  
 
-    isPointInside(x, y) {
+
+  isPointInside(x, y) {
     if (this.isNearPivot(x, y)) {
-        this.pivotDraggable = !this.pivotDraggable;
-        console.log(`🔄 Toggled pivotDraggable to ${this.pivotDraggable}`);
-
-        // ✅ Trigger re-render so the color changes instantly
-        if (typeof canvasManager !== 'undefined') {
-            canvasManager.render();
-        }
-
+        this.pivotDraggable = true;
+        console.log("🔴 Pivot clicked — Drag enabled");
         return true;
     }
 
-    if (this.isNearLeg(x, y, 'leg1')) return true;
-    if (this.isNearLeg(x, y, 'leg2')) return true;
+    if (this.pivotDraggable && this.isNearScrew(x, y)) {
+        this.pivotDraggable = false;
+        console.log("⚪ Screw clicked — Drag disabled");
+        return true;
+    }
+
+    // Optional: also allow selection when near legs
+    if (this.isNearLeg && this.isNearLeg(x, y, 'leg1')) return true;
+    if (this.isNearLeg && this.isNearLeg(x, y, 'leg2')) return true;
 
     return false;
 }
 
-
-
-
-
+    
 
 
 
