@@ -98,7 +98,10 @@ createButton(label, onClick) {
         button.style.padding = '4px 6px';
         button.style.fontSize = '10px';
         button.style.cursor = 'pointer';
-        document.body.appendChild(button);
+        const container = document.getElementById('container') || document.body;
+        container.appendChild(button);
+
+       
         button.addEventListener('click', onClick);
         return button;
     }
