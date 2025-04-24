@@ -473,6 +473,13 @@ canvas.addEventListener('mousemove', (e) => {
             case 'Divider':
                     console.log("Inside divider selectedShape is ", selectedShape);
 
+
+                    if (selectedShape instanceof Divider) {
+                        const hovered = selectedShape.isNearScrew(offsetX, offsetY);
+                        canvas.title = hovered && selectedShape.pivotDraggable ? "Click screw to disable dragging" : "";
+                    }
+
+
                     if (selectedShape.dragging === 'pivot') {
                         selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
                         console.log("📌 Dragging Divider Pivot.");
