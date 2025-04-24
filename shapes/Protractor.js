@@ -280,6 +280,10 @@ snapToNearestPoint(protractor, shapes) {
     }
 }
 
+removeDOMElements() {
+    this.removeRotationControls?.();
+}
+
 
 alignProtractorToPrimaryAngle(primaryAngleData) {
     if (!primaryAngleData || primaryAngleData.type !== 'primary') {
