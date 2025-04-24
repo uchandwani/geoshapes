@@ -386,6 +386,9 @@ isNearLeg(x, y, leg) {
     setPosition(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30); // Bottom-right of pivot
 }
 
+removeDOMElements() {
+    this.removeRotationControls?.();
+}
 
 
 
