@@ -65,18 +65,60 @@ export class Protractor extends Shape {
         this.updateRotationControlsPosition(); // Position buttons near the protractor
     } */
 
-    createButton(label, rotationStep) {
-        const button = document.createElement('button');
-        button.innerText = label;
-        button.style.position = 'absolute';
-        button.style.zIndex = '10';
-        button.addEventListener('click', () => {
-            this.rotateByDegrees(rotationStep);
-            console.log("The protractor rotated by", rotationStep);
-            canvasManager.render(); // Redraw the canvas after rotation
-        });
-        return button;
-    }
+        addRotationControls() {
+            const rotateLeft1 = this.createButton('−1°', -1);
+            const rotateRight1 = this.createButton('+1°', 1);
+            const rotateLeft5 = this.createButton('−5°', -5);
+            const rotateRight5 = this.createButton('+5°', 5);
+        
+            document.body.appendChild(rotateLeft1);
+            document.body.appendChild(rotateRight1);
+            document.body.appendChild(rotateLeft5);
+            document.body.appendChild(rotateRight5);
+        
+            this.rotationControls = {
+                rotateLeft1,
+                rotateRight1,
+                rotateLeft5,
+                rotateRight5
+            };
+        
+            const majorLineColor = '#CB4154';
+            Object.values(this.rotationControls).forEach((button) => {
+                button.style.backgroundColor = majorLineColor;
+                button.style.color = 'white';
+                button.style.border = `1px solid ${majorLineColor}`;
+                button.style.borderRadius = '5px';
+                button.style.padding = '5px';
+                button.style.cursor = 'pointer';
+            });
+        
+            this.updateRotationControlsPosition();
+        }
+        
+        createButton(label, rotationStep) {
+            const button = document.createElement('button');
+            button.innerText = label;
+            button.style.position = 'absolute';
+            button.style.zIndex = '10';
+            button.addEventListener('click', () => {
+                console.log(`🔁 Button "${label}" clicked → Rotating by ${rotationStep}°`);
+                this.rotateByDegrees(rotationStep); // ✅ Main rotation method
+            });
+            return button;
+        }
+        
+        rotateByDegrees(degrees) {
+            this.angleOffset = (this.angleOffset + degrees + 360) % 360;
+            console.log(`✅ Protractor rotated by ${degrees}°. New offset: ${this.angleOffset}`);
+            this.updateRotationControlsPosition(); // Keep buttons positioned
+            canvasManager.render(); // ✅ Redraw canvas and protractor
+        }
+        
+
+        
+
+    
 
    updateRotationControlsPosition() {
     if (this.rotationControls) {
@@ -132,11 +174,7 @@ clampCenterWithinCanvas(canvas) {
     }
 
 
-    rotateByDegrees(degrees) {
-        this.angleOffset = (this.angleOffset + degrees + 360) % 360;
-        console.log(`Protractor rotated by ${degrees}°. Current offset: ${this.angleOffset}`);
-        this.updateRotationControlsPosition(); // Update button positions
-    }
+    
 
  /*   resize(newRadius) {
         this.radius = newRadius;
