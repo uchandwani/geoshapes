@@ -204,20 +204,21 @@ canvas {
 /* ===========================
    Dynamic SVG Sub-Buttons
 =========================== */
-#left-side-tool-div .icon-btn {
-  width: 40px;
-  height: 40px;
-  background: #eef4ff;                      /* Light blue background */
-  border: 2px solid #1E88E5;                /* Blue border */
-  border-radius: 6px;
+#left-side-tool-div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  flex-direction: row;           /* ✅ Horizontal layout */
+  gap: 10px;                     /* ✅ Horizontal spacing */
+  padding: 6px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #1E88E5;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 
 #left-side-tool-div .icon-btn:hover {
   background-color: #dbeaff;               /* Slightly darker on hover */
