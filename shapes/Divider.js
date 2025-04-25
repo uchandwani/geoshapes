@@ -99,7 +99,8 @@ createButton(label, onClick) {
         button.style.fontSize = '10px';
         button.style.cursor = 'pointer';
         
-        document.getElementById('canvas-overlay')?.appendChild(button);
+        document.body.appendChild(button);
+
 
 
        
