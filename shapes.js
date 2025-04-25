@@ -272,7 +272,7 @@ export function generatePointLabel() {
 canvas.addEventListener('mousedown', (e) => {
     const { offsetX, offsetY } = e;
 
-    document.getElementById('right-sidebar').style.pointerEvents = 'none';
+    
 
     if (mode === 'modify') {
         // Detect shape under the cursor
@@ -559,8 +559,7 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mouseup', (e) => {
     console.log(`Inside mouse up Mouse Up at: X = ${e.offsetX}, Y = ${e.offsetY}`);
     
-    document.getElementById('right-sidebar').style.pointerEvents = 'auto';
-
+    
     if (!selectedShape) {
         console.log("No shape was selected before mouse up. Exiting safely.");
         return; // 🔥 Avoid accessing undefined properties
