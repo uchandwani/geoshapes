@@ -90,7 +90,7 @@ constructor(pivotX, pivotY){
     }
 }
 
-reateButton(label, onClick) {
+createButton(label, onClick) {
     const button = document.createElement('button');
     button.innerText = label;
     button.style.position = 'absolute';
