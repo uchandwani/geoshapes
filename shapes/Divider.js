@@ -116,25 +116,26 @@ rotatePoint(point, pivot, angle) {
     }
 
     updateRotationControls() {
-        const canvasRect = document.querySelector('canvas').getBoundingClientRect(); // Get canvas position
-        const offsetX = canvasRect.left;
-        const offsetY = canvasRect.top;
-    
+        const canvasRect = document.getElementById('canvas').getBoundingClientRect();  
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+      
+        const offsetX = canvasRect.left + scrollX;
+        const offsetY = canvasRect.top + scrollY;
+      
         const setPosition = (button, x, y) => {
-            button.style.position = 'absolute';
-            button.style.left = `${x + offsetX}px`; // Adjust for canvas offset
-            button.style.top = `${y + offsetY}px`; // Adjust for canvas offset
+          button.style.left = `${x + offsetX}px`;
+          button.style.top = `${y + offsetY}px`;
         };
-    
-        const offset = 10; // Distance from the pivot center to place the buttons
-    
-        // Place buttons near the pivot center
-        setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset); // Top-left of pivot
-        setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30); // Bottom-left of pivot
-    
-        setPosition(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset); // Top-right of pivot
-        setPosition(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30); // Bottom-right of pivot
-    }
+      
+        const offset = 10;
+      
+        setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);
+        setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);
+        setPosition(this.buttons.rotate.plus1,  this.pivot.x + offset, this.pivot.y - offset);
+        setPosition(this.buttons.rotate.plus5,  this.pivot.x + offset, this.pivot.y - offset + 30);
+      }
+      
       
 
 
