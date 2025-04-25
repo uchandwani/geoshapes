@@ -203,7 +203,7 @@ canvas {
 
 /* ===========================
    Dynamic SVG Sub-Buttons
-=========================== 
+=========================== */
 #left-side-tool-div {
   position: absolute;
   top: 10px;
@@ -230,7 +230,7 @@ canvas {
   padding: 4px;
   cursor: pointer;
 }
-*/
+
 
 #left-side-tool-div .icon-btn svg {
   width: 24px;
