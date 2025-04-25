@@ -615,8 +615,6 @@ drawModern(ctx) {
 }
 
 
-
-
       isPointInside(x, y) {
             if (this._canvasButtons) {
                 for (let btn of this._canvasButtons) {
@@ -648,7 +646,7 @@ drawModern(ctx) {
         }
         // Inside isPointInside(x, y)
     
-
+    }
  
     handleMouseUp() {
         this.draggingEdge = false;
