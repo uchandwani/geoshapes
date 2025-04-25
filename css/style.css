@@ -169,36 +169,41 @@ canvas {
 canvas-wrapper {
   position: relative; /* Important for absolute children */
 }
+/* Additional div for tools */
 .additional-div {
+  width: 60px;
+  background-color: #f1f1f1;
+  border-right: 1px solid #ccc;
   display: flex;
-  flex-direction: row;       /* or 'row' for horizontal layout */
-  align-items: flex-start;
-  gap: 8px;                     /* space between buttons */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 9999;
-  padding: 4px;
-  background-color: rgba(255, 255, 255, 0.8); /* optional: for contrast */
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.additional-div button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
+.additional-div .icon-btn {
+  background: none;
   border: none;
-  background: #f9f9f9;
-  border-radius: 4px;
+  margin: 10px 0;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
 }
+
+.additional-div .icon-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.additional-div .icon-btn:hover {
+  transform: scale(1.1);
+  background-color: #eaeaea;
+  border-radius: 5px;
+}
+/* Right Sidebar */
 
 .additional-div button img {
   max-width: 200px;
-  max-height: 40px;
+  max-height: 100px;
 }
 
 .additional-div {
