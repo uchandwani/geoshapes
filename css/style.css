@@ -165,7 +165,7 @@ canvas {
 
 /* ===========================
    Left Tool Bar
-=========================== */
+=========================== 
 .additional-div {
   position: absolute;
   top: 10px;
@@ -199,7 +199,7 @@ canvas {
   height: 100%;
   object-fit: contain;
 }
-
+*/
 
 /* ===========================
    Dynamic SVG Sub-Buttons
