@@ -204,6 +204,41 @@ canvas {
 /* ===========================
    Dynamic SVG Sub-Buttons
 =========================== */
+#left-side-tool-div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+#left-side-tool-div .icon-btn {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+#left-side-tool-div .icon-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+
 #dynamic-buttons {
   position: absolute;
   top: 10%;
