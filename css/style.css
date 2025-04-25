@@ -197,8 +197,8 @@ canvas-wrapper {
 }
 
 .additional-div button img {
-  max-width: 20px;
-  max-height: 20px;
+  max-width: 200px;
+  max-height: 40px;
 }
 
 .additional-div {
