@@ -34,13 +34,13 @@ export class Protractor extends Shape {
 
         this.center.draw(ctx);
 
-         if (!this.rotationControls) {
+        /*  if (!this.rotationControls) {
             this.addRotationControls();
-        }
+        } */
        
     }
 
-   addRotationControls() {
+   /* addRotationControls() {
         const rotateLeft1 = this.createButton('−1°', -1);
         const rotateRight1 = this.createButton('+1°', 1);
         const rotateLeft5 = this.createButton('−5°', -5);
@@ -63,7 +63,7 @@ export class Protractor extends Shape {
     });
 
         this.updateRotationControlsPosition(); // Position buttons near the protractor
-    }
+    } */
 
     createButton(label, rotationStep) {
         const button = document.createElement('button');
@@ -305,13 +305,51 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
     console.log(`Protractor aligned to smaller angle. Offset: ${this.angleOffset}`);
 }
 
+drawCanvasButtons(ctx) {
+    const cx = this.center.x;
+    const cy = this.center.y;
+    const spacing = 20;
+    const btnSize = 20;
+
+    const buttons = [
+        { label: '-5°', dx: -spacing, dy: -spacing, delta: -5 },
+        { label: '-1°', dx: -spacing, dy: spacing, delta: -1 },
+        { label: '+1°', dx: spacing, dy: -spacing, delta: 1 },
+        { label: '+5°', dx: spacing, dy: spacing, delta: 5 },
+    ];
+
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    this._canvasButtons = []; // store buttons for hit detection
+
+    buttons.forEach(({ label, dx, dy, delta }) => {
+        const x = cx + dx;
+        const y = cy + dy;
+
+        ctx.beginPath();
+        ctx.rect(x - btnSize / 2, y - btnSize / 2, btnSize, btnSize);
+        ctx.fillStyle = '#CB4154';
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+
+        ctx.fillStyle = 'white';
+        ctx.fillText(label, x, y);
+
+        this._canvasButtons.push({ x, y, w: btnSize, h: btnSize, delta });
+    });
+}
 
 
-    drawModern(ctx) {
+drawModern(ctx) {
     const fullLineLength = this.radius;
     const majorLineLength = 40;  // Length of major lines (multiples of 5 degrees)
     const minorLineLength = 20;  // Length of minor lines (other degrees)
 
+
+   
     
     //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
     // Draw the outer circle
@@ -359,6 +397,7 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
             ctx.fillText(`${angle}`, labelX, labelY);
         }
     }
+    this.drawCanvasButtons(ctx);  /
 }
 
 
@@ -556,6 +595,20 @@ rotateByDegrees(degrees) {
             this.draggingEdge = false;
             return true;
         }
+        // Inside isPointInside(x, y)
+    if (this._canvasButtons) {
+      for (let btn of this._canvasButtons) {
+        const { x, y, w, h, delta } = btn;
+        const left = x - w / 2, right = x + w / 2;
+        const top = y - h / 2, bottom = y + h / 2;
+        if (xPos >= left && xPos <= right && yPos >= top && yPos <= bottom) {
+            this.rotateByDegrees(delta);
+            canvasManager.render();
+            return true; // prevent further dragging
+        }
+    }
+}
+
         return false; // Not inside the Protractor
     }
 
