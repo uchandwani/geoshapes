@@ -172,42 +172,36 @@ canvas-wrapper {
 
 .additional-div {
   position: absolute;
-  top: 20px;
+  top: 10px;
   left: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
+  gap: 12px; /* Spacing between icons */
+  background: white;
+  padding: 8px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000; /* Ensure it's on top */
+  align-items: center;
 }
-
-/* Additional div for tools 
-.additional-div {
-  width: 60px;
-  background-color: #f1f1f1;
-  border-right: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 .additional-div .icon-btn {
-  background: none;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
+  background: #f9f9f9;
   border: none;
-  margin: 10px 0;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .additional-div .icon-btn img {
-  width: 30px;
-  height: 30px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
+
 
 .additional-div .icon-btn:hover {
   transform: scale(1.1);
@@ -216,15 +210,12 @@ canvas-wrapper {
 }
 /* Right Sidebar */
 
-.additional-div button img {
-  max-width: 200px;
-  max-height: 100px;
-}
+
 
 .additional-div {
   background: rgba(255, 0, 0, 0.1); /* See the bounding box */
 }
-*/
+
 
 /* ===========================
    Dynamic SVG Sub-Buttons
