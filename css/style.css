@@ -528,13 +528,3 @@ canvas {
   margin-bottom: 6px;
 }
 
-button {
-  position: absolute;
-  will-change: transform;
-  pointer-events: auto;
-  transition: none;
-  z-index: 1000;
-  font-size: 10px;
-  padding: 4px 6px;
-  cursor: pointer;
-}
