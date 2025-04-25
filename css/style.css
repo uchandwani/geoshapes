@@ -231,6 +231,11 @@ canvas {
   stroke-width: 2;
 }
 
+#left-side-tool-div .icon-btn.active {
+  background-color: #cce0ff;
+  border-color: #0d47a1;
+  box-shadow: 0 0 4px #1E88E5;
+}
 
 
 #dynamic-buttons {
