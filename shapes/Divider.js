@@ -120,19 +120,33 @@ rotatePoint(point, pivot, angle) {
         };
     }
 
-    updateButtonPositions() {
+    updateRotationControls() {
+        const canvas = document.getElementById('canvas');
+        const rect = canvas.getBoundingClientRect();  // pixel position and scale info
+      
+        const scaleX = rect.width / canvas.width;
+        const scaleY = rect.height / canvas.height;
+      
+        const offsetX = rect.left + window.scrollX;
+        const offsetY = rect.top + window.scrollY;
+      
+        const px = this.pivot.x * scaleX + offsetX;
+        const py = this.pivot.y * scaleY + offsetY;
+      
+        const offset = 10;
+      
         const setPosition = (button, x, y) => {
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-            console.log("The position is ", button.style.left, button.style.top);
+          button.style.left = `${x}px`;
+          button.style.top = `${y}px`;
         };
-    
-        // Place rotation buttons near the left and right legs for aesthetics
-        setPosition(this.buttons.rotate.minus1, this.leg1.x - 10, this.leg1.y - 30);
-        setPosition(this.buttons.rotate.minus5, this.leg1.x - 30, this.leg1.y );
-        setPosition(this.buttons.rotate.plus1, this.leg2.x + 10, this.leg2.y - 30);
-        setPosition(this.buttons.rotate.plus5, this.leg2.x + 10, this.leg2.y) ;
-    }
+      
+        // Place buttons neatly around the pivot
+        setPosition(this.buttons.rotate.minus1, px - 40, py - offset);
+        setPosition(this.buttons.rotate.minus5, px - 40, py + 20);
+        setPosition(this.buttons.rotate.plus1,  px + 10, py - offset);
+        setPosition(this.buttons.rotate.plus5,  px + 10, py + 20);
+      }
+      
 
 
 
