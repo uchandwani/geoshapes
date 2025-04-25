@@ -1710,6 +1710,7 @@ obtuse:
 }
  export const pageFeatures = {
     'triangle_theorem_07.html': { enableProtractorSnapping: true },
+    'parallel_lines_04.html' : { enableProtractorSnapping: true },
     'circlePage.html': { enableProtractorSnapping: false },
 };
 
