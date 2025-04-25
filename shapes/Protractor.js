@@ -493,50 +493,52 @@ drawModern(ctx) {
     }
 }*/
 
- drag(dx, dy, enableSnapping = false, geoshapes = [],isModifierKeyPressed = false,currentMousePos, intersections=false, ) {
-    // Resizing the protractor (dragging the edge)
+drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos, intersections = false) {
     const angleStep = 1;
 
     if (this.draggingEdge) {
-        const newRadius = this.radius + dx; // Adjust radius using dx
-        this.radius = Math.max(newRadius, 10); // Set minimum radius to prevent collapse
-        console.log(`Resized Protractor: Radius = ${this.radius}`);
+        const newRadius = this.radius + dx;
+        this.radius = Math.max(newRadius, 10);
+        console.log(`📏 Protractor resized: Radius = ${this.radius}`);
     } 
-    // Dragging the center of the protractor
     else if (this.draggingCenter) {
         this.center.x += dx;
         this.center.y += dy;
+        this.updateRotationControlsPosition();
 
-        this.updateRotationControlsPosition(); 
+        console.log(`🎯 Dragged Protractor to (${this.center.x}, ${this.center.y})`);
+        console.log("🧲 Snapping Enabled?", enableSnapping, "| Modifier Key Pressed?", isModifierKeyPressed);
 
-        console.log(`Dragged Protractor: Center = (${this.center.x}, ${this.center.y})`);
+        // 👉 Handle snapping if enabled and no modifier is pressed
+        if (enableSnapping) {
+            if (!isModifierKeyPressed) {
+                const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
+                const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
 
-        console.log("The enable snapping status inside Protractor is",enableSnapping); // Handle snapping to vertices if enabled
-        if (enableSnapping && !isModifierKeyPressed) {
-            const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
-        
-            if (closestVertex) {
-                this.center.x = closestVertex.x;
-                this.center.y = closestVertex.y;
-            } else if (closestPoint) {
-                this.center.x = closestPoint.x;
-                this.center.y = closestPoint.y;
+                if (closestVertex) {
+                    this.center.x = closestVertex.x;
+                    this.center.y = closestVertex.y;
+                    console.log("📌 Snapped to vertex:", closestVertex);
+                } else if (closestPoint) {
+                    this.center.x = closestPoint.x;
+                    this.center.y = closestPoint.y;
+                    console.log("📌 Snapped to point:", closestPoint);
+                }
+            } else {
+                console.log("⛔ Snapping skipped due to modifier key");
             }
-        
-            this.clampCenterWithinCanvas(canvas);  // 👈 Apply safe bounding
+
+            this.clampCenterWithinCanvas(canvas);
             this.updateRotationControlsPosition();
         }
-        
-            
-                
 
-        // Snap to intersections if any exist
+        // 👀 Optional: Snap to angle intersection
         if (intersections && intersections.length > 0) {
             this.snapToIntersection(intersections);
         }
+
+        canvasManager.render(); // ✅ Update after drag
     } 
-    // Rotating the protractor
     else if (this.rotating && this.previousMousePos) {
         const prevAngle = Math.atan2(
             this.previousMousePos.y - this.center.y,
@@ -553,14 +555,14 @@ drawModern(ctx) {
 
         const adjustedDelta = Math.round(angleDelta / angleStep) * angleStep;
 
-        this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360; // Update rotation angle
-        console.log(`Protractor rotated. Current offset: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
+        this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360;
+        console.log(`🔄 Rotated Protractor. New offset: ${this.angleOffset} (Δ = ${adjustedDelta}°)`);
 
-        this.previousMousePos = currentMousePos; // Update previous position
+        this.previousMousePos = currentMousePos;
+        canvasManager.render(); // ✅ Redraw after rotation
     }
-
-        
 }
+
 
      findClosestVertex(currentPosition, canvasshapes) {
         const snapThreshold = 10; // Distance threshold for snapping
