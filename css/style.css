@@ -231,10 +231,13 @@ canvas {
   cursor: pointer;
 }
 */
-#left-side-tool-div .icon-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+
+#left-side-tool-div .icon-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #000;
+  stroke-width: 2;
 }
 
 
