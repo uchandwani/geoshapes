@@ -169,7 +169,7 @@ canvas {
 canvas-wrapper {
   position: relative; /* Important for absolute children */
 }
-/* Additional div for tools */
+/* Additional div for tools 
 .additional-div {
   width: 60px;
   background-color: #f1f1f1;
@@ -199,7 +199,7 @@ canvas-wrapper {
   background-color: #eaeaea;
   border-radius: 5px;
 }
-/* Right Sidebar */
+
 
 .additional-div button img {
   max-width: 200px;
@@ -209,7 +209,7 @@ canvas-wrapper {
 .additional-div {
   background: rgba(255, 0, 0, 0.1); /* See the bounding box */
 }
-
+*/
 
 /* ===========================
    Dynamic SVG Sub-Buttons
