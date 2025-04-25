@@ -544,15 +544,9 @@ canvas.addEventListener('mousemove', (e) => {
         dragStart = { x: offsetX, y: offsetY };
        // console.log('Rendering updated shape compass with arc', selectedShape.arc?.currentAngle);
 
-        // Re-render the canvas
-        if (canvasManager.renderOnly) {
-            canvasManager.renderOnly(selectedShape);
-        } else {
-            console.warn("⚠️ renderOnly not available, falling back to full render.");
-            canvasManager.render(); // Fallback
-        }
-
-
+        
+        canvasManager.render(); // Fallback
+    
     }
 });
 
