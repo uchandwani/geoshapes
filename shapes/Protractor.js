@@ -109,6 +109,15 @@ export class Protractor extends Shape {
     }
 }
 
+clampCenterWithinCanvas(canvas) {
+    const minX = this.radius;
+    const minY = this.radius;
+    const maxX = canvas.width - this.radius;
+    const maxY = canvas.height - this.radius;
+
+    this.center.x = Math.max(minX, Math.min(this.center.x, maxX));
+    this.center.y = Math.max(minY, Math.min(this.center.y, maxY));
+}
 
     removeRotationControls() {
         if (this.rotationControls) {
@@ -423,22 +432,25 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
         console.log(`Dragged Protractor: Center = (${this.center.x}, ${this.center.y})`);
 
         console.log("The enable snapping status inside Protractor is",enableSnapping); // Handle snapping to vertices if enabled
-        if (enableSnapping  && !isModifierKeyPressed) {
+        if (enableSnapping && !isModifierKeyPressed) {
             const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            console.log("The closest Vertex is", closestVertex);
-            const closestPoint = findClosestPoint(this.center,canvasManager.shapes);
+            const closestPoint = findClosestPoint(this.center, canvasManager.shapes);
+        
             if (closestVertex) {
                 this.center.x = closestVertex.x;
                 this.center.y = closestVertex.y;
-                console.log("Protractor snapped to vertex at:", this.center);
-            } else {
-
+            } else if (closestPoint) {
                 this.center.x = closestPoint.x;
                 this.center.y = closestPoint.y;
-                console.log("Protractor snapped to vertex at:", this.center);
-
-           }
+            }
+        
+            this.clampCenterWithinCanvas(canvas);  // 👈 Apply safe bounding
+            this.updateRotationControlsPosition();
         }
+        
+            
+            
+        
 
         // Snap to intersections if any exist
         if (intersections && intersections.length > 0) {
