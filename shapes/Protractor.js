@@ -473,7 +473,7 @@ drawModern(ctx) {
         console.log("The enable snapping status inside Protractor is",enableSnapping); // Handle snapping to vertices if enabled
         if (enableSnapping && !isModifierKeyPressed) {
             const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            const closestPoint = findClosestPoint(this.center, canvasManager.shapes);
+            const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
         
             if (closestVertex) {
                 this.center.x = closestVertex.x;
