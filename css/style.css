@@ -209,14 +209,14 @@ canvas {
   top: 10px;
   left: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 12px;
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.95);
   border: 1px solid #ccc;
   border-radius: 8px;
   z-index: 1000;
-} */
+} 
 
 #left-side-tool-div .icon-btn {
   width: 40px;
@@ -230,7 +230,7 @@ canvas {
   padding: 4px;
   cursor: pointer;
 }
-
+*/
 #left-side-tool-div .icon-btn img {
   width: 100%;
   height: 100%;
