@@ -361,7 +361,7 @@ drawCanvasButtons(ctx) {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
-    this._canvasButtons = []; // store buttons for hit detection
+    this._canvasButtons = [];
 
     buttons.forEach(({ label, dx, dy, delta }) => {
         const x = cx + dx;
@@ -382,13 +382,13 @@ drawCanvasButtons(ctx) {
 }
 
 
+
 drawModern(ctx) {
     const fullLineLength = this.radius;
     const majorLineLength = 40;  // Length of major lines (multiples of 5 degrees)
     const minorLineLength = 20;  // Length of minor lines (other degrees)
 
-
-   
+ 
     
     //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
     // Draw the outer circle
@@ -476,14 +476,7 @@ drawModern(ctx) {
         }
     }
 
-    rotateByDegrees(degrees) {
-        this.angleOffset = (this.angleOffset + degrees + 360) % 360;
-        console.log(`✅ Protractor rotated by ${degrees}°. New offset: ${this.angleOffset}`);
-    
-        this.updateRotationControlsPosition(); // Ensure buttons stay in place
-        canvasManager.render();                // Re-render the canvas to reflect rotation
-    }
-    
+       
 /*
     drag(dx, dy) {
         console.log("The status of draggingEdge, draggingCenter are", this.draggingEdge,this.draggingCenter);
@@ -536,8 +529,7 @@ drawModern(ctx) {
         }
         
             
-            
-        
+                
 
         // Snap to intersections if any exist
         if (intersections && intersections.length > 0) {
@@ -569,11 +561,6 @@ drawModern(ctx) {
 
         
 }
-
-/* rotateByDegrees(degrees) {
-    this.angleOffset = (this.angleOffset + degrees + 360) % 360;
-    console.log(`Protractor rotated by ${degrees}°. Current offset: ${this.angleOffset}`);
-} */
 
      findClosestVertex(currentPosition, canvasshapes) {
         const snapThreshold = 10; // Distance threshold for snapping
@@ -630,7 +617,23 @@ drawModern(ctx) {
 
 
 
-    isPointInside(x, y) {
+      isPointInside(x, y) {
+            if (this._canvasButtons) {
+                for (let btn of this._canvasButtons) {
+                    const { x: bx, y: by, w, h, delta } = btn;
+                    const left = bx - w / 2, right = bx + w / 2;
+                    const top = by - h / 2, bottom = by + h / 2;
+                    if (x >= left && x <= right && y >= top && y <= bottom) {
+                        this.rotateByDegrees(delta);
+                        canvasManager.render();  // 🔁 Redraw after rotation
+                        return true; // 📌 Stop further checks
+                    }
+                }
+            }
+        
+               
+
+
         const distance = Math.hypot(x - this.center.x, y - this.center.y);
         if (Math.abs(distance - this.radius) <= 10) {
             // Near the circumference for resizing
@@ -644,21 +647,7 @@ drawModern(ctx) {
             return true;
         }
         // Inside isPointInside(x, y)
-    if (this._canvasButtons) {
-      for (let btn of this._canvasButtons) {
-        const { x, y, w, h, delta } = btn;
-        const left = x - w / 2, right = x + w / 2;
-        const top = y - h / 2, bottom = y + h / 2;
-        if (xPos >= left && xPos <= right && yPos >= top && yPos <= bottom) {
-            this.rotateByDegrees(delta);
-            canvasManager.render();
-            return true; // prevent further dragging
-        }
-    }
-}
-
-        return false; // Not inside the Protractor
-    }
+    
 
  
     handleMouseUp() {
