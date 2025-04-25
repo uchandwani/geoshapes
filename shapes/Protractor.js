@@ -72,7 +72,7 @@ export class Protractor extends Shape {
         button.style.zIndex = '10';
         button.addEventListener('click', () => {
             this.rotateByDegrees(rotationStep);
-            console.log("The protractor rotated by" rotationStep);
+            console.log("The protractor rotated by", rotationStep);
             canvasManager.render(); // Redraw the canvas after rotation
         });
         return button;
