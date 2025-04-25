@@ -72,6 +72,7 @@ export class Protractor extends Shape {
         button.style.zIndex = '10';
         button.addEventListener('click', () => {
             this.rotateByDegrees(rotationStep);
+            console.log("The protractor rotated by" rotationStep);
             canvasManager.render(); // Redraw the canvas after rotation
         });
         return button;
@@ -436,6 +437,15 @@ drawModern(ctx) {
             console.log(`Protractor resized to radius: ${this.radius}`);
         }
     }
+
+    rotateByDegrees(degrees) {
+        this.angleOffset = (this.angleOffset + degrees + 360) % 360;
+        console.log(`✅ Protractor rotated by ${degrees}°. New offset: ${this.angleOffset}`);
+    
+        this.updateRotationControlsPosition(); // Ensure buttons stay in place
+        canvasManager.render();                // Re-render the canvas to reflect rotation
+    }
+    
 /*
     drag(dx, dy) {
         console.log("The status of draggingEdge, draggingCenter are", this.draggingEdge,this.draggingCenter);
@@ -522,10 +532,10 @@ drawModern(ctx) {
         
 }
 
-rotateByDegrees(degrees) {
+/* rotateByDegrees(degrees) {
     this.angleOffset = (this.angleOffset + degrees + 360) % 360;
     console.log(`Protractor rotated by ${degrees}°. Current offset: ${this.angleOffset}`);
-}
+} */
 
      findClosestVertex(currentPosition, canvasshapes) {
         const snapThreshold = 10; // Distance threshold for snapping
