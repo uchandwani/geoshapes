@@ -166,7 +166,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     ctx.lineTo(this.leg1.x, this.leg1.y);
     ctx.moveTo(this.pivot.x, this.pivot.y);
     ctx.lineTo(this.leg2.x, this.leg2.y);
-    ctx.strokeStyle = '#00FFFF';
+    ctx.strokeStyle = '#008080';
     ctx.lineWidth = 3;
     ctx.stroke();
     ctx.closePath();
@@ -187,7 +187,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     // 4️⃣ Draw pivot circle last so color toggle is visible on top
     ctx.beginPath();
     ctx.arc(this.pivot.x, this.pivot.y, this.ringRadius, 0, 2 * Math.PI);
-    const pivotColor = this.pivotDraggable ? 'red' : '#00FFFF';
+    const pivotColor = this.pivotDraggable ? 'red' : '#008080';
     console.log("🎨 Pivot color set to:", pivotColor);
     ctx.fillStyle = pivotColor;
     ctx.fill();
@@ -201,7 +201,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     ctx.arc(this.screw.x, this.screw.y, this.ringRadius, 0, 2 * Math.PI);
 
     // Change appearance if pivotDraggable is true
-    ctx.fillStyle = this.pivotDraggable ? '#aaa' : '#00FFFF';
+    ctx.fillStyle = this.pivotDraggable ? '#aaa' : '#008080';
     ctx.strokeStyle = '#333';
     ctx.lineWidth = 1.5;
     ctx.fill();
