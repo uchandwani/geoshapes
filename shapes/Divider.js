@@ -119,27 +119,26 @@ rotatePoint(point, pivot, angle) {
         };
     }
 
-updateRotationControls() {
-  const overlay = document.getElementById('canvas-overlay');
-  if (!overlay) {
-    console.warn("⚠️ canvas-overlay not found.");
-    return;
-  }
-
-  const setPosition = (button, x, y) => {
-    button.style.position = 'absolute';
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
-  };
-
-  const offset = 10;
-
-  // Position buttons around the pivot
-  setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);       // Top-left
-  setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);  // Bottom-left
-  setPosition(this.buttons.rotate.plus1,  this.pivot.x + offset,       this.pivot.y - offset);      // Top-right
-  setPosition(this.buttons.rotate.plus5,  this.pivot.x + offset,       this.pivot.y - offset + 30); // Bottom-right
-}
+    updateRotationControls() {
+        const canvasRect = document.getElementById('canvas').getBoundingClientRect();  // Use canvas, not document
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+      
+        const offsetX = canvasRect.left + scrollX;
+        const offsetY = canvasRect.top + scrollY;
+      
+        const setPosition = (button, x, y) => {
+          button.style.left = ${x + offsetX}px;
+          button.style.top = ${y + offsetY}px;
+        };
+      
+        const offset = 10;
+      
+        setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);
+        setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);
+        setPosition(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset);
+        setPosition(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30);
+      }
 
 
 
