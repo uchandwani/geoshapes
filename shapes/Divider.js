@@ -90,23 +90,18 @@ constructor(pivotX, pivotY){
     }
 }
 
-createButton(label, onClick) {
-        const button = document.createElement('button');
-        button.innerText = label;
-        button.style.position = 'absolute';
-        button.style.zIndex = 1000;
-        button.style.padding = '4px 6px';
-        button.style.fontSize = '10px';
-        button.style.cursor = 'pointer';
-        
-        document.body.appendChild(button);
-
-
-
-       
-        button.addEventListener('click', onClick);
-        return button;
-    }
+reateButton(label, onClick) {
+    const button = document.createElement('button');
+    button.innerText = label;
+    button.style.position = 'absolute';
+    button.style.zIndex = 1000;
+    button.style.padding = '4px 6px';
+    button.style.fontSize = '10px';
+    button.style.cursor = 'pointer';
+    document.body.appendChild(button);
+    button.addEventListener('click', onClick);
+    return button;
+}
 
 rotatePoint(point, pivot, angle) {
         const dx = point.x - pivot.x;
@@ -121,31 +116,25 @@ rotatePoint(point, pivot, angle) {
     }
 
     updateRotationControls() {
-        const canvas = document.getElementById('canvas');
-        const rect = canvas.getBoundingClientRect();  // pixel position and scale info
-      
-        const scaleX = rect.width / canvas.width;
-        const scaleY = rect.height / canvas.height;
-      
-        const offsetX = rect.left + window.scrollX;
-        const offsetY = rect.top + window.scrollY;
-      
-        const px = this.pivot.x * scaleX + offsetX;
-        const py = this.pivot.y * scaleY + offsetY;
-      
-        const offset = 10;
-      
+        const canvasRect = document.querySelector('canvas').getBoundingClientRect(); // Get canvas position
+        const offsetX = canvasRect.left;
+        const offsetY = canvasRect.top;
+    
         const setPosition = (button, x, y) => {
-          button.style.left = `${x}px`;
-          button.style.top = `${y}px`;
+            button.style.position = 'absolute';
+            button.style.left = `${x + offsetX}px`; // Adjust for canvas offset
+            button.style.top = `${y + offsetY}px`; // Adjust for canvas offset
         };
-      
-        // Place buttons neatly around the pivot
-        setPosition(this.buttons.rotate.minus1, px - 40, py - offset);
-        setPosition(this.buttons.rotate.minus5, px - 40, py + 20);
-        setPosition(this.buttons.rotate.plus1,  px + 10, py - offset);
-        setPosition(this.buttons.rotate.plus5,  px + 10, py + 20);
-      }
+    
+        const offset = 10; // Distance from the pivot center to place the buttons
+    
+        // Place buttons near the pivot center
+        setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset); // Top-left of pivot
+        setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30); // Bottom-left of pivot
+    
+        setPosition(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset); // Top-right of pivot
+        setPosition(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30); // Bottom-right of pivot
+    }
       
 
 
