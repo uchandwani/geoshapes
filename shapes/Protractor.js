@@ -397,7 +397,7 @@ drawModern(ctx) {
             ctx.fillText(`${angle}`, labelX, labelY);
         }
     }
-    this.drawCanvasButtons(ctx);  /
+    this.drawCanvasButtons(ctx);  
 }
 
 
