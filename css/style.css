@@ -166,10 +166,6 @@ canvas {
 /* ===========================
    Left Tool Bar
 =========================== */
-canvas-wrapper {
-  position: relative; /* Important for absolute children */
-}
-
 .additional-div {
   position: absolute;
   top: 10px;
