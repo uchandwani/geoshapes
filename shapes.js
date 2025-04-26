@@ -629,23 +629,25 @@ function determineLeg(x, y, shape) {
 function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
     if (protractor.draggingEdge) {
         protractor.resize(mouseX, mouseY);
-        console.log("📏 Protractor resized.");
-    } else if (protractor.isCenterDragging || protractor.rotating) {
-        console.log("🛠️ Protractor dragging/rotating... enableProtractorSnapping:", currentPageFeatures.enableProtractorSnapping);
+        console.log("🛞 Protractor resized.");
+    } else {
+        console.log("🧠 Protractor Snapping:", currentPageFeatures.enableProtractorSnapping);
 
-        protractor.drag(dx, dy, {
-            enableSnapping: currentPageFeatures.enableProtractorSnapping,
-            geoshapes: canvasManager.shapes,
-            isAltPressed: event?.altKey || false,
-            isShiftPressed: event?.shiftKey || false,
-            isCtrlPressed: event?.ctrlKey || false,
-            isEscapePressed: false,  // (Escape key normally comes separately)
-            currentMousePos: { x: mouseX, y: mouseY }
-        });
-
-        console.log("🛠️ Protractor moved.");
+        protractor.drag(
+            dx,
+            dy,
+            currentPageFeatures.enableProtractorSnapping, // enableSnapping
+            canvasManager.shapes,                         // geoshapes
+            event?.altKey || event?.ctrlKey,               // isModifierKeyPressed
+            { x: mouseX, y: mouseY },                      // currentMousePos
+            canvas,                                        // canvas ✅ pass canvas
+            false,                                         // intersections (optional, not needed now)
+            event                                          // full event object
+        );
+        console.log("🎯 Protractor dragged.");
     }
 }
+
 
 
 
