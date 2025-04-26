@@ -531,7 +531,7 @@ canvas.addEventListener('mousemove', (e) => {
 
             default:
                 console.log(`Dragging ${selectedShape.constructor.name}: dx = ${dx}, dy = ${dy}`);
-                debugger;
+              
                 
                 selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
                 break;
