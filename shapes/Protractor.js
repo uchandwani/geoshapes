@@ -616,15 +616,19 @@ findClosestPoint(currentPosition, canvasShapes) {
 
 
 isPointInside(x, y) {
+    const buttonPadding = 4; // ➡️ Allow slight forgiveness around button box
+
     if (this._canvasButtons) {
         for (let btn of this._canvasButtons) {
             const { x: bx, y: by, w, h, delta } = btn;
-            const left = bx - w / 2, right = bx + w / 2;
-            const top = by - h / 2, bottom = by + h / 2;
+            const left = bx - w / 2 - buttonPadding;
+            const right = bx + w / 2 + buttonPadding;
+            const top = by - h / 2 - buttonPadding;
+            const bottom = by + h / 2 + buttonPadding;
             if (x >= left && x <= right && y >= top && y <= bottom) {
                 console.log(`🖱 Click detected inside button (${delta}°) → setting pendingRotation.`);
-                this.pendingRotation = delta;  // 📌 Set pending, but do not rotate yet
-                return true; // 🔒 Stop checking further (don't drag now)
+                this.pendingRotation = delta;
+                return true;
             }
         }
     }
@@ -641,6 +645,7 @@ isPointInside(x, y) {
     }
     return false;
 }
+
 
  
 handleMouseUp() {
