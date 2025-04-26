@@ -508,6 +508,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
     }
 
     else if (this.draggingCenter) {
+        console.log("Inside drag checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed);
         // Check escape condition: allow unsnap
         if (this.wasSnapped && (isShiftPressed || isEscapePressed)) {
             console.log("🔓 Unsnap triggered. Allowing free movement.");
@@ -520,6 +521,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
 
         // Snap only if Alt or Ctrl is pressed
         if (enableSnapping && !this.wasSnapped && (isAltPressed || isCtrlPressed)) {
+            console.log("Inside enableSnapping checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed, isAltPressed);
             console.log("🧲 Snap attempt with Alt/Ctrl...");
             const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
             const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
