@@ -152,7 +152,7 @@ export class Protractor extends Shape {
     }
 }
 
-clampCenterWithinCanvas(canvas) {
+clampCenterWithinCanvas() {
 
     const canvas = this.canvas; // use internal canvas object
     if (!canvas) {
