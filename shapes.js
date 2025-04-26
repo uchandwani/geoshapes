@@ -580,7 +580,7 @@ canvas.addEventListener('mouseup', (e) => {
         selectedShape.draggingEdge = false;
         selectedShape.isCenterDragging = false;
         selectedShape.rotating = false;
-        selectedShape.stopDragging();
+       
         console.log("🖱️ Mouse up: Stopped Protractor movement.");
         break;
 
