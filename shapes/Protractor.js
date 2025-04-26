@@ -115,8 +115,7 @@ export class Protractor extends Shape {
             canvasManager.render(); // ✅ Redraw canvas and protractor
         }
         
-
-        
+      
 
     
 
@@ -493,38 +492,42 @@ drawModern(ctx) {
     }
 }*/
 
-drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos, intersections = false, event) {
-    const angleStep = 1;
+drag(dx, dy, options = {}) {
+    const {
+        enableSnapping = false,
+        geoshapes = [],
+        isAltPressed = false,
+        isShiftPressed = false,
+        isCtrlPressed = false,
+        isEscapePressed = false,
+        currentMousePos = null
+    } = options;
 
-    const isAltPressed = event?.altKey;
-    const isShiftPressed = event?.shiftKey;
-    const isCtrlPressed = event?.ctrlKey;
-    const isEscapePressed = event?.key === 'Escape'; // if passed
+    const angleStep = 1;
 
     if (this.draggingEdge) {
         const newRadius = this.radius + dx;
         this.radius = Math.max(newRadius, 10);
-        console.log(`Resized Protractor: Radius = ${this.radius}`);
+        console.log(`🛠️ Resized Protractor: Radius = ${this.radius}`);
     }
 
-    else if (this.draggingCenter) {
-        console.log("Inside drag checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed);
-        // Check escape condition: allow unsnap
+    else if (this.isCenterDragging) {
+        console.log("🛠️ Center dragging. wasSnapped:", this.wasSnapped, "Shift:", isShiftPressed);
+
         if (this.wasSnapped && (isShiftPressed || isEscapePressed)) {
-            console.log("🔓 Unsnap triggered. Allowing free movement.");
+            console.log("🔓 Unsnap triggered by Shift or Escape. Allowing free movement.");
             this.wasSnapped = false;
         }
 
-        // Move protractor
+        // Move protractor center
         this.center.x += dx;
         this.center.y += dy;
 
-        // Snap only if Alt or Ctrl is pressed
+        // Check if snapping needed
         if (enableSnapping && !this.wasSnapped && (isAltPressed || isCtrlPressed)) {
-            console.log("Inside enableSnapping checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed, isAltPressed);
-            console.log("🧲 Snap attempt with Alt/Ctrl...");
-            const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
+            console.log("🧲 Snap attempt with Alt/Ctrl pressed...");
+            const closestVertex = this.findClosestVertex(this.center, geoshapes);
+            const closestPoint = this.findClosestPoint(this.center, geoshapes);
 
             if (closestVertex) {
                 this.center.x = closestVertex.x;
@@ -539,12 +542,11 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
             }
         }
 
-        this.clampCenterWithinCanvas(canvas);
+        this.clampCenterWithinCanvas();
         this.updateRotationControlsPosition();
     }
 
-    // Rotation logic (no change)
-    else if (this.rotating && this.previousMousePos) {
+    else if (this.rotating && this.previousMousePos && currentMousePos) {
         const prevAngle = Math.atan2(this.previousMousePos.y - this.center.y, this.previousMousePos.x - this.center.x);
         const currentAngle = Math.atan2(currentMousePos.y - this.center.y, currentMousePos.x - this.center.x);
         let angleDelta = ((currentAngle - prevAngle) * 180) / Math.PI;
@@ -555,10 +557,11 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
         const adjustedDelta = Math.round(angleDelta / angleStep) * angleStep;
         this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360;
 
-        console.log(`Protractor rotated. Current offset: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
+        console.log(`🌀 Protractor rotated. Offset now: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
         this.previousMousePos = currentMousePos;
     }
 }
+
 
 
 
