@@ -106,46 +106,56 @@ function drawShapes(canvasConfig, buttonType = null) {
 }
 
 function drawPoints(canvasConfig, buttonType = null) {
-    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type }) => {
+    if (!canvasConfig.points) return;
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = true }) => {
         if (!type || type === buttonType) {
             const point = new Point(x, y, label, color, radius);
+            point.setEnableDrag?.(enableDrag); // ✅ Use individual setting
             canvasManager.addShape(point);
         }
     });
 }
 
 function drawLines(canvasConfig) {
-    canvasConfig.lines.forEach(({ endA, endB, color = "black" }) => {
+    if (!canvasConfig.lines) return;
+    canvasConfig.lines.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
         if (endA && endB) {
             const line = new Line(endA, endB, color);
-            line.setEnableDrag(canvasConfig.enableDrag ?? true);
+            line.setEnableDrag?.(enableDrag); // ✅ Use individual setting
             canvasManager.addShape(line);
         }
     });
 }
 
 function drawCircle(canvasConfig) {
+    if (!canvasConfig.circle) return;
     const [center, radius] = canvasConfig.circle;
     const circle = new Circle(center, radius);
-    circle.setEnableDrag(canvasConfig.enableDrag ?? true);
+    const enableDrag = canvasConfig.enableDrag ?? true;
+    circle.setEnableDrag?.(enableDrag);
     canvasManager.addShape(circle);
 }
+
+
 
 function drawTriangles(canvasConfig, buttonType = null) {
     const triangles = buttonType
         ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
         : canvasConfig.triangles;
 
-    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidPoints, showMeasurements }) => {
+    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = true }) => {
         if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
         const triangle = new Triangle(vertexA, vertexB, vertexC);
+
         triangle.setVertexLabels(labels);
-        triangle.setEnableDrag(canvasConfig.enableDrag ?? true);
-        triangle.setShowMidpoints(showMidPoints);
+        triangle.setEnableDrag(enableDrag); // ✅ Use shape-specific enableDrag if defined
+        triangle.setShowMidpoints(showMidpoints);
         triangle.setShowMeasurements(showMeasurements);
+
         canvasManager.addShape(triangle);
     });
 }
+
 
 /**
  * 🧠 Updates UI elements like theorem text and sub-buttons.
