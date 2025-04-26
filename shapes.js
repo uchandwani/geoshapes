@@ -314,16 +314,20 @@ canvas.addEventListener('mousedown', (e) => {
   
 
                 case 'Protractor':
+                        const distanceToCenter = Math.hypot(offsetX - selectedShape.center.x, offsetY - selectedShape.center.y);
+                    
                         if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
-                            selectedShape.draggingEdge = true;
-                            console.log(`${shapeType} resizing initiated.`);
+                            selectedShape.draggingEdge = true;   // Near circumference → Resize
+                            selectedShape.isCenterDragging = false;
+                            console.log("🛞 Protractor resizing initiated.");
                         } else {
                             selectedShape.draggingEdge = false;
+                            selectedShape.isCenterDragging = true;  // Near center → Drag center
                             selectedShape.draggingPoint = selectedShape.center;
-                            selectedShape.isCenterDragging = true;  // ✅ Set this flag here
-                            console.log(`${shapeType} center dragging initiated.`);
+                            console.log("🎯 Protractor center dragging initiated.");
                         }
                         break;
+                    
                     
 
                 case 'Triangle':
@@ -573,11 +577,13 @@ canvas.addEventListener('mouseup', (e) => {
         break;
 
         case 'Protractor':
-            console.log("Mouse up on Protractor. Finalizing changes.");
-            selectedShape.isCenterDragging = false;  // ✅ Clear flag
-            selectedShape.draggingEdge = false;       // ✅ Also clear edge drag if needed
-            selectedShape.stopDragging();
-            break;
+        selectedShape.draggingEdge = false;
+        selectedShape.isCenterDragging = false;
+        selectedShape.rotating = false;
+        selectedShape.stopDragging();
+        console.log("🖱️ Mouse up: Stopped Protractor movement.");
+        break;
+
 
 
         case 'Compass':
