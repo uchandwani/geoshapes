@@ -190,6 +190,8 @@ clampCenterWithinCanvas(canvas) {
             this.draggingEdge = true; // Resizing the radius
             this.draggingCenter = false;
             this.rotating = false;
+
+            // Deleted else if button for shift
         
         } else if (distance <= this.radius) {
             this.draggingCenter = true; // Dragging the center
