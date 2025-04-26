@@ -317,9 +317,6 @@ canvas.addEventListener('mousedown', (e) => {
                     if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
                         selectedShape.draggingEdge = true;
                         console.log(`${shapeType} resizing initiated.`);
-                    } else if (e.shiftKey) {
-                        selectedShape.rotating = true;
-                        console.log(`${shapeType} rotation initiated.`);
                     } else {
                         selectedShape.draggingEdge = false;
                         selectedShape.draggingPoint = selectedShape.center;
