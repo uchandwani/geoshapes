@@ -630,24 +630,24 @@ function determineLeg(x, y, shape) {
 function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
     if (protractor.draggingEdge) {
         protractor.resize(mouseX, mouseY);
-        console.log("Protractor resized.");
+        console.log("🛠️ Protractor resized.");
     } else {
-        console.log("The enableProtractorSnapping status", currentPageFeatures.enableProtractorSnapping);
-
+        console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
+        
         protractor.drag(
             dx,
             dy,
             currentPageFeatures.enableProtractorSnapping,
             canvasManager.shapes,
-            false,                   // isModifierKeyPressed (legacy - not used much now)
             { x: mouseX, y: mouseY },
-            false,                   // intersections (future use - keep false for now)
-            event                    // ✅ properly pass the full event here!!
+            event // 🔥 Pass full event
         );
 
-        console.log("Protractor dragged.");
+        console.log("✋ Protractor dragged.");
     }
 }
+
+
 
 
 function handleDividerMove(shape, dx, dy, offsetX, offsetY) {

@@ -499,47 +499,50 @@ drawModern(ctx) {
     }
 }*/
 
-drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos, intersections = false, event = null) {
+drag(dx, dy, enableSnapping = false, geoshapes = [], currentMousePos = null, event = null) {
     const angleStep = 1;
 
-    const isAltPressed = event?.altKey || false;
-    const isShiftPressed = event?.shiftKey || false;
-    const isCtrlPressed = event?.ctrlKey || false;
-    const isEscapePressed = (event && 'key' in event && event.key === 'Escape') ? true : false; 
-    // 🔥 Safe check for Escape only if 'key' exists
+    const isAltPressed = event?.altKey;
+    const isShiftPressed = event?.shiftKey;
+    const isCtrlPressed = event?.ctrlKey;
+    const isEscapePressed = event?.key === 'Escape';
 
     if (this.draggingEdge) {
         const newRadius = this.radius + dx;
         this.radius = Math.max(newRadius, 10);
-        console.log(`Resized Protractor: Radius = ${this.radius}`);
+        console.log(`🛠️ Resized Protractor: Radius = ${this.radius}`);
     }
 
     else if (this.draggingCenter) {
-        console.log("Inside drag checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed);
-        
+        console.log("🧠 Center Drag: WasSnapped =", this.wasSnapped, "| Shift pressed =", isShiftPressed);
+
+        // Allow unsnap if Shift or Escape pressed
         if (this.wasSnapped && (isShiftPressed || isEscapePressed)) {
-            console.log("🔓 Unsnap triggered. Allowing free movement.");
+            console.log("🔓 Unsnapping Protractor...");
             this.wasSnapped = false;
         }
 
+        // Move center
         this.center.x += dx;
         this.center.y += dy;
 
         if (enableSnapping && !this.wasSnapped && (isAltPressed || isCtrlPressed)) {
-            console.log("🧲 Snap attempt with Alt/Ctrl...");
-            const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
+            console.log("🧲 Attempting Snap to nearby point/vertex...");
+            const closestVertex = this.findClosestVertex(this.center, geoshapes);
+            const closestPoint = this.findClosestPoint(this.center, geoshapes);
 
             if (closestVertex) {
                 this.center.x = closestVertex.x;
                 this.center.y = closestVertex.y;
                 this.wasSnapped = true;
-                console.log("✅ Snapped to vertex:", closestVertex);
+                console.log("✅ Snapped to Vertex:", closestVertex);
             } else if (closestPoint) {
                 this.center.x = closestPoint.x;
                 this.center.y = closestPoint.y;
                 this.wasSnapped = true;
-                console.log("✅ Snapped to point:", closestPoint);
+                console.log("✅ Snapped to Point:", closestPoint);
+            } else {
+                console.log("🚫 No snap target found.");
             }
         }
 
@@ -558,7 +561,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
         const adjustedDelta = Math.round(angleDelta / angleStep) * angleStep;
         this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360;
 
-        console.log(`Protractor rotated. Current offset: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
+        console.log(`🔄 Protractor rotated. Angle offset: ${this.angleOffset}° (adjusted by ${adjustedDelta}°)`);
         this.previousMousePos = currentMousePos;
     }
 }
