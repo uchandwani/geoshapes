@@ -499,34 +499,36 @@ drawModern(ctx) {
     }
 }*/
 
-drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos = {}, canvas, intersections = false, event) 
-
-{
+drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos, intersections = false, event = null) {
     const angleStep = 1;
+
+    const isAltPressed = event?.altKey || false;
+    const isShiftPressed = event?.shiftKey || false;
+    const isCtrlPressed = event?.ctrlKey || false;
+    const isEscapePressed = (event && 'key' in event && event.key === 'Escape') ? true : false; 
+    // 🔥 Safe check for Escape only if 'key' exists
 
     if (this.draggingEdge) {
         const newRadius = this.radius + dx;
         this.radius = Math.max(newRadius, 10);
-        console.log(`🛠️ Resized Protractor: Radius = ${this.radius}`);
+        console.log(`Resized Protractor: Radius = ${this.radius}`);
     }
 
-    else if (this.isCenterDragging) {
-        console.log("🛠️ Center dragging. wasSnapped:", this.wasSnapped, "Shift:", isShiftPressed);
-
+    else if (this.draggingCenter) {
+        console.log("Inside drag checking whether snapped or shift pressed", this.wasSnapped, isShiftPressed);
+        
         if (this.wasSnapped && (isShiftPressed || isEscapePressed)) {
-            console.log("🔓 Unsnap triggered by Shift or Escape. Allowing free movement.");
+            console.log("🔓 Unsnap triggered. Allowing free movement.");
             this.wasSnapped = false;
         }
 
-        // Move protractor center
         this.center.x += dx;
         this.center.y += dy;
 
-        // Check if snapping needed
         if (enableSnapping && !this.wasSnapped && (isAltPressed || isCtrlPressed)) {
-            console.log("🧲 Snap attempt with Alt/Ctrl pressed...");
-            const closestVertex = this.findClosestVertex(this.center, geoshapes);
-            const closestPoint = this.findClosestPoint(this.center, geoshapes);
+            console.log("🧲 Snap attempt with Alt/Ctrl...");
+            const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
+            const closestPoint = this.findClosestPoint(this.center, canvasManager.shapes);
 
             if (closestVertex) {
                 this.center.x = closestVertex.x;
@@ -541,11 +543,11 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
             }
         }
 
-        this.clampCenterWithinCanvas();
+        this.clampCenterWithinCanvas(canvas);
         this.updateRotationControlsPosition();
     }
 
-    else if (this.rotating && this.previousMousePos && currentMousePos) {
+    else if (this.rotating && this.previousMousePos) {
         const prevAngle = Math.atan2(this.previousMousePos.y - this.center.y, this.previousMousePos.x - this.center.x);
         const currentAngle = Math.atan2(currentMousePos.y - this.center.y, currentMousePos.x - this.center.x);
         let angleDelta = ((currentAngle - prevAngle) * 180) / Math.PI;
@@ -556,10 +558,11 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
         const adjustedDelta = Math.round(angleDelta / angleStep) * angleStep;
         this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360;
 
-        console.log(`🌀 Protractor rotated. Offset now: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
+        console.log(`Protractor rotated. Current offset: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
         this.previousMousePos = currentMousePos;
     }
 }
+
 
 
 
