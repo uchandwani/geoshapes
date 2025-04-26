@@ -314,15 +314,17 @@ canvas.addEventListener('mousedown', (e) => {
   
 
                 case 'Protractor':
-                    if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
-                        selectedShape.draggingEdge = true;
-                        console.log(`${shapeType} resizing initiated.`);
-                    } else {
-                        selectedShape.draggingEdge = false;
-                        selectedShape.draggingPoint = selectedShape.center;
-                        console.log(`${shapeType} center dragging initiated.`);
-                    }
-                    break;
+                        if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
+                            selectedShape.draggingEdge = true;
+                            console.log(`${shapeType} resizing initiated.`);
+                        } else {
+                            selectedShape.draggingEdge = false;
+                            selectedShape.draggingPoint = selectedShape.center;
+                            selectedShape.isCenterDragging = true;  // ✅ Set this flag here
+                            console.log(`${shapeType} center dragging initiated.`);
+                        }
+                        break;
+                    
 
                 case 'Triangle':
                 case 'Rectangle':
@@ -569,6 +571,14 @@ canvas.addEventListener('mouseup', (e) => {
         console.log("🖱️ Mouse up: Reset Divider dragging state.");
         canvasManager.render(); // Ensure any final position is rendered
         break;
+
+        case 'Protractor':
+            console.log("Mouse up on Protractor. Finalizing changes.");
+            selectedShape.isCenterDragging = false;  // ✅ Clear flag
+            selectedShape.draggingEdge = false;       // ✅ Also clear edge drag if needed
+            selectedShape.stopDragging();
+            break;
+
 
         case 'Compass':
             console.log("Mouse up on Compass. Finalizing changes.");
