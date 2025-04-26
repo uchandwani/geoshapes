@@ -560,7 +560,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
 
 
 
-     findClosestVertex(currentPosition, canvasshapes) {
+findClosestVertex(currentPosition, canvasshapes) {
         const snapThreshold = 10; // Distance threshold for snapping
         let closestVertex = null;
         let minDistance = Infinity;
@@ -587,7 +587,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
     }
 
 
-    findClosestPoint(currentPosition, canvasShapes) {
+findClosestPoint(currentPosition, canvasShapes) {
     const snapThreshold = 10; // Distance threshold for snapping
     let closestPoint = null;
     let minDistance = Infinity;
@@ -640,27 +640,8 @@ isPointInside(x, y) {
     return false;
 }
 
-
-               
-
-
-        const distance = Math.hypot(x - this.center.x, y - this.center.y);
-        if (Math.abs(distance - this.radius) <= 10) {
-            // Near the circumference for resizing
-            this.draggingEdge = true;
-            this.draggingCenter = false;
-            return true;
-        } else if (distance <= this.radius) {
-            // Inside the circle for dragging the center
-            this.draggingCenter = true;
-            this.draggingEdge = false;
-            return true;
-        }
-        // Inside isPointInside(x, y)
-    
-    }
  
-    handleMouseUp() {
+handleMouseUp() {
         console.log("🖐 Mouse Up event");
         this.draggingEdge = false;
         this.draggingCenter = false;
@@ -674,7 +655,7 @@ isPointInside(x, y) {
     }
     
   
-    getPointsForDragging() {
+getPointsForDragging() {
         return [this.center];
     }
 }
