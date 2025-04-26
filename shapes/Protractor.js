@@ -10,19 +10,18 @@ import {canvasManager} from '../shapes/CanvasManager.js';
 const enableSnapping = currentPageFeatures.enableProtractorSnapping || false;
 
 export class Protractor extends Shape {
-    constructor(center, radius = 80, style = 'modern') {
-        super();
-        this.type = 'protractor'; // important for cleanup
+    constructor(center, radius, style = 'classic') {
         this.center = center;
         this.radius = radius;
         this.style = style;
-        this.angleStep = 5;
+        this.draggingEdge = false;
+        this.draggingCenter = false;
+        this.rotating = false;
+        this.previousMousePos = null;
         this.angleOffset = 0;
-        this.draggingEdge = false; 
-        this.draggingCenter = false;// Track if the edge is being dragged
-        this.rotationControls = null; // To hold button elements
-        this.canvas = document.getElementById('canvas'); // <=== ADD THIS LINE
+        this.wasSnapped = false; // ✅ Important missing line
     }
+    
 
     draw(ctx) {
         // Draw the protractor (existing code)
