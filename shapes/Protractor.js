@@ -613,20 +613,34 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
 }
 
 
-      isPointInside(x, y) {
-            if (this._canvasButtons) {
-                for (let btn of this._canvasButtons) {
-                    const { x: bx, y: by, w, h, delta } = btn;
-                    const left = bx - w / 2, right = bx + w / 2;
-                    const top = by - h / 2, bottom = by + h / 2;
-                    if (x >= left && x <= right && y >= top && y <= bottom) {
-                        this.rotateByDegrees(delta);
-                        canvasManager.render();  // 🔁 Redraw after rotation
-                        return true; // 📌 Stop further checks
-                    }
-                }
+isPointInside(x, y) {
+    if (this._canvasButtons) {
+        for (let btn of this._canvasButtons) {
+            const { x: bx, y: by, w, h, delta } = btn;
+            const left = bx - w / 2, right = bx + w / 2;
+            const top = by - h / 2, bottom = by + h / 2;
+            if (x >= left && x <= right && y >= top && y <= bottom) {
+                console.log(`🖱 Click detected inside button (${delta}°) → setting pendingRotation.`);
+                this.pendingRotation = delta;  // 📌 Set pending, but do not rotate yet
+                return true; // 🔒 Stop checking further (don't drag now)
             }
-        
+        }
+    }
+
+    const distance = Math.hypot(x - this.center.x, y - this.center.y);
+    if (Math.abs(distance - this.radius) <= 10) {
+        this.draggingEdge = true;
+        this.draggingCenter = false;
+        return true;
+    } else if (distance <= this.radius) {
+        this.draggingCenter = true;
+        this.draggingEdge = false;
+        return true;
+    }
+    return false;
+}
+
+
                
 
 
@@ -647,9 +661,18 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = fals
     }
  
     handleMouseUp() {
+        console.log("🖐 Mouse Up event");
         this.draggingEdge = false;
         this.draggingCenter = false;
+    
+        if (this.pendingRotation != null) {
+            console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
+            this.rotateByDegrees(this.pendingRotation);
+            this.pendingRotation = null; // Reset
+            canvasManager.render();  // Redraw the canvas
+        }
     }
+    
   
     getPointsForDragging() {
         return [this.center];
