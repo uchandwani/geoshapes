@@ -190,9 +190,7 @@ clampCenterWithinCanvas(canvas) {
             this.draggingEdge = true; // Resizing the radius
             this.draggingCenter = false;
             this.rotating = false;
-        } else if (distance <= this.radius && isShiftKey) {
-            this.rotating = true; // Start rotation
-            this.previousMousePos = { x, y }; // Initialize previous mouse position
+        
         } else if (distance <= this.radius) {
             this.draggingCenter = true; // Dragging the center
             this.draggingEdge = false;
