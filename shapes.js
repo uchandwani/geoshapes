@@ -614,9 +614,6 @@ function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
     if (protractor.draggingEdge) {
         protractor.resize(mouseX, mouseY);
         console.log("Protractor resized.");
-    } else if (event.shiftKey) {
-        protractor.rotateLabels(mouseX, mouseY, dragStart);
-        console.log("Protractor rotated.");
     } else {
         console.log("The enableProtractorSnapping status",currentPageFeatures.enableProtractorSnapping );
        
