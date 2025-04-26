@@ -106,15 +106,15 @@ function drawShapes(canvasConfig, buttonType = null) {
 }
 
 function drawPoints(canvasConfig, buttonType = null) {
-    if (!canvasConfig.points) return;
     canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = true }) => {
         if (!type || type === buttonType) {
             const point = new Point(x, y, label, color, radius);
-            point.setEnableDrag?.(enableDrag); // ✅ Use individual setting
+            point.setEnableDrag(enableDrag); // ✅ Control dragging based on config
             canvasManager.addShape(point);
         }
     });
 }
+
 
 function drawLines(canvasConfig) {
     if (!canvasConfig.lines) return;
