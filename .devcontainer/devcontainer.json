@@ -1,0 +1,30 @@
+{
+    "name": "GeoShapes Dev Environment",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:latest",
+    "features": {
+      "ghcr.io/devcontainers/features/python:1": {}
+    },
+    "postCreateCommand": "echo '🚀 GeoShapes Codespace is ready!'",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "esbenp.prettier-vscode",
+          "dbaeumer.vscode-eslint",
+          "ms-python.python",
+          "ms-vscode.live-server"
+        ],
+        "settings": {
+          "editor.formatOnSave": true,
+          "files.autoSave": "onWindowChange"
+        }
+      }
+    },
+    "forwardPorts": [],
+    "portsAttributes": {
+      "5500": {
+        "label": "Live Server",
+        "onAutoForward": "openPreview"
+      }
+    }
+  }
+  
