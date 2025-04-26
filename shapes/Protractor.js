@@ -21,6 +21,7 @@ export class Protractor extends Shape {
         this.draggingEdge = false; 
         this.draggingCenter = false;// Track if the edge is being dragged
         this.rotationControls = null; // To hold button elements
+        this.canvas = document.getElementById('canvas'); // <=== ADD THIS LINE
     }
 
     draw(ctx) {
@@ -152,6 +153,12 @@ export class Protractor extends Shape {
 }
 
 clampCenterWithinCanvas(canvas) {
+
+    const canvas = this.canvas; // use internal canvas object
+    if (!canvas) {
+        console.error("🚫 Canvas not found inside Protractor!");
+        return;
+    }
     const minX = this.radius;
     const minY = this.radius;
     const maxX = canvas.width - this.radius;
@@ -492,17 +499,9 @@ drawModern(ctx) {
     }
 }*/
 
-drag(dx, dy, options = {}) {
-    const {
-        enableSnapping = false,
-        geoshapes = [],
-        isAltPressed = false,
-        isShiftPressed = false,
-        isCtrlPressed = false,
-        isEscapePressed = false,
-        currentMousePos = null
-    } = options;
+drag(dx, dy, enableSnapping = false, geoshapes = [], isModifierKeyPressed = false, currentMousePos = {}, canvas, intersections = false, event) 
 
+{
     const angleStep = 1;
 
     if (this.draggingEdge) {
