@@ -627,28 +627,23 @@ function determineLeg(x, y, shape) {
 
 // Specific handlers for different shapes
 
-function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
-    if (protractor.draggingEdge) {
-        protractor.resize(mouseX, mouseY);
-        console.log("🛠️ Protractor resized.");
-    } else {
-        console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
-        
-        protractor.drag(
-            dx,
-            dy,
-            currentPageFeatures.enableProtractorSnapping,
-            canvasManager.shapes,
-            event.shiftKey,
-            { x: mouseX, y: mouseY },
-            canvas
-        );
-        
+function handleProtractorMove(protractor, dx, dy, event, mouseX, mouseY) {
+    if (!protractor) return;
 
-        console.log("✋ Protractor dragged.");
-    }
+    console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
+
+    protractor.drag(
+        dx,
+        dy,
+        currentPageFeatures.enableProtractorSnapping,
+        canvasManager.shapes,
+        event.altKey,                             // ⬅️ ALT key (for unsnapping)
+        { x: mouseX, y: mouseY },                  // ⬅️ current mouse position
+        canvasManager.canvas                      // ⬅️ pass the canvas here!
+    );
+
+    console.log("✋ Protractor dragged.");
 }
-
 
 
 
