@@ -639,10 +639,11 @@ function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
             dy,
             currentPageFeatures.enableProtractorSnapping,
             canvasManager.shapes,
+            event.shiftKey,
             { x: mouseX, y: mouseY },
-            event, // 🔥 Pass full event
-            canvas 
+            canvas
         );
+        
 
         console.log("✋ Protractor dragged.");
     }

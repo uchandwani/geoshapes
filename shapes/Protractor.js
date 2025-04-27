@@ -459,7 +459,8 @@ drawModern(ctx) {
 
      
 
-drag(dx, dy, enableSnapping = false, geoshapes = [], currentMousePos = null, event = null, canvas=null) {
+    drag(dx, dy, enableSnapping = false, geoshapes = [], isShiftPressed = false, currentMousePos = null, canvas = null)
+    {
     const angleStep = 1;
 
     const isAltPressed = event?.altKey;
