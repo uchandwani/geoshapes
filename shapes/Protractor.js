@@ -464,7 +464,7 @@ drawModern(ctx) {
     const angleStep = 1;
 
     const isAltPressed = event?.altKey;
-    const isShiftPressed = event?.shiftKey;
+    
     const isCtrlPressed = event?.ctrlKey;
     const isEscapePressed = event?.key === 'Escape';
 
