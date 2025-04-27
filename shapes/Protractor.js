@@ -40,32 +40,7 @@ export class Protractor extends Shape {
        
     }
 
-   /* addRotationControls() {
-        const rotateLeft1 = this.createButton('−1°', -1);
-        const rotateRight1 = this.createButton('+1°', 1);
-        const rotateLeft5 = this.createButton('−5°', -5);
-        const rotateRight5 = this.createButton('+5°', 5);
-
-        document.body.appendChild(rotateLeft1);
-        document.body.appendChild(rotateRight1);
-        document.body.appendChild(rotateLeft5);
-        document.body.appendChild(rotateRight5);
-
-        this.rotationControls = { rotateLeft1, rotateRight1, rotateLeft5, rotateRight5 };
-
-        const majorLineColor = '#CB4154'; // Same color as major lines
-        Object.values(this.rotationControls).forEach((button) => {
-            button.style.backgroundColor = majorLineColor;
-            button.style.color = 'white'; // Ensure good contrast
-            button.style.border = `1px solid ${majorLineColor}`; // Optional: add a border matching the line
-            button.style.borderRadius = '5px'; // Optional: round edges
-            button.style.padding = '5px'; // Adjust padding
-    });
-
-        this.updateRotationControlsPosition(); // Position buttons near the protractor
-    } */
-
-        addRotationControls() {
+           addRotationControls() {
             const rotateLeft1 = this.createButton('−1°', -1);
             const rotateRight1 = this.createButton('+1°', 1);
             const rotateLeft5 = this.createButton('−5°', -5);
@@ -189,7 +164,7 @@ clampCenterWithinCanvas() {
 */
 
 
-     handleMouseDown(x, y, isShiftKey = false) {
+handleMouseDown(x, y, isShiftKey = false) {
         const distance = Math.hypot(x - this.center.x, y - this.center.y);
         if (Math.abs(distance - this.radius) < 10) {
             this.draggingEdge = true; // Resizing the radius
@@ -481,22 +456,7 @@ drawModern(ctx) {
         }
     }
 
-       
-/*
-    drag(dx, dy) {
-        console.log("The status of draggingEdge, draggingCenter are", this.draggingEdge,this.draggingCenter);
-        if (this.draggingEdge) {
-           this.radius += dx; // Resize (stretch radius)
-            if (this.radius < 5) this.radius = 5; 
-            
-            console.log(`Protractor resized: New radius = ${this.radius}`); // Resizing logic
-            
-        } else if (this.draggingCenter) {
-            this.center.x += dx;
-            this.center.y += dy;
-        console.log(`Protractor dragged to (${this.center.x}, ${this.center.y})`);
-    }
-}*/
+     
 
 drag(dx, dy, enableSnapping = false, geoshapes = [], currentMousePos = null, event = null) {
     const angleStep = 1;
