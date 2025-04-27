@@ -640,7 +640,8 @@ function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
             currentPageFeatures.enableProtractorSnapping,
             canvasManager.shapes,
             { x: mouseX, y: mouseY },
-            event // 🔥 Pass full event
+            event, // 🔥 Pass full event
+            canvas 
         );
 
         console.log("✋ Protractor dragged.");
