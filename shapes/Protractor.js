@@ -459,32 +459,43 @@ drawModern(ctx) {
 
      
 
-    drag(dx, dy, enableSnapping = false, geoshapes = [], isAltPressed = false, currentMousePos = null, canvas = null) {
+    drag(dx, dy, enableSnapping = false, canvasShapes = [], currentMousePos = null, canvas = null) {
         if (!this.center) return;
     
-        // Move the center
-        this.center.x += dx;
-        this.center.y += dy;
+        const newX = this.center.x + dx;
+        const newY = this.center.y + dy;
+        let snapped = false;
     
-        // Check if snapping is enabled and allowed
-        if (enableSnapping && !isAltPressed) {
-            console.log("🧲 Attempting Snap to nearby point/vertex...");
-            const snapTarget = this.findClosestVertex(currentMousePos, geoshapes);
-            if (snapTarget) {
-                this.center.x = snapTarget.x;
-                this.center.y = snapTarget.y;
-                console.log("✅ Snapped to:", snapTarget);
+        if (enableSnapping && currentMousePos && canvasShapes.length > 0) {
+            console.log("🧲 Snapping enabled: true");
+            console.log("🧠 Attempting Snap to nearby point...");
+    
+            const closestPoint = this.findClosestPoint(currentMousePos, canvasShapes);
+    
+            console.log("🧠 Closest Point found:", closestPoint);
+    
+            if (closestPoint) {
+                this.center.x = closestPoint.x;
+                this.center.y = closestPoint.y;
+                snapped = true;
+                console.log("✅ Snapped to Point:", closestPoint.label || "(no label)");
             } else {
                 console.log("🚫 No snap target found.");
+                this.center.x = newX;
+                this.center.y = newY;
             }
+        } else {
+            console.log("🧲 Snapping disabled or no shapes available");
+            this.center.x = newX;
+            this.center.y = newY;
         }
     
-        // Clamp the protractor center within the canvas
+        // Finally clamp center within canvas if available
         if (canvas) {
             this.clampCenterWithinCanvas(canvas);
-        } else {
-            console.error("🚫 Canvas not found inside Protractor!");
         }
+    
+        this.wasSnapped = snapped;
     }
     
  clampCenterWithinCanvas(canvas) {
