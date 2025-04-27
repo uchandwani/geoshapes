@@ -469,7 +469,7 @@ drawModern(ctx) {
         // Check if snapping is enabled and allowed
         if (enableSnapping && !isAltPressed) {
             console.log("🧲 Attempting Snap to nearby point/vertex...");
-            const snapTarget = this.findClosestVertex(geoshapes, currentMousePos);
+            const snapTarget = this.findClosestVertex(currentMousePos, geoshapes);
             if (snapTarget) {
                 this.center.x = snapTarget.x;
                 this.center.y = snapTarget.y;
