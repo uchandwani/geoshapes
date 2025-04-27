@@ -474,7 +474,7 @@ drag(dx, dy, enableSnapping = false, geoshapes = [], currentMousePos = null, eve
     }
 
     else if (this.draggingCenter) {
-        console.log("🧠 Center Drag: WasSnapped =", this.wasSnapped, "| Shift pressed =", isShiftPressed);
+        console.log("🧠 Center Drag: WasSnapped =", this.wasSnapped, "| Alt pressed =", isAltPressed);
 
         // Allow unsnap if Shift or Escape pressed
         if (this.wasSnapped && (isShiftPressed || isEscapePressed)) {
