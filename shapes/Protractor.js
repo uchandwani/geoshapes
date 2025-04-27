@@ -11,6 +11,7 @@ const enableSnapping = currentPageFeatures.enableProtractorSnapping || false;
 
 export class Protractor extends Shape {
     constructor(center, radius, style = 'classic') {
+        super();
         this.center = center;
         this.radius = radius;
         this.style = style;
