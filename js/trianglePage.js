@@ -10,69 +10,25 @@ import {Line} from '../shapes/Lines.js';
 import {Protractor} from '../shapes/Protractor.js';
 import {updateRightSidebar} from './eventHandlers.js';
 
-    
-/* document.addEventListener('DOMContentLoaded', () => {
-    console.log("Triangle Theorem Page Loaded");
-    updatePageTitle();
-    
-    const defaultFunctionality = 'midSegmentTheorem';
-    const defaultSubClassification = 'right';
-    const buttons = document.querySelectorAll('.nav-icon-btn');
-
-    attachNavBarListeners();    
 
 
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const link = button.getAttribute('data-link');
-            if (link) {
-                window.open(link, '_self'); // Change '_self' to '_blank' for a new tab
-            }
-        });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Triangle Page Loaded");
+      updatePageTitle();
+      switchFunctionality('midSegmentTheorem'); // default
     });
 
-     console.log("Calling switchFunctionality with" , defaultFunctionality);
-     switchFunctionality(defaultFunctionality);
-
-    // Initialize right sidebar with the default sub-classification
-    updateRightSidebar(defaultFunctionality, defaultSubClassification);
-
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-
-    console.log('Canvas Element:', canvas);
-    console.log('Canvas Context:', ctx);
-
-    // Check CanvasManager initialization
-    console.log('CanvasManager:', canvasManager);
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-
-    console.log('Adjusted Canvas Dimensions:', canvas.width, canvas.height); 
-
-    attachNavBarListeners(); // Set up listeners for nav buttons
-    switchFunctionality('midSegmentTheorem');
-
-    // Set the default triangle type to "Right Angle Triangle"
-    handleTriangleType('midSegmentTheorem','right');
-
-     console.log("The functionality config is", pageFeatures.enableProtractorSnapping) ;
-    if (pageFeatures.enableProtractorSnapping) {
-        console.log("The page enables snap vertex functionality");
-    
-    }
-});  */
-    // TrianglePage.js
-
-
-  document.addEventListener("DOMContentLoaded", () => {
-  console.log("Triangle Page Loaded");
-  updatePageTitle(); // sets the title from file name
+    window.addEventListener("nav-select", (e) => {
+      const { functionalityKey, subtype } = e.detail;
+      console.log("📥 Received nav-select:", functionalityKey, subtype);
+      switchFunctionality(functionalityKey, subtype);
+    });
+ 
 
 
   attachNavBarListeners(); // Nav bar logic
-  const defaultFunctionality = 'midSegmentTheorem';
+ 
   const defaultsubButton ='right';
   
   switchFunctionality(defaultFunctionality, defaultsubButton); // Default load

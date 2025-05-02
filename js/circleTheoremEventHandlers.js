@@ -565,6 +565,8 @@ export function switchFunctionality(functionalityKey, buttonType) {
         return;
     }
 
+    const effectiveType = buttonType || config.defaultButtonType || null;
+
     console.log("🟡 [switchFunctionality] Loaded config:", config);
 
     // 🔧 PATCH: Remove rotation controls from any active Divider objects
