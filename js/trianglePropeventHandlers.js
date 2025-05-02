@@ -69,43 +69,6 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-/**
- * Attaches event listeners to navigation buttons.
- */
-export function attachNavBarListeners() {
-    const navButtons = {
-        sineTheta: document.getElementById("sineTheta-button"),
-        cosineTheta: document.getElementById("cosineTheta-button"),
-        trigonoRatios: document.getElementById("trigonoRatios-button"),
-        trigonoIdentities: document.getElementById("trigonoIdentities-button"),
-    };
-
-    Object.entries(navButtons).forEach(([key, button]) => {
-        console.log("Function NBL - navbarListeneres, key button is ", key, button);
-        if (button) {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-
-            newButton.addEventListener("click", () => {
-                console.log("The clicked button is ", key, button);
-                if (key === "trigonoRatios") {
-                    switchFunctionality(key);
-                } else {
-                    switchFunctionality(key, "sin");
-                }
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
-        }
-    });
-
-    const defaultKey = 'sinTheta';
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
-    }
-}
 
 /**
  * Draws a circle based on the given configuration.

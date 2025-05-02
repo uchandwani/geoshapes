@@ -150,19 +150,19 @@
   <script type="module" src="./shapes/CanvasManager.js"></script>
 
   <!-- Dynamically load header.html and header.js -->
- <script type="module">
+
+  <script type="module">
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
-
-    const { updatePageTitle,loadSubHeaderIcons } = await import('./js/header.js');
+  
+    const { updatePageTitle, loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
     updatePageTitle();
     loadSubHeaderIcons();
-    
-    const { switchFunctionality, attachNavBarListeners } = await import('./js/circleTheoremEventHandlers.js');
     attachNavBarListeners();
-    switchFunctionality('radiusTangent'); // Default functionality
+  
+    const { switchFunctionality } = await import('./js/circleTheoremEventHandlers.js');
+    switchFunctionality('radiusTangent'); // or your preferred default
   </script>
-
   
 </body>
 </html>

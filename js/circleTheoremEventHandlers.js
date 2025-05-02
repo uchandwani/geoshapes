@@ -74,37 +74,6 @@ export function addSpecificPoints(points, ctx) {
 }
 
 /**
- * Attaches event listeners to navigation buttons.
- */
-function attachNavBarListeners() {
-    Object.keys(buttonSetMap).forEach((key) => {
-      const btn = document.getElementById(`${key}-button`);
-      if (!btn) {
-        console.warn(`Button for ${key} not found.`);
-        return;
-      }
-  
-      btn.addEventListener("click", () => {
-        console.log("The clicked button is ", key, btn);
-        activateButton(btn);
-        
-        // Dispatch nav-select instead of calling switchFunctionality directly
-        const defaultSubtype = functionalityConfig[key]?.defaultButtonType || undefined;
-  
-        window.dispatchEvent(new CustomEvent("nav-select", {
-          detail: {
-            functionalityKey: key,
-            subtype: defaultSubtype
-          }
-        }));
-      });
-  
-      console.log(`Listener attached to button: ${key}`);
-    });
-  }
-  
-
-/**
  * Draws a circle based on the given configuration.
  */
 function drawCircle(canvasConfig) {
