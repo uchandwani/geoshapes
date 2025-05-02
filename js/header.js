@@ -169,13 +169,11 @@ export function loadSubHeaderIcons() {
               <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
             </svg>` }
     ],"circle_theorems_02.html": [
-      { id: "radiusTangent-button", title: "Radius Tangent Theorem", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
-                 stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="10" y1="90" x2="90" y2="10" />
-              <line x1="10" y1="10" x2="90" y2="90" />
-              <path d="M50 50 A15 15 0 0 1 65 35" stroke-width="2"/>
-              <path d="M50 50 A15 15 0 0 1 35 65" stroke-width="2"/>
-            </svg>` },
+      { id: "radiusTangent-button", title: "Radius Tangent Theorem", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <polyline points="20,30 80,30 70,85 25,85 20,30"
+                    stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>` },
       { id: "twoTangent-button", title: "Two Tangent Theorem", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
               <line x1="10" y1="30" x2="90" y2="30" />
