@@ -1,3 +1,4 @@
+import { updatePageTitle} from './header.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { functionalityConfig } from './circleTheoremConfig.js';
