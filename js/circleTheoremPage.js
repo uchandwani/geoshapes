@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
        
     attachNavBarListeners(); // Set up listeners for nav buttons
-    const defaultFunctionality = 'sineTheta';
+    const defaultFunctionality = 'radiusTangent';
     const defaultType = 'sin';
 
     switchFunctionality(defaultFunctionality, defaultType);
@@ -615,7 +615,7 @@ export function renderCanvas(config) {
 
 
 // Call renderCanvas with the desired configuration
-renderCanvas(functionalityConfig.sineTheta);
+renderCanvas(functionalityConfig.radiusTangent);
 
 
 
