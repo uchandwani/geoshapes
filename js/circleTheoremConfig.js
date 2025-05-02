@@ -2,7 +2,7 @@ export  const functionalityConfig = {
 
         
     
-        sineTheta: {
+    radiusTangent: {
            
         theoremDefinition: "Tangent to a circle is perpendicular to the radius of the circle at the point of contact.",
         canvasConfig: {
@@ -191,7 +191,7 @@ export  const functionalityConfig = {
 
         `,
 },
-    cosineTheta: {
+    twoTangent: {
 
         defaultButtonType: 'sin',
        

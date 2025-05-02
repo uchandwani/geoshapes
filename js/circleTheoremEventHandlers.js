@@ -78,8 +78,8 @@ export function addSpecificPoints(points, ctx) {
  */
 export function attachNavBarListeners() {
     const navButtons = {
-        sineTheta: document.getElementById("sineTheta-button"),
-        cosineTheta: document.getElementById("cosineTheta-button"),
+        radiusTangent: document.getElementById("radiusTangent-button"),
+        twoTriangles: document.getElementById("twoTriangles-button"),
         alternateSegments: document.getElementById("alternateSegments-button"),
         subtendedAngles: document.getElementById("subtendedAngles-button"),
         quadrilaterals: document.getElementById("quadrilaterals-button"),
@@ -93,7 +93,7 @@ export function attachNavBarListeners() {
 
             newButton.addEventListener("click", () => {
                 console.log("The clicked button is ", key, button);
-                if (key === "sineTheta") {
+                if (key === "radiusTangent") {
                     switchFunctionality(key);
                 } else {
                     switchFunctionality(key, "sin");
@@ -106,7 +106,7 @@ export function attachNavBarListeners() {
         }
     });
 
-    const defaultKey = 'sinTheta';
+    const defaultKey = 'radiusTangent';
     if (navButtons[defaultKey]) {
         navButtons[defaultKey].classList.add('active');
     }
