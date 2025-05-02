@@ -3,7 +3,7 @@ import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { functionalityConfig } from './circleTheoremConfig.js';
 import { switchFunctionality } from './circleTheoremEventHandlers.js';
-import { attachNavBarListeners } from './circleTheoremEventHandlers.js';
+
 import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
 import {Circle} from '../shapes/Circle.js';

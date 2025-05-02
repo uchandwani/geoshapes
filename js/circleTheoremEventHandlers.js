@@ -765,5 +765,3 @@ function updateTheoremText(config, subtype) {
     console.log("DEFINITIOAN after if blocks", definition);
     document.getElementById("theorem-text").innerHTML = definition;
 }
-
-export { attachNavBarListeners };
