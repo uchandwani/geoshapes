@@ -13,7 +13,7 @@ import {Arc} from './shapes/Arc.js';
 import { functionalityConfig } from '/geoshapes/js/functionalityConfig.js';
 import { currentPageFeatures } from '/geoshapes/js/functionalityConfig.js';
 
-console.log("🎯 canvasManager at import time:", canvasManager);
+
 
 
 // Other shape creation logic
