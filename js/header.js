@@ -13,6 +13,7 @@ export function attachNavBarListeners() {
     if (button) {
       button.addEventListener("click", () => {
         console.log("📣 Dispatching nav-select event:", functionality, subtype);
+        debugger;
         const event = new CustomEvent("nav-select", {
           detail: { functionalityKey: functionality, subtype }
         });
