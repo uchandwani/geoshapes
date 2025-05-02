@@ -13,6 +13,7 @@ import {Arc} from './shapes/Arc.js';
 import { functionalityConfig } from '/geoshapes/js/functionalityConfig.js';
 import { currentPageFeatures } from '/geoshapes/js/functionalityConfig.js';
 
+console.log("🎯 canvasManager at import time:", canvasManager);
 
 
 // Other shape creation logic
@@ -629,6 +630,8 @@ function determineLeg(x, y, shape) {
 
 function handleProtractorMove(protractor, dx, dy, event, mouseX, mouseY) {
     if (!protractor) return;
+    console.log("🔍 canvasManager in drag handler:", canvasManager);
+    console.log("📦 canvasManager.shapes in drag handler:", canvasManager?.shapes);
 
     console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
     debugger;
