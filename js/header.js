@@ -174,7 +174,7 @@ export function loadSubHeaderIcons() {
           <polyline points="20,30 80,30 70,85 25,85 20,30"
                     stroke="#1E88E5" stroke-width="2" fill="none"/>
         </svg>` },
-      { id: "twoTangent-button", title: "Two Tangent Theorem", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+      { id: "twoTangents-button", title: "Two Tangent Theorem", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
               <line x1="10" y1="30" x2="90" y2="30" />
               <line x1="10" y1="70" x2="90" y2="70" />
