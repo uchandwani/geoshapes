@@ -102,9 +102,10 @@ export function loadSubHeaderIcons() {
               <line x1="30" y1="10" x2="70" y2="90" />
               <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
               <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
-            </svg>` }
-    ],"triangle_theorem_07.html": [
-      { id: ""midSegmentTheorem-button", title: "Mid Segment Theoream", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
+            </svg>` },
+    ],
+    "triangle_theorem_07.html": [
+      { id: "midSegmentTheorem-button", title: "Mid Segment Theoream", svg: `<svg class="sub-header-icon" viewBox="0 0 100 100" fill="none" stroke="#1E88E5"
                  stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
               <line x1="10" y1="90" x2="90" y2="10" />
               <line x1="10" y1="10" x2="90" y2="90" />
