@@ -272,7 +272,7 @@ function drawDefaultTriangle(ctx, canvas) {
     // Add triangle to canvas manager and render it
     //canvasManager.addShape(triangle);
     //canvasManager.render();
-    renderCanvas(functionalityConfig.sineTheta);
+    renderCanvas(functionalityConfig.radiusTangent);
 
     console.log("Default triangle drawn.");
 }
