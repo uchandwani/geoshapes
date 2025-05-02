@@ -111,7 +111,7 @@ function drawPoints(canvasConfig, buttonType = null) {
             const point = new Point(x, y, label, color, radius);
             point.setEnableDrag(enableDrag); // ✅ Control dragging based on config
             canvasManager.addShape(point);
-            console.log("The canvas manager shapes are", CanvasManager.shapes);
+            console.log("The canvas manager shapes are", canvasManager.shapes);
         }
     });
 }
