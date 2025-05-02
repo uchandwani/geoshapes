@@ -398,7 +398,7 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey) {
+function updateUI(config, functionalityKey, buttonType = null) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config);
 
 
@@ -407,7 +407,7 @@ function updateUI(config, functionalityKey) {
         leftSidebar.innerHTML = config.leftSidebarContent || "";
     }
 
-    updateTheoremText(config);
+    updateTheoremText(config, buttonType);
     // Update dynamic sub-buttons
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
     if (config.buttonSet && Array.isArray(config.buttonSet)) {
@@ -495,11 +495,33 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-function updateTheoremText(config) {
-    console.log("Inside updateTheoremText", config);
-    const theoremText = document.getElementById('theorem-text');
-    if (theoremText) {
-        console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
-        theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
+export function updateTheoremText(config, subtype = null) {
+    console.log("Inside updateTheoremText", config, subtype);
+
+    let definitionText = "";
+
+    // ✅ Try subtype-specific definition first
+    if (config.theoremDefinitions && typeof config.theoremDefinitions === 'object') {
+        if (subtype && config.theoremDefinitions[subtype]) {
+            definitionText = config.theoremDefinitions[subtype];
+        } else {
+            // ✅ Use any available definition as fallback
+            const values = Object.values(config.theoremDefinitions);
+            if (values.length > 0) {
+                definitionText = values[0];  // take the first available
+            }
+        }
     }
+
+    // ✅ Fallback to single-string definition (optional)
+    if (!definitionText && typeof config.theoremDefinition === 'string') {
+        definitionText = config.theoremDefinition;
+    }
+
+    // ✅ Final fallback
+    if (!definitionText) {
+        definitionText = "Definition not available.";
+    }
+
+    document.getElementById("theorem-text").innerHTML = definitionText;
 }
