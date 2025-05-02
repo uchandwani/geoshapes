@@ -543,7 +543,7 @@ export function handleTriangleType(fkey, type) {
     // Draw triangles
     drawTriangles(canvasConfig, type);
 
-    if(fkey === "sineTheta" || fkey === "cosineTheta" ) {
+    if(fkey === "radiusTangent" || fkey === "twoTriangles" ) {
        
             drawLines(canvasConfig, type);
     }    
@@ -712,7 +712,7 @@ export function updateRightSidebar(functionalityKey, subClassification) {
 
     let content = rightSidebarContent[subClassification];
 
-    if (functionalityKey === "sineTheta") 
+    if (functionalityKey === "radiusTangent") 
             content = rightSidebarContent;
     
     if (!content) {
@@ -738,7 +738,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     const leftSidebarContent = config.leftSidebarContent;
 
     let content;
-    if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
+    if (functionalityKey === "radiusTangent" || functionalityKey === "twoTriangle") {
         content = leftSidebarContent;
     } else {
         content = typeof leftSidebarContent === 'object'
