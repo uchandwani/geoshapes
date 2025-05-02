@@ -358,6 +358,8 @@ export function switchFunctionality(functionalityKey, buttonType) {
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
     const activeSubButton = dynamicButtonsContainer?.querySelector(".triangle-button.active");
 
+    const effectiveType = buttonType || config.defaultButtonType || null;
+
         // Use the active sub-button if available, otherwise default
         const effectiveButtonType = activeSubButton?.dataset.type || config.defaultButtonType;
 
@@ -448,44 +450,24 @@ function updateUI(config, functionalityKey, buttonType = null) {
     }
 }
 
-export function updateRightSidebar(functionalityKey, subClassification) {
-    console.log('%c' + "Function URS : Functionality Key,Subclassification: ", 'color: green;', functionalityKey, subClassification);
-   
-    
-
+export function updateRightSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
+    if (!config) return;
 
-     console.log('Functionality Configuration:', config);
+    const sidebar = document.querySelector(".sidebar.right");
+    const allContent = config.rightSidebarContent;
 
-    if (!config) {
-        console.error(`No configuration found for functionality key: ${functionalityKey}`);
-        return;
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
     }
 
-    const rightSidebarContent = config.rightSidebarContent;
-
-  //  console.log("RHS Functionality Configuration:", rightSidebarContent);
-
-    if (!rightSidebarContent) {
-        console.error(`No rightSidebarContent defined for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    let content = rightSidebarContent[subClassification];
-
-    if (functionalityKey === "trigonoRatios") 
-            content = rightSidebarContent;
-    
-    if (!content) {
-        console.error(`No content found for subClassification: ${subClassification}`);
-        document.querySelector('.sidebar.right').innerHTML = `<p>Content not available.</p>`;
-        return;
-    }
-
-    // Update the sidebar
-    document.querySelector('.sidebar.right').innerHTML = content;
-   // console.log("Right Sidebar updated with:", content);
+    sidebar.innerHTML = content;
 }
+
 
 function updateSidebars(config) {
     const leftSidebar = document.querySelector('.sidebar.left');

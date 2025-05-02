@@ -590,7 +590,8 @@ export function switchFunctionality(functionalityKey, buttonType) {
 
     updateUI(config, functionalityKey, buttonType);
     updateLeftSidebar(functionalityKey, buttonType);
-    updateRightSidebar(functionalityKey, buttonType);
+  
+    updateRightSidebar(functionalityKey, effectiveType);
 
     // 🛠️ Prevents unintended drawing
     setMode("modify");

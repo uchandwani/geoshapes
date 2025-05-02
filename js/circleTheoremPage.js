@@ -7,36 +7,21 @@ import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
 import {Circle} from '../shapes/Circle.js';
 
-    
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Triangle Properties Page Loaded");
 
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+ window.switchFunctionality = switchFunctionality;
 
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      updatePageTitle();
+      switchFunctionality('radiusTangent'); // default
+    });
 
-    // 1️⃣ Fix: Explicitly set width & height in JavaScript (Avoid CSS scaling)
-    canvas.width = 800;  // Change as needed
-    canvas.height = 800;
-
-    // 2️⃣ Fix: Prevent distortion from high-DPI screens
-    const scale = window.devicePixelRatio; // Get device pixel ratio
-    canvas.width *= scale;
-    canvas.height *= scale;
-    ctx.scale(scale, scale); // Scale drawing context
-
-    // 3️⃣ Fix: Ensure No Transformation is Applied Before Drawing
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-    
-       
-    attachNavBarListeners(); // Set up listeners for nav buttons
-    const defaultFunctionality = 'radiusTangent';
-    const defaultType = 'sin';
-
-    switchFunctionality(defaultFunctionality, defaultType);
-    
-
+    window.addEventListener("nav-select", (e) => {
+      const { functionalityKey, subtype } = e.detail;
+      console.log("📥 Received nav-select:", functionalityKey, subtype);
+      switchFunctionality(functionalityKey, subtype);
+    });
+      
 
 // Function to draw the default triangle on page load
 function drawDefaultCircle(ctx,canvas) {
