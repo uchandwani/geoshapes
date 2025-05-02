@@ -74,7 +74,7 @@ import {updateRightSidebar} from './eventHandlers.js';
   attachNavBarListeners(); // Nav bar logic
   const defaultFunctionality = 'midSegmentTheorem';
   const defaultsubButton ='right';
-  debugger;
+  
   switchFunctionality(defaultFunctionality, defaultsubButton); // Default load
 
   // 🟦 Header icon click listeners
