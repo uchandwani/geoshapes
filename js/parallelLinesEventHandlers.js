@@ -9,7 +9,7 @@
  */
 
 import { functionalityConfig } from './parallelLinesConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
@@ -111,6 +111,7 @@ function drawPoints(canvasConfig, buttonType = null) {
             const point = new Point(x, y, label, color, radius);
             point.setEnableDrag(enableDrag); // ✅ Control dragging based on config
             canvasManager.addShape(point);
+            console.log("The canvas manager shapes are", CanvasManager.shapes);
         }
     });
 }
