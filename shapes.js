@@ -632,7 +632,7 @@ function handleProtractorMove(protractor, dx, dy, event, mouseX, mouseY) {
 
     console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
     debugger;
-    console.log(The canvas shapes are :", canvas.shapes");
+    console.log("The canvas shapes are :", canvas.shapes);
     protractor.drag(
         dx,
         dy,
