@@ -6,7 +6,7 @@ import { Circle } from './shapes/Circle.js';
 import { Triangle } from './shapes/Triangle.js';
 import { Rectangle } from './shapes/Rectangle.js';
 import { Protractor } from './shapes/Protractor.js';
-import { canvasManager } from './shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from './shapes/CanvasManager.js';
 import { Divider } from './shapes/Divider.js';
 import { Compass } from './shapes/Compass.js';
 import {Arc} from './shapes/Arc.js';
@@ -632,7 +632,7 @@ function handleProtractorMove(protractor, dx, dy, event, mouseX, mouseY) {
 
     console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
     debugger;
-    console.log("The canvas shapes are :", canvas.shapes);
+    console.log("The canvas shapes are :", CanvasManager.shapes);
     protractor.drag(
         dx,
         dy,
