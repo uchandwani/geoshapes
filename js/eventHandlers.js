@@ -373,7 +373,7 @@ export function attachNavBarListeners() {
 
 
 function drawShapes(canvasConfig, buttonType = null) {
-    debugger;
+  
     if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
     if (canvasConfig.circle) drawCircle(canvasConfig);
     if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
