@@ -76,41 +76,33 @@ export function addSpecificPoints(points, ctx) {
 /**
  * Attaches event listeners to navigation buttons.
  */
-export function attachNavBarListeners() {
-    const navButtons = {
-        radiusTangent: document.getElementById("radiusTangent-button"),
-        twoTriangles: document.getElementById("twoTriangles-button"),
-        alternateSegments: document.getElementById("alternateSegments-button"),
-        subtendedAngles: document.getElementById("subtendedAngles-button"),
-        quadrilaterals: document.getElementById("quadrilaterals-button"),
-    };
-
-    Object.entries(navButtons).forEach(([key, button]) => {
-        console.log("Function NBL - navbarListeneres, key button is ", key, button);
-        if (button) {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-
-            newButton.addEventListener("click", () => {
-                console.log("The clicked button is ", key, button);
-                if (key === "radiusTangent") {
-                    switchFunctionality(key);
-                } else {
-                    switchFunctionality(key, "sin");
-                }
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
-        }
+function attachNavBarListeners() {
+    Object.keys(buttonSetMap).forEach((key) => {
+      const btn = document.getElementById(`${key}-button`);
+      if (!btn) {
+        console.warn(`Button for ${key} not found.`);
+        return;
+      }
+  
+      btn.addEventListener("click", () => {
+        console.log("The clicked button is ", key, btn);
+        activateButton(btn);
+        
+        // Dispatch nav-select instead of calling switchFunctionality directly
+        const defaultSubtype = functionalityConfig[key]?.defaultButtonType || undefined;
+  
+        window.dispatchEvent(new CustomEvent("nav-select", {
+          detail: {
+            functionalityKey: key,
+            subtype: defaultSubtype
+          }
+        }));
+      });
+  
+      console.log(`Listener attached to button: ${key}`);
     });
-
-    const defaultKey = 'radiusTangent';
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
-    }
-}
+  }
+  
 
 /**
  * Draws a circle based on the given configuration.
