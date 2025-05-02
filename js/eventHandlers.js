@@ -411,7 +411,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
         ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
         : canvasConfig.triangles;
 
-    debugger;    
+    
     triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidPoints, showMeasurements }) => {
         if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
         const triangle = new Triangle(vertexA, vertexB, vertexC);
