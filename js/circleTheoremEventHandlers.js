@@ -738,7 +738,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     const leftSidebarContent = config.leftSidebarContent;
 
     let content;
-    if (functionalityKey === "radiusTangent" || functionalityKey === "twoTriangle") {
+    if (functionalityKey === "radiusTangent" || functionalityKey === "twoTangents") {
         content = leftSidebarContent;
     } else {
         content = typeof leftSidebarContent === 'object'
