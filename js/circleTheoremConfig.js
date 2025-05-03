@@ -7,18 +7,18 @@ export  const functionalityConfig = {
         theoremDefinition: "Tangent to a circle is perpendicular to the radius of the circle at the point of contact.",
         canvasConfig: {
             
-            circle: [{ x: 400, y: 400 }, 200], 
+            circle: [{ x: 300, y: 300 }, 200], 
            
             points: [
-                { x: 400, y: 400, label: "O", color: "red", radius: 5 },
-                { x: 400, y: 200, label: "A", color: "red", radius: 5 },
-                { x: 540, y: 540, label: "B", color: "red", radius: 5 },
+                { x: 300, y: 300, label: "O", color: "red", radius: 5 },
+                { x: 300, y: 100, label: "A", color: "red", radius: 5 },
+                { x: 440, y: 440, label: "B", color: "red", radius: 5 },
 
-                { x: 200, y: 400, label: "C", color: "red", radius: 5 },
+                { x: 100, y: 300, label: "C", color: "red", radius: 5 },
                
-                { x: 700, y: 200, label: "L", color: "red", radius: 5},
-                { x: 720, y: 360, label: "M", color: "red", radius: 5},
-                { x: 200, y: 700, label: "N", color: "red", radius: 5},
+                { x: 600, y: 100, label: "L", color: "red", radius: 5},
+                { x: 620, y: 260, label: "M", color: "red", radius: 5},
+                { x: 100, y: 600, label: "N", color: "red", radius: 5},
 
                
             ],
@@ -26,18 +26,18 @@ export  const functionalityConfig = {
             // Lines drawn without labels
             lines: [
                 // Parallel lines
-                { endA: { x: 200, y: 400 }, endB: { x: 400, y: 400 }, type: "parallel",color: "green", enableDrag:false   },
+                { endA: { x: 100, y: 300 }, endB: { x: 300, y: 300 }, type: "parallel",color: "green", enableDrag:false   },
              
-                { endA: { x: 400, y: 200 }, endB: { x: 400, y: 400 }, type: "parallel",color: "green", enableDrag:false    },
+                { endA: { x: 300, y: 100 }, endB: { x: 300, y: 300 }, type: "parallel",color: "green", enableDrag:false    },
 
                 // Transversals
-                { endA: { x: 540, y: 540 }, endB: { x: 400, y: 400 }, type: "transversal", color: "green",enableDrag:false   },
-                { endA: { x: 400, y: 200 }, endB: { x: 700, y: 200 }, type: "transversal", color: "green",enableDrag:false  },
-                { endA: { x: 200, y: 400 }, endB: { x: 200, y: 700 }, type: "transversal", color: "green",enableDrag:false   },
+                { endA: { x: 440, y: 440 }, endB: { x: 300, y: 300 }, type: "transversal", color: "green",enableDrag:false   },
+                { endA: { x: 300, y: 100 }, endB: { x: 600, y: 100 }, type: "transversal", color: "green",enableDrag:false  },
+                { endA: { x: 100, y: 300 }, endB: { x: 100, y: 600 }, type: "transversal", color: "green",enableDrag:false   },
 
                 // Connecting lines
                
-                { endA: { x: 540, y: 540 }, endB: { x: 720, y: 360 }, type: "connecting", color: "green", enableDrag:false   },
+                { endA: { x: 440, y: 440 }, endB: { x: 620, y: 260 }, type: "connecting", color: "green", enableDrag:false   },
 
                
             ]
