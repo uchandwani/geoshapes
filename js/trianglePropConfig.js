@@ -460,7 +460,7 @@ export  const functionalityConfig = {
          canvasConfig: {
             circle: [{ x: 400, y: 400 }, 200], // Circle center and radius
             triangles: [
-                {
+                {   type:'sin'
                     vertexA: { x: 400, y: 400 }, // Center of the circle
                     angles: [45, 45], // Adjacent angles
                     radius: 200, // Circle radius
@@ -468,7 +468,7 @@ export  const functionalityConfig = {
                     showMidpoints: false,
                     setShowMeasurements:true
                 },
-                {
+                {   type:'sin'
                     vertexA: { x: 400, y: 400 },
                     angles: [45, 45],
                     radius: 300,
@@ -477,7 +477,7 @@ export  const functionalityConfig = {
                     setShowMeasurements:true
                 },
 
-                {
+                {   type:'sin'
                     vertexA: { x: 400, y: 400 }, // Center of the circle
                     angles: [60, 30], // Adjacent angles
                     radius: 200, // Circle radius
@@ -485,7 +485,7 @@ export  const functionalityConfig = {
                     showMidpoints: false,
                     setShowMeasurements:true
                 },
-                {
+                {   type:'sin'
                     vertexA: { x: 400, y: 400 },
                     angles: [60, 30],
                     radius: 300,
