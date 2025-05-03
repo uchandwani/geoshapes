@@ -523,71 +523,66 @@ export  const functionalityConfig = {
         theoremDefinition: "The angle subtended by an arc at the center is double the angle subtended by the same arc at the circumference. The angles subtended by the same arc on the circumference are equal.The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
       
-    "circle": [{ "x": 400, "y": 400 }, 200],
+    "circle": [{ "x": 300, "y": 300 }, 200],
 
-    "points": [
-        // Common center
-        { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" },
+"points": [
+    // Common center
+    { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" },
 
-        // "sin" - First Figure: ∠COB = 60°
-       
-        { x: 280, y: 560, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 520, y: 560, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 500, y: 224, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    // "sin" - First Figure: ∠COB = 60°
+    { x: 180, y: 460, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 420, y: 460, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 400, y: 124, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
 
-        // "cos" - Second Figure: ∠COB = 100°
-        { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 240, y: 280, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    // "cos" - Second Figure: ∠COB = 100°
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 140, y: 180, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
 
-        // "tan" - Special Case: ∠COB = 180°
-        { x: 200, y: 400, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 600, y: 400, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 520, y: 240, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 260, y: 540, label: "E", color: "red", radius: 5, type: "subtended", subtype: "tan" }
-    ],
+    // "tan" - Special Case: ∠COB = 180°
+    { x: 100, y: 300, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 500, y: 300, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 420, y: 140, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 160, y: 440, label: "E", color: "red", radius: 5, type: "subtended", subtype: "tan" }
+],
 
+"lines": [
+    // Figure "sin"
+    { endA: { x: 300, y: 300 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-    "lines": [
-        // Figure "sin"
-        {  endA: { x: 400, y: 400 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    { endA: { x: 300, y: 100 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-        {  endA: { x: 400, y: 200 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    { endA: { x: 400, y: 124 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 400, y: 124 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-        {  endA: { x: 500, y: 224 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 500, y: 224 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    // Figure "cos"
+    { endA: { x: 300, y: 300 }, endB: { x: 124, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 476, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
+    { endA: { x: 300, y: 100 }, endB: { x: 126, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 474, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
-        {  endA: { x: 400, y: 400 }, endB: { x: 224, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 576, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    { endA: { x: 140, y: 180 }, endB: { x: 126, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 140, y: 180 }, endB: { x: 474, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
-        {  endA: { x: 400, y: 200 }, endB: { x: 226, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 574, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    // Figure "tan"
+    { endA: { x: 300, y: 300 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
-        {  endA: { x: 240, y: 280 }, endB: { x: 226, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 240, y: 280 }, endB: { x: 574, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    { endA: { x: 300, y: 100 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
+    { endA: { x: 420, y: 140 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 420, y: 140 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
-        {  endA: { x: 400, y: 400 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 400, y: 200 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 520, y: 240 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 520, y: 240 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 260, y: 540 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 260, y: 540 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        
-      
-        ]
+    { endA: { x: 160, y: 440 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 160, y: 440 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false }
+]
 
 
         },
