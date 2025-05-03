@@ -139,146 +139,104 @@ export  const functionalityConfig = {
              right: 
         `
           
-            <h3>Right Angle Inference</h3>
-   <h4>Table 1</h4>
-<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+           <h3>Right Angle Inference</h3>
+
+<table class="table" style="width:100%;">
   <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 20%;">
-        <col style="width: 15%;">
-    </colgroup>
-    <thead style="background-color: #6a9be8; color: white;">
-        <tr>
-            <th>Length of AB</th>
-            <th>Length of BC</th>
-            <th>Is AB=BC ?</th>
-        </tr>
-    </thead>
-    <tbody>
-      
-    <tr style="background-color: #d9e1f2;">
-        <td>
-            <input type="number" name="length_ab" placeholder="Enter AB" style="width: 70%;"
-                oninput="compareMeasures('length_ab', 'length_bc', 'ans1'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
-        </td>
-        <td>
-            <input type="number" name="length_bc" placeholder="Enter BC" style="width: 70%;"
-                oninput="compareMeasures('length_ab', 'length_bc', 'ans1'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
-        </td>
-        <td>
-            <span name="ans1"></span>
-        </td>
-    </tr>
-</tbody>
-<thead style="background-color: #6a9be8; color: white;">
-    <tr>
-        <th>Length of AD</th>
-        <th>Length of DF</th>
-        <th>Is AD=DF?</th>
-    </tr>
-</thead>
-<tbody>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-            <input type="number" name="length_ad" placeholder="Enter AD" style="width: 70%;"
-                oninput="compareMeasures('length_ad', 'length_df', 'ans2'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
-        </td>
-        <td>
-            <input type="number" name="length_df" placeholder="Enter DF" style="width: 70%;"
-                oninput="compareMeasures('length_ad', 'length_df', 'ans2'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
-        </td>
-        <td>
-            <span name="ans2"></span>
-        </td>
-    </tr>
-</tbody>
-<!-- Add the message area -->
-        
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
+  <tr>
+    <th>Length / Angle</th>
+    <th>Comparison Target</th>
+    <th>Equality Check</th>
+  </tr>
+
+  <!-- Table 1 Header -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>Length of AB</span><br>
+      <input type="number" name="length_ab" placeholder="Enter AB" style="width: 90%;"
+        oninput="compareMeasures('length_ab', 'length_bc', 'ans1'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
+    </td>
+    <td><span>Length of BC</span><br>
+      <input type="number" name="length_bc" placeholder="Enter BC" style="width: 90%;"
+        oninput="compareMeasures('length_ab', 'length_bc', 'ans1'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
+    </td>
+    <td><span name="ans1"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>Length of AD</span><br>
+      <input type="number" name="length_ad" placeholder="Enter AD" style="width: 90%;"
+        oninput="compareMeasures('length_ad', 'length_df', 'ans2'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
+    </td>
+    <td><span>Length of DF</span><br>
+      <input type="number" name="length_df" placeholder="Enter DF" style="width: 90%;"
+        oninput="compareMeasures('length_ad', 'length_df', 'ans2'); updateMessage('ans1', 'ans2', 'MessageArea1', 'B is mid-point of AC. D is mid-point of AF')">
+    </td>
+    <td><span name="ans2"></span></td>
+  </tr>
+</table>
+<div id="MessageArea1" style="margin-top: 8px; font-weight: bold; color: darkblue;"></div>
+
+<!-- Table 2 -->
+<table class="table" style="width:100%; margin-top: 10px;">
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>Length of BD</span><br>
+      <input type="number" name="length_bd" placeholder="Enter BD" style="width: 90%;"
+        oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)">
+    </td>
+    <td><span>Length of CF</span><br>
+      <input type="number" name="length_cf" placeholder="Enter CF" style="width: 90%;"
+        oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)">
+    </td>
+    <td><span name="cf_div_2"></span></td>
+  </tr>
 </table>
 
-<div id="MessageArea1" style="margin-top: 10px; font-weight: bold; color: darkblue;"></div>
-
-<h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 20%;">
-        <col style="width: 15%;">
-    </colgroup>
-    <tr>
-        <th>Length of BD</th>
-        <th>Length of Side CF</th>
-        <th>Is BD = CF/2 ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="number" name="length_bd" placeholder="Enter BD" style="width: 90%;" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
-        <td><input type="number" name="length_cf" placeholder="Enter CF" style="width: 90%;" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
-        <td><span name="cf_div_2"></span></td>
-    </tr>
-</table>
-
-<h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠ABD</th>
-        <th>Measure of ∠ACF </th>
-        <th>Is ∠ABD = ∠ACF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_abd" placeholder="Enter ∠ABD" style="width: 90%;"
+<!-- Table 3 -->
+<table class="table" style="width:100%; margin-top: 10px;">
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ABD</span><br>
+      <input type="number" name="angle_abd" placeholder="Enter ∠ABD" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf'); updateMessage('is_abd_acf', 'is_adb_afc', 'messageArea2', 'BD is parallel to CF');">
-</td>
-<td>
-    <input type="number" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"
+    </td>
+    <td><span>∠ACF</span><br>
+      <input type="number" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf'); updateMessage('is_abd_acf', 'is_adb_afc', 'messageArea2', 'BD is parallel to CF');">
-</td>
-<td>
-    <span name="is_abd_acf"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠ADB</th>
-        <th>Measure of ∠AFC</th>
-        <th>Is ∠ADB = ∠AFC ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_adb" placeholder="Enter ∠ADB" style="width: 90%;"
+    </td>
+    <td><span name="is_abd_acf"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ADB</span><br>
+      <input type="number" name="angle_adb" placeholder="Enter ∠ADB" style="width: 90%;"
         oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); updateMessage('is_abd_acf', 'is_adb_afc', 'messageArea2', 'BD is parallel to CF');">
-</td>
-<td>
-    <input type="number" name="angle_afc2" placeholder="Enter ∠AFC" style="width: 90%;"
+    </td>
+    <td><span>∠AFC</span><br>
+      <input type="number" name="angle_afc2" placeholder="Enter ∠AFC" style="width: 90%;"
         oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); updateMessage('is_abd_acf', 'is_adb_afc', 'messageArea2', 'BD is parallel to CF');">
-</td>
-<td>
-    <span name="is_adb_afc"></span>
-</td>
-
-    </tr>
+    </td>
+    <td><span name="is_adb_afc"></span></td>
+  </tr>
 </table>
+<div id="messageArea2" style="margin-top: 8px; font-weight: bold; color: darkblue;"></div>
 
-<div id="messageArea2" style="margin-top: 10px; font-weight: bold; color: darkblue;"></div>
-
-    <div style="margin-top: 20px;">
-    <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
-    <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
-              style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
-    
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
 </div>
 
-<!-- Submit Button -->
-<div style="margin-top: 20px;">
-    <button id="submitButton" style="background-color: #6a9be8; color: white ; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
-        Submit
-    </button>
+<div style="margin-top: 15px;">
+  <button id="submitButton" style="background-color: #6a9be8; color: white ; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
 </div>
+
         `,
 
     acute: 
