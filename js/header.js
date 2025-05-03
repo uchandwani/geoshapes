@@ -5,7 +5,18 @@ export function attachNavBarListeners() {
     "verticallyOpposite-button": { functionality: "verticallyOpposite", subtype: null },
     "parallelProperties-button": { functionality: "parallelProperties", subtype: "sin" },
     "exteriorAngles-button": { functionality: "exteriorAngles", subtype: "sin" },
-    "angleSumProperties-button": { functionality: "angleSumProperties", subtype: "sin" }
+    "angleSumProperties-button": { functionality: "angleSumProperties", subtype: "sin" },
+
+    "radiusTangent-button": { functionality: "radiusTangent", subtype: null },
+    "twoTangents-button": { functionality: "twoTangents", subtype: "sin" },
+    "subtendedAngles-button": { functionality: "subtendedAngles", subtype: "sin" },
+    "alternateSegments-button": { functionality: "alternateSegments", subtype: "sin" },
+    "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" }
+
+
+
+
+
   };
 
   Object.entries(navMap).forEach(([id, { functionality, subtype }]) => {
