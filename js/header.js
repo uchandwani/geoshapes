@@ -251,7 +251,5 @@ export function loadSubHeaderIcons() {
   });
 }
 
-// 👇 Call only if inside parallel_lines_04.html
-if (location.pathname.endsWith("parallel_lines_04.html")) {
   loadSubHeaderIcons();
-}
+
