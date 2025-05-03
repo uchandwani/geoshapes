@@ -37,14 +37,14 @@ export  const functionalityConfig = {
             lines: [
                 // Parallel lines
                 // Parallel lines
-                { endA: { x: 0, y: 100 }, endB: { x: 600, y: 100 }, type: "parallel", color: "green", enableDrag: false },
+                { endA: { x: 40, y: 100 }, endB: { x: 600, y: 100 }, type: "parallel", color: "green", enableDrag: false },
                 { endA: { x: 40, y: 320 }, endB: { x: 600, y: 320 }, type: "parallel", color: "green", enableDrag: false },
 
 
              // Transversals
-            { endA: { x: 300, y: 10 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
-            { endA: { x: 350, y: -20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
-            { endA: { x: 380, y: -20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 318, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 345, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 360, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
             // Connecting lines
             { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
