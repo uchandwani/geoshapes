@@ -7,6 +7,15 @@ import { updateHeaderLabels } from './header.js';
 // Function to handle navigation and update the screen
 let setShowMidpoints =true;
 
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
+
 
 export function generateButtons(buttonSet = [], defaultType = 'right') {
     const buttonContainer = document.getElementById("dynamic-buttons");
@@ -301,7 +310,14 @@ export function addSpecificPoints(points, ctx) {
   const mainTitle = pageTitles[page] || "Math App";
 
   const icon = document.getElementById(`${functionalityKey}-button`);
-  const subtitleLabel = icon?.getAttribute("title") || "";
+  const subtitleMap = {
+    midSegmentTheorem: "Mid Segment Theorem",
+    basicProportionalityTheorem: "Basic Proportionality Theorem",
+    angleBisectorTheorem : "Angle Bisector Theorem",
+    propertiesOfTriangles: "Properties of Triangles",
+   
+      };
+   const subtitleLabel = subtitleMap[functionalityKey] || "";
 
   let activeSubBtnLabel = "";
   if (config.buttonSet && effectiveType) {

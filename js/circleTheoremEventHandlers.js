@@ -570,17 +570,10 @@ export function switchFunctionality(functionalityKey, buttonType) {
       activeSubBtnLabel = match?.label || "";
     }
   
-  console.log("🧠 Header Composition Check");
-  console.log("   Main Title:", mainTitle);
-  console.log("   Subtitle (from icon title):", subtitleLabel);
-  console.log("   Sub-button label (from config):", activeSubBtnLabel);
-  
+    
     // ✅ Compose header with dividers only if parts are present
     updateHeaderLabels({
-  
-   
-  
-      title: mainTitle,
+        title: mainTitle,
       subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
       subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
     });

@@ -3,10 +3,7 @@
  * Description: Handles dynamic drawing and UI updates for Parallel Lines Theorem with sub-button support.
  */
 
-/**
- * Program: Parallel Lines Canvas Tool (Merged Final Version)
- * Description: Handles dynamic drawing and UI updates for Parallel Lines Theorem with sub-button support.
- */
+
 
 import { functionalityConfig } from './parallelLinesConfig.js';
 import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
