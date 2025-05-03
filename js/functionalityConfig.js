@@ -153,6 +153,7 @@ export  const functionalityConfig = {
     <th>Comparison Target</th>
     <th>Equality Check</th>
   </tr>
+   </thead>
 
   <!-- Table 1 Header -->
   <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
@@ -257,6 +258,7 @@ export  const functionalityConfig = {
     <th>Comparison Target</th>
     <th>Equality Check</th>
   </tr>
+   </thead>
 
   <!-- Table 1 -->
   <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
