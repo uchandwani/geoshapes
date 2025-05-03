@@ -11,8 +11,6 @@ import {Protractor} from '../shapes/Protractor.js';
 import {updateRightSidebar} from './eventHandlers.js';
 
 
-
-
     document.addEventListener("DOMContentLoaded", () => {
       console.log("Triangle Page Loaded");
       updatePageTitle();
@@ -25,42 +23,7 @@ import {updateRightSidebar} from './eventHandlers.js';
       switchFunctionality(functionalityKey, subtype);
     });
  
-
-
-  attachNavBarListeners(); // Nav bar logic
  
-  const defaultsubButton ='right';
-  
-  switchFunctionality(defaultFunctionality, defaultsubButton); // Default load
-
-  // 🟦 Header icon click listeners
-  const iconMap = {
-    "midSegmentTheorem-button": "midSegmentTheorem",
-    "basicProportionalityTheorem-button": "basicProportionalityTheorem",
-    "angleBisectorTheorem-button": "angleBisectorTheorem",
-    "propertiesOfTriangles-button": "propertiesOfTriangles"
-  };
-
- Object.entries(iconMap).forEach(([id, funcKey]) => {
-  const el = document.getElementById(id);
-  console.log("🔍 Checking icon", id, el?.dataset.listenerAttached);
-
-if (el && !el.dataset.listenerAttached) {
-  console.log("✅ Binding click handler for:", id);
-  el.addEventListener("click", () => {
-    console.log(`🔘 ${funcKey} icon clicked`);
-    switchFunctionality(funcKey);
-  });
-  el.dataset.listenerAttached = "true";
-}
-
-});
- 
-
-
-
-
-
 // Function to compare two measures (e.g., lengths or angles)
    export function compareMeasures(input1Name, input2Name, resultName) {
     console.log("Inside compare Measures");
