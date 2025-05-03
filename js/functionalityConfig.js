@@ -147,6 +147,7 @@ export  const functionalityConfig = {
     <col style="width: 25%;">
     <col style="width: 25%;">
   </colgroup>
+  <thead style="background-color:#6a9be8; color:white;">
   <tr>
     <th>Length / Angle</th>
     <th>Comparison Target</th>
@@ -250,6 +251,7 @@ export  const functionalityConfig = {
     <col style="width: 30%;">
     <col style="width: 40%;">
   </colgroup>
+  <thead style="background-color:#6a9be8; color:white;">
   <tr>
     <th>Length / Angle</th>
     <th>Comparison Target</th>
