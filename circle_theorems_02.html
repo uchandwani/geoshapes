@@ -4,13 +4,19 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Page</title>
+    <title>Circle Theorems </title>
     
-    <link rel="stylesheet" href="./css/header_styles.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./js/responsiveCanvas.js"> </script>
-    <script type="module" src="./shapes.js"></script>
-    <script type="module" src="./shapes/CanvasManager.js"> </script>
+    <!-- ✅ CSS Files -->
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- ✅ JS Modules -->
+
+  <script type="module" src="./shapes/CanvasManager.js"> </script>
+  <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./shapes.js"></script>
+        <!-- Page Scripts -->
+ 
     
     <script type="module">
     import {sumMeasures, compareMeasures} from './js/circleTheoremPage.js';
@@ -56,15 +62,11 @@
                         
                 </div-->
             
-
-             <div id="dynamic-buttons" class="triangle-buttons">
-    <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
-    <button id="tab-other" onclick="showTab('other')">Other Tab</button>
-   </div>
-
-             <!--div id="dynamic-buttons" class="triangle-buttons"></div-->
-                     <div class="canvas-wrapper">
-             
+    <div class="canvas-wrapper">
+             <div id="dynamic-buttons" class="triangle-buttons">  </div>
+              <div class="size-label"></div>
+                   <!-- Tool Buttons -->
+                          
         
                 <div id="left-side-tool-div">
                     <button id="draw-line" class="icon-btn" title="Draw Line">
@@ -144,10 +146,7 @@
     <footer>
         <p></p>
     </footer>
-     <!-- Page Scripts -->
-  <script type="module" src="./js/circleTheoremPage.js"></script>
-  <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
+ 
 
   <!-- Dynamically load header.html and header.js -->
 
