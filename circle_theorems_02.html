@@ -161,6 +161,13 @@
   
     const { switchFunctionality } = await import('./js/circleTheoremEventHandlers.js');
     attachNavBarListeners();
+
+    window.addEventListener("nav-select", (e) => {
+    const { functionalityKey, subtype } = e.detail;
+    console.log("📥 Received nav-select:", functionalityKey, subtype);
+    switchFunctionality(functionalityKey, subtype);
+  });
+
     switchFunctionality('radiusTangent'); // or your preferred default
   </script>
   
