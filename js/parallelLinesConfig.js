@@ -94,7 +94,8 @@ export  const functionalityConfig = {
     <th>Are they equal?</th>
   </tr>
 
-  <!-- Row 1 -->
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AGT</span><br>
       <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
@@ -106,8 +107,6 @@ export  const functionalityConfig = {
     </td>
     <td><span name="is_abd_acf"></span></td>
   </tr>
-
-  <!-- Row 2 -->
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AGE</span><br>
       <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
@@ -120,7 +119,8 @@ export  const functionalityConfig = {
     <td><span name="is_adb_afc"></span></td>
   </tr>
 
-  <!-- Row 3 -->
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠ABP</span><br>
       <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
@@ -132,8 +132,6 @@ export  const functionalityConfig = {
     </td>
     <td><span name="is_abp_qbw"></span></td>
   </tr>
-
-  <!-- Row 4 -->
   <tr style="background-color: #d9e1f2;">
     <td><span>∠ABQ</span><br>
       <input type="number" name="angle_abq" placeholder="Enter" style="width: 90%;"
@@ -146,7 +144,8 @@ export  const functionalityConfig = {
     <td><span name="is_abq_pbw"></span></td>
   </tr>
 
-  <!-- Row 5 -->
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AEG</span><br>
       <input type="number" name="angle_aeg" placeholder="Enter" style="width: 90%;"
@@ -158,8 +157,6 @@ export  const functionalityConfig = {
     </td>
     <td><span name="is_aeg_sev"></span></td>
   </tr>
-
-  <!-- Row 6 -->
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AES</span><br>
       <input type="number" name="angle_aes" placeholder="Enter" style="width: 90%;"
@@ -172,6 +169,7 @@ export  const functionalityConfig = {
     <td><span name="is_aes_tev"></span></td>
   </tr>
 </table>
+
 
 
         `,
