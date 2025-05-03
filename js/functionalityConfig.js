@@ -400,7 +400,7 @@ obtuse:
 </div>
         `,            
     },
-
+    },
 
     angleBisectorTheorem: {
         theoremDefinition: "If a ray bisects an angle of a triangle, then it divides the opposite side of the triangle into segments proportional to the other two sides.",
