@@ -28,10 +28,22 @@
  */
 
 import { functionalityConfig } from './trianglePropConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
+import { Point } from '../shapes/Points.js';
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
 
 // Functions ordered alphabetically
 
@@ -312,7 +324,59 @@ export function switchFunctionality(functionalityKey, buttonType) {
     console.log(`Switching functionality: ${functionalityKey}, buttonType: ${buttonType}`);
 
     // Activate the main functionality button
-    handleNavButtons(functionalityKey);
+   // handleNavButtons(functionalityKey);
+
+    const config = functionalityConfig[functionalityKey];
+      if (!config) {
+        console.error("❌ Invalid functionalityKey:", functionalityKey);
+        return;
+      }
+    
+      const effectiveType = buttonType || config.defaultButtonType || null;
+      console.log("🎯 Using subtype:", effectiveType);
+    
+      // 🔹 Title and subtitle updates
+      const page = location.pathname.split("/").pop();
+      const pageTitles = {
+        "index.html": "Home",
+        "parallel_lines_04.html": "Parallel Lines",
+        "triangle_theorem_07.html": "Triangle Theorems",
+        "trig_properties_09.html": "Trigonometric Properties",
+        "circle_theorems_02.html": "Circle Theorems"
+      };
+      const mainTitle = pageTitles[page] || "Math App";
+    
+      const icon = document.getElementById(`${functionalityKey}-button`);
+      const subtitleMap = {
+      midSegmentTheorem: "Mid Segment Theorem",
+      basicProportionalityTheorem: "Basic Proportionately Theorem",
+      angleBisectorTheorem: "Angle Bisector Theorem",
+      propertiesOfTriangles: "Properties of Triangles"
+        };
+     const subtitleLabel = subtitleMap[functionalityKey] || "";
+    
+    
+      let activeSubBtnLabel = "";
+      if (config.buttonSet && effectiveType) {
+        const match = config.buttonSet.find(btn => btn.type === effectiveType);
+        activeSubBtnLabel = match?.label || "";
+      }
+    
+    console.log("🧠 Header Composition Check");
+    console.log("   Main Title:", mainTitle);
+    console.log("   Subtitle (from icon title):", subtitleLabel);
+    console.log("   Sub-button label (from config):", activeSubBtnLabel);
+    
+      // ✅ Compose header with dividers only if parts are present
+      updateHeaderLabels({
+    
+     
+    
+        title: mainTitle,
+        subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+        subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+      });
+    
 
     // Update the UI
     const config = functionalityConfig[functionalityKey];
