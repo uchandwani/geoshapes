@@ -293,7 +293,7 @@ function handleNavButtons(functionalityKey) {
 export function handleTriangleType(fkey, type) {
 
     console.log('%c'+ "Function HTT fkey, type", 'color : green ;', fkey, type);
-    const config = functionalityConfig[fkey];
+    let config = functionalityConfig[fkey];
     if (!config || !config.canvasConfig) {
         console.error("Invalid configuration for functionality key:", fkey);
         return;
@@ -379,7 +379,7 @@ export function switchFunctionality(functionalityKey, buttonType) {
     
 
     // Update the UI
-    const config = functionalityConfig[functionalityKey];
+    
     if (config) {
 
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
