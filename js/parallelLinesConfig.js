@@ -81,9 +81,7 @@ export  const functionalityConfig = {
         `,
         rightSidebarContent: `
             
-    <h3>Verification - Vertically Opposite Angles </h3>
-
-    <h4>Verification - Vertically Opposite Angles</h4>
+<h4>Verification - Vertically Opposite Angles</h4>
 <table class="table">
   <colgroup>
     <col style="width: 15%;">
@@ -96,97 +94,84 @@ export  const functionalityConfig = {
     <th>Are they equal?</th>
   </tr>
 
-  <!-- Row 1: AGT vs EGU -->
+  <!-- Row 1 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_abd" placeholder="Enter ∠AGT" style="width: 90%;"
+    <td><span>∠AGT</span><br>
+      <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
     </td>
-    <td>
-      <input type="number" name="angle_acf" placeholder="Enter ∠EGU" style="width: 90%;"
+    <td><span>∠EGU</span><br>
+      <input type="number" name="angle_acf" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
     </td>
-    <td>
-      <span name="is_abd_acf"></span>
-    </td>
+    <td><span name="is_abd_acf"></span></td>
   </tr>
 
-  <!-- Row 2: AGE vs TGU -->
+  <!-- Row 2 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_adb" placeholder="Enter ∠AGE" style="width: 90%;"
+    <td><span>∠AGE</span><br>
+      <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
     </td>
-    <td>
-      <input type="number" name="angle_afc2" placeholder="Enter ∠TGU" style="width: 90%;"
+    <td><span>∠TGU</span><br>
+      <input type="number" name="angle_afc2" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
     </td>
-    <td>
-      <span name="is_adb_afc"></span>
-    </td>
+    <td><span name="is_adb_afc"></span></td>
   </tr>
 
-  <!-- Row 3: ABP vs QBW -->
+  <!-- Row 3 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abp', 'angle_qbw', 'is_abp_qbw');">
     </td>
-    <td>
-      <input type="number" name="angle_qbw" placeholder="Enter ∠QBW" style="width: 90%;"
+    <td><span>∠QBW</span><br>
+      <input type="number" name="angle_qbw" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abp', 'angle_qbw', 'is_abp_qbw');">
     </td>
-    <td>
-      <span name="is_abp_qbw"></span>
-    </td>
+    <td><span name="is_abp_qbw"></span></td>
   </tr>
 
-  <!-- Row 4: ABQ vs PBW -->
+  <!-- Row 4 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_abq" placeholder="Enter ∠ABQ" style="width: 90%;"
+    <td><span>∠ABQ</span><br>
+      <input type="number" name="angle_abq" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abq', 'angle_pbw', 'is_abq_pbw');">
     </td>
-    <td>
-      <input type="number" name="angle_pbw" placeholder="Enter ∠PBW" style="width: 90%;"
+    <td><span>∠PBW</span><br>
+      <input type="number" name="angle_pbw" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abq', 'angle_pbw', 'is_abq_pbw');">
     </td>
-    <td>
-      <span name="is_abq_pbw"></span>
-    </td>
+    <td><span name="is_abq_pbw"></span></td>
   </tr>
 
-  <!-- Row 5: AEG vs SEV -->
+  <!-- Row 5 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_aeg" placeholder="Enter ∠AEG" style="width: 90%;"
+    <td><span>∠AEG</span><br>
+      <input type="number" name="angle_aeg" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
     </td>
-    <td>
-      <input type="number" name="angle_sev" placeholder="Enter ∠SEV" style="width: 90%;"
+    <td><span>∠SEV</span><br>
+      <input type="number" name="angle_sev" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
     </td>
-    <td>
-      <span name="is_aeg_sev"></span>
-    </td>
+    <td><span name="is_aeg_sev"></span></td>
   </tr>
 
-  <!-- Row 6: AES vs TEV -->
+  <!-- Row 6 -->
   <tr style="background-color: #d9e1f2;">
-    <td>
-      <input type="number" name="angle_aes" placeholder="Enter ∠AES" style="width: 90%;"
+    <td><span>∠AES</span><br>
+      <input type="number" name="angle_aes" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
     </td>
-    <td>
-      <input type="number" name="angle_tev" placeholder="Enter ∠TEV" style="width: 90%;"
+    <td><span>∠TEV</span><br>
+      <input type="number" name="angle_tev" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
     </td>
-    <td>
-      <span name="is_aes_tev"></span>
-    </td>
+    <td><span name="is_aes_tev"></span></td>
   </tr>
 </table>
-
 
 
         `,
