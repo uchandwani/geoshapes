@@ -30,7 +30,7 @@ export  const functionalityConfig = {
                 { x: 225, y: 480, label: "W", color: "red", radius: 5 },
                 { x: 322, y: 480, label: "V", color: "red", radius: 5 },
                 { x: 540, y: 480, label: "U", color: "red", radius: 5 },
-              ]
+              ],
               
 
             // Lines drawn without labels
