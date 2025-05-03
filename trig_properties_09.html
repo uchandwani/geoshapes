@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triangle Properties</title>
-    <link rel="stylesheet" href="./css/header_styles.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./js/trianglePropertiesPage.js"></script>
-    <script type="module" src="./js/responsiveCanvas.js"> </script>
+     <!-- ✅ CSS Files -->
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- ✅ JS Modules -->
+
+  <script type="module" src="./shapes/CanvasManager.js"> </script>
+  <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./shapes.js"></script>
+
+
      <script type="module">
     import { calculateSin, calculateCos, calculateTrig, decimalToFraction, calcTrig} from './js/trianglePropertiesPage.js';
 
@@ -134,11 +141,11 @@
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
 
-    const { updatePageTitle,loadSubHeaderIcons } = await import('./js/header.js');
+    const { updatePageTitle,loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality, attachNavBarListeners } = await import('./js/trianglePropeventHandlers.js');
+    const { switchFunctionality } = await import('./js/trianglePropeventHandlers.js');
     attachNavBarListeners();
     switchFunctionality('sineTheta'); // Default functionality
   </script>
