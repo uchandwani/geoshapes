@@ -233,67 +233,70 @@ export  const functionalityConfig = {
         defaultButtonType: 'sin',
         theoremDefinition: "To Verify that the value of cos θ decreases with the increase in θ when 0 ≤ θ ≤ 90⁰",
         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200],
-            lines: [ {
-                      type: 'cos',
-                      endA: {x:400, y:400},
-                      endB: {x:400, y:200},
-                    },
-                 {
-                      type: 'cos',
-                      endA: {x:400, y:401},
-                      endB: {x:600, y:401},
-                    },
-            ], 
+            circle: [{ x: 300, y: 300 }, 200],
+          
+            lines: [
+              {
+                type: 'cos',
+                endA: { x: 300, y: 300 },
+                endB: { x: 300, y: 100 },
+              },
+              {
+                type: 'cos',
+                endA: { x: 300, y: 301 },
+                endB: { x: 500, y: 301 },
+              }
+            ],
+          
             triangles: [
-                {
-                    type: 'cos', 
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [5,85], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'D', C: 'B' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'E', C: 'A' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [45, 45],
-                    radius: 200,
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [85,5],
-                    radius: 200,
-                    labels: { A: 'P', B: 'U', C: 'V' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                }
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [5, 85],
+                radius: 200,
+                labels: { A: 'P', B: 'D', C: 'B' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'E', C: 'A' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [45, 45],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [85, 5],
+                radius: 200,
+                labels: { A: 'P', B: 'U', C: 'V' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              }
             ]
-        
-    
-        },
+          },
+          
         buttonSet: [
                 { label: "regular", type: "sin" },
                 { label: "edge", type: "cos" },
@@ -668,57 +671,61 @@ export  const functionalityConfig = {
     trigonoIdentities: {
         defaultButtonType: 'sin',
         theoremDefinition: "Trigono Identities.",
-         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200], // Circle center and radius
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200], // Circle center and radius
+          
             triangles: [
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                },
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                },
-                {   type:'tan',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'tan',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                }
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              },
+              {
+                type: 'tan',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'tan',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              }
             ]
-        
-        },
+          },
+          
          buttonSet: [
                 { label: "sin²θ + cos²θ = 1", type: "sin" },
                 { label: "1 + tan²θ = sec²θ", type: "cos" },
