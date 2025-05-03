@@ -925,73 +925,69 @@ alternateSegments: {
         defaultButtonType: 'sin',
         theoremDefinition: "The theorem states that for any circle, the angle formed between the tangent and the chord through the point of contact of the tangent is equal to the angle formed by the chord in the alternate segment",
          canvasConfig: {
-    
-          circle: [{ x: 400, y: 400 }, 200],
+  circle: [{ x: 300, y: 300 }, 200],
 
-          points: [
-            { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" },
+  points: [
+    { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" },
 
-            // "sin" - First Figure: ∠ABC = ∠CAD = 30°
-            { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 250, y: 200, label: "D", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    // "sin"
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 150, y: 100, label: "D", color: "red", radius: 5, type: "alternate", subtype: "sin" },
 
-            // "cos" - Second Figure: ∠ABC = ∠CAD = 120°
-            { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 600, y: 380, label: "A", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 590, y: 280, label: "D", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    // "cos"
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 500, y: 280, label: "A", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 490, y: 180, label: "D", color: "red", radius: 5, type: "alternate", subtype: "cos" },
 
-            // "tan" - Special Case: ∠ABC = ∠CAD = 45°
-            { x: 240, y: 520, label: "C", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 560, y: 520, label: "B", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 240, y: 280, label: "A", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 180, y: 360, label: "D", color: "red", radius: 5, type: "alternate", subtype: "tan" }
-          ],
+    // "tan"
+    { x: 140, y: 420, label: "C", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 460, y: 420, label: "B", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 140, y: 180, label: "A", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 80, y: 260, label: "D", color: "red", radius: 5, type: "alternate", subtype: "tan" }
+  ],
 
-          lines: [
-            // Figure "sin"
-            { endA: { x: 224, y: 500 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "sin" },
-            { endA: { x: 224, y: 500 }, endB: { x: 400, y: 200 }, color: "green", subtype: "sin" },
-            { endA: { x: 400, y: 200 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "sin" },
-          
+  lines: [
+    // "sin"
+    { endA: { x: 124, y: 400 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "sin" },
+    { endA: { x: 124, y: 400 }, endB: { x: 300, y: 100 }, color: "green", subtype: "sin" },
+    { endA: { x: 300, y: 100 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "sin" },
 
-            // Figure "cos"
-            { endA: { x: 224, y: 500 }, endB: { x: 600, y: 380 }, color: "green", subtype: "cos" },
-            { endA: { x: 576, y: 500 }, endB: { x: 600, y: 380 }, color: "blue", subtype: "cos" },
-            { endA: { x: 224, y: 500 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "cos" },
-           
+    // "cos"
+    { endA: { x: 124, y: 400 }, endB: { x: 500, y: 280 }, color: "green", subtype: "cos" },
+    { endA: { x: 476, y: 400 }, endB: { x: 500, y: 280 }, color: "blue", subtype: "cos" },
+    { endA: { x: 124, y: 400 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "cos" },
 
-            // Figure "tan"
-            { endA: { x: 240, y: 280 }, endB: { x: 560, y: 520 }, color: "blue", subtype: "tan" },
-            { endA: { x: 240, y: 520 }, endB: { x: 240, y: 280 }, color: "green", subtype: "tan" },
-            { endA: { x: 240, y: 520 }, endB: { x: 560, y: 520 }, color: "blue", subtype: "tan" },
-           
-          ],
+    // "tan"
+    { endA: { x: 140, y: 180 }, endB: { x: 460, y: 420 }, color: "blue", subtype: "tan" },
+    { endA: { x: 140, y: 420 }, endB: { x: 140, y: 180 }, color: "green", subtype: "tan" },
+    { endA: { x: 140, y: 420 }, endB: { x: 460, y: 420 }, color: "blue", subtype: "tan" }
+  ],
 
- 
   tangentLines: [
     {
-      midpoint: { x: 400, y: 200, label: "A" },  // ✅ Explicit midpoint label
-      length: 300,  // Extend equally on both sides
+      midpoint: { x: 300, y: 100, label: "A" },
+      length: 300,
       color: "green",
       subtype: "sin"
     },
     {
-      midpoint: { x: 600, y: 380, label: "A" },  // ✅ Explicit midpoint label
-      length: 200,  // Extend equally on both sides
+      midpoint: { x: 500, y: 280, label: "A" },
+      length: 200,
       color: "green",
       subtype: "cos"
     },
     {
-      midpoint: { x: 240, y: 280, label: "A" },  // ✅ Explicit midpoint label
+      midpoint: { x: 140, y: 180, label: "A" },
       length: 200,
       color: "green",
       subtype: "tan"
     }
   ]
 }
+
 ,
        
 
