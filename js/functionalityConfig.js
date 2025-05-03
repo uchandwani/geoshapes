@@ -338,74 +338,70 @@ export  const functionalityConfig = {
 obtuse: 
        `
     <h3> Obtuse Angle Inference</h3>
- <div class="inference-container">
-  <h3>Acute Angle Inference</h3>
-  <table class="inference-table">
-    <thead>
-      <tr>
-        <th>Length / Angle</th>
-        <th>Comparison Target</th>
-        <th>Equality Check</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-heading-row">
-        <td colspan="3"><strong>Table 1</strong></td>
-      </tr>
-      <tr>
-        <td>Length of AB<br><input type="number" name="length_ab" placeholder="Enter AB" oninput="compareMeasures('length_ab', 'length_bc', 'ans1')"></td>
-        <td>Length of BC<br><input type="number" name="length_bc" placeholder="Enter BC" oninput="compareMeasures('length_ab', 'length_bc', 'ans1')"></td>
-        <td><span name="ans1"></span></td>
-      </tr>
-      <tr>
-        <td>Length of AD<br><input type="number" name="length_ad" placeholder="Enter AD" oninput="compareMeasures('length_ad', 'length_df', 'ans2')"></td>
-        <td>Length of DF<br><input type="number" name="length_df" placeholder="Enter DF" oninput="compareMeasures('length_ad', 'length_df', 'ans2')"></td>
-        <td><span name="ans2"></span></td>
-      </tr>
 
-      <tr class="table-heading-row">
-        <td colspan="3"><strong>Table 2</strong></td>
-      </tr>
-      <tr>
-        <td>Length of BD<br><input type="number" name="length_bd" placeholder="Enter BD" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
-        <td>Length of CF<br><input type="number" name="length_cf" placeholder="Enter CF" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
-        <td><span name="cf_div_2"></span></td>
-      </tr>
+<table class="table" style="width:100%; text-align:center;">
+  <thead style="background-color:#6a9be8; color:white;">
+    <tr>
+      <th>Length / Angle</th>
+      <th>Comparison Target</th>
+      <th>Equality Check</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#e2efda;">
+      <td colspan="3"><strong>Table 1</strong></td>
+    </tr>
+    <tr style="background-color:#d9e1f2;">
+      <td>Length of AB<br><input type="number" name="length_ab" placeholder="Enter AB" style="width:90%;" oninput="compareMeasures('length_ab', 'length_bc', 'ans1')"></td>
+      <td>Length of BC<br><input type="number" name="length_bc" placeholder="Enter BC" style="width:90%;" oninput="compareMeasures('length_ab', 'length_bc', 'ans1')"></td>
+      <td><span name="ans1"></span></td>
+    </tr>
+    <tr style="background-color:#d9e1f2;">
+      <td>Length of AD<br><input type="number" name="length_ad" placeholder="Enter AD" style="width:90%;" oninput="compareMeasures('length_ad', 'length_df', 'ans2')"></td>
+      <td>Length of DF<br><input type="number" name="length_df" placeholder="Enter DF" style="width:90%;" oninput="compareMeasures('length_ad', 'length_df', 'ans2')"></td>
+      <td><span name="ans2"></span></td>
+    </tr>
 
-      <tr class="table-heading-row">
-        <td colspan="3"><strong>Table 3</strong></td>
-      </tr>
-      <tr>
-        <td>∠ABD<br><input type="number" name="angle_abd" placeholder="Enter ∠ABD" oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf')"></td>
-        <td>∠ACF<br><input type="number" name="angle_acf" placeholder="Enter ∠ACF" oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf')"></td>
-        <td><span name="is_abd_acf"></span></td>
-      </tr>
-      <tr>
-        <td>∠ADB<br><input type="number" name="angle_adb" placeholder="Enter ∠ADB" oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc')"></td>
-        <td>∠AFC<br><input type="number" name="angle_afc2" placeholder="Enter ∠AFC" oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc')"></td>
-        <td><span name="is_adb_afc"></span></td>
-      </tr>
-    </tbody>
-  </table>
+    <tr style="background-color:#e2efda;">
+      <td colspan="3"><strong>Table 2</strong></td>
+    </tr>
+    <tr style="background-color:#d9e1f2;">
+      <td>Length of BD<br><input type="number" name="length_bd" placeholder="Enter BD" style="width:90%;" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
+      <td>Length of CF<br><input type="number" name="length_cf" placeholder="Enter CF" style="width:90%;" oninput="compareDividedMeasures('length_bd', 'length_cf', 'cf_div_2', 2)"></td>
+      <td><span name="cf_div_2"></span></td>
+    </tr>
 
-  <div style="margin-top: 15px;">
-    <label for="studentConclusion"><strong>Student's Conclusion (50 words):</strong></label>
-    <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
-              style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
-  </div>
+    <tr style="background-color:#e2efda;">
+      <td colspan="3"><strong>Table 3</strong></td>
+    </tr>
+    <tr style="background-color:#d9e1f2;">
+      <td>∠ABD<br><input type="number" name="angle_abd" placeholder="Enter ∠ABD" style="width:90%;" oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf')"></td>
+      <td>∠ACF<br><input type="number" name="angle_acf" placeholder="Enter ∠ACF" style="width:90%;" oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf')"></td>
+      <td><span name="is_abd_acf"></span></td>
+    </tr>
+    <tr style="background-color:#d9e1f2;">
+      <td>∠ADB<br><input type="number" name="angle_adb" placeholder="Enter ∠ADB" style="width:90%;" oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc')"></td>
+      <td>∠AFC<br><input type="number" name="angle_afc2" placeholder="Enter ∠AFC" style="width:90%;" oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc')"></td>
+      <td><span name="is_adb_afc"></span></td>
+    </tr>
+  </tbody>
+</table>
 
-  <div style="margin-top: 15px;">
-    <button id="submitButton" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer;">
-      Submit
-    </button>
-  </div>
+<div style="margin-top: 15px;">
+  <label for="studentConclusion"><strong>Student's Conclusion (50 words):</strong></label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width:100%; height:80px; resize:none;" oninput="limitWords(this, 50)"></textarea>
 </div>
 
-
+<div style="margin-top: 15px;">
+  <button id="submitButton" style="background-color:#6a9be8; color:white; border:none; padding:10px 20px; cursor:pointer;">
+    Submit
+  </button>
+</div>
         `,            
     },
 
-},
+
     angleBisectorTheorem: {
         theoremDefinition: "If a ray bisects an angle of a triangle, then it divides the opposite side of the triangle into segments proportional to the other two sides.",
          
