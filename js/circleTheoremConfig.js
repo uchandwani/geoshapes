@@ -592,11 +592,53 @@ export  const functionalityConfig = {
 
 
         },
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-            ],
+        buttonSet: [
+
+            {
+  label: "Figure 1",
+  type: "sin",
+  svg: `
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="15" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+    `
+    },
+      {
+  label: "Figure 2",
+  type: "cos",
+  svg: `
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="20" y1="30" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="80" y1="40" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="15" y1="75" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+  `
+},
+
+          {
+  label: "Figure 3",
+  type: "tan",
+  svg: `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="50" y1="5" x2="20" y2="75" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="20" y1="75" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="85" y1="85" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+    `
+},
+
+        
+        ],
        
         leftSidebarContent: {
             
