@@ -11,7 +11,7 @@
     <script type="module" src="./js/responsiveCanvas.js"> </script>
     <script type="module" src="./shapes.js"></script>
     <script type="module" src="./shapes/CanvasManager.js"> </script>
-    <script type="module" src="./js/circleTheoremPage.js"></script>
+    
     <script type="module">
     import {sumMeasures, compareMeasures} from './js/circleTheoremPage.js';
 
@@ -158,9 +158,10 @@
     const { updatePageTitle, loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
     updatePageTitle();
     loadSubHeaderIcons();
-    attachNavBarListeners();
+    
   
     const { switchFunctionality } = await import('./js/circleTheoremEventHandlers.js');
+    attachNavBarListeners();
     switchFunctionality('radiusTangent'); // or your preferred default
   </script>
   
