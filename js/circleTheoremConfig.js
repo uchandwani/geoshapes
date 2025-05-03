@@ -198,35 +198,34 @@ export  const functionalityConfig = {
         theoremDefinition: "This Theorem states that two tangent segments drawn to a circle from the same external point are equal in length.",
 
     
-        canvasConfig : {
-
-      
-            circle: [{ x: 400, y: 400 }, 200],
-
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200],
+          
             points: [
-            { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" }, // Center
-
-            // First set of tangents for "sin"
-            { x: 400, y: 200, label: "A", color: "green", radius: 5, type: "tangent", subtype: "sin" },
-            { x: 600, y: 400, label: "B", color: "green", radius: 5, type: "tangent", subtype: "sin" },
-
-            // Second set of tangents for "cos"
-            { x: 600, y: 400, label: "C", color: "green", radius: 5, type: "tangent", subtype: "cos" },
-            { x: 400, y: 600, label: "D", color: "green", radius: 5, type: "tangent", subtype: "cos" },
-
-            // Third set of tangents for "tan"
-            { x: 560, y: 280, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
-            { x: 560, y: 520, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" }, // Center
+          
+              // First set of tangents for "sin"
+              { x: 300, y: 100, label: "A", color: "green", radius: 5, type: "tangent", subtype: "sin" },
+              { x: 500, y: 300, label: "B", color: "green", radius: 5, type: "tangent", subtype: "sin" },
+          
+              // Second set of tangents for "cos"
+              { x: 500, y: 300, label: "C", color: "green", radius: 5, type: "tangent", subtype: "cos" },
+              { x: 300, y: 500, label: "D", color: "green", radius: 5, type: "tangent", subtype: "cos" },
+          
+              // Third set of tangents for "tan"
+              { x: 460, y: 180, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 460, y: 420, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
             ],
-
+          
             externalPoints: {
-                sin: { label: "L", color: "blue", radius: 5 },
-                cos: { label: "M", color: "blue", radius: 5 },
-                tan: { label: "N", color: "blue", radius: 5 },
+              sin: { label: "L", color: "blue", radius: 5 },
+              cos: { label: "M", color: "blue", radius: 5 },
+              tan: { label: "N", color: "blue", radius: 5 },
             },
           
             lines: []
-        },
+          },
+          
 
         buttonSet: [
 
