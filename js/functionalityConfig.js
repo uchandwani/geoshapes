@@ -585,168 +585,102 @@ obtuse:
 
           `,
 
-        acute: ` <h3>Acute Angle Inference </h3>
-       <h4>Table 1</h4>
-    <table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
-    <colgroup>
-        <col style="width: 33%;">
-        <col style="width: 33%;">
-        <col style="width: 34%;">
-    </colgroup>
-    <thead style="background-color: #6a9be8; color: white;">
-        <tr>
-            <th>Length of Line Segment CE</th>
-            <th>Length of Line Segment EF</th>
-            <th>Ratio (a) </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="background-color: #d9e1f2;">
-            <td>
-                <input type="text" name="length_ce" placeholder="Enter CE" style="width: 90%;" 
-                       oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')">
-            </td>
-            <td>
-                <input type="text" name="length_ef" placeholder="Enter EF" style="width: 90%;" 
-                       oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')">
-            </td>
-            <td>
-                <input type="text" name="ratio_a" placeholder="Calculated Ratio" style="width: 90%;" readonly>
-            </td>
-        </tr>
-    </tbody>
+        acute: ` <h3>Acute Angle Inference</h3>
+<table class="table" style="width: 100%; text-align: center;">
+  <thead style="background-color: #6a9be8; color: white;">
+    <tr>
+      <th>Length / Ratio</th>
+      <th>Comparison Target</th>
+      <th>Calculated / Equal?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #e2efda;">
+      <td colspan="3"><strong>Table 1</strong></td>
+    </tr>
+    <tr style="background-color: #d9e1f2;">
+      <td>Length of CE<br><input type="text" name="length_ce" placeholder="Enter CE" style="width: 90%;" oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')"></td>
+      <td>Length of EF<br><input type="text" name="length_ef" placeholder="Enter EF" style="width: 90%;" oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')"></td>
+      <td><input type="text" name="ratio_a" placeholder="Calculated Ratio" style="width: 90%;" readonly></td>
+    </tr>
+
+    <tr style="background-color: #e2efda;">
+      <td colspan="3"><strong>Table 2</strong></td>
+    </tr>
+    <tr style="background-color: #d9e1f2;">
+      <td>Length of AC<br><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;" oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')"></td>
+      <td>Length of AF<br><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;" oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')"></td>
+      <td><input type="text" name="ratio_b" placeholder="Calculated Ratio" style="width: 90%;" readonly></td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: left; padding-left: 10px; padding-top: 8px;">
+        Is a = b? Ans: <input type="text" name="is_a_equals_b" placeholder="Enter Yes/No" style="width: 150px;">
+      </td>
+    </tr>
+  </tbody>
 </table>
 
+<div style="margin-top: 20px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
+</div>
 
-<h4>Table 2</h4>
-<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
-    <colgroup>
-        <col style="width: 33%;">
-        <col style="width: 33%;">
-        <col style="width: 34%;">
-    </colgroup>
-    <thead style="background-color: #6a9be8; color: white;">
-        <tr>
-            <th>Length of Line Segment AC</th>
-            <th>Length of Line Segment AF</th>
-            <th>Ratio (b) </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="background-color: #d9e1f2;">
-            <td>
-                <input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;" 
-                       oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')">
-            </td>
-            <td>
-                <input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;" 
-                       oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')">
-            </td>
-            <td>
-                <input type="text" name="ratio_b" placeholder="Calculated Ratio" style="width: 90%;" readonly>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-        <p>Is a = b?; Ans- 
-            <input type="text" name="is_a_equals_b" placeholder="Enter Yes/No" style="width: 150px;">
-        </p>
+<div style="margin-top: 20px;">
+  <button id="submitButton" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+    Submit
+  </button>
+</div>
 
-        <div style="margin-top: 20px;">
-        <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
-        <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
-                  style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
-        
-            </div>
-
-        <!-- Submit Button -->
-        <div style="margin-top: 20px;">
-            <button id="submitButton" style="background-color: #6a9be8; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
-                Submit
-            </button>
-        </div>
           `,
 
-           obtuse: ` <h3>Obtuse Angle Inference </h3>
-       <h4>Table 1</h4>
-    <table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
-    <colgroup>
-        <col style="width: 33%;">
-        <col style="width: 33%;">
-        <col style="width: 34%;">
-    </colgroup>
-    <thead style="background-color: #6a9be8; color: white;">
-        <tr>
-            <th>Length of Line Segment CE</th>
-            <th>Length of Line Segment EF</th>
-            <th>Ratio (a) </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="background-color: #d9e1f2;">
-            <td>
-                <input type="text" name="length_ce" placeholder="Enter CE" style="width: 90%;" 
-                       oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')">
-            </td>
-            <td>
-                <input type="text" name="length_ef" placeholder="Enter EF" style="width: 90%;" 
-                       oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')">
-            </td>
-            <td>
-                <input type="text" name="ratio_a" placeholder="Calculated Ratio" style="width: 90%;" readonly>
-            </td>
-        </tr>
-    </tbody>
+           obtuse: ` <h3>Obtuse Angle Inference</h3>
+<table class="table" style="width: 100%; text-align: center;">
+  <thead style="background-color: #6a9be8; color: white;">
+    <tr>
+      <th>Length / Ratio</th>
+      <th>Comparison Target</th>
+      <th>Calculated / Equal?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #e2efda;">
+      <td colspan="3"><strong>Table 1</strong></td>
+    </tr>
+    <tr style="background-color: #d9e1f2;">
+      <td>Length of CE<br><input type="text" name="length_ce" placeholder="Enter CE" style="width: 90%;" oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')"></td>
+      <td>Length of EF<br><input type="text" name="length_ef" placeholder="Enter EF" style="width: 90%;" oninput="calculateRatio('length_ce', 'length_ef', 'ratio_a')"></td>
+      <td><input type="text" name="ratio_a" placeholder="Calculated Ratio" style="width: 90%;" readonly></td>
+    </tr>
+
+    <tr style="background-color: #e2efda;">
+      <td colspan="3"><strong>Table 2</strong></td>
+    </tr>
+    <tr style="background-color: #d9e1f2;">
+      <td>Length of AC<br><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;" oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')"></td>
+      <td>Length of AF<br><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;" oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')"></td>
+      <td><input type="text" name="ratio_b" placeholder="Calculated Ratio" style="width: 90%;" readonly></td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: left; padding-left: 10px; padding-top: 8px;">
+        Is a = b? Ans: <input type="text" name="is_a_equals_b" placeholder="Enter Yes/No" style="width: 150px;">
+      </td>
+    </tr>
+  </tbody>
 </table>
 
+<div style="margin-top: 20px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
+</div>
 
-<h4>Table 2</h4>
-<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
-    <colgroup>
-        <col style="width: 33%;">
-        <col style="width: 33%;">
-        <col style="width: 34%;">
-    </colgroup>
-    <thead style="background-color: #6a9be8; color: white;">
-        <tr>
-            <th>Length of Line Segment AC</th>
-            <th>Length of Line Segment AF</th>
-            <th>Ratio (b) </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="background-color: #d9e1f2;">
-            <td>
-                <input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;" 
-                       oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')">
-            </td>
-            <td>
-                <input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;" 
-                       oninput="calculateRatio('length_ac', 'length_af', 'ratio_b')">
-            </td>
-            <td>
-                <input type="text" name="ratio_b" placeholder="Calculated Ratio" style="width: 90%;" readonly>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-        <p>Is a = b?; Ans- 
-            <input type="text" name="is_a_equals_b" placeholder="Enter Yes/No" style="width: 150px;">
-        </p>
+<div style="margin-top: 20px;">
+  <button id="submitButton" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer;">
+    Submit
+  </button>
+</div>
 
-        <div style="margin-top: 20px;">
-        <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
-        <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
-                  style="width: 100%; height: 80px; resize: none;" oninput="limitWords(this, 50)"></textarea>
-        
-            </div>
-
-        <!-- Submit Button -->
-        <div style="margin-top: 20px;">
-            <button id="submitButton" style="background-color: #6a9be8; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
-                Submit
-            </button>
-        </div>
           `,
     },
     },
