@@ -457,47 +457,50 @@ export  const functionalityConfig = {
 }},
     trigonoRatios: {
         theoremDefinition: "Trig. Ratios don’t change even if the length of the sides of the triangle changes.",
-         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200], // Circle center and radius
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200], // Circle center and radius
+          
             triangles: [
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [45, 45], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [45, 45],
-                    radius: 300,
-                    labels: { A: 'P', B: 'A', C: 'E' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [60, 30], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 300,
-                    labels: { A: 'P', B: 'V', C: 'W' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-              
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [45, 45],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [45, 45],
+                radius: 300,
+                labels: { A: 'P', B: 'A', C: 'E' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 300,
+                labels: { A: 'P', B: 'V', C: 'W' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              }
             ]
-        
-    },
-      
+          },
+          
+                
         leftSidebarContent: `
             
        <h3>Instructions</h3>
