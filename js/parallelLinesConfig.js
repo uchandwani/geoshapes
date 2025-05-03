@@ -368,147 +368,97 @@ export  const functionalityConfig = {
 
         rightSidebarContent: {
         sin:  `
-             <h3>Verification - Correponding Angles </h3>
-
-    <h4>Table 1</h4>
+            <h3>Verification - Corresponding Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠AFQ</th>
-        <th>Corresponding ∠AGT </th>
-        <th>Is ∠AFQ = ∠AGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id ="angle_afq" name="angle_afq" placeholder="Enter ∠AFQ" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <input type="number" id ="angle_agt" name="angle_agt" placeholder="Enter ∠AGT" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <span id="is_afq_agt" name="is_afq_agt"></span>
-</td>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 18%;">
+    <col style="width: 22%;">
+  </colgroup>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠AFD</th>
-        <th>Corresponding ∠AGE</th>
-        <th>Is ∠AFD = ∠AGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_afd" name="angle_afd" placeholder="Enter ∠AFD" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <input type="number" id="angle_age" name="angle_age" placeholder="Enter ∠AGE" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <span id="is_afd_age" name="is_afd_age"></span>
-</td>
+  <tr>
+    <th>Angle Measure</th>
+    <th>Corresponding Angle</th>
+    <th>Are they equal?</th>
+  </tr>
 
-    </tr>
-</table>
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AFQ</span><br>
+      <input type="number" id="angle_afq" name="angle_afq" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
+    </td>
+    <td><span>∠AGT</span><br>
+      <input type="number" id="angle_agt" name="angle_agt" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
+    </td>
+    <td><span id="is_afq_agt" name="is_afq_agt"></span></td>
+  </tr>
 
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠ADF</th>
-        <th>Corresponding ∠AEG </th>
-        <th>Is ∠ADF = ∠AEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id ="angle_adf" name="angle_adf" placeholder="Enter ∠ADF" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AFD</span><br>
+      <input type="number" id="angle_afd" name="angle_afd" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
+    </td>
+    <td><span>∠AGE</span><br>
+      <input type="number" id="angle_age" name="angle_age" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
+    </td>
+    <td><span id="is_afd_age" name="is_afd_age"></span></td>
+  </tr>
+
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ADF</span><br>
+      <input type="number" id="angle_adf" name="angle_adf" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-</td>
-<td>
-    <input type="number" id="angle_aeg" name="angle_aeg" placeholder="Enter ∠AEG" style="width: 90%;"
+    </td>
+    <td><span>∠AEG</span><br>
+      <input type="number" id="angle_aeg" name="angle_aeg" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-</td>
-<td>
-    <span id="is_adf_aeg" name="is_adf_aeg"></span>
-</td>
+    </td>
+    <td><span id="is_adf_aeg" name="is_adf_aeg"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠PDV</th>
-        <th>Corresponding ∠SEV</th>
-        <th>Is ∠PDV = ∠SEV ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_pdv" name="angle_pdv" placeholder="Enter ∠PDV" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDV</span><br>
+      <input type="number" id="angle_pdv" name="angle_pdv" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-</td>
-<td>
-    <input type="number" id="angle_sev"  name="angle_sev" placeholder="Enter ∠SEV" style="width: 90%;"
+    </td>
+    <td><span>∠SEV</span><br>
+      <input type="number" id="angle_sev" name="angle_sev" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-</td>
-<td>
-    <span id="is_pdv_sev" name="is_pdv_sev"></span>
-</td>
+    </td>
+    <td><span id="is_pdv_sev" name="is_pdv_sev"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Corresponding ∠QBC </th>
-        <th>Is ∠NAB = ∠QBC ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc'); ">
-</td>
-<td>
-    <input type="number" id="angle_qbc" name="angle_qbc" placeholder="Enter ∠QBC" style="width: 90%;"
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
-</td>
-<td>
-    <span id="is_nab_qbc" name="is_nab_qbc"></span>
-</td>
+    </td>
+    <td><span>∠QBC</span><br>
+      <input type="number" id="angle_qbc" name="angle_qbc" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
+    </td>
+    <td><span id="is_nab_qbc" name="is_nab_qbc"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Corresponding ∠PBC</th>
-        <th>Is ∠MAB = ∠PBC ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_mab" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc'); ">
-</td>
-<td>
-    <input type="number" id="angle_pbc" name="angle_pbc" placeholder="Enter ∠PBC" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" id="angle_mab" name="angle_mab" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
-</td>
-<td>
-    <span id="is_mab_pbc" name="is_mab_pbc"></span>
-</td>
-
-    </tr>
+    </td>
+    <td><span>∠PBC</span><br>
+      <input type="number" id="angle_pbc" name="angle_pbc" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
+    </td>
+    <td><span id="is_mab_pbc" name="is_mab_pbc"></span></td>
+  </tr>
 </table>
 
 
