@@ -11,8 +11,18 @@ export function attachNavBarListeners() {
     "twoTangents-button": { functionality: "twoTangents", subtype: "sin" },
     "subtendedAngles-button": { functionality: "subtendedAngles", subtype: "sin" },
     "alternateSegments-button": { functionality: "alternateSegments", subtype: "sin" },
-    "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" }
+    "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" },
 
+    "midSegmentTheorem-button": { functionality: "midSegmentTheorem", subtype: null },
+    "basicProportionalityTheorem-button": { functionality: "basicProportionalityTheorem", subtype: "sin" },
+    "angleBisectorTheorem-button": { functionality: "angleBisectorTheorem", subtype: "sin" },
+    "propertiesOfTriangles-button": { functionality: "propertiesOfTriangles", subtype: "sin" },
+    
+    "sineTheta-button": { functionality: "sineTheta", subtype: null },
+    "cosineTheta-button": { functionality: "cosineTheta", subtype: "sin" },
+    "trigonoRatios-button": { functionality: "trigonoRatios", subtype: "sin" },
+    "trigonoIdentities-button": { functionality: "trigonoIdentities", subtype: "sin" },
+   
 
   };
 
