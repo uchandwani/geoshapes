@@ -118,7 +118,7 @@ function drawCircle(canvasConfig) {
 /**
  * Draws lines filtered by the specified type.
  */
-function drawLines(canvasConfig, type) {
+function drawLines(canvasConfig, type = null) {
     if (canvasConfig.lines && Array.isArray(canvasConfig.lines)) {
         const filteredLines = canvasConfig.lines.filter(line => line.type === type);
         filteredLines.forEach(lineConfig => {
