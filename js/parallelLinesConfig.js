@@ -44,7 +44,7 @@ export  const functionalityConfig = {
              // Transversals
             { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
             { endA: { x: 345, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
-            { endA: { x: 360, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 375, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
             // Connecting lines
             { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
