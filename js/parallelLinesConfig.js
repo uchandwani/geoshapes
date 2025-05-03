@@ -466,296 +466,194 @@ export  const functionalityConfig = {
         `,
 
         cos:  `
-            <h3>Verification - Alternate Angles </h3>
-
-    <h4>Table 1</h4>
+            <h3>Verification - Alternate Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠QFG</th>
-        <th>Alternate Interior ∠FGE </th>
-        <th>Is ∠QFG = ∠FGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_abd" placeholder="Enter ∠QFG" style="width: 90%;"
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 18%;">
+    <col style="width: 22%;">
+  </colgroup>
+
+  <tr>
+    <th>Angle Measure</th>
+    <th>Alternate Interior Angle</th>
+    <th>Are they equal?</th>
+  </tr>
+
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠QFG</span><br>
+      <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
-</td>
-<td>
-    <input type="number" name="angle_acf" placeholder="Enter ∠FGE" style="width: 90%;"
-        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf'); ">
-</td>
-<td>
-    <span name="is_abd_acf"></span>
-</td>
+    </td>
+    <td><span>∠FGE</span><br>
+      <input type="number" name="angle_acf" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
+    </td>
+    <td><span name="is_abd_acf"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠DFG</th>
-        <th>Alternate Interior ∠FGT</th>
-        <th>Is ∠DFG = ∠FGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_adb" placeholder="Enter ∠DFG" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); ">
-</td>
-<td>
-    <input type="number" name="angle_afc2" placeholder="Enter ∠FGT" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); ">
-</td>   
-<td>
-    <span name="is_adb_afc"></span>
-</td>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠DFG</span><br>
+      <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
+    </td>
+    <td><span>∠FGT</span><br>
+      <input type="number" name="angle_afc2" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
+    </td>
+    <td><span name="is_adb_afc"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠PDE</th>
-        <th>Alternate Interior ∠DEG </th>
-        <th>Is ∠PDE = ∠DEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_pde" placeholder="Enter ∠PDE" style="width: 90%;"
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDE</span><br>
+      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-</td>
-<td>
-    <input type="number" name="angle_deg" placeholder="Enter ∠DEG" style="width: 90%;"
+    </td>
+    <td><span>∠DEG</span><br>
+      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-</td>
-<td>
-    <span name="is_pde_deg"></span>
-</td>
+    </td>
+    <td><span name="is_pde_deg"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠FDE </th>
-        <th>Alternate Interior ∠DES</th>
-        <th>Is ∠FDE = ∠DES ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_fde" placeholder="Enter ∠FDE" style="width: 90%;"
-        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des'); ">
-</td>
-<td>
-    <input type="number" name="angle_des" placeholder="Enter ∠DES" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠FDE</span><br>
+      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
-</td>
-<td>
-    <span name="is_fde_des"></span>
-</td>
+    </td>
+    <td><span>∠DES</span><br>
+      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
+    </td>
+    <td><span name="is_fde_des"></span></td>
+  </tr>
 
-    </tr>
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
+    </td>
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
+    </td>
+    <td><span name="is_nab_abp"></span></td>
+  </tr>
+
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
+    </td>
+    <td><span>∠ABF</span><br>
+      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
+    </td>
+    <td><span name="is_mab_abf"></span></td>
+  </tr>
 </table>
 
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Alternate Interior ∠ABP </th>
-        <th>Is ∠NAB = ∠ABP ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp'); ">
-</td>
-<td>
-    <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp'); ">
-</td>
-<td>
-    <span name="is_nab_abp"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Alternate Interior ∠ABF</th>
-        <th>Is ∠MAB = ∠ABF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf'); ">
-</td>
-<td>
-    <input type="number" name="angle_abf" placeholder="Enter ∠ABF" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf'); ">
-</td>
-<td>
-    <span name="is_mab_abf"></span>
-</td>
-
-    </tr>
-</table>
 
 
            
     `, tan : `
            
-           <h3>Verification - Interior Angles </h3>
-
-    <h4>Table 1</h4>
+          <h3>Verification - Interior Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠QFG</th>
-        <th>Corresponding Interior ∠FGT </th>
-        <th> ∠QFG + ∠FGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_qfg" placeholder="Enter ∠QFG" style="width: 90%;"
-        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt'); ">
-</td>
-<td>
-    <input type="number" name="angle_fgt" placeholder="Enter ∠FGT" style="width: 90%;"
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
+
+  <tr>
+    <th>Angle Measure</th>
+    <th>Corresponding Interior Angle</th>
+    <th>Sum = ?</th>
+  </tr>
+
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠QFG</span><br>
+      <input type="number" name="angle_qfg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
-</td>
-<td>
-    <span name="sum_qfg_fgt"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠DFG</th>
-        <th>Corresponding Interior ∠FGE</th>
-        <th> ∠DFG + ∠FGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_dfg" placeholder="Enter ∠DFG" style="width: 90%;"
+    </td>
+    <td><span>∠FGT</span><br>
+      <input type="number" name="angle_fgt" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
+    </td>
+    <td><span name="sum_qfg_fgt"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠DFG</span><br>
+      <input type="number" name="angle_dfg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-</td>
-<td>
-    <input type="number" name="angle_fge" placeholder="Enter ∠FGE" style="width: 90%;"
+    </td>
+    <td><span>∠FGE</span><br>
+      <input type="number" name="angle_fge" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-</td>   
-<td>
-    <span name="sum_dfg_fge"></span>
-</td>
+    </td>
+    <td><span name="sum_dfg_fge"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠PDE</th>
-        <th>Corresponding Interior ∠DES </th>
-        <th> ∠PDE + ∠DES ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_pde" placeholder="Enter ∠PDE" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des'); ">
-</td>
-<td>
-    <input type="number" name="angle_des" placeholder="Enter ∠DES" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des'); ">
-</td>
-<td>
-    <span name="sum_pde_des"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠FDE </th>
-        <th>Corresponding Interior ∠DEG</th>
-        <th> ∠FDE + ∠DEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_fde" placeholder="Enter ∠FDE" style="width: 90%;"
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDE</span><br>
+      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
+    </td>
+    <td><span>∠DES</span><br>
+      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
+    </td>
+    <td><span name="sum_pde_des"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠FDE</span><br>
+      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-</td>
-<td>
-    <input type="number" name="angle_deg" placeholder="Enter ∠DEG" style="width: 90%;"
+    </td>
+    <td><span>∠DEG</span><br>
+      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-</td>
-<td>
-    <span name="sum_fde_deg"></span>
-</td>
+    </td>
+    <td><span name="sum_fde_deg"></span></td>
+  </tr>
 
-    </tr>
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
+    </td>
+    <td><span>∠ABF</span><br>
+      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
+    </td>
+    <td><span name="sum_nab_abf"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
+    </td>
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
+    </td>
+    <td><span name="sum_mab_abp"></span></td>
+  </tr>
 </table>
 
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Corresponding Interior ∠ABF </th>
-        <th> ∠NAB + ∠ABF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf'); ">
-</td>
-<td>
-    <input type="number" name="angle_abf" placeholder="Enter ∠ABF" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf'); ">
-</td>
-<td>
-    <span name="sum_nab_abf"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Corresponding Interior ∠ABP</th>
-        <th> ∠MAB + ∠ABP ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp'); ">
-</td>
-<td>
-    <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp'); ">
-</td>
-<td>
-    <span name="sum_mab_abp"></span>
-</td>
-
-    </tr>
-</table>
-            
             
         `, 
 }},
