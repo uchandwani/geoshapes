@@ -66,12 +66,11 @@ export  const functionalityConfig = {
                 labels: { A: 'P', B: 'R', C: 'Q' },
                 showMidpoints: false,
                 setShowMeasurements: false
-              }
-            ]
-          }
-          
-        
-    }, 
+            }
+        ]
+    
+
+    },
     
     buttonSet: [
                 { label: "regular", type: "sin" },
