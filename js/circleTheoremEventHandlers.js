@@ -28,12 +28,23 @@
  */
 
 import { functionalityConfig } from './circleTheoremConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 import { setMode } from '../shapes.js';
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
 
 
 // Functions ordered alphabetically
@@ -532,7 +543,48 @@ export function switchFunctionality(functionalityKey, buttonType) {
 
     // 🔧 PATCH: Remove rotation controls from any active Divider objects
     
-    
+    const page = location.pathname.split("/").pop();
+    const pageTitles = {
+      "index.html": "Home",
+      "parallel_lines_04.html": "Parallel Lines",
+      "triangle_theorem_07.html": "Triangle Theorems",
+      "trig_properties_09.html": "Trigonometric Properties",
+      "circle_theorems_02.html": "Circle Theorems"
+    };
+    const mainTitle = pageTitles[page] || "Math App";
+  
+    const icon = document.getElementById(`${functionalityKey}-button`);
+    const subtitleMap = {
+    radiusTangent: "Radius Tangent",
+    twoTangents: "Two Tangents",
+    subtendedAngles : "Subtended Angles",
+    alternateSegments: "Alternate Segments",
+    quadrilaterals: "Quadrilaterals"
+      };
+   const subtitleLabel = subtitleMap[functionalityKey] || "";
+  
+  
+    let activeSubBtnLabel = "";
+    if (config.buttonSet && effectiveType) {
+      const match = config.buttonSet.find(btn => btn.type === effectiveType);
+      activeSubBtnLabel = match?.label || "";
+    }
+  
+  console.log("🧠 Header Composition Check");
+  console.log("   Main Title:", mainTitle);
+  console.log("   Subtitle (from icon title):", subtitleLabel);
+  console.log("   Sub-button label (from config):", activeSubBtnLabel);
+  
+    // ✅ Compose header with dividers only if parts are present
+    updateHeaderLabels({
+  
+   
+  
+      title: mainTitle,
+      subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+      subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+    });
+  
     canvasManager.shapes.forEach(shape => {
         if (shape.type === 'divider' && typeof shape.removeRotationControls === 'function') {
             shape.removeRotationControls();
