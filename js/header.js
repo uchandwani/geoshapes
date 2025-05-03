@@ -14,9 +14,6 @@ export function attachNavBarListeners() {
     "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" }
 
 
-
-
-
   };
 
   Object.entries(navMap).forEach(([id, { functionality, subtype }]) => {
@@ -24,7 +21,6 @@ export function attachNavBarListeners() {
     if (button) {
       button.addEventListener("click", () => {
         console.log("📣 Dispatching nav-select event:", functionality, subtype);
-        debugger;
         const event = new CustomEvent("nav-select", {
           detail: { functionalityKey: functionality, subtype }
         });
