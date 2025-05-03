@@ -1257,57 +1257,54 @@ quadrilaterals: {
         theoremDefinition: "The theorem states that for any circle, the angle formed between the tangent and the chord through the point of contact of the tangent is equal to the angle formed by the chord in the alternate segment",
          canvasConfig: {
     
-         circle: [{ x: 400, y: 400 }, 200],
+            circle: [{ x: 300, y: 300 }, 200],
 
-  points: [
-    // Quadrilateral (Figure 1) - sin
-    { x: 280, y: 240, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 560, y: 280, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 520, y: 560, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 320, y: 580, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 600, y: 550, label: "E", color: "blue", radius: 5, type: "external", subtype: "sin" },
-
-    // Square (Figure 2) - cos
-    { x: 259, y: 259, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 541, y: 259, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 541, y: 541, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 259, y: 541, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 259, y: 620, label: "E", color: "blue", radius: 5, type: "external", subtype: "cos" },
-
-    // Trapezium (Figure 3) - tan
-    { x: 300, y: 573, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 500, y: 573, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 550, y: 270, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 250, y: 270, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 180, y: 270, label: "E", color: "blue", radius: 5, type: "external", subtype: "tan" }
-  ],
-
-  lines: [
-    // Quadrilateral (Figure 1) - sin
-    { endA: { x: 280, y: 240 }, endB: { x: 560, y: 280 }, color: "blue", subtype: "sin" },
-    { endA: { x: 560, y: 280 }, endB: { x: 520, y: 560 }, color: "blue", subtype: "sin" },
-    { endA: { x: 520, y: 560 }, endB: { x: 320, y: 580 }, color: "blue", subtype: "sin" },
-    { endA: { x: 320, y: 580 }, endB: { x: 280, y: 240 }, color: "blue", subtype: "sin" },
-    { endA: { x: 320, y: 580 }, endB: { x: 600, y: 550 }, color: "blue", subtype: "sin" },
-
-    // Square (Figure 2) - cos
-    { endA: { x: 259, y: 259 }, endB: { x: 541, y: 259 }, color: "blue", subtype: "cos" },
-    { endA: { x: 541, y: 259 }, endB: { x: 541, y: 541 }, color: "blue", subtype: "cos" },
-    { endA: { x: 541, y: 541 }, endB: { x: 259, y: 541 }, color: "blue", subtype: "cos" },
-    { endA: { x: 259, y: 541 }, endB: { x: 259, y: 259 }, color: "blue", subtype: "cos" },
-    { endA: { x: 259, y: 541 }, endB: { x: 259, y: 620 }, color: "blue", subtype: "cos" },
-
-    // Trapezium (Figure 3) - tan
-    { endA: { x: 300, y: 573 }, endB: { x: 500, y: 573 }, color: "blue", subtype: "tan" },
-    { endA: { x: 500, y: 573 }, endB: { x: 550, y: 270 }, color: "blue", subtype: "tan" },
-    { endA: { x: 550, y: 270 }, endB: { x: 250, y: 270 }, color: "blue", subtype: "tan" },
-    { endA: { x: 250, y: 270 }, endB: { x: 300, y: 573 }, color: "blue", subtype: "tan" },
-    { endA: { x: 250, y: 270 }, endB: { x: 180, y: 270 }, color: "blue", subtype: "tan" }
-  ]
-
-,
-
-}
+            points: [
+              // Quadrilateral (Figure 1) - sin
+              { x: 180, y: 140, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 460, y: 180, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 420, y: 460, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 220, y: 480, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 500, y: 450, label: "E", color: "blue", radius: 5, type: "external", subtype: "sin" },
+            
+              // Square (Figure 2) - cos
+              { x: 159, y: 159, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 441, y: 159, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 441, y: 441, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 159, y: 441, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 159, y: 520, label: "E", color: "blue", radius: 5, type: "external", subtype: "cos" },
+            
+              // Trapezium (Figure 3) - tan
+              { x: 200, y: 473, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 400, y: 473, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 450, y: 170, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 150, y: 170, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 80, y: 170, label: "E", color: "blue", radius: 5, type: "external", subtype: "tan" }
+            ],
+            
+            lines: [
+              // Quadrilateral (Figure 1) - sin
+              { endA: { x: 180, y: 140 }, endB: { x: 460, y: 180 }, color: "blue", subtype: "sin" },
+              { endA: { x: 460, y: 180 }, endB: { x: 420, y: 460 }, color: "blue", subtype: "sin" },
+              { endA: { x: 420, y: 460 }, endB: { x: 220, y: 480 }, color: "blue", subtype: "sin" },
+              { endA: { x: 220, y: 480 }, endB: { x: 180, y: 140 }, color: "blue", subtype: "sin" },
+              { endA: { x: 220, y: 480 }, endB: { x: 500, y: 450 }, color: "blue", subtype: "sin" },
+            
+              // Square (Figure 2) - cos
+              { endA: { x: 159, y: 159 }, endB: { x: 441, y: 159 }, color: "blue", subtype: "cos" },
+              { endA: { x: 441, y: 159 }, endB: { x: 441, y: 441 }, color: "blue", subtype: "cos" },
+              { endA: { x: 441, y: 441 }, endB: { x: 159, y: 441 }, color: "blue", subtype: "cos" },
+              { endA: { x: 159, y: 441 }, endB: { x: 159, y: 159 }, color: "blue", subtype: "cos" },
+              { endA: { x: 159, y: 441 }, endB: { x: 159, y: 520 }, color: "blue", subtype: "cos" },
+            
+              // Trapezium (Figure 3) - tan
+              { endA: { x: 200, y: 473 }, endB: { x: 400, y: 473 }, color: "blue", subtype: "tan" },
+              { endA: { x: 400, y: 473 }, endB: { x: 450, y: 170 }, color: "blue", subtype: "tan" },
+              { endA: { x: 450, y: 170 }, endB: { x: 150, y: 170 }, color: "blue", subtype: "tan" },
+              { endA: { x: 150, y: 170 }, endB: { x: 200, y: 473 }, color: "blue", subtype: "tan" },
+              { endA: { x: 150, y: 170 }, endB: { x: 80, y: 170 }, color: "blue", subtype: "tan" }
+            ]
+        }          
 
 ,
           buttonSet: [
