@@ -325,7 +325,7 @@ export function switchFunctionality(functionalityKey, subtype = null) {
  // updateActiveSubHeaderButton(functionalityKey);
 
   // ✅ Update dynamic sub-buttons if needed
-  showSubButtons(config.buttonSet || [], functionalityKey);
+ // showSubButtons(config.buttonSet || [], functionalityKey);
 
   canvasManager.render();
  
