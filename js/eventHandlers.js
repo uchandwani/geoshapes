@@ -293,7 +293,7 @@ window.switchFunctionality = switchFunctionality;
  * @param {string} functionalityKey - The key for the selected functionality
  * @param {string|null} subtype - Optional subtype (e.g. 'right', 'sin'); fallback applied if not provided
  */
-function switchFunctionality(functionalityKey, subtype = null) {
+export function switchFunctionality(functionalityKey, subtype = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, subtype);
 
   const config = functionalityConfig[functionalityKey];
