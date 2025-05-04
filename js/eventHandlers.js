@@ -322,7 +322,7 @@ export function switchFunctionality(functionalityKey, subtype = null) {
   drawShapes(config.canvasConfig, effectiveSubtype);
 
   // ✅ Update active icon styles
-  updateActiveSubHeaderButton(functionalityKey);
+ // updateActiveSubHeaderButton(functionalityKey);
 
   // ✅ Update dynamic sub-buttons if needed
   showSubButtons(config.buttonSet || [], functionalityKey);
