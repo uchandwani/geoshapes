@@ -181,13 +181,13 @@
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
 
-    const { updatePageTitle,loadSubHeaderIcons } = await import('./js/header.js');
+    const { updatePageTitle,loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality, attachNavBarListeners } = await import('./js/eventHandlers.js');
+    const { switchFunctionality } = await import('./js/eventHandlers.js');
     attachNavBarListeners();
-    switchFunctionality('midSegmentTheorem'); // Default functionality
+    switchFunctionality('midSegmentTheorem',  'right'); // Default functionality
   </script>
 
 
