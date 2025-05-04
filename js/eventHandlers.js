@@ -386,7 +386,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
 }
 
 
-export function updateActiveButton(buttonElement) {
+export function updateActiveSubHeaderButton(buttonElement) {
     const current = document.querySelector(".navigation-buttons button.active, .triangle-button.active");
     if (current !== buttonElement) {
         document.querySelectorAll(".navigation-buttons button, .triangle-button").forEach(btn => btn.classList.remove("active"));
