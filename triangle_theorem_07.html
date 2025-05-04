@@ -151,7 +151,7 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality } = await import('./js/eventHandlers.js');
+    const { switchFunctionality } = await import('./js/triangleEventHandlers.js');
     attachNavBarListeners();
     
     window.addEventListener("nav-select", (e) => {
