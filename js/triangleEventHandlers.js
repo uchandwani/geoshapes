@@ -18,35 +18,42 @@ const pageTitles = {
 
 // 🔁 Main functionality handler
 export function switchFunctionality(functionalityKey, buttonType = null) {
-  console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
-
-  const config = functionalityConfig[functionalityKey];
-  if (!config) {
-    console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
-    return;
+    console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+  
+    const config = functionalityConfig[functionalityKey];
+    if (!config) {
+      console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
+      return;
+    }
+  
+    // Fallback logic to pick first subtype if buttonType is null
+    if (!buttonType && config.buttonSet && config.buttonSet.length > 0) {
+      buttonType = config.buttonSet[0];
+      console.log(`🔁 No buttonType provided. Falling back to default subtype: ${buttonType.type}`);
+    }
+  
+    const effectiveType = buttonType?.type || config.defaultButtonType || null;
+    console.log("🎯 Using subtype:", effectiveType);
+  
+    // 🧠 Header update
+    const mainTitle = pageTitles[page] || "Triangle Theorems";
+    const activeSubBtnLabel = buttonType?.label || (config.buttonSet?.find(btn => btn.type === effectiveType)?.label || "");
+  
+    updateHeaderLabels({
+      title: mainTitle,
+      subtitle: `| ${functionalityKey}`,
+      subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+    });
+  
+    // 🔄 Clear & draw
+    canvasManager.clearAllShapes();
+    drawShapes(config.canvasConfig, effectiveType);
+    updateUI(config, functionalityKey, buttonType);
+    updateLeftSidebar(functionalityKey, effectiveType);
+    updateRightSidebar(functionalityKey, effectiveType);
+    canvasManager.render();
   }
-
-  const effectiveType = buttonType?.type || config.defaultButtonType || null;
-  console.log("🎯 Using subtype:", effectiveType);
-
-  // 🧠 Header update
-  const mainTitle = pageTitles[page] || "Triangle Theorems";
-  const activeSubBtnLabel = buttonType?.label || (config.buttonSet?.find(btn => btn.type === effectiveType)?.label || "");
-
-  updateHeaderLabels({
-    title: mainTitle,
-    subtitle: `| ${functionalityKey}`,
-    subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
-  });
-
-  // 🔄 Clear & draw
-  canvasManager.clearAllShapes();
-  drawShapes(config.canvasConfig, effectiveType);
-  updateUI(config, functionalityKey, buttonType);
-  updateLeftSidebar(functionalityKey, effectiveType);
-  updateRightSidebar(functionalityKey, effectiveType);
-  canvasManager.render();
-}
+  
 
 // 🎨 Unified shape renderer
 function drawShapes(canvasConfig, buttonType = null) {
