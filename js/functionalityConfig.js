@@ -863,7 +863,10 @@ obtuse:
 <ul>
 <li>Is AC = AF = CF? Ans- <input type="text" name="is_ac_af_cf" placeholder="Yes/No" style="width: 50px;"></li>
 <li>Is ∠A = ∠C = ∠F = 60⁰? Ans- <input type="text" name="is_angles_equal" placeholder="Yes/No" style="width: 50px;"></li>
-</ul>`,"  
+</ul>
+
+          `,
+           
    isosceles : `<h3>Isosceles Triangle Inference</h3>
 
 <h4>Table 1</h4>
@@ -944,7 +947,7 @@ obtuse:
     <td><input type="text" name="largest_angle" placeholder="Enter Largest Angle" style="width: 90%;"></td>
     <td><input type="text" name="is_side_opposite_angle" placeholder="Enter Yes/No" style="width: 90%;"></td>
 </tr>
-</table>`
+</table>
 
         `,       
     },
