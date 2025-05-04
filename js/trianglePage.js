@@ -3,12 +3,12 @@ import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { functionalityConfig } from './functionalityConfig.js';
 import { pageFeatures  } from './functionalityConfig.js';
-import { switchFunctionality } from './eventHandlers.js';
+import { switchFunctionality } from './triangleEventHandlers.js';
 
-import { handleTriangleType } from './eventHandlers.js';
+import { handleTriangleType } from './triangleEventHandlers.js';
 import {Line} from '../shapes/Lines.js';
 import {Protractor} from '../shapes/Protractor.js';
-import {updateRightSidebar} from './eventHandlers.js';
+import {updateRightSidebar} from './triangleEventHandlers.js';
 
 
 
