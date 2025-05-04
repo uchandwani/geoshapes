@@ -13,7 +13,7 @@ export function attachNavBarListeners() {
     "alternateSegments-button": { functionality: "alternateSegments", subtype: "sin" },
     "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" },
 
-    "midSegmentTheorem-button": { functionality: "midSegmentTheorem", subtype: null },
+    "midSegmentTheorem-button": { functionality: "midSegmentTheorem", subtype: "sin" },
     "basicProportionalityTheorem-button": { functionality: "basicProportionalityTheorem", subtype: "sin" },
     "angleBisectorTheorem-button": { functionality: "angleBisectorTheorem", subtype: "sin" },
     "propertiesOfTriangles-button": { functionality: "propertiesOfTriangles", subtype: "sin" },

@@ -827,219 +827,125 @@ obtuse:
         rightSidebarContent: {
             equilateral : `<h3>Equilateral Triangle Inference</h3>
 
-    <h4>Table 1</h4>
-    <table class="table">
-    <tr>
-        <th>Length of Side AC</th>
-        <th>Length of Side AF</th>
-        <th>Length of Side CF</th>
-    </tr>
-   <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;"></td>
-        <td><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;"></td>
-        <td><input type="text" name="length_cf" placeholder="Enter CF" style="width: 90%;"></td>
-    </tr>
+<h4>Table 1</h4>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Length of Side AC</th>
+    <th>Length of Side AF</th>
+    <th>Length of Side CF</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;"></td>
+    <td><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;"></td>
+    <td><input type="text" name="length_cf" placeholder="Enter CF" style="width: 90%;"></td>
+</tr>
 </table>
 
 <h4>Table 2</h4>
-<table class="table">
-    <tr>
-        <th>Measure of Angle ∠CAF</th>
-        <th>Measure of Angle ∠ACF</th>
-        <th>Measure of Angle ∠AFC</th>
-    </tr>
-   <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="angle_caf" placeholder="Enter ∠CAF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_afc" placeholder="Enter ∠AFC" style="width: 90%;"></td>
-    </tr>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Measure of Angle ∠CAF</th>
+    <th>Measure of Angle ∠ACF</th>
+    <th>Measure of Angle ∠AFC</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="angle_caf" placeholder="Enter ∠CAF" style="width: 90%;"></td>
+    <td><input type="text" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"></td>
+    <td><input type="text" name="angle_afc" placeholder="Enter ∠AFC" style="width: 90%;"></td>
+</tr>
 </table>
 
-
-   <h2>Equilateral Triangle</h2>
+<h2>Equilateral Triangle</h2>
 <ul>
-    <li>
-        Is AC = AF = CF? Ans- 
-        <input type="text" name="is_ac_af_cf" placeholder="Yes/No" style="width: 50px;">
-    </li>
-    <li>
-        Is ∠A = ∠C = ∠F = 60⁰? Ans- 
-        <input type="text" name="is_angles_equal" placeholder="Yes/No" style="width: 50px;">
-    </li>
-</ul>
+<li>Is AC = AF = CF? Ans- <input type="text" name="is_ac_af_cf" placeholder="Yes/No" style="width: 50px;"></li>
+<li>Is ∠A = ∠C = ∠F = 60⁰? Ans- <input type="text" name="is_angles_equal" placeholder="Yes/No" style="width: 50px;"></li>
+</ul>`,"  
+   isosceles : `<h3>Isosceles Triangle Inference</h3>
 
-        `,
-
-   isosceles : `<h3>Isoceles Triangle Inference</h3>
-
-    <h4>Table 1</h4>
-    <table class="table">
-    <tr>
-        <th>Length of Side AC</th>
-        <th>Length of Side AF</th>
-        <th>Length of Side CF</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;"></td>
-        <td><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;"></td>
-        <td><input type="text" name="length_cf" placeholder="Enter CF" style="width: 90%;"></td>
-    </tr>
+<h4>Table 1</h4>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Length of Side AC</th>
+    <th>Length of Side AF</th>
+    <th>Length of Side CF</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;"></td>
+    <td><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;"></td>
+    <td><input type="text" name="length_cf" placeholder="Enter CF" style="width: 90%;"></td>
+</tr>
 </table>
 
 <h4>Table 2</h4>
-<table class="table">
-    <tr>
-        <th>Measure of Angle ∠CAF</th>
-        <th>Measure of Angle ∠ACF</th>
-        <th>Measure of Angle ∠AFC</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="angle_caf" placeholder="Enter ∠CAF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_afc" placeholder="Enter ∠AFC" style="width: 90%;"></td>
-    </tr>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Measure of Angle ∠CAF</th>
+    <th>Measure of Angle ∠ACF</th>
+    <th>Measure of Angle ∠AFC</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="angle_caf" placeholder="Enter ∠CAF" style="width: 90%;"></td>
+    <td><input type="text" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"></td>
+    <td><input type="text" name="angle_afc" placeholder="Enter ∠AFC" style="width: 90%;"></td>
+</tr>
 </table>
 
-    <h2>Isosceles Triangle</h2>
+<h2>Isosceles Triangle</h2>
 <ul>
-    <li>
-        Are any two sides equal? Ans- 
-        <input type="text" name="isosceles_sides_equal" placeholder="Yes/No" style="width: 50px;">
-        (note which two sides are equal: 
-        <input type="text" name="isosceles_sides_details" placeholder="Enter sides" style="width: 100px;">)
-    </li>
-    <li>
-        Are the angles opposite to the equal sides equal to each other? Ans- 
-        <input type="text" name="isosceles_angles_equal" placeholder="Yes/No" style="width: 50px;">
-        (note the equal angles: 
-        <input type="text" name="isosceles_angles_details" placeholder="Enter angles" style="width: 100px;">)
-    </li>
+<li>Are any two sides equal? Ans- <input type="text" name="isosceles_sides_equal" placeholder="Yes/No" style="width: 50px;"> (note which two sides are equal: <input type="text" name="isosceles_sides_details" placeholder="Enter sides" style="width: 100px;">)</li>
+<li>Are the angles opposite to the equal sides equal to each other? Ans- <input type="text" name="isosceles_angles_equal" placeholder="Yes/No" style="width: 50px;"> (note the equal angles: <input type="text" name="isosceles_angles_details" placeholder="Enter angles" style="width: 100px;">)</li>
 </ul>
 
-    <h4>Table 3</h4>
-<table class="table">
-    <tr>
-        <th>Sum of Sides "S"</th>
-        <th>Length of Remaining Side "R"</th>
-        <th>Is S > R</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_1" placeholder="AC + AF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_1" placeholder="CF" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_1" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_2" placeholder="AC + CF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_2" placeholder="AF" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_2" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_3" placeholder="AF + CF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_3" placeholder="AC" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_3" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
+<h4>Table 3</h4>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Sum of Sides "S"</th>
+    <th>Length of Remaining Side "R"</th>
+    <th>Is S > R</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="sum_s_1" placeholder="AC + AF" style="width: 90%;"></td>
+    <td><input type="text" name="remaining_side_1" placeholder="CF" style="width: 90%;"></td>
+    <td><input type="text" name="is_s_greater_r_1" placeholder="Yes" style="width: 90%;"></td>
+</tr>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="sum_s_2" placeholder="AC + CF" style="width: 90%;"></td>
+    <td><input type="text" name="remaining_side_2" placeholder="AF" style="width: 90%;"></td>
+    <td><input type="text" name="is_s_greater_r_2" placeholder="Yes" style="width: 90%;"></td>
+</tr>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="sum_s_3" placeholder="AF + CF" style="width: 90%;"></td>
+    <td><input type="text" name="remaining_side_3" placeholder="AC" style="width: 90%;"></td>
+    <td><input type="text" name="is_s_greater_r_3" placeholder="Yes" style="width: 90%;"></td>
+</tr>
 </table>
 
 <h4>Table 4</h4>
-<table class="table">
-    <tr>
-        <th>Longest Side</th>
-        <th>Largest Angle</th>
-        <th>Is this Side Opposite to this Angle?</th>
-    </tr>
-   <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="longest_side" placeholder="Enter Longest Side" style="width: 90%;"></td>
-        <td><input type="text" name="largest_angle" placeholder="Enter Largest Angle" style="width: 90%;"></td>
-        <td><input type="text" name="is_side_opposite_angle" placeholder="Enter Yes/No" style="width: 90%;"></td>
-    </tr>
-</table>
+<table class="table" style="width: 100%; text-align: center; border-collapse: collapse;">
+<thead style="background-color: #6a9be8; color: white;">
+<tr>
+    <th>Longest Side</th>
+    <th>Largest Angle</th>
+    <th>Is this Side Opposite to this Angle?</th>
+</tr>
+</thead>
+<tr style="background-color: #d9e1f2;">
+    <td><input type="text" name="longest_side" placeholder="Enter Longest Side" style="width: 90%;"></td>
+    <td><input type="text" name="largest_angle" placeholder="Enter Largest Angle" style="width: 90%;"></td>
+    <td><input type="text" name="is_side_opposite_angle" placeholder="Enter Yes/No" style="width: 90%;"></td>
+</tr>
+</table>`
 
-
-        `,
-  scalene : `<h3>Scalene Triangle Inference</h3>
-
-    <h4>Table 1</h4>
-    <table class="table">
-    <tr>
-        <th>Length of Side AC</th>
-        <th>Length of Side AF</th>
-        <th>Length of Side CF</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="length_ac" placeholder="Enter AC" style="width: 90%;"></td>
-        <td><input type="text" name="length_af" placeholder="Enter AF" style="width: 90%;"></td>
-        <td><input type="text" name="length_cf" placeholder="Enter CF" style="width: 90%;"></td>
-    </tr>
-</table>
-
-<h4>Table 2</h4>
-<table class="table">
-    <tr>
-        <th>Measure of Angle ∠CAF</th>
-        <th>Measure of Angle ∠ACF</th>
-        <th>Measure of Angle ∠AFC</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="angle_caf" placeholder="Enter ∠CAF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_acf" placeholder="Enter ∠ACF" style="width: 90%;"></td>
-        <td><input type="text" name="angle_afc" placeholder="Enter ∠AFC" style="width: 90%;"></td>
-    </tr>
-</table>
-
-
-
-<h2>Scalene Triangle</h2>
-<ul>
-    <li>
-        Are all three sides unequal? Ans- 
-        <input type="text" name="scalene_sides_unequal" placeholder="Yes/No" style="width: 50px;">
-    </li>
-    <li>
-        Are all three angles unequal? Ans- 
-        <input type="text" name="scalene_angles_unequal" placeholder="Yes/No" style="width: 50px;">
-    </li>
-</ul>
-
-
-    <h4>Table 3</h4>
-<table class="table">
-    <tr>
-        <th>Sum of Sides "S"</th>
-        <th>Length of Remaining Side "R"</th>
-        <th>Is S > R</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_1" placeholder="AC + AF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_1" placeholder="CF" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_1" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_2" placeholder="AC + CF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_2" placeholder="AF" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_2" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td><input type="text" name="sum_s_3" placeholder="AF + CF" style="width: 90%;"></td>
-        <td><input type="text" name="remaining_side_3" placeholder="AC" style="width: 90%;"></td>
-        <td><input type="text" name="is_s_greater_r_3" placeholder="Yes" style="width: 90%;"></td>
-    </tr>
-</table>
-
-    <h4>Table 4</h4>
-    <table class="table">
-        <tr>
-            <th>Longest Side</th>
-            <th>Largest Angle</th>
-            <th>Is this Side Opposite to this Angle?</th>
-        </tr>
-        <tr style="background-color: #d9e1f2;">
-            <td><input type="text" name="longest_side" placeholder="Enter Longest Side" style="width: 90%;"></td>
-            <td><input type="text" name="largest_angle" placeholder="Enter Largest Angle" style="width: 90%;"></td>
-            <td><input type="text" name="is_side_opposite_angle" placeholder="Enter Yes/No" style="width: 90%;"></td>
-        </tr>
-    </table>
-
-    
         `,       
     },
      },
