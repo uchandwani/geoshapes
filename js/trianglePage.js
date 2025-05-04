@@ -4,7 +4,7 @@ import { canvasManager } from '../shapes/CanvasManager.js';
 import { functionalityConfig } from './functionalityConfig.js';
 import { pageFeatures  } from './functionalityConfig.js';
 import { switchFunctionality } from './eventHandlers.js';
-import { attachNavBarListeners } from './eventHandlers.js';
+
 import { handleTriangleType } from './eventHandlers.js';
 import {Line} from '../shapes/Lines.js';
 import {Protractor} from '../shapes/Protractor.js';
