@@ -207,36 +207,31 @@ function drawShapes(fkey, canvasConfig, buttonType) {
  * Draws triangles according to configuration and type.
  
  */
-function drawTriangles(canvasConfig, buttonType) {
-    console.log('%c' + "Function DWT - canvasConfig, buttonType", 'color: green;', canvasConfig, buttonType);
+function drawTriangles(canvasConfig, effectiveType) {
+    console.log('%c' + "Function DWT - canvasConfig, buttonType", 'color: green;', canvasConfig, effectiveType);
     const { triangles } = canvasConfig;
-    
+
     if (!triangles || !Array.isArray(triangles)) {
         console.warn("Invalid or missing triangles configuration:", triangles);
         return;
     }
 
-    const filteredTriangles = buttonType
-        ? triangles.filter(triangle => triangle.type === buttonType)
+    const filteredTriangles = effectiveType
+        ? triangles.filter(triangle => triangle.type === effectiveType)
         : triangles;
 
     if (filteredTriangles.length === 0) {
-        console.warn(`No triangles found for type: ${buttonType}`);
+        console.warn(`No triangles found for type: ${effectiveType}`);
         return;
     }
 
-    console.log(`Drawing ${filteredTriangles.length} triangles for type: ${buttonType || "all"}`);
+    console.log(`Drawing ${filteredTriangles.length} triangles for type: ${effectiveType || "all"}`);
 
     filteredTriangles.forEach(triangleConfig => {
-        
-
         let { vertexA, vertexB, vertexC, angles, radius, labels, showMidPoints = false, showMeasurements = false } = triangleConfig;
 
         if (triangleConfig.vertexA && triangleConfig.angles && triangleConfig.radius) {
             console.log("Inside if vertex, angles and radius defined", triangleConfig);
-            // ✅ **Case 1: Calculate vertices from vertexA, angles, and radius**
-           
-            
             const angle1 = (angles[0] * Math.PI) / 180;
 
             vertexB = {
@@ -247,31 +242,23 @@ function drawTriangles(canvasConfig, buttonType) {
                 x: vertexB.x,
                 y: vertexA.y,
             };
-        } else if (triangleConfig.vertices) {
-            // ✅ **Case 2: Use provided three vertices**
-
-            if (triangleConfig.vertices.length === 3) {
-                 console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
-                [vertexA, vertexB, vertexC] = triangleConfig.vertices;
-            } else {
-                console.warn("⚠️ Invalid vertices configuration. Expected exactly 3 points.");
-                return;
-            }
+        } else if (triangleConfig.vertices && triangleConfig.vertices.length === 3) {
+            console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
+            [vertexA, vertexB, vertexC] = triangleConfig.vertices;
         } else {
             console.warn("⚠️ Triangle configuration missing required data.");
             return;
         }
 
-        // ✅ Create Triangle and Add to Canvas
         const triangle = new Triangle(vertexA, vertexB, vertexC);
         triangle.setVertexLabels(labels);
-        triangle.setShowLabels(true); // Ensure labels appear
+        triangle.setShowLabels(true);
         triangle.setShowMidpoints(showMidPoints);
         triangle.setShowMeasurements(showMeasurements);
         if (triangleConfig.labels) {
             triangle.setVertexLabels(triangleConfig.labels);
         }
-        
+
         canvasManager.addShape(triangle);
     });
 
@@ -323,9 +310,7 @@ export function handleTriangleType(fkey, type) {
 export function switchFunctionality(functionalityKey, buttonType) {
     console.log(`Switching functionality: ${functionalityKey}, buttonType: ${buttonType}`);
 
-    // Activate the main functionality button
-   // handleNavButtons(functionalityKey);
-
+   
     const config = functionalityConfig[functionalityKey];
       if (!config) {
         console.error("❌ Invalid functionalityKey:", functionalityKey);
@@ -368,7 +353,7 @@ export function switchFunctionality(functionalityKey, buttonType) {
     console.log("   Sub-button label (from config):", activeSubBtnLabel);
     
       // ✅ Compose header with dividers only if parts are present
-      updateHeaderLabels({
+     updateHeaderLabels({
     
      
     
@@ -391,9 +376,9 @@ export function switchFunctionality(functionalityKey, buttonType) {
         const effectiveButtonType = activeSubButton?.dataset.type || config.defaultButtonType;
 
 
-        drawShapes(functionalityKey,config.canvasConfig, buttonType);
+        drawShapes(functionalityKey,config.canvasConfig, effectiveType);
         updateUI(config, functionalityKey);
-        updateRightSidebar(functionalityKey, buttonType);
+        updateRightSidebar(functionalityKey, effectiveType);
 
         // If buttonType is specified, activate it
         if (buttonType) {
