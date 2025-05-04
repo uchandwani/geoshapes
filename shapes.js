@@ -89,20 +89,8 @@ function attachButtonListener(buttonId, callback, fallbackMessage) {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    attachButtonListener('toggle-grid', toggleGrid, 'Grid button not found in the DOM');
-    attachButtonListener('style-classic', () => {
-        activeStyle = 'classic';
-        console.log('Classic style selected');
-    }, 'Classic button not found in the DOM');
-    attachButtonListener('style-modern', () => {
-        activeStyle = 'modern';
-        console.log('Modern style selected');
-    }, 'Modern button not found in the DOM');
 
-    attachButtonListener('toggle-measurements', () => {
-        canvasManager.toggleGlobalMeasurements();
-        canvasManager.render(ctx, canvas);
-    }, 'Measurements toggle button not found in the DOM');
+      
 
     attachButtonListener('add-divider', () => {
     activateMode('create', 'divider', 'Add Divider');
@@ -112,15 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activateMode('create', 'compass', 'Add Compass');
     }, 'Compass button not found in the DOM');
 
-    attachButtonListener('toggle-labels', () => {
-        canvasManager.toggleGlobalLabels();
-        canvasManager.render(ctx, canvas);
-    }, 'Labels toggle button not found in the DOM');
-
-    attachButtonListener('toggle-coordinates', () => {
-        canvasManager.toggleGlobalCoordinates();
-        canvasManager.render(ctx, canvas);
-    }, 'Coordinates toggle button not found in the DOM');
+      
 
     // Shape buttons
     const shapeButtons = [
