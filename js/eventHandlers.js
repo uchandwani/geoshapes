@@ -1,7 +1,8 @@
 import { functionalityConfig } from './functionalityConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import {Point} from '../shapes/Points.js';
+import { Circle } from '../shapes/Circle.js';
 import { updatePageTitle } from './header.js';
 import { updateHeaderLabels } from './header.js';
 // Function to handle navigation and update the screen
@@ -382,6 +383,15 @@ function drawTriangles(canvasConfig, buttonType = null) {
         triangle.setShowMeasurements(showMeasurements);
         canvasManager.addShape(triangle);
     });
+}
+
+
+export function updateActiveButton(buttonElement) {
+    const current = document.querySelector(".navigation-buttons button.active, .triangle-button.active");
+    if (current !== buttonElement) {
+        document.querySelectorAll(".navigation-buttons button, .triangle-button").forEach(btn => btn.classList.remove("active"));
+        buttonElement?.classList.add("active");
+    }
 }
 
 function updateUI(config, functionalityKey, buttonType = null) {
