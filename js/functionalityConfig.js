@@ -691,7 +691,7 @@ obtuse:
       autoloadShape: "triangle",
       triangles: [
         {
-          type: "right",
+          type: "equilateral",
           vertices: [
             { x: 220, y: 450 },
             { x: 620, y: 450 },
@@ -703,7 +703,7 @@ obtuse:
           showMeasurements: true
         },
         {
-          type: "acute",
+          type: "isosceles",
           vertices: [
             { x: 260, y: 480 },
             { x: 640, y: 470 },
@@ -715,7 +715,7 @@ obtuse:
           showMeasurements: true
         },
         {
-          type: "obtuse",
+          type: "scalene",
           vertices: [
             { x: 180, y: 480 },
             { x: 700, y: 470 },
