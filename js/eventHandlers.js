@@ -285,107 +285,52 @@ export function addSpecificPoints(points, ctx) {
     
 */
 
-  export function switchFunctionality(functionalityKey, buttonType = null) {
-  console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+window.switchFunctionality = switchFunctionality;
+
+/**
+ * Main function to update functionality and render new shapes + UI.
+ * 
+ * @param {string} functionalityKey - The key for the selected functionality
+ * @param {string|null} subtype - Optional subtype (e.g. 'right', 'sin'); fallback applied if not provided
+ */
+function switchFunctionality(functionalityKey, subtype = null) {
+  console.log("🔁 switchFunctionality called with:", functionalityKey, subtype);
 
   const config = functionalityConfig[functionalityKey];
   if (!config) {
-    console.error("❌ Invalid functionalityKey:", functionalityKey);
+    console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
     return;
   }
 
-  
-  const effectiveType = buttonType || config.defaultButtonType || null;
-  console.log("🎯 Using subtype:", effectiveType);
+  // 🧠 Determine fallback subtype if not explicitly provided
+  const effectiveSubtype = subtype || (Array.isArray(config.buttonSet) && config.buttonSet.length > 0
+    ? config.buttonSet[0]
+    : null);
 
-  // 🔹 Title and subtitle updates
-  const page = location.pathname.split("/").pop();
-  const pageTitles = {
-    "index.html": "Home",
-    "parallel_lines_04.html": "Parallel Lines",
-    "triangle_theorem_07.html": "Triangle Theorems",
-    "trig_properties_09.html": "Trigonometric Properties",
-    "circle_theorems_02.html": "Circle Theorems"
-  };
-  const mainTitle = pageTitles[page] || "Math App";
+  console.log("🎯 Using subtype:", effectiveSubtype);
 
-  const icon = document.getElementById(`${functionalityKey}-button`);
-  const subtitleMap = {
-    midSegmentTheorem: "Mid Segment Theorem",
-    basicProportionalityTheorem: "Basic Proportionality Theorem",
-    angleBisectorTheorem : "Angle Bisector Theorem",
-    propertiesOfTriangles: "Properties of Triangles",
-   
-      };
-   const subtitleLabel = subtitleMap[functionalityKey] || "";
-
-  let activeSubBtnLabel = "";
-  if (config.buttonSet && effectiveType) {
-    const match = config.buttonSet.find(btn => btn.type === effectiveType);
-    activeSubBtnLabel = match?.label || "";
-  }
-
-  // ✅ Compose header with dividers only if parts are present
-  updateHeaderLabels({
-    title: mainTitle,
-    subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
-    subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
-  });
-
-  // 🧹 Canvas and UI
+  // ✅ Clear canvas
   canvasManager.clearAllShapes();
-  drawShapes(config.canvasConfig, effectiveType);
-  updateUI(config, functionalityKey, effectiveType);
-  updateLeftSidebar(functionalityKey, effectiveType);
-  updateRightSidebar(functionalityKey, effectiveType);
+
+  // ✅ Update content areas
+  updateTheoremText(config, effectiveSubtype);
+  updateLeftSidebar(config, effectiveSubtype);
+  updateRightSidebar(config, effectiveSubtype);
+
+  // ✅ Update visuals on canvas
+  drawShapes(config.canvasConfig, effectiveSubtype);
+
+  // ✅ Update active icon styles
+  updateActiveSubHeaderButton(functionalityKey);
+
+  // ✅ Update dynamic sub-buttons if needed
+  showSubButtons(config.buttonSet || [], functionalityKey);
+
   canvasManager.render();
-
-   
- /* Update the canvas with the default triangle using defaultType
-    if (defaultType) {
-        console.log("The functionalitykey and type", functionalityKey,defaultType);
-        handleTriangleType(functionalityKey,defaultType); // Dynamically create and render the default triangle
-    }
-
-    canvasManager.render(); */
-
+ 
   } 
 
 // Attach event listeners to navigation buttons
-
-
-export function attachNavBarListeners() {
-  const navMap = {
-    midSegmentTheorem: null,
-    basicProportionalityTheorem: null,
-    angleBisectorTheorem: null,
-    propertiesOfTriangles: null
-  };
-
-  Object.entries(navMap).forEach(([id, subtype]) => {
-    const button = document.getElementById(`${id}-button`);
-    if (button) {
-      button.addEventListener("click", () => {
-        console.log("🔘 Header/Nav button clicked:", id, subtype);
-        switchFunctionality(id, subtype);
-
-        // Remove active from all sibling buttons inside same container
-        const allButtons = document.querySelectorAll("#sub-header-icons .sub-header-icon");
-        allButtons.forEach(btn => btn.classList.remove("active"));
-
-        // Set active on this button
-        button.classList.add("active");
-      }, { once: true });  // Prevent double firing
-    } else {
-      console.warn(`❌ Button for ${id} not found.`);
-    }
-  });
-
-  // Optional: mark default button active on page load
-  const defaultId = "midSegmentTheorem";
-  const defaultButton = document.getElementById(`${defaultId}-button`);
-  if (defaultButton) defaultButton.classList.add("active");
-}
 
 
 function drawShapes(canvasConfig, buttonType = null) {

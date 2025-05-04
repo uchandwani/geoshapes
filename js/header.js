@@ -2,37 +2,37 @@
 
 export function attachNavBarListeners() {
   const navMap = {
-    "verticallyOpposite-button": { functionality: "verticallyOpposite", subtype: null },
-    "parallelProperties-button": { functionality: "parallelProperties", subtype: "sin" },
-    "exteriorAngles-button": { functionality: "exteriorAngles", subtype: "sin" },
-    "angleSumProperties-button": { functionality: "angleSumProperties", subtype: "sin" },
-
-    "radiusTangent-button": { functionality: "radiusTangent", subtype: null },
-    "twoTangents-button": { functionality: "twoTangents", subtype: "sin" },
-    "subtendedAngles-button": { functionality: "subtendedAngles", subtype: "sin" },
-    "alternateSegments-button": { functionality: "alternateSegments", subtype: "sin" },
-    "quadrilaterals-button": { functionality: "quadrilaterals", subtype: "sin" },
-
-    "midSegmentTheorem-button": { functionality: "midSegmentTheorem", subtype: "right" },
-    "basicProportionalityTheorem-button": { functionality: "basicProportionalityTheorem", subtype: "right" },
-    "angleBisectorTheorem-button": { functionality: "angleBisectorTheorem", subtype: "right" },
-    "propertiesOfTriangles-button": { functionality: "propertiesOfTriangles", subtype: "equilateral" },
-    
-    "sineTheta-button": { functionality: "sineTheta", subtype: null },
-    "cosineTheta-button": { functionality: "cosineTheta", subtype: "sin" },
-    "trigonoRatios-button": { functionality: "trigonoRatios", subtype: "sin" },
-    "trigonoIdentities-button": { functionality: "trigonoIdentities", subtype: "sin" },
-   
-
+    "verticallyOpposite-button": "verticallyOpposite",
+    "parallelProperties-button": "parallelProperties",
+    "exteriorAngles-button": "exteriorAngles",
+    "angleSumProperties-button": "angleSumProperties",
+  
+    "radiusTangent-button": "radiusTangent",
+    "twoTangents-button": "twoTangents",
+    "subtendedAngles-button": "subtendedAngles",
+    "alternateSegments-button": "alternateSegments",
+    "quadrilaterals-button": "quadrilaterals",
+  
+    "midSegmentTheorem-button": "midSegmentTheorem",
+    "basicProportionalityTheorem-button": "basicProportionalityTheorem",
+    "angleBisectorTheorem-button": "angleBisectorTheorem",
+    "propertiesOfTriangles-button": "propertiesOfTriangles",
+  
+    "sineTheta-button": "sineTheta",
+    "cosineTheta-button": "cosineTheta",
+    "trigonoRatios-button": "trigonoRatios",
+    "trigonoIdentities-button": "trigonoIdentities",
   };
+  
 
-  Object.entries(navMap).forEach(([id, { functionality, subtype }]) => {
+  Object.entries(navMap).forEach(([id, functionalityKey]) => {
+
     const button = document.getElementById(id);
     if (button) {
       button.addEventListener("click", () => {
         console.log("📣 Dispatching nav-select event:", functionality, subtype);
         const event = new CustomEvent("nav-select", {
-          detail: { functionalityKey: functionality, subtype }
+          detail: { functionalityKey }
         });
         window.dispatchEvent(event);
       });

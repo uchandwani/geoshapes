@@ -11,6 +11,9 @@ import {Protractor} from '../shapes/Protractor.js';
 import {updateRightSidebar} from './eventHandlers.js';
 
 
+
+
+
     document.addEventListener("DOMContentLoaded", () => {
       console.log("Triangle Page Loaded");
       updatePageTitle();
