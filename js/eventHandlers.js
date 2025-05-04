@@ -394,53 +394,71 @@ export function updateActiveSubHeaderButton(buttonElement) {
     }
 }
 
+/**
+ * updateUI - Renders theorem definition and subtype buttons dynamically based on configuration
+ *
+ * @param {Object} config - Configuration object for the selected functionality
+ * @param {string} functionalityKey - The main functionality key (e.g., "midSegmentTheorem")
+ * @param {Object|null} buttonType - Subtype object (e.g., { label, type, svg }) or null
+ */
 function updateUI(config, functionalityKey, buttonType = null) {
-  const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
-
-  updateTheoremText(config, buttonType);
-
-  const dynamicButtons = document.getElementById("dynamic-buttons");
-if (Array.isArray(config.buttonSet)) {
-  dynamicButtons.innerHTML = "";
-
-  config.buttonSet.forEach(({ label, type, svg }) => {
-    // ✅ Use required tooltip container class
-    const wrapper = document.createElement("div");
-    wrapper.className = "tooltip-container";  // 👈 KEY FIX
-
-    // 🔹 Inject SVG or fallback to label
-    if (svg) {
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = svg.trim();
-      const svgEl = tempDiv.firstChild;
-      svgEl.classList.add("sub-button-svg");
-      wrapper.appendChild(svgEl);
+    // 🧠 Step 1: Choose correct theorem definition for selected subtype (if available)
+    const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
+  
+    // 🧠 Step 2: Update the theorem text, canvas, and sidebar areas
+    updateTheoremText(config, buttonType);
+  
+    // 🧠 Step 3: Handle dynamic button rendering for subtypes (right sidebar)
+    const dynamicButtons = document.getElementById("dynamic-buttons");
+  
+    if (Array.isArray(config.buttonSet)) {
+      // Clear previous buttons
+      dynamicButtons.innerHTML = "";
+  
+      // Loop through each subtype button definition
+      config.buttonSet.forEach(({ label, type, svg }) => {
+        // 🔹 Create a tooltip-enabled container for each button
+        const wrapper = document.createElement("div");
+        wrapper.className = "tooltip-container";
+  
+        // 🔹 Add SVG icon if provided, otherwise fallback to plain button
+        if (svg) {
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = svg.trim();
+          const svgEl = tempDiv.firstChild;
+          svgEl.classList.add("sub-button-svg");
+          wrapper.appendChild(svgEl);
+        } else {
+          const fallbackBtn = document.createElement("button");
+          fallbackBtn.classList.add("triangle-button");
+          fallbackBtn.textContent = label;
+          wrapper.appendChild(fallbackBtn);
+        }
+  
+        // 🔹 Add tooltip label
+        const tooltip = document.createElement("span");
+        tooltip.className = "tooltip-text";
+        tooltip.textContent = label;
+        wrapper.appendChild(tooltip);
+  
+        // ✅ Attach click handler to switch subtype
+        wrapper.addEventListener("click", () => {
+          console.log("📥 Subtype button clicked:", functionalityKey, { label, type, svg });
+          switchFunctionality(functionalityKey, { label, type, svg });
+        });
+  
+        // Add to right sidebar container
+        dynamicButtons.appendChild(wrapper);
+      });
+  
+      // Ensure dynamic buttons are visible
+      dynamicButtons.style.display = "block";
     } else {
-      const fallbackBtn = document.createElement("button");
-      fallbackBtn.classList.add("triangle-button");
-      fallbackBtn.textContent = label;
-      wrapper.appendChild(fallbackBtn);
+      // If no buttons defined, hide the container
+      dynamicButtons.style.display = "none";
     }
-
-    // 🔹 Tooltip span (now styled correctly)
-    const tooltip = document.createElement("span");
-    tooltip.className = "tooltip-text";
-    tooltip.textContent = label;
-    wrapper.appendChild(tooltip);
-    
-
-    // 🔹 Click handler
-    wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
-
-    dynamicButtons.appendChild(wrapper);
-  });
-
-  dynamicButtons.style.display = "block";
-} else {
-  dynamicButtons.style.display = "none";
-}
-
-}
+  }
+  
 
 export function updateLeftSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
