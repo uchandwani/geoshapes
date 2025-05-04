@@ -1,6 +1,6 @@
 // Imports
 import { updatePageTitle } from './header.js';
-import { switchFunctionality, handleTriangleType } from './triangleEventHandlers.js';
+import { switchFunctionality } from './triangleEventHandlers.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
