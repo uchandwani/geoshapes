@@ -30,7 +30,7 @@ export function attachNavBarListeners() {
     const button = document.getElementById(id);
     if (button) {
       button.addEventListener("click", () => {
-        console.log("📣 Dispatching nav-select event:", functionality);
+       
         const event = new CustomEvent("nav-select", {
           detail: { functionalityKey }
         });
