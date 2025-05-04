@@ -6,12 +6,15 @@
     <title>Triangle Theorems</title>
     <!--link rel="stylesheet" href="../css/header_styles.css"-->
     
-    <link rel="stylesheet" href="./css/header_styles.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./js/trianglePage.js"></script>
-    <script type="module" src="./js/responsiveCanvas.js"> </script>
-    <script type="module" src="./js/responsiveCanvas.js"> </script>
-   
+     <!-- ✅ CSS Files -->
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- ✅ JS Modules -->
+
+  <script type="module" src="./shapes/CanvasManager.js"> </script>
+  <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./shapes.js"></script>
 
 
     <script type="module">
@@ -137,46 +140,9 @@
         <p></p>
     </footer>
 
-    <!-- Toggle button -->
-    <!--button id="toggle-dimensions" style="margin: 20px;">Toggle Dimensions</button-->
-
-    <!-- JavaScript to handle dimension labeling -->
-    <!--script>
-        let dimensionsVisible = false;
-
-        document.getElementById('toggle-dimensions').addEventListener('click', () => {
-            if (dimensionsVisible) {
-                // Remove existing labels
-                document.querySelectorAll('.dimension-label').forEach(label => label.remove());
-                dimensionsVisible = false;
-            } else {
-                // Add dimension labels
-                document.querySelectorAll('div').forEach((div) => {
-                    const rect = div.getBoundingClientRect();
-                    const label = document.createElement('div');
-                    label.classList.add('dimension-label');
-                    label.style.position = 'absolute';
-                    label.style.top = `${rect.top + window.scrollY}px`;
-                    label.style.left = `${rect.left + window.scrollX}px`;
-                    label.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                    label.style.color = 'white';
-                    label.style.padding = '2px 5px';
-                    label.style.fontSize = '14px';
-                    label.style.zIndex = '1000';
-                    label.textContent = `${rect.width}px × ${rect.height}px`;
-                    document.body.appendChild(label);
-                });
-                const screenWidth = window.innerWidth;
-                const screenHeight = window.innerHeight;
-
-                screenDimensions.textContent = `Screen: ${screenWidth}px × ${screenHeight}px`;
-                dimensionsVisible = true;
-                
-            }
-        });
-    </script-->
+    
      <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
+  
   <script type="module">
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
@@ -187,11 +153,16 @@
 
     const { switchFunctionality } = await import('./js/eventHandlers.js');
     attachNavBarListeners();
-    switchFunctionality('midSegmentTheorem',  'right'); // Default functionality
+    
+    window.addEventListener("nav-select", (e) => {
+    const { functionalityKey, subtype } = e.detail;
+    console.log("📥 Received nav-select:", functionalityKey, subtype);
+    switchFunctionality(functionalityKey, subtype);
+  });
+    
+    
+    switchFunctionality('midSegmentTheorem'); // Default functionality
   </script>
-
-
-  
-
+ 
 </body>
 </html>
