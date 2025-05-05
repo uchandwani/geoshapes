@@ -586,6 +586,7 @@ isPointInside(x, y) {
             if (x >= left && x <= right && y >= top && y <= bottom) {
                 console.log(`🖱 Click detected inside button (${delta}°) → setting pendingRotation.`);
                 this.pendingRotation = delta;
+                this.draggingCenter = true; // ✅ Ensures shape is selected
                 return true;
             }
         }

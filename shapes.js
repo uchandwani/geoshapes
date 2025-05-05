@@ -308,8 +308,19 @@ canvas.addEventListener('mousedown', (e) => {
                     break;
   
 
-                case 'Protractor':
+                    case 'Protractor':
                         const distanceToCenter = Math.hypot(offsetX - selectedShape.center.x, offsetY - selectedShape.center.y);
+                    
+                        const isInsideRotationButton = selectedShape.pendingRotation != null;
+                    
+                        if (isInsideRotationButton) {
+                            console.log("🖱️ Canvas rotation button clicked → will rotate on mouseup.");
+                            // Do not engage in dragging or resizing if it's a rotation button
+                            selectedShape.draggingEdge = false;
+                            selectedShape.isCenterDragging = false;
+                            selectedShape.draggingPoint = null;
+                            break;  // ✅ Exit the case cleanly without doing anything else
+                        }
                     
                         if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
                             selectedShape.draggingEdge = true;   // Near circumference → Resize
@@ -322,6 +333,7 @@ canvas.addEventListener('mousedown', (e) => {
                             console.log("🎯 Protractor center dragging initiated.");
                         }
                         break;
+                    
                     
                     
 
@@ -572,13 +584,23 @@ canvas.addEventListener('mouseup', (e) => {
         break;
 
         case 'Protractor':
-        selectedShape.draggingEdge = false;
-        selectedShape.isCenterDragging = false;
-        selectedShape.rotating = false;
-       // selectedShape.pendingRotation = null;
-      //  selectedShape.wasSnapped = false;
-    
-       
+            
+                console.log("🖐 Mouse Up event");
+            
+                // Reset dragging flags regardless
+                this.draggingEdge = false;
+                this.draggingCenter = false;
+                this.isCenterDragging = false;
+                this.draggingPoint = null;
+            
+                // Apply any pending rotation
+                if (this.pendingRotation != null) {
+                    console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
+                    this.rotateByDegrees(this.pendingRotation);
+                    this.pendingRotation = null;
+                    canvasManager.render();
+                }
+            
         console.log("🖱️ Mouse up: Stopped Protractor movement.");
         break;
 
