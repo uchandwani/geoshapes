@@ -144,7 +144,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
     triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = false }) => {
         if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
         const triangle = new Triangle(vertexA, vertexB, vertexC);
-
+        debugger;
         triangle.setVertexLabels(labels);
         triangle.setEnableDrag(enableDrag); // ✅ Use shape-specific enableDrag if defined
         triangle.setShowMidpoints(showMidpoints);
