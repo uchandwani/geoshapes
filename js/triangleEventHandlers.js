@@ -97,9 +97,9 @@ function drawTriangles(canvasConfig, buttonType = null) {
     if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
     const triangle = new Triangle(vertexA, vertexB, vertexC);
     triangle.setVertexLabels(labels);
-    triangle.setEnableDrag(enableDrag);
+    triangle.setEnableDrag(false);
     triangle.setShowMidpoints(showMidpoints);
-    triangle.setShowMeasurements(showMeasurements);
+    triangle.setShowMeasurements(false);
     triangle.setShowLabels(true); // ✅ Enable vertex labels
     canvasManager.addShape(triangle);
   });
