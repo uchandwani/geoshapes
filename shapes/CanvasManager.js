@@ -86,6 +86,19 @@ calculatemidPoints(vertices) {
     }
 }
 
+getSnapCandidates() {
+    return this.shapes.flatMap(shape => {
+        // Include standalone points
+        if (shape instanceof Point) return [shape];
+
+        // Include triangle vertices (but not midpoints or internal points)
+        if (shape.points && shape.constructor.name === "Triangle") {
+            return shape.points;
+        }
+
+        return [];
+    });
+}
 
 
     clearTrianglesOnly() {
