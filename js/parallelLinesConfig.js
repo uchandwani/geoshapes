@@ -91,7 +91,7 @@ export  const functionalityConfig = {
   <tr>
     <th>Angle Measure</th>
     <th>Vertically Opposite</th>
-    <th>Are they equal?</th>
+    <th>Equality Check</th>
   </tr>
 
   <!-- Table 1 -->
@@ -381,7 +381,7 @@ export  const functionalityConfig = {
   <tr>
     <th>Angle Measure</th>
     <th>Corresponding Angle</th>
-    <th>Are they equal?</th>
+    <th>Equality Check</th>
   </tr>
 
   <!-- Table 1 -->
@@ -479,7 +479,7 @@ export  const functionalityConfig = {
   <tr>
     <th>Angle Measure</th>
     <th>Alternate Interior Angle</th>
-    <th>Are they equal?</th>
+    <th>Equality Check</th>
   </tr>
 
   <!-- Table 1 -->
