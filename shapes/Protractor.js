@@ -463,7 +463,8 @@ drawModern(ctx) {
         if (!this.center) return;
     
         if (enableSnapping && !isAltPressed && geoshapes.length > 0) {
-            const closest = this.findClosestPoint(geoshapes);
+
+            const closest = this.findClosestPoint(this.center, geoshapes); // ✅ Fixed
             if (closest) {
                 this.center.x = closest.x;
                 this.center.y = closest.y;
