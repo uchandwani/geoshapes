@@ -112,7 +112,7 @@ function drawCircle(canvasConfig) {
     const circleShape = new Circle(center, radius);
     
     // 🔹 Ensure enableDrag is applied properly
-    circleShape.setEnableDrag(canvasConfig.enableDrag ?? true);  
+    circleShape.setEnableDrag(false);  
 
     canvasManager.addShape(circleShape);
     canvasManager.render();
@@ -156,7 +156,7 @@ function drawPoints(config, subtype) {
 
         // ✅ Correctly create and store the Point object
         const point = new Point(x, y, label || "", color, radius);
-
+        point.enableDrag = false;
         console.log(`🖊 Adding point ${label} at (${x}, ${y})`);
 
         // ✅ First add the point to the canvas
@@ -193,7 +193,7 @@ function drawLines(canvasConfig, subtype = null) {
     filteredLines.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
         if (endA && endB) {
             const line = new Line(endA, endB, color);
-            line.setEnableDrag(enableDrag);  // Apply dragging setting from config
+            line.setEnableDrag(false);  // Apply dragging setting from config
 
             canvasManager.addShape(line);
             console.log(`📏 Drawing line from (${endA.x}, ${endA.y}) to (${endB.x}, ${endB.y}) in color "${color}"`);
@@ -253,7 +253,9 @@ function drawTangents(config, subtype) {
 
         // Draw external point
         console.log("🖊 Drawing external point:", externalPoint);
+        externalPoint.enableDrag = false;
         drawPoints({ points: [externalPoint] });
+
 
         console.log(`🎯 Tangents drawn for ${subtype} with external point ${externalPoint.label}`);
     } else if (tangentPoints.length > 2) {
@@ -295,7 +297,9 @@ function drawTangents(config, subtype) {
             drawLines({ lines: [{ endA, endB, color }] });
 
             // Draw the midpoint itself
-            drawPoints({ points: [midpoint] });
+            externalPoint.enableDrag = false;
+            drawPoints({ points: [externalPoint] });
+
         });
     }
 
