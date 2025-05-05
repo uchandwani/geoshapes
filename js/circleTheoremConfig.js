@@ -213,8 +213,8 @@ export  const functionalityConfig = {
               { x: 300, y: 500, label: "D", color: "green", radius: 5, type: "tangent", subtype: "cos" },
           
               // Third set of tangents for "tan"
-              { x: 440, y: 160, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
-              { x: 440, y: 440, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 440, y: 157.16, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 440, y: 442.84, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
             ],
           
             externalPoints: {
