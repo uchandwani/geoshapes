@@ -95,7 +95,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#6a9be8;">Table 1</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AGT</span><br>
       <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
@@ -120,7 +120,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#6a9be8; ">Table 2</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2; ">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠ABP</span><br>
       <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
@@ -145,7 +145,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#6a9be8;">Table 3</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AEG</span><br>
       <input type="number" name="angle_aeg" placeholder="Enter" style="width: 90%;"
@@ -385,7 +385,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠AFQ</span><br>
       <input type="number" id="angle_afq" name="angle_afq" placeholder="Enter" style="width: 90%;"
@@ -411,7 +411,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠ADF</span><br>
       <input type="number" id="angle_adf" name="angle_adf" placeholder="Enter" style="width: 90%;"
@@ -437,7 +437,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠NAB</span><br>
       <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter" style="width: 90%;"
@@ -483,7 +483,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠QFG</span><br>
       <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
@@ -509,7 +509,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠PDE</span><br>
       <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
@@ -535,7 +535,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠NAB</span><br>
       <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
@@ -581,7 +581,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 1</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠QFG</span><br>
       <input type="number" name="angle_qfg" placeholder="Enter" style="width: 90%;"
@@ -606,7 +606,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠PDE</span><br>
       <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
@@ -631,7 +631,7 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 3</th></tr>
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>∠NAB</span><br>
       <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
