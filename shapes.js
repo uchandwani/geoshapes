@@ -23,6 +23,18 @@ export const allshapes = {
     geoshapes: []
 };
 
+// Track if Alt key is pressed
+let isAltPressed = false;
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Alt") isAltPressed = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    if (e.key === "Alt") isAltPressed = false;
+});
+
+
 let dragCallback = null; 
 
 const currentPage = location.pathname.split("/").pop();
