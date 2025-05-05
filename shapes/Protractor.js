@@ -589,18 +589,26 @@ isPointInside(x, y) {
         }
     }
 
-    if (dist <= this._snapButton.r) {
-        this.snappingEnabled = !this.snappingEnabled;
-        console.log("🧲 Snapping toggled to:", this.snappingEnabled);
-        canvasManager.render();
-    
-        // Prevent further dragging logic
-        this.draggingEdge = false;
-        this.draggingCenter = false;
-        this.pendingRotation = null;
-    
-        return true; // Very important
-    }
+    // ✅ Check snap toggle button
+        if (this._snapButton) {
+            const dx = x - this._snapButton.x;
+            const dy = y - this._snapButton.y;
+            const dist = Math.hypot(dx, dy);  // 🔧 Define dist before using it
+
+            if (dist <= this._snapButton.r) {
+                this.snappingEnabled = !this.snappingEnabled;
+                console.log("🧲 Snapping toggled to:", this.snappingEnabled);
+                canvasManager.render();
+
+                // Prevent unintended dragging or rotation
+                this.draggingEdge = false;
+                this.draggingCenter = false;
+                this.pendingRotation = null;
+
+                return true;
+            }
+}
+
     
 
     const distance = Math.hypot(x - this.center.x, y - this.center.y);
