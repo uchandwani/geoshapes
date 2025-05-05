@@ -64,7 +64,7 @@ function drawShapes(canvasConfig, buttonType = null) {
 }
 
 function drawPoints(canvasConfig, buttonType = null) {
-  canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = true }) => {
+  canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = false }) => {
     if (!type || type === buttonType) {
       const point = new Point(x, y, label, color, radius);
       point.setEnableDrag(enableDrag);
@@ -74,7 +74,7 @@ function drawPoints(canvasConfig, buttonType = null) {
 }
 
 function drawLines(canvasConfig) {
-  canvasConfig.lines?.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
+  canvasConfig.lines?.forEach(({ endA, endB, color = "black", enableDrag = false }) => {
     const line = new Line(endA, endB, color);
     line.setEnableDrag(enableDrag);
     canvasManager.addShape(line);
@@ -84,7 +84,7 @@ function drawLines(canvasConfig) {
 function drawCircle(canvasConfig) {
   const [center, radius] = canvasConfig.circle;
   const circle = new Circle(center, radius);
-  circle.setEnableDrag(canvasConfig.enableDrag ?? true);
+  circle.setEnableDrag(false);
   canvasManager.addShape(circle);
 }
 
@@ -93,7 +93,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
     ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
     : canvasConfig.triangles;
 
-  triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = true }) => {
+  triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = false, enableDrag = false }) => {
     if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
     const triangle = new Triangle(vertexA, vertexB, vertexC);
     triangle.setVertexLabels(labels);
