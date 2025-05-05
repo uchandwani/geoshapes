@@ -481,28 +481,30 @@ drawModern(ctx) {
 
      
 
-    drag(dx, dy, enableSnapping = false, geoshapes = [], isAltPressed = false) {
-        if (!this.center) return;
-
-        console.log ("The key values are  enableSanpping, isAltPressed, geoshapes.length are ", enableSnapping,isAltPressed,geoshapes.length);
-    
-        if (enableSnapping && isAltPressed && geoshapes.length > 0) {
-
-            const closest = this.findClosestPoint(this.center, geoshapes); // ✅ Fixed
-            if (closest) {
-                this.center.x = closest.x;
-                this.center.y = closest.y;
-                return;
+    drag(dx, dy, geoshapes = [] ) {
+            if (!this.center) return;
+        
+            const shouldSnap = this.snappingEnabled && geoshapes.length > 0;
+        
+            if (shouldSnap) {
+                const closest = this.findClosestPoint(this.center, geoshapes);
+                if (closest) {
+                    this.center.x = closest.x;
+                    this.center.y = closest.y;
+                    console.log("✅ Snapped to closest point due to snap mode.");
+                    return;
+                }
+            }
+        
+            // Default dragging
+            this.center.x += dx;
+            this.center.y += dy;
+        
+            if (typeof canvas !== "undefined" && canvas) {
+                this.clampCenterWithinCanvas(canvas);
             }
         }
-    
-        this.center.x += dx;
-        this.center.y += dy;
-    
-        if (typeof canvas !== "undefined" && canvas) {
-            this.clampCenterWithinCanvas(canvas);  // Use global
-        }
-    }
+        
     
     
  clampCenterWithinCanvas(canvas) {
