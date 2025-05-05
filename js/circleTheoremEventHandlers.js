@@ -113,6 +113,7 @@ function drawCircle(canvasConfig) {
     
     // 🔹 Ensure enableDrag is applied properly
     circleShape.setEnableDrag(false);  
+    circleShape.setEnableStretch(false); 
 
     canvasManager.addShape(circleShape);
     canvasManager.render();
