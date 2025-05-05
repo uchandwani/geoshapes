@@ -423,42 +423,44 @@ function updateUI(config, functionalityKey, buttonType = null) {
 
     updateTheoremText(config, buttonType);
     // Update dynamic sub-buttons
-    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        dynamicButtonsContainer.innerHTML = ""; // Clear existing buttons
-
-        // Render sub-buttons
-        config.buttonSet.forEach((buttonConfig) => {
-            const btn = document.createElement("button");
-            btn.classList.add("triangle-button");
-            btn.textContent = buttonConfig.label;
-            btn.dataset.type = buttonConfig.type;
-            btn.dataset.functionalityKey = functionalityKey;
-
-            // Attach click handler
-            btn.addEventListener("click", () => {
-                activateButton("#dynamic-buttons", btn);
-                switchFunctionality(functionalityKey, buttonConfig.type);
-            });
-
-            dynamicButtonsContainer.appendChild(btn);
-        });
-
-        dynamicButtonsContainer.style.display = "block";
-
-        // Activate default sub-button if none is active
-        const activeSubButton = dynamicButtonsContainer.querySelector(".triangle-button.active");
-        const effectiveSubButton =
-            activeSubButton ||
-            dynamicButtonsContainer.querySelector(
-                `button[data-type="${config.defaultButtonType}"]`
-            );
-
-        if (effectiveSubButton) {
-            activateButton("#dynamic-buttons", effectiveSubButton);
+     const dynamicButtons = document.getElementById("dynamic-buttons");
+    if (Array.isArray(config.buttonSet)) {
+      dynamicButtons.innerHTML = "";
+    
+      config.buttonSet.forEach(({ label, type, svg }) => {
+        // ✅ Use required tooltip container class
+        const wrapper = document.createElement("div");
+        wrapper.className = "tooltip-container";  // 👈 KEY FIX
+    
+        // 🔹 Inject SVG or fallback to label
+        if (svg) {
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = svg.trim();
+          const svgEl = tempDiv.firstChild;
+          svgEl.classList.add("sub-button-svg");
+          wrapper.appendChild(svgEl);
+        } else {
+          const fallbackBtn = document.createElement("button");
+          fallbackBtn.classList.add("triangle-button");
+          fallbackBtn.textContent = label;
+          wrapper.appendChild(fallbackBtn);
         }
+    
+        // 🔹 Tooltip span (now styled correctly)
+        const tooltip = document.createElement("span");
+        tooltip.className = "tooltip-text";
+        tooltip.textContent = label;
+        wrapper.appendChild(tooltip);
+    
+        // 🔹 Click handler
+        wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
+    
+        dynamicButtons.appendChild(wrapper);
+      });
+    
+      dynamicButtons.style.display = "block";
     } else {
-        dynamicButtonsContainer.style.display = "none"; // Hide if no buttons
+      dynamicButtons.style.display = "none";
     }
 }
 
