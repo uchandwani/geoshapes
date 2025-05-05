@@ -730,9 +730,42 @@ export  const functionalityConfig = {
           },
           
          buttonSet: [
-                { label: "sin²θ + cos²θ = 1", type: "sin" },
-                { label: "1 + tan²θ = sec²θ", type: "cos" },
-                { label: "cot²θ + 1 = cosec²θ", type: "tan" },
+
+            {
+                label: "sin\u00B2\u03B8 + cos\u00B2\u03B8 = 1",
+                type: "sin",
+                svg: `
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="blue" fill="none" stroke-width="4"/>
+                  <line x1="50" y1="50" x2="90" y2="50" stroke="black" stroke-width="4"/>
+                  <line x1="90" y1="50" x2="50" y2="10" stroke="black" stroke-width="4"/>
+                  <line x1="50" y1="10" x2="50" y2="50" stroke="black" stroke-width="4"/>
+                  </svg>
+                      `
+                  },
+                  {
+                label: "1 + tan\u00B2\u03B8 = sec\u00B2\u03B8",
+                type: "cos",
+                svg: `
+                    <svg width="24" height="24" viewBox="0 0 100 100">
+                    <line x1="10" y1="90" x2="90" y2="90" stroke="black" stroke-width="4"/>
+                    <line x1="90" y1="90" x2="90" y2="10" stroke="black" stroke-width="4"/>
+                    <line x1="10" y1="90" x2="90" y2="10" stroke="red" stroke-width="4"/>
+                    </svg>
+                        `
+                    },
+                 {
+                label:"cot\u00B2\u03B8 + 1 = cosec\u00B2\u03B8",
+                type: "tan",
+                svg: `
+                   <svg width="24" height="24" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="black" fill="none" stroke-width="4"/>
+                    <line x1="10" y1="90" x2="90" y2="10" stroke="green" stroke-width="4"/>
+                    <line x1="50" y1="50" x2="50" y2="5" stroke="black" stroke-width="4"/>
+                    </svg>
+                        `
+                    },    
+                               
             ],
        
         leftSidebarContent: `
