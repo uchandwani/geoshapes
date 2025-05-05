@@ -21,6 +21,7 @@ export class Protractor extends Shape {
         this.previousMousePos = null;
         this.angleOffset = 0;
         this.wasSnapped = false; // ✅ Important missing line
+        this.snappingEnabled = true;
     }
     
 
@@ -35,10 +36,7 @@ export class Protractor extends Shape {
 
         this.center.draw(ctx);
 
-        /*  if (!this.rotationControls) {
-            this.addRotationControls();
-        } */
-       
+            
     }
 
            addRotationControls() {
@@ -90,6 +88,28 @@ export class Protractor extends Shape {
             this.updateRotationControlsPosition(); // Keep buttons positioned
             canvasManager.render(); // ✅ Redraw canvas and protractor
         }
+
+        drawSnapToggleButton(ctx) {
+            const cx = this.center.x;
+            const cy = this.center.y + this.radius + 30; // position below protractor
+            const radius = 12;
+        
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = this.snappingEnabled ? '#4CAF50' : '#aaa';
+            ctx.fill();
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = '14px sans-serif';
+            ctx.fillText(this.snappingEnabled ? '🧲' : '⛔', cx, cy + 1);
+        
+            this._snapButton = { x: cx, y: cy, r: radius };
+        }
+        
         
       
 
@@ -360,6 +380,8 @@ drawCanvasButtons(ctx) {
 
         this._canvasButtons.push({ x, y, w: btnSize, h: btnSize, delta });
     });
+    this.drawSnapToggleButton(ctx);
+
 }
 
 
