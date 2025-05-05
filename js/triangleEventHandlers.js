@@ -100,6 +100,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
     triangle.setEnableDrag(enableDrag);
     triangle.setShowMidpoints(showMidpoints);
     triangle.setShowMeasurements(showMeasurements);
+    triangle.setShowLabels(true); // ✅ Enable vertex labels
     canvasManager.addShape(triangle);
   });
 }
