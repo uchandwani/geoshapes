@@ -635,12 +635,8 @@ function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, isAltPressed) 
     protractor.drag(
         dx,
         dy,
-        currentPageFeatures.enableProtractorSnapping,
-        canvasManager.shapes,
-        isAltPressed,                     // ✅ Use persisted value
-        { x: mouseX, y: mouseY },
-        canvasManager.canvas
-    );
+        canvasManager.shapes
+     );
 
     console.log("✋ Protractor dragged.");
 }
