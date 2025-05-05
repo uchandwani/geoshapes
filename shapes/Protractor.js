@@ -589,6 +589,20 @@ isPointInside(x, y) {
         }
     }
 
+    if (dist <= this._snapButton.r) {
+        this.snappingEnabled = !this.snappingEnabled;
+        console.log("🧲 Snapping toggled to:", this.snappingEnabled);
+        canvasManager.render();
+    
+        // Prevent further dragging logic
+        this.draggingEdge = false;
+        this.draggingCenter = false;
+        this.pendingRotation = null;
+    
+        return true; // Very important
+    }
+    
+
     const distance = Math.hypot(x - this.center.x, y - this.center.y);
     if (Math.abs(distance - this.radius) <= 10) {
         this.draggingEdge = true;
@@ -605,17 +619,30 @@ isPointInside(x, y) {
 
  
 handleMouseUp() {
-        console.log("🖐 Mouse Up event");
-        this.draggingEdge = false;
-        this.draggingCenter = false;
-    
-        if (this.pendingRotation != null) {
-            console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
-            this.rotateByDegrees(this.pendingRotation);
-            this.pendingRotation = null; // Reset
-            canvasManager.render();  // Redraw the canvas
-        }
+    console.log("🖐 Mouse Up event");
+
+    // Reset dragging states in all cases
+    this.draggingEdge = false;
+    this.draggingCenter = false;
+
+    // 🧲 Apply rotation if any
+    if (this.pendingRotation != null) {
+        console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
+        this.rotateByDegrees(this.pendingRotation);
+        this.pendingRotation = null;
+        canvasManager.render();
+        return; // ✅ Done — don’t allow further action
     }
+
+    // 🧲 Edge case: ensure no phantom dragging was triggered by snap toggle
+    if (!this.draggingEdge && !this.draggingCenter) {
+        console.log("❎ No dragging active — likely a snap toggle click");
+        return;
+    }
+
+    // ✋ Other drag end logic (if needed) can go here...
+}
+
     
   
 getPointsForDragging() {
