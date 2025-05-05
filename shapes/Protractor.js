@@ -461,6 +461,8 @@ drawModern(ctx) {
 
     drag(dx, dy, enableSnapping = false, geoshapes = [], isAltPressed = false) {
         if (!this.center) return;
+
+        console.log ("The key values are  enableSanpping, isAltPressed, geoshapes.length are ", enableSnapping,isAltPressed,geoshapes.length);
     
         if (enableSnapping && isAltPressed && geoshapes.length > 0) {
 
