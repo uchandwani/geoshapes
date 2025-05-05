@@ -584,27 +584,25 @@ canvas.addEventListener('mouseup', (e) => {
         break;
 
         case 'Protractor':
-            
-                console.log("🖐 Mouse Up event");
-            
-                // Reset dragging flags regardless
-                this.draggingEdge = false;
-                this.draggingCenter = false;
-                this.isCenterDragging = false;
-                this.draggingPoint = null;
-            
-                // Apply any pending rotation
-                if (this.pendingRotation != null) {
-                    console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
-                    this.rotateByDegrees(this.pendingRotation);
-                    this.pendingRotation = null;
-                    canvasManager.render();
-                }
-            
-        console.log("🖱️ Mouse up: Stopped Protractor movement.");
-        break;
-
-
+            console.log("🖐 Mouse Up event");
+        
+            // Reset dragging flags on the selected Protractor
+            selectedShape.draggingEdge = false;
+            selectedShape.draggingCenter = false;
+            selectedShape.isCenterDragging = false;
+            selectedShape.draggingPoint = null;
+        
+            // Apply pending rotation if set
+            if (selectedShape.pendingRotation != null) {
+                console.log(`⏳ Applying pending rotation: ${selectedShape.pendingRotation}°`);
+                selectedShape.rotateByDegrees(selectedShape.pendingRotation);
+                selectedShape.pendingRotation = null;
+                canvasManager.render();
+            }
+        
+            console.log("🖱️ Mouse up: Stopped Protractor movement.");
+            break;
+     
 
         case 'Compass':
             console.log("Mouse up on Compass. Finalizing changes.");
