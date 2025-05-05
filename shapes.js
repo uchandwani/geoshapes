@@ -25,6 +25,8 @@ export const allshapes = {
 
 // Track if Alt key is pressed
 let isAltPressed = false;
+let isAltPressedDuringDrag = false;
+
 
 window.addEventListener("keydown", (e) => {
     if (e.key === "Alt") isAltPressed = true;
@@ -265,7 +267,7 @@ export function generatePointLabel() {
 canvas.addEventListener('mousedown', (e) => {
     const { offsetX, offsetY } = e;
 
-    
+    isAltPressedDuringDrag = e.altKey; // ✅ capture ALT status
 
     if (mode === 'modify') {
         // Detect shape under the cursor
@@ -451,7 +453,7 @@ canvas.addEventListener('mousemove', (e) => {
                 selectedShape.drag(dx, dy);
                 break;
             case 'Protractor':
-                handleProtractorMove(selectedShape, dx, dy, offsetX, offsetY, e);
+                handleProtractorMove(selectedShape, dx, dy, offsetX, offsetY, isAltPressedDuringDrag);
                 break;
 
             case 'Circle':
@@ -623,26 +625,26 @@ function determineLeg(x, y, shape) {
 
 // Specific handlers for different shapes
 
-function handleProtractorMove(protractor, dx, dy, event, mouseX, mouseY) {
+function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, isAltPressed) {
     if (!protractor) return;
-    console.log("🔍 canvasManager in drag handler:", canvasManager);
-    console.log("📦 canvasManager.shapes in drag handler:", canvasManager?.shapes);
 
+    console.log("🔍 canvasManager in drag handler:", canvasManager);
     console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
-    
-    console.log("The canvas shapes are :", CanvasManager.shapes);
+    console.log("🛑 ALT Key Pressed (persisted):", isAltPressed);
+
     protractor.drag(
         dx,
         dy,
         currentPageFeatures.enableProtractorSnapping,
         canvasManager.shapes,
-        event.altKey,                             // ⬅️ ALT key (for unsnapping)
-        { x: mouseX, y: mouseY },                  // ⬅️ current mouse position
-        canvasManager.canvas                      // ⬅️ pass the canvas here!
+        isAltPressed,                     // ✅ Use persisted value
+        { x: mouseX, y: mouseY },
+        canvasManager.canvas
     );
 
     console.log("✋ Protractor dragged.");
 }
+
 
 
 
