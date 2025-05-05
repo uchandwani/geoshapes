@@ -665,65 +665,57 @@ export  const functionalityConfig = {
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
            
-        points: [
-            { x: 700, y: 500, label: "E", color: "black", radius: 5},
-            { x: 100, y: 600, label: "F", color: "black", radius: 4, type: 'sin' },
-            { x: 300, y: 600, label: "F", color: "black", radius: 5, type: 'cos' },
-
-            { x: 340, y: 600, label: "F", color: "black", radius: 4, type: 'tan' },
-      
+          points: [
+            { x: 620, y: 400, label: "E", color: "black", radius: 5 },
+            { x: 20,  y: 500, label: "F", color: "black", radius: 4, type: 'sin' },
+            { x: 220, y: 500, label: "F", color: "black", radius: 5, type: 'cos' },
+            { x: 260, y: 500, label: "F", color: "black", radius: 4, type: 'tan' },
         ],
-
-       lines: [
-                // Parallel lines
-                { endA: { x: 600, y: 500 }, endB: { x: 700, y: 500 }, type: "parallel",color: "blue", enableDrag: false  },
-
-                ],
-
-        triangles: [
-                {   type:'sin',
-                   
-                vertices: [
-                    { x: 200, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 400, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-                
-               
-                {   type:'cos',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 300, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,             
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-
-                {   type:'tan',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 200, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,             
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-            ]
         
-        },
+        lines: [
+            // Parallel lines
+            { endA: { x: 520, y: 400 }, endB: { x: 620, y: 400 }, type: "parallel", color: "blue", enableDrag: false },
+        ],
+        
+        triangles: [
+            {
+                type: 'sin',
+                vertices: [
+                    { x: 120, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 320, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'cos',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 220, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'tan',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 120, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+        ]
+      },
          buttonSet: [
                  {
     type: "sin",
@@ -1045,63 +1037,54 @@ angleSumProperties: {
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
            
-        points: [
-            { x: 700, y: 500, label: "E", color: "black", radius: 5},
-            
-      
+          points: [
+            { x: 620, y: 400, label: "E", color: "black", radius: 5 },
         ],
-
-       lines: [
-                // Parallel lines
-                { endA: { x: 600, y: 500 }, endB: { x: 700, y: 500 }, type: "parallel",color: "blue", enableDrag:false   },
-
-                ],
-
-        triangles: [
-                {   type:'sin',
-                   
-                vertices: [
-                    { x: 200, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 400, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                              
-                showMidpoints: false,
-                showMeasurements: false,
-                enableDrag:false,
-                },
-                
-               
-                {   type:'cos',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 300, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-
-                {   type:'tan',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 200, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-            ]
         
-        },
+        lines: [
+            // Parallel lines
+            { endA: { x: 520, y: 400 }, endB: { x: 620, y: 400 }, type: "parallel", color: "blue", enableDrag: false },
+        ],
+        
+        triangles: [
+            {
+                type: 'sin',
+                vertices: [
+                    { x: 120, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 320, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'cos',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 220, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'tan',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 120, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+        ]
+      },       
          buttonSet: [
                  {
     type: "sin",
