@@ -188,48 +188,50 @@ export  const functionalityConfig = {
         canvasConfig: {
             
            
-            points: [
-                { x: 445, y: 200, label: "A", color: "red", radius: 5},
-                { x: 200, y: 200, label: "M", color: "red", radius: 5},
-                { x: 620, y: 200, label: "N", color: "red", radius: 5},
+          points: [
+            { x: 345, y: 100, label: "A", color: "red", radius: 5 },
+            { x: 100, y: 100, label: "M", color: "red", radius: 5 },
+            { x: 520, y: 100, label: "N", color: "red", radius: 5 },
+          
+            { x: 40, y: 320, label: "P", color: "red", radius: 5 },
+          
+            { x: 330, y: 320, label: "D", color: "red", radius: 5 },
+            { x: 275, y: 320, label: "B", color: "red", radius: 5 },
+            { x: 455, y: 320, label: "F", color: "red", radius: 5 },
+            { x: 600, y: 320, label: "Q", color: "red", radius: 5 },
+          
+            { x: 250, y: 400, label: "C", color: "red", radius: 5 },
+            { x: 325, y: 400, label: "E", color: "red", radius: 5 },
+            { x: 496, y: 400, label: "G", color: "red", radius: 5 },
+          
+            { x: 100, y: 400, label: "S", color: "red", radius: 5 },
+            { x: 600, y: 400, label: "T", color: "red", radius: 5 },
+          
+            { x: 225, y: 480, label: "W", color: "red", radius: 5 },
+            { x: 322, y: 480, label: "V", color: "red", radius: 5 },
+            { x: 540, y: 480, label: "U", color: "red", radius: 5 },
+          ],
+          
 
-                { x: 140, y: 420, label: "P", color: "red", radius: 5},
-               
-                { x: 430, y: 420, label: "D", color: "red", radius: 5},
-                { x: 375, y: 420, label: "B", color: "red", radius: 5},
-                { x: 555, y: 420, label: "F", color: "red", radius: 5},
-                { x: 700, y: 420, label: "Q", color: "red", radius: 5},
+        // Lines drawn without labels
+        lines: [
+            // Parallel lines
+            // Parallel lines
+            { endA: { x: 40, y: 100 }, endB: { x: 600, y: 100 }, type: "parallel", color: "green", enableDrag: false },
+            { endA: { x: 40, y: 320 }, endB: { x: 600, y: 320 }, type: "parallel", color: "green", enableDrag: false },
 
-                { x: 350, y: 500, label: "C", color: "red", radius: 5},
-                { x: 425, y: 500, label: "E", color: "red", radius: 5},
-                { x: 596    , y: 500, label: "G", color: "red", radius: 5},
 
-                { x: 200, y: 500, label: "S", color: "red", radius: 5},
-                { x: 700, y: 500, label: "T", color: "red", radius: 5},
-                
-                { x: 325, y: 580, label: "W", color: "red", radius: 5},
-                { x: 422, y: 580, label: "V", color: "red", radius: 5},
-                { x: 640, y: 580, label: "U", color: "red", radius: 5},
-            ],
+         // Transversals
+        { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 350, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 365, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
-            // Lines drawn without labels
-            lines: [
-                // Parallel lines
-                { endA: { x: 100, y: 200 }, endB: { x: 700, y: 200 }, type: "parallel",color: "green", enableDrag:false  },
-             
-                { endA: { x: 140, y: 420 }, endB: { x: 700, y: 420 }, type: "parallel",color: "green",enableDrag:false   },
+        // Connecting lines
+        { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
 
-                // Transversals
-                { endA: { x: 405, y: 120 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 450, y: 100 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 475, y: 100 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false  },
 
-                // Connecting lines
-               
-                { endA: { x: 140, y: 500 }, endB: { x: 700, y: 500 }, type: "connecting", color: "green" ,enableDrag:false },
-
-               
-            ]
+           
+        ]
         },
         buttonSet: [
                 {
