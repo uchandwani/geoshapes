@@ -103,7 +103,7 @@ function drawShapes(canvasConfig, buttonType = null) {
 }
 
 function drawPoints(canvasConfig, buttonType = null) {
-    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = true }) => {
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = false }) => {
         if (!type || type === buttonType) {
             const point = new Point(x, y, label, color, radius);
             point.setEnableDrag(enableDrag); // ✅ Control dragging based on config
@@ -116,7 +116,7 @@ function drawPoints(canvasConfig, buttonType = null) {
 
 function drawLines(canvasConfig) {
     if (!canvasConfig.lines) return;
-    canvasConfig.lines.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
+    canvasConfig.lines.forEach(({ endA, endB, color = "black", enableDrag = false }) => {
         if (endA && endB) {
             const line = new Line(endA, endB, color);
             line.setEnableDrag?.(enableDrag); // ✅ Use individual setting
@@ -129,7 +129,7 @@ function drawCircle(canvasConfig) {
     if (!canvasConfig.circle) return;
     const [center, radius] = canvasConfig.circle;
     const circle = new Circle(center, radius);
-    const enableDrag = canvasConfig.enableDrag ?? true;
+    const enableDrag = canvasConfig.enableDrag ?? false;
     circle.setEnableDrag?.(enableDrag);
     canvasManager.addShape(circle);
 }
@@ -141,7 +141,7 @@ function drawTriangles(canvasConfig, buttonType = null) {
         ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
         : canvasConfig.triangles;
 
-    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = true }) => {
+    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = false }) => {
         if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
         const triangle = new Triangle(vertexA, vertexB, vertexC);
 
