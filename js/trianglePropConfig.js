@@ -72,11 +72,36 @@ export  const functionalityConfig = {
 
     },
     
-    buttonSet: [
-                { label: "regular", type: "sin" },
-                { label: "edge", type: "cos" },
-                
-            ],
+        buttonSet: [
+
+                {
+                    label: "Regular",
+                    type: "sin",
+                    svg: `
+                     <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="48" stroke="black" fill="none" stroke-width="2" />
+                        <line x1="10" y1="90" x2="90" y2="90" stroke="blue" stroke-width="2"/>
+                        <line x1="10" y1="90" x2="30" y2="20" stroke="blue" stroke-width="2"/>
+                        <line x1="30" y1="20" x2="70" y2="40" stroke="blue" stroke-width="2"/>
+                        <line x1="70" y1="40" x2="90" y2="90" stroke="blue" stroke-width="2"/>
+                    </svg>
+                                            `
+                      },
+                      {
+                    label: "Edge",
+                    type: "cos",
+                    svg: `
+                        <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="48" stroke="black" fill="none" stroke-width="2" />
+                        <line x1="10" y1="90" x2="10" y2="10" stroke="red" stroke-width="2"/>
+                        <line x1="10" y1="10" x2="90" y2="10" stroke="red" stroke-width="2"/>
+                        <line x1="10" y1="90" x2="90" y2="10" stroke="blue" stroke-width="2"/>
+                    </svg>
+                            `
+                        },
+                     
+                                   
+                ],
 
         leftSidebarContent: `
 
