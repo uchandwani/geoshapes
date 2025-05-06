@@ -3,33 +3,56 @@ import { Point } from './Points.js';
 import {canvasManager} from './CanvasManager.js';
 
 export class Divider extends Shape {
-constructor(pivotX, pivotY){
-    super();
-    this.type = 'divider';
-    this.pivot = { x: pivotX, y: pivotY };
-    this.leg1 = { x: pivotX - 50, y: pivotY + 100 };
-    this.leg2 = { x: pivotX + 50, y: pivotY + 100 };
-    this.screw = { x: pivotX, y: pivotY + 20 };
-    this.ringRadius = 10;
-    this.dragging = null;
-    this.rotationControlsInitialized = false;
-    this.pivotDraggable = false; // new flag to allow drag when pivot is clicked
+    constructor(pivotX, pivotY) {
+        super();
+        this.type = 'divider';
+        this.pivot = { x: pivotX, y: pivotY };
+        this.leg1 = { x: pivotX - 50, y: pivotY + 100 };
+        this.leg2 = { x: pivotX + 50, y: pivotY + 100 };
+        this.screw = { x: pivotX, y: pivotY + 20 };
+        this.ringRadius = 10;
+        this.dragging = null;
+        this.rotationControlsInitialized = false;
+        this.pivotDraggable = false;
+        this.snappingEnabled = false;
+    
+        this.buttons = {
+            rotate: {
+                minus1: this.createButton('−1°', () => this.handleRotation(-1)),
+                minus5: this.createButton('−5°', () => this.handleRotation(-5)),
+                plus1: this.createButton('+1°', () => this.handleRotation(1)),
+                plus5: this.createButton('+5°', () => this.handleRotation(5)),
+            },
+            snapToggle: this.createSnapToggleButton(),
+        };
+    
+        this.updateButtonPositions();
+    }
+    
+    createSnapToggleButton() {
+        const btn = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        btn.setAttribute("width", "24");
+        btn.setAttribute("height", "24");
+        btn.setAttribute("viewBox", "0 0 24 24");
+        btn.style.position = 'absolute';
+        btn.style.cursor = 'pointer';
+        btn.innerHTML = `
+          <circle cx="12" cy="12" r="10" stroke="#1E88E5" fill="none" stroke-width="2" />
+          <path d="M6 12l4 4 8-8" stroke="#1E88E5" stroke-width="2" fill="none" />
+        `;
+        btn.addEventListener('click', () => {
+            this.snappingEnabled = !this.snappingEnabled;
+            const circle = btn.querySelector('circle');
+            if (circle) {
+                circle.setAttribute("fill", this.snappingEnabled ? '#cce0ff' : 'none');
+            }
+            console.log(`📐 Divider snapping ${this.snappingEnabled ? 'enabled' : 'disabled'}`);
+        });
+        document.body.appendChild(btn);
+        return btn;
+    }
 
-
-    // Initialize buttons
-    this.buttons = {
-        rotate: {
-            minus1: this.createButton('−1°', () => this.handleRotation(-1)),
-            minus5: this.createButton('−5°', () => this.handleRotation(-5)),
-            plus1: this.createButton('+1°', () => this.handleRotation(1)),
-            plus5: this.createButton('+5°', () => this.handleRotation(5)),
-        },
-    };
-
-    this.updateButtonPositions(); // Position buttons initially
-}
-
-
+    
 drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
     if (!ctx) {
         console.error("❌ drag(): Canvas context is undefined!");
@@ -124,34 +147,22 @@ rotatePoint(point, pivot, angle) {
         };
     }
 
-    updateRotationControls() {
-        const canvasRect = document.getElementById('canvas').getBoundingClientRect();  
-        const scrollX = window.scrollX;
-        const scrollY = window.scrollY;
-      
-        const offsetX = canvasRect.left + scrollX;
-        const offsetY = canvasRect.top + scrollY;
-      
-        const setPosition = (button, x, y) => {
-          button.style.left = `${x + offsetX}px`;
-          button.style.top = `${y + offsetY}px`;
+updateRotationControls() {
+        const canvasRect = document.querySelector('canvas').getBoundingClientRect();
+        const offsetX = canvasRect.left;
+        const offsetY = canvasRect.top;
+          const setPosition = (button, x, y) => {
+            button.style.left = `${x + offsetX}px`;
+            button.style.top = `${y + offsetY}px`;
         };
-      
         const offset = 10;
-      
         setPosition(this.buttons.rotate.minus1, this.pivot.x - offset - 40, this.pivot.y - offset);
         setPosition(this.buttons.rotate.minus5, this.pivot.x - offset - 40, this.pivot.y - offset + 30);
-        setPosition(this.buttons.rotate.plus1,  this.pivot.x + offset, this.pivot.y - offset);
-        setPosition(this.buttons.rotate.plus5,  this.pivot.x + offset, this.pivot.y - offset + 30);
-      }
-      
-  
-
-
-
-
-
-
+        setPosition(this.buttons.rotate.plus1, this.pivot.x + offset, this.pivot.y - offset);
+        setPosition(this.buttons.rotate.plus5, this.pivot.x + offset, this.pivot.y - offset + 30);
+        setPosition(this.buttons.snapToggle, this.pivot.x - 12, this.pivot.y - 60);
+    }
+   
 constrainToCanvas(canvasWidth, canvasHeight) {
         const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -415,15 +426,17 @@ rotatePointAroundPivot(point, angle) {
     }
 
     removeRotationControls() {
-    Object.values(this.buttons.rotate).forEach((button) => {
-        if (button && button.parentNode) {
-            button.parentNode.removeChild(button);
+        Object.values(this.buttons.rotate).forEach((button) => {
+            if (button && button.parentNode) {
+                button.parentNode.removeChild(button);
+            }
+        });
+        if (this.buttons.snapToggle && this.buttons.snapToggle.parentNode) {
+            this.buttons.snapToggle.parentNode.removeChild(this.buttons.snapToggle);
         }
-    });
-    this.rotationControlsInitialized = false;
-    this.pivotDraggable = false; // new flag to allow drag when pivot is clicked
-
-}
+        this.rotationControlsInitialized = false;
+        this.pivotDraggable = false;
+    }
 
 isNearPivot(x, y) {
     const distance = Math.hypot(x - this.pivot.x, y - this.pivot.y);
