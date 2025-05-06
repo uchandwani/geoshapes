@@ -192,9 +192,9 @@ export class Triangle extends Shape {
         this.midpoints.forEach((midpoint) => {
             debugger;
             midpoint.draw(ctx);
-            ctx.fillStyle = 'black';
-            ctx.font = '12px Arial';
-            ctx.fillText(midpoint.label, midpoint.x + 5, midpoint.y - 5);
+         //   ctx.fillStyle = 'black';
+         //   ctx.font = '12px Arial';
+         //   ctx.fillText(midpoint.label, midpoint.x + 5, midpoint.y - 5);
         });
     }
 
