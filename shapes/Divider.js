@@ -325,38 +325,6 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     return false;
 }
 
-    
-function snapPointToNearestCandidate(targetPoint, shapes) {
-    let closest = null;
-    let minDistance = Infinity;
-
-    shapes.forEach((shape) => {
-        if (shape instanceof Point) {
-            const distance = Math.hypot(targetPoint.x - shape.x, targetPoint.y - shape.y);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closest = shape;
-            }
-        }
-
-        if (shape.constructor.name === 'Triangle' && shape.points?.length === 3) {
-            shape.points.forEach((vertex) => {
-                const distance = Math.hypot(targetPoint.x - vertex.x, targetPoint.y - vertex.y);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closest = vertex;
-                }
-            });
-        }
-    });
-
-    if (closest && minDistance < 20) {
-        targetPoint.x = closest.x;
-        targetPoint.y = closest.y;
-        console.log("✅ Snapped to:", closest.label || '(unnamed point)', closest);
-    }
-}
-
 findSnapCandidate(currentPoint, shapes) {
     let closest = null;
     let minDistance = Infinity;
