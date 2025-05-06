@@ -284,15 +284,14 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     if (this.rotationButtons && this.rotationButtons.snapToggle && !this.snapToggleListenerSet) {
         this.setupSnapToggleButton(this.rotationButtons.snapToggle);
         this.snapToggleListenerSet = true; // Prevent double binding
-
+    }
 
     // 5️⃣ Optional: call helper to draw rotation arrows
     this.updateRotationControls();
 }
 
-
     
-        startDragging(mouseX, mouseY) {
+    startDragging(mouseX, mouseY) {
             console.log("Divider drag starts");
             if (this.isPointInside({ x: mouseX, y: mouseY })) {
                 if (Math.hypot(this.pivot.x - mouseX, this.pivot.y - mouseY) <= 10) {
