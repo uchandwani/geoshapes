@@ -34,7 +34,8 @@ export class Divider extends Shape {
           this.snappingEnabled = !this.snappingEnabled;
           console.log(this.snappingEnabled ? "🔁 Snap Enabled" : "⛔ Snap Disabled");
         });
-
+    }
+    
     getSnapToggleSVGMarkup() {
         const fillColor = this.snappingEnabled ? '#cce0ff' : 'none';
         return `
