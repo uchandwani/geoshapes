@@ -35,7 +35,7 @@ export class Divider extends Shape {
           console.log(this.snappingEnabled ? "🔁 Snap Enabled" : "⛔ Snap Disabled");
         });
     }
-    
+
     getSnapToggleSVGMarkup() {
         const fillColor = this.snappingEnabled ? '#cce0ff' : 'none';
         return `
@@ -106,12 +106,16 @@ export class Divider extends Shape {
             const target = this.dragging === 'leg1' ? this.leg1 : this.leg2;
     
             if (this.snappingEnabled && geoshapes.length > 0) {
+                console.log("🧲 Checking for snap - Dragging:", this.dragging, 
+                    "Snap Enabled:", this.snappingEnabled, 
+                    "GeoShapes:", geoshapes?.length);
                 const snapped = this.findSnapCandidate(target, geoshapes);
                 if (snapped) {
                     target.x = snapped.x;
                     target.y = snapped.y;
                     console.log(`✅ Divider ${this.dragging} snapped to`, snapped.label || snapped);
                 } else {
+                    console.log(`🚫 No snap candidate found for Divider ${this.dragging}`);
                     target.x += dx;
                     target.y += dy;
                 }
@@ -396,7 +400,8 @@ findSnapCandidate(currentPoint, shapes) {
             });
         }
     });
-
+    console.log("🔍 Checking candidate:", point.label || point, 
+        "Distance:", distance);
     return minDistance < 20 ? closest : null;
 }
 
