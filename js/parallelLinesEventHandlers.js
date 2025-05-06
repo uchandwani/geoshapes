@@ -74,8 +74,6 @@ console.log("   Sub-button label (from config):", activeSubBtnLabel);
   // ✅ Compose header with dividers only if parts are present
   updateHeaderLabels({
 
- 
-
     title: mainTitle,
     subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
     subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""

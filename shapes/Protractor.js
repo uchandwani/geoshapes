@@ -281,38 +281,42 @@ resize(mouseX, mouseY) {
     
 
 // Function to snap protractor to the nearest vertex
-snapToNearestCandidate(protractor, shapes) {
+function snapDividerLegToNearestPoint(divider, shapes) {
+    if (!divider.draggingLeg) return; // No leg is being dragged
+  
+    const draggedPoint = divider[divider.draggingLeg];
     let closest = null;
     let minDistance = Infinity;
-
+  
     shapes.forEach((shape) => {
-        // Snap to standalone Point objects
-        if (shape instanceof Point) {
-            const distance = Math.hypot(protractor.center.x - shape.x, protractor.center.y - shape.y);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closest = shape;
-            }
+      // Snap to standalone points
+      if (shape instanceof Point) {
+        const dist = Math.hypot(draggedPoint.x - shape.x, draggedPoint.y - shape.y);
+        if (dist < minDistance) {
+          minDistance = dist;
+          closest = shape;
         }
-
-        // Snap to triangle vertices only (not midpoints or extensions)
-        if (shape.constructor.name === 'Triangle' && shape.points?.length === 3) {
-            shape.points.forEach((vertex) => {
-                const distance = Math.hypot(protractor.center.x - vertex.x, protractor.center.y - vertex.y);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closest = vertex;
-                }
-            });
-        }
+      }
+  
+      // Snap to triangle vertices
+      if (shape.constructor.name === 'Triangle' && Array.isArray(shape.points)) {
+        shape.points.forEach((vertex) => {
+          const dist = Math.hypot(draggedPoint.x - vertex.x, draggedPoint.y - vertex.y);
+          if (dist < minDistance) {
+            minDistance = dist;
+            closest = vertex;
+          }
+        });
+      }
     });
-
+  
     if (closest && minDistance < 20) {
-        protractor.center.x = closest.x;
-        protractor.center.y = closest.y;
-        console.log("✅ Protractor snapped to:", closest.label || '(unnamed point)', closest);
+      draggedPoint.x = closest.x;
+      draggedPoint.y = closest.y;
+      console.log(`✅ Divider ${divider.draggingLeg} snapped to:`, closest.label || '(unnamed point)', closest);
     }
-}
+  }
+  
 
 // In your mousemove or drag logic
 
