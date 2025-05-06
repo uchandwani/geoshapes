@@ -29,6 +29,12 @@ export class Divider extends Shape {
         this.updateButtonPositions();
     }
 
+    setupSnapToggleButton(buttonElement) {
+        buttonElement.addEventListener("click", () => {
+          this.snappingEnabled = !this.snappingEnabled;
+          console.log(this.snappingEnabled ? "🔁 Snap Enabled" : "⛔ Snap Disabled");
+        });
+
     getSnapToggleSVGMarkup() {
         const fillColor = this.snappingEnabled ? '#cce0ff' : 'none';
         return `
@@ -72,7 +78,7 @@ export class Divider extends Shape {
         return btn;
     }
     
-    
+     
     
     drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
         if (!ctx) {
