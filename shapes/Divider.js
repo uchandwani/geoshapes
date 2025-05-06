@@ -30,11 +30,18 @@ export class Divider extends Shape {
     }
 
     setupSnapToggleButton(buttonElement) {
+        if (!buttonElement) {
+          console.warn("🚫 Snap toggle button not found.");
+          return;
+        }
+      
+        console.log("✅ Snap toggle button found and listener attached.");
         buttonElement.addEventListener("click", () => {
           this.snappingEnabled = !this.snappingEnabled;
           console.log(this.snappingEnabled ? "🔁 Snap Enabled" : "⛔ Snap Disabled");
         });
-    }
+      }
+      
 
     getSnapToggleSVGMarkup() {
         const fillColor = this.snappingEnabled ? '#cce0ff' : 'none';
