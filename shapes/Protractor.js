@@ -469,50 +469,50 @@ drawModern(ctx) {
      
 
     drag(dx, dy, geoshapes = []) {
-        if (!this.center) return;
-    
-        // First, move the center by dx, dy
-        this.center.x += dx;
-        this.center.y += dy;
-    
-        // Snap only if enabled and geoshapes available
-        const shouldSnap = this.snappingEnabled && geoshapes.length > 0;
-    
-        if (shouldSnap) {
-            let closestPoint = null;
-            let minDistance = Infinity;
-    
-            geoshapes.forEach((shape) => {
-                if (shape instanceof Point) {
-                    const dist = Math.hypot(this.center.x - shape.x, this.center.y - shape.y);
+    if (!this.center) return;
+
+    // First, move the center by dx, dy
+    this.center.x += dx;
+    this.center.y += dy;
+
+    // Snap only if enabled and geoshapes available
+    const shouldSnap = this.snappingEnabled && geoshapes.length > 0;
+
+    if (shouldSnap) {
+        let closestPoint = null;
+        let minDistance = Infinity;
+
+        geoshapes.forEach((shape) => {
+            if (shape instanceof Point) {
+                const dist = Math.hypot(this.center.x - shape.x, this.center.y - shape.y);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    closestPoint = shape;
+                }
+            } else if (shape.constructor.name === 'Triangle') {
+                shape.points?.forEach((vertex) => {
+                    const dist = Math.hypot(this.center.x - vertex.x, this.center.y - vertex.y);
                     if (dist < minDistance) {
                         minDistance = dist;
-                        closestPoint = shape;
+                        closestPoint = vertex;
                     }
-                } else if (shape.constructor.name === 'Triangle') {
-                    shape.points?.forEach((vertex) => {
-                        const dist = Math.hypot(this.center.x - vertex.x, this.center.y - vertex.y);
-                        if (dist < minDistance) {
-                            minDistance = dist;
-                            closestPoint = vertex;
-                        }
-                    });
-                }
-            });
-    
-            if (closestPoint && minDistance < 20) {
-                this.center.x = closestPoint.x;
-                this.center.y = closestPoint.y;
-                console.log("✅ Snapped to closest Point or Triangle Vertex:", closestPoint.label || '(unnamed)');
+                });
             }
-        }
-    
-        // Keep center within canvas bounds
-        if (typeof canvas !== "undefined" && canvas) {
-            this.clampCenterWithinCanvas(canvas);
+        });
+
+        if (closestPoint && minDistance < 20) {
+            this.center.x = closestPoint.x;
+            this.center.y = closestPoint.y;
+            console.log("✅ Snapped to closest Point or Triangle Vertex:", closestPoint.label || '(unnamed)');
         }
     }
-    
+
+    // Keep center within canvas bounds
+    if (typeof canvas !== "undefined" && canvas) {
+        this.clampCenterWithinCanvas(canvas);
+    }
+}
+
         
     
     
