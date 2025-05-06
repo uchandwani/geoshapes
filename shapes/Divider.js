@@ -30,46 +30,55 @@ constructor(pivotX, pivotY){
 }
 
 
-    drag(dx, dy, isShiftKey, ctx, mouseX, mouseY) {
-        
-        if (!ctx) {
+drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
+    if (!ctx) {
         console.error("❌ drag(): Canvas context is undefined!");
         return;
-        }
-        if (isShiftKey) {
-            this.rotateDivider(mouseX, mouseY); 
-             this.updateRotationControls(); 
-        } else if (this.dragging === 'pivot' && this.pivotDraggable) {
-            // Move pivot and both legs
-            this.pivot.x += dx;
-            this.pivot.y += dy;
-            this.screw.x += dx;
-            this.screw.y += dy;
-            this.leg1.x += dx;
-            this.leg1.y += dy;
-            this.leg2.x += dx;
-            this.leg2.y += dy;
-            this.updateRotationControls(); // Update button positions when dragged
-        } else if (this.dragging === 'leg1') {
-            // Adjust only the first leg
-            this.leg1.x += dx;
-            this.leg1.y += dy;
-            this.updateRotationControls(); 
-        } else if (this.dragging === 'leg2') {
-            // Adjust only the second leg
-            this.leg2.x += dx;
-            this.leg2.y += dy;
-        }
-
-        // Enforce canvas boundaries
-        if (ctx && ctx.canvas) {
-            this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
-        } else {
-            console.warn("⚠️ Canvas reference not available; skipping constraint enforcement.");
-            }
-
-        this.updateButtonPositions();
     }
+
+    if (isShiftKey) {
+        this.rotateDivider(mouseX, mouseY);
+        this.updateRotationControls();
+    } else if (this.dragging === 'pivot' && this.pivotDraggable) {
+        // Move pivot and both legs
+        this.pivot.x += dx;
+        this.pivot.y += dy;
+        this.screw.x += dx;
+        this.screw.y += dy;
+        this.leg1.x += dx;
+        this.leg1.y += dy;
+        this.leg2.x += dx;
+        this.leg2.y += dy;
+        this.updateRotationControls();
+    } else if (this.dragging === 'leg1' || this.dragging === 'leg2') {
+        const target = this.dragging === 'leg1' ? this.leg1 : this.leg2;
+
+        // Snapping logic only for legs
+        if (this.snappingEnabled && geoshapes.length > 0) {
+            const snapped = this.findSnapCandidate(target, geoshapes);
+            if (snapped) {
+                target.x = snapped.x;
+                target.y = snapped.y;
+                console.log(`✅ Divider ${this.dragging} snapped to`, snapped.label || snapped);
+            } else {
+                target.x += dx;
+                target.y += dy;
+            }
+        } else {
+            target.x += dx;
+            target.y += dy;
+        }
+
+        this.updateRotationControls();
+    }
+
+    // Keep everything within bounds
+    if (ctx && ctx.canvas) {
+        this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
+    }
+
+    this.updateButtonPositions();
+}
 
    adjustLeg(mouseX, mouseY) {
     if (this.dragging === 'leg1') {
@@ -306,9 +315,63 @@ constrainToCanvas(canvasWidth, canvasHeight) {
 }
 
     
+function snapPointToNearestCandidate(targetPoint, shapes) {
+    let closest = null;
+    let minDistance = Infinity;
 
+    shapes.forEach((shape) => {
+        if (shape instanceof Point) {
+            const distance = Math.hypot(targetPoint.x - shape.x, targetPoint.y - shape.y);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closest = shape;
+            }
+        }
 
+        if (shape.constructor.name === 'Triangle' && shape.points?.length === 3) {
+            shape.points.forEach((vertex) => {
+                const distance = Math.hypot(targetPoint.x - vertex.x, targetPoint.y - vertex.y);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closest = vertex;
+                }
+            });
+        }
+    });
 
+    if (closest && minDistance < 20) {
+        targetPoint.x = closest.x;
+        targetPoint.y = closest.y;
+        console.log("✅ Snapped to:", closest.label || '(unnamed point)', closest);
+    }
+}
+
+findSnapCandidate(currentPoint, shapes) {
+    let closest = null;
+    let minDistance = Infinity;
+
+    shapes.forEach(shape => {
+        if (shape instanceof Point) {
+            const dist = Math.hypot(currentPoint.x - shape.x, currentPoint.y - shape.y);
+            if (dist < minDistance) {
+                minDistance = dist;
+                closest = shape;
+            }
+        }
+
+        if (shape.constructor.name === 'Triangle' && shape.points?.length === 3) {
+            shape.points.forEach(vertex => {
+                const dist = Math.hypot(currentPoint.x - vertex.x, currentPoint.y - vertex.y);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    closest = vertex;
+                }
+            });
+        }
+    });
+
+    return minDistance < 20 ? closest : null;
+}
 
 
 rotateDivider(angle) {
