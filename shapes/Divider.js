@@ -28,6 +28,17 @@ export class Divider extends Shape {
     
         this.updateButtonPositions();
     }
+
+    getSnapToggleSVGMarkup() {
+        const fillColor = this.snappingEnabled ? '#cce0ff' : 'none';
+        return `
+            <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="48" stroke="#1E88E5" fill="${fillColor}" stroke-width="4"/>
+                <path d="M30 50 L45 65 L70 30" stroke="#1E88E5" stroke-width="6" fill="none" />
+                <title>Toggle Snap</title>
+            </svg>
+        `;
+    }
     
     createSnapToggleButton() {
         const btn = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -63,56 +74,55 @@ export class Divider extends Shape {
     
     
     
-drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
-    if (!ctx) {
-        console.error("❌ drag(): Canvas context is undefined!");
-        return;
-    }
-
-    if (isShiftKey) {
-        this.rotateDivider(mouseX, mouseY);
-        this.updateRotationControls();
-    } else if (this.dragging === 'pivot' && this.pivotDraggable) {
-        // Move pivot and both legs
-        this.pivot.x += dx;
-        this.pivot.y += dy;
-        this.screw.x += dx;
-        this.screw.y += dy;
-        this.leg1.x += dx;
-        this.leg1.y += dy;
-        this.leg2.x += dx;
-        this.leg2.y += dy;
-        this.updateRotationControls();
-    } else if (this.dragging === 'leg1' || this.dragging === 'leg2') {
-        const target = this.dragging === 'leg1' ? this.leg1 : this.leg2;
-
-        // Snapping logic only for legs
-        if (this.snappingEnabled && geoshapes.length > 0) {
-            const snapped = this.findSnapCandidate(target, geoshapes);
-            if (snapped) {
-                target.x = snapped.x;
-                target.y = snapped.y;
-                console.log(`✅ Divider ${this.dragging} snapped to`, snapped.label || snapped);
+    drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
+        if (!ctx) {
+            console.error("❌ drag(): Canvas context is undefined!");
+            return;
+        }
+    
+        if (isShiftKey) {
+            this.rotateDivider(mouseX, mouseY);
+            this.updateRotationControls();
+    
+        } else if (this.dragging === 'pivot' && this.pivotDraggable) {
+            this.pivot.x += dx;
+            this.pivot.y += dy;
+            this.screw.x += dx;
+            this.screw.y += dy;
+            this.leg1.x += dx;
+            this.leg1.y += dy;
+            this.leg2.x += dx;
+            this.leg2.y += dy;
+            this.updateRotationControls();
+    
+        } else if (this.dragging === 'leg1' || this.dragging === 'leg2') {
+            const target = this.dragging === 'leg1' ? this.leg1 : this.leg2;
+    
+            if (this.snappingEnabled && geoshapes.length > 0) {
+                const snapped = this.findSnapCandidate(target, geoshapes);
+                if (snapped) {
+                    target.x = snapped.x;
+                    target.y = snapped.y;
+                    console.log(`✅ Divider ${this.dragging} snapped to`, snapped.label || snapped);
+                } else {
+                    target.x += dx;
+                    target.y += dy;
+                }
             } else {
                 target.x += dx;
                 target.y += dy;
             }
-        } else {
-            target.x += dx;
-            target.y += dy;
+    
+            this.updateRotationControls();
         }
-
-        this.updateRotationControls();
+    
+        if (ctx?.canvas) {
+            this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
+        }
+    
+        this.updateButtonPositions();
     }
-
-    // Keep everything within bounds
-    if (ctx && ctx.canvas) {
-        this.constrainToCanvas(ctx.canvas.width, ctx.canvas.height);
-    }
-
-    this.updateButtonPositions();
-}
-
+    
    adjustLeg(mouseX, mouseY) {
     if (this.dragging === 'leg1') {
         const dx = mouseX - this.pivot.x;
@@ -213,6 +223,27 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     ctx.font = '14px Arial';
     ctx.fillStyle = 'black';
     ctx.fillText(`Distance: ${distance.toFixed(0)}`, this.pivot.x, this.pivot.y - 20);
+
+    // 3️⃣.5 Draw snap toggle indicator (canvas-based mimic)
+    ctx.beginPath();
+    ctx.arc(this.pivot.x, this.pivot.y - 40, 14, 0, 2 * Math.PI);
+    ctx.fillStyle = this.snappingEnabled ? '#cce0ff' : 'white';
+    ctx.strokeStyle = '#1E88E5';
+    ctx.lineWidth = 2;
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    // ✔ Draw check mark
+    ctx.beginPath();
+    ctx.moveTo(this.pivot.x - 6, this.pivot.y - 42);
+    ctx.lineTo(this.pivot.x - 2, this.pivot.y - 36);
+    ctx.lineTo(this.pivot.x + 6, this.pivot.y - 46);
+    ctx.strokeStyle = '#1E88E5';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.closePath();
+
 
     // 4️⃣ Draw pivot circle last so color toggle is visible on top
     ctx.beginPath();
@@ -383,6 +414,11 @@ rotateDivider(angle) {
 
 }
 
+isSnapToggleHit(x, y) {
+    const dx = x - this.pivot.x;
+    const dy = y - (this.pivot.y - 40);
+    return Math.hypot(dx, dy) <= 14;
+}
 
 rotatePointAroundPivot(point, angle) {
         const dx = point.x - this.pivot.x;
