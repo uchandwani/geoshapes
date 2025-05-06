@@ -177,12 +177,20 @@ export class Triangle extends Shape {
 
     calculateMidpoints(forceUpdate = false) {
         if (!forceUpdate && this.midpoints.length) return;
+    
         this.midpoints = this.points.map((point, i) => {
             const next = this.points[(i + 1) % 3];
             const label = this.midpointLabels?.[`M${i + 1}`] || `M${i + 1}`;
-            return new Point((point.x + next.x) / 2, (point.y + next.y) / 2, label);
+            const midpoint = new Point((point.x + next.x) / 2, (point.y + next.y) / 2, label);
+            
+            // Disable measurements and enable only label
+            midpoint.showLabel = true;
+            midpoint.showMeasurements = false;
+    
+            return midpoint;
         });
     }
+    
 
     drawMidpoints(ctx) {
         if (!this.showMidpoints) return;
