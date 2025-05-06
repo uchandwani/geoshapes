@@ -93,17 +93,33 @@ function drawTriangles(canvasConfig, buttonType = null) {
     ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
     : canvasConfig.triangles;
 
-  triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = false, enableDrag = false }) => {
-    if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
-    const triangle = new Triangle(vertexA, vertexB, vertexC);
+  triangles.forEach((triangleData) => {
+    const {
+      vertices,
+      vertexA,
+      vertexB,
+      vertexC,
+      labels,
+      midpointLabels,
+      showMidPoints = true,
+      showMeasurements = false,
+      enableDrag = false
+    } = triangleData;
+
+    const [A, B, C] = vertices?.length === 3 ? vertices : [vertexA, vertexB, vertexC];
+
+    const triangle = new Triangle(A, B, C);
     triangle.setVertexLabels(labels);
-    triangle.setEnableDrag(false);
-    triangle.setShowMidpoints(showMidpoints);
-    triangle.setShowMeasurements(false);
-    triangle.setShowLabels(true); // ✅ Enable vertex labels
+    triangle.setMidpointLabels(midpointLabels); // ✅ Now this works
+    triangle.setEnableDrag(enableDrag);
+    triangle.setShowMidpoints(showMidPoints); // ✅ match case to config
+    triangle.setShowMeasurements(showMeasurements);
+    triangle.setShowLabels(true);
+
     canvasManager.addShape(triangle);
   });
 }
+
 
 // 🧠 Sub-button and definition UI updater
 function updateUI(config, functionalityKey, buttonType = null) {
