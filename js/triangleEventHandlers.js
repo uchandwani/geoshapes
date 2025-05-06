@@ -19,6 +19,9 @@ export function switchFunctionality(functionalityKey, buttonType = null) {
       return;
     }
 
+  const effectiveType = buttonType?.type || config.defaultButtonType || null;
+  console.log("🎯 Using subtype:", effectiveType);
+
   const page = location.pathname.split("/").pop();
   const pageTitles = {
   "index.html": "Home",
@@ -39,26 +42,17 @@ const mainTitle = pageTitles[page] || "Math App";
     };
  const subtitleLabel = subtitleMap[functionalityKey] || "";
 
-
-  let activeSubBtnLabel = "";
-  if (config.buttonSet && effectiveType) {
+  
+   
+  
+    // 🧠 Header update
+    
+    let activeSubBtnLabel = "";
+    if (config.buttonSet && effectiveType) {
     const match = config.buttonSet.find(btn => btn.type === effectiveType);
     activeSubBtnLabel = match?.label || "";
   }
-  
-    // Fallback logic to pick first subtype if buttonType is null
-    if (!buttonType && config.buttonSet && config.buttonSet.length > 0) {
-      buttonType = config.buttonSet[0];
-      console.log(`🔁 No buttonType provided. Falling back to default subtype: ${buttonType.type}`);
-    }
-  
-    const effectiveType = buttonType?.type || config.defaultButtonType || null;
-    console.log("🎯 Using subtype:", effectiveType);
-  
-    // 🧠 Header update
-    const mainTitle = pageTitles[page] || "Triangle Theorems";
-    const activeSubBtnLabel = buttonType?.label || (config.buttonSet?.find(btn => btn.type === effectiveType)?.label || "");
-  
+
     updateHeaderLabels({
       title: mainTitle,
       subtitle: `| ${functionalityKey}`,
