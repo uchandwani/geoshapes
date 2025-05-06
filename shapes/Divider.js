@@ -34,8 +34,16 @@ export class Divider extends Shape {
         btn.setAttribute("width", "24");
         btn.setAttribute("height", "24");
         btn.setAttribute("viewBox", "0 0 24 24");
+        btn.setAttribute("title", "Toggle Snap for Divider Legs");
         btn.style.position = 'absolute';
         btn.style.cursor = 'pointer';
+        btn.style.zIndex = 1000;
+        btn.style.background = 'white';
+        btn.style.border = '1px solid #ccc';
+        btn.style.borderRadius = '6px';
+        btn.style.padding = '2px';
+        btn.style.boxShadow = '0 1px 4px rgba(0,0,0,0.2)';
+    
         btn.innerHTML = `
           <circle cx="12" cy="12" r="10" stroke="#1E88E5" fill="none" stroke-width="2" />
           <path d="M6 12l4 4 8-8" stroke="#1E88E5" stroke-width="2" fill="none" />
@@ -48,10 +56,12 @@ export class Divider extends Shape {
             }
             console.log(`📐 Divider snapping ${this.snappingEnabled ? 'enabled' : 'disabled'}`);
         });
+    
         document.body.appendChild(btn);
         return btn;
     }
-
+    
+    
     
 drag(dx, dy, isShiftKey, ctx, mouseX, mouseY, geoshapes = []) {
     if (!ctx) {
