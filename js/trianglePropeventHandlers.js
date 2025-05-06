@@ -109,6 +109,8 @@ function drawCircle(canvasConfig) {
 
     canvasManager.clearAllShapes();
     const circleShape = new Circle(center, radius);
+    circleShape.setEnableDrag(false);  
+    circleShape.setEnableStretch(false); 
     canvasManager.addShape(circleShape);
     canvasManager.render();
 
