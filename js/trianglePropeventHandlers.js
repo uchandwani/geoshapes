@@ -253,6 +253,7 @@ function drawTriangles(canvasConfig, effectiveType) {
         }
 
         const triangle = new Triangle(vertexA, vertexB, vertexC);
+        triangle.setEnableDrag(false); 
         triangle.setVertexLabels(labels);
         triangle.setShowLabels(true);
         triangle.setShowMidpoints(showMidPoints);
