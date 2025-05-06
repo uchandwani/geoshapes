@@ -140,7 +140,7 @@ export  const functionalityConfig = {
       <th>Angle "θ"</th>
       <th title="Perpendicular">P</th>
       <th title="Hypotenuse">H</th>
-      <th title="Sine(θ) = Perpendicular / Hypotenuse">Sin(θ)</th>
+      <th title="Sine(θ) = Perpendicular / Hypotenuse">Sin θ (P/H)</th>
     </tr>
   </thead>
         <tbody style="background-color: #d9e1f2; style="width: 70%">
