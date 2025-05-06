@@ -371,7 +371,7 @@ export  const functionalityConfig = {
                
                 <th title="Base">B</th>
                  <th title="Hypotenuse">H</th>
-                 <th title = "Cosine 0 = Base/ Hypotenuse" > Cosθ (B / H) </th>
+                 <th title = "Cosine θ  = Base/ Hypotenuse" > Cosθ (B / H) </th>
             </tr>
         </thead>
            
@@ -424,7 +424,7 @@ export  const functionalityConfig = {
                
                 <th title="Base">B</th>
                  <th title="Hypotenuse">H</th>
-                <th title = "Cosine 0 = Base/ Hypotenuse" > Cosθ (B / H) </th>
+                <th title = "Cosine θ  = Base/ Hypotenuse" > Cosθ (B / H) </th>
             </tr>
         </thead>
         <tbody style="background-color: #d9e1f2; style="width: 70%">
