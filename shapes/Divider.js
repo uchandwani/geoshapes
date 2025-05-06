@@ -281,6 +281,10 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     ctx.stroke();
     ctx.closePath();
 
+    if (this.rotationButtons && this.rotationButtons.snapToggle && !this.snapToggleListenerSet) {
+        this.setupSnapToggleButton(this.rotationButtons.snapToggle);
+        this.snapToggleListenerSet = true; // Prevent double binding
+
 
     // 5️⃣ Optional: call helper to draw rotation arrows
     this.updateRotationControls();
