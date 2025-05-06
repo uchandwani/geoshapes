@@ -956,7 +956,7 @@ obtuse:
         theoremDefinition: "If the line segment divides any two sides of a triangle in the same ratio, then the line is parallel to the third side.",
          canvasConfig: {
       autoloadShape: "triangle",
-      triangles: triangles: [
+      triangles: [
         {
           type: "right",
           vertices: [
