@@ -18,7 +18,7 @@ export  const functionalityConfig = {
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "acute",
@@ -30,7 +30,7 @@ export  const functionalityConfig = {
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "obtuse",
@@ -42,7 +42,7 @@ export  const functionalityConfig = {
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         }
       ]
     },
@@ -422,7 +422,7 @@ obtuse:
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "acute",
@@ -434,7 +434,7 @@ obtuse:
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "obtuse",
@@ -443,10 +443,14 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
+          labels: { A: "C", B: "E", C: "A" },
+          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: false
+        }
+      ]
     },
-]
-},
-        buttonSet: [
+     buttonSet: [
 
                 {
               label: "Right Angle Triangle",
