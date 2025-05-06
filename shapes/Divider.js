@@ -134,24 +134,25 @@ export class Divider extends Shape {
         this.updateButtonPositions();
     }
     
-   adjustLeg(mouseX, mouseY) {
-    if (this.dragging === 'leg1') {
-        const dx = mouseX - this.pivot.x;
-        const dy = mouseY - this.pivot.y;
-        const length = Math.hypot(dx, dy);
-        const angle = Math.atan2(dy, dx);
-        this.leg1.x = this.pivot.x + length * Math.cos(angle);
-        this.leg1.y = this.pivot.y + length * Math.sin(angle);
-    } else if (this.dragging === 'leg2') {
-        const dx = mouseX - this.pivot.x;
-        const dy = mouseY - this.pivot.y;
-        const length = Math.hypot(dx, dy);
-
-        const angle = Math.atan2(dy, dx);
-        this.leg2.x = this.pivot.x + length * Math.cos(angle);
-        this.leg2.y = this.pivot.y + length * Math.sin(angle);
+    adjustLeg(mouseX, mouseY, geoshapes = []) {
+        const pointToAdjust = this.dragging === 'leg1' ? this.leg1 : this.leg2;
+    
+        let newX = mouseX;
+        let newY = mouseY;
+    
+        if (this.snappingEnabled && Array.isArray(geoshapes)) {
+            const closest = this.findClosestSnapPoint({ x: newX, y: newY }, geoshapes);
+            if (closest && closest.distance < 20) {
+                newX = closest.x;
+                newY = closest.y;
+                console.log("📌 Snapped Divider leg to vertex or point:", closest);
+            }
+        }
+    
+        pointToAdjust.x = newX;
+        pointToAdjust.y = newY;
     }
-}
+    
 
 createButton(label, onClick) {
     const button = document.createElement('button');
