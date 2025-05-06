@@ -130,7 +130,7 @@ export  const functionalityConfig = {
     <table>
 
     <colgroup>
-        <col style="width: 5%;">
+        <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 20%;">
@@ -179,20 +179,21 @@ export  const functionalityConfig = {
             <h2>Table 1</h2>
     <table>
     <colgroup>
-        <col style="width: 5%;">
+        <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
         <thead>
-            <tr>
-                <th>Angle "θ"</th>
-                <th>Perpendicular "P"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Sine of the Angle<br>Sin(θ) = P / H</th>
-            </tr>
-        </thead>
-        <tbody style="background-color: #d9e1f2; style="width: 70%">
+    <tr>
+      <th>Angle "θ"</th>
+      <th title="Perpendicular">P</th>
+      <th title="Hypotenuse">H</th>
+      <th title="Sine(θ) = Perpendicular / Hypotenuse">Sin θ (P/H)</th>
+    </tr>
+  </thead>
+
+      <tbody style="background-color: #d9e1f2; style="width: 70%">
             <tr>
                
                 <td> 0°</td>
@@ -367,11 +368,15 @@ export  const functionalityConfig = {
         <thead>
             <tr>
                 <th>Angle "θ"</th>
-                <th>Base "B"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Cosine of the Angle<br>Cos(θ) = B / H</th>
+               
+                <th title="Base">B</th>
+                 <th title="Hypotenuse">H</th>
+                <th title = Cosine(0)= Base/ Hypotenuse> Cosθ (B / H) </th>
             </tr>
         </thead>
+           
+
+
         <tbody style="background-color: #d9e1f2; style="width: 70%">
            
             <tr>
@@ -416,9 +421,10 @@ export  const functionalityConfig = {
         <thead>
             <tr>
                 <th>Angle "θ"</th>
-                <th>Base "B"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Cosine of the Angle<br>Cos(θ) = B / H</th>
+               
+                <th title="Base">B</th>
+                 <th title="Hypotenuse">H</th>
+                <th title = Cosine(0)= Base/ Hypotenuse> Cosθ (B / H) </th>
             </tr>
         </thead>
         <tbody style="background-color: #d9e1f2; style="width: 70%">
