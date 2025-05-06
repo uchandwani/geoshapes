@@ -336,7 +336,7 @@ export function switchFunctionality(functionalityKey, buttonType) {
     
       const icon = document.getElementById(`${functionalityKey}-button`);
       const subtitleMap = {
-      midSegmentTheorem: "Mid Segment Theorem",
+      SineTheta: "Sine Theta",
       basicProportionalityTheorem: "Basic Proportionately Theorem",
       angleBisectorTheorem: "Angle Bisector Theorem",
       propertiesOfTriangles: "Properties of Triangles"
