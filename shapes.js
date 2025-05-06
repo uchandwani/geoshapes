@@ -495,10 +495,12 @@ canvas.addEventListener('mousemove', (e) => {
                         selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
                         console.log("📌 Dragging Divider Pivot.");
                     } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
-                        if (selectShape.snappingEnabled) {
+                        if (selectedShape.snappingEnabled) {
                             snapDividerToNearestVertex(selectedShape, canvasManager.shapes);
+                          } else {
+                        selectedShape.adjustLeg(offsetX, offsetY,canvasManager.shapes);
+                        console.log(`📏 Adjusting Divider ${selectedShape.dragging}.`);
                           }
-                       console.log(`📏 Adjusting Divider ${selectedShape.dragging}.`);
                     } else {
                         console.log("❌ No dragging action set for Divider.");
                     }
