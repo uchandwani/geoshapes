@@ -422,7 +422,7 @@ obtuse:
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: false
+          showMeasurements: true
         },
         {
           type: "acute",
@@ -434,7 +434,7 @@ obtuse:
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: false
+          showMeasurements: true
         },
         {
           type: "obtuse",
@@ -443,14 +443,10 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-        }
-      ]
     },
-     buttonSet: [
+]
+},
+        buttonSet: [
 
                 {
               label: "Right Angle Triangle",
@@ -960,42 +956,42 @@ obtuse:
         theoremDefinition: "If the line segment divides any two sides of a triangle in the same ratio, then the line is parallel to the third side.",
          canvasConfig: {
       autoloadShape: "triangle",
-      triangles: [
+      triangles: triangles: [
         {
           type: "right",
           vertices: [
-            { x: 220, y: 450 },
-            { x: 620, y: 450 },
-            { x: 420, y: 100 }
+            { x: 200, y: 400 },
+            { x: 600, y: 400 },
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "acute",
           vertices: [
-            { x: 260, y: 480 },
-            { x: 640, y: 470 },
-            { x: 430, y: 160 }
+            { x: 300, y: 400 },
+            { x: 600, y: 400 },
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         },
         {
           type: "obtuse",
           vertices: [
-            { x: 180, y: 480 },
-            { x: 700, y: 470 },
-            { x: 420, y: 120 }
+            { x: 100, y: 400 },
+            { x: 600, y: 400 },
+            { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "E", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
-          showMeasurements: true
+          showMeasurements: false
         }
       ]
     },
