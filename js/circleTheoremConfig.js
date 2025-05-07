@@ -334,7 +334,7 @@ export  const functionalityConfig = {
    
     subtendedAngles: {
         defaultButtonType: 'sin',
-        theoremDefinition: "The angle subtended by an arc at the center is double the angle subtended by the same arc at the circumference. The angles subtended by the same arc on the circumference are equal.The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
+        theoremDefinition: "The angle subtended by an arc at the center is double the angle subtended by the same arc at the circumference. The angles subtended by the same arc on the circumference are equal.",
          canvasConfig: {
       
     "circle": [{ "x": 300, "y": 300 }, 200],
