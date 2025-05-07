@@ -16,7 +16,7 @@ export  const functionalityConfig = {
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
@@ -28,7 +28,7 @@ export  const functionalityConfig = {
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
@@ -40,7 +40,7 @@ export  const functionalityConfig = {
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         }
@@ -430,31 +430,31 @@ obtuse:
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-        },
-        {
-          type: "acute",
-          vertices: [
-            { x: 300, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 100 }
-          ],
-          labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
         {
           type: "obtuse",
           vertices: [
+            { x: 300, y: 400 },
+            { x: 600, y: 400 },
+            { x: 200, y: 100 }
+          ],
+          labels: { A: "C", B: "F", C: "A" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: false
+        },
+        {
+          type: "acute",
+          vertices: [
             { x: 100, y: 400 },
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
     },
@@ -712,7 +712,7 @@ obtuse:
             { x: 420, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
@@ -724,7 +724,7 @@ obtuse:
             { x: 430, y: 160 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
@@ -736,7 +736,7 @@ obtuse:
             { x: 420, y: 120 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         }
@@ -1063,31 +1063,31 @@ obtuse:
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-        },
-        {
-          type: "acute",
-          vertices: [
-            { x: 300, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 100 }
-          ],
-          labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         },
         {
           type: "obtuse",
           vertices: [
+            { x: 300, y: 400 },
+            { x: 600, y: 400 },
+            { x: 200, y: 100 }
+          ],
+          labels: { A: "C", B: "F", C: "A" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
+          showMidPoints: true,
+          showMeasurements: false
+        },
+        {
+          type: "acute",
+          vertices: [
             { x: 100, y: 400 },
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
           labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "G", M2: "D", M3: "B" },
+          midpointLabels: { M1: "E", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
         }
