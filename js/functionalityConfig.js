@@ -701,7 +701,7 @@ obtuse:
             { x: 620, y: 450 },
             { x: 420, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -713,7 +713,7 @@ obtuse:
             { x: 640, y: 470 },
             { x: 430, y: 160 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -725,7 +725,7 @@ obtuse:
             { x: 700, y: 470 },
             { x: 420, y: 120 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -1052,7 +1052,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -1064,7 +1064,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -1076,7 +1076,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
