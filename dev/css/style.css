@@ -1,0 +1,529 @@
+/* ===== Global Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== Container Layout ===== */
+.container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* ===========================
+   Header
+=========================== */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6a9be8;
+  height: 5vh;
+  padding: 0 20px;
+  color: #1E88E5;
+  position: relative;
+}
+
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  margin: 0;
+  color: #1E88E5;
+}
+
+/* ===========================
+   Sidebars
+=========================== */
+.sidebar-container {
+  width: 22vw;               /* 26% of viewport width – matches .sidebar.left */
+  max-width: none;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #f0f8ff;
+  box-sizing: border-box;
+}
+
+.sidebar.left {
+  width: 22vw;
+  padding: 15px;
+  background-color: #f4f4f9;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.sidebar.left h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #1E88E5;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.sidebar.left p,
+.sidebar.left li {
+  margin-bottom: 8px;
+}
+
+.sidebar.left ul {
+  padding-left: 18px;
+  list-style-type: disc;
+}
+
+.sidebar.right {
+  width: 22vw;
+  padding: 15px;
+  background-color: #f4f4f9;
+  border-left: 1px solid #ccc;
+  overflow-y: auto;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===========================
+   Canvas Area
+=========================== */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;  /* 🔧 changed from center */
+  overflow: hidden;
+}
+
+.canvas-scroll-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: block;
+  z-index: 0;
+  position: relative;
+}
+
+#theorem-definition {
+  background-color: #eef5ff;
+  padding: 10px;
+  border-left: 4px solid #3366cc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #3366cc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+#theorem-definition h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+}
+
+#theorem-text {
+  margin: 0;
+}
+
+/* ===========================
+   Left Tool Bar
+=========================== 
+.additional-div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.additional-div .icon-btn {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.additional-div .icon-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+*/
+
+/* ===========================
+   Dynamic SVG Sub-Buttons
+=========================== */
+#left-side-tool-div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: row;           /* ✅ Horizontal layout */
+  gap: 10px;                     /* ✅ Horizontal spacing */
+  padding: 6px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid #1E88E5;
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+#left-side-tool-div .icon-btn:hover {
+  background-color: #dbeaff;               /* Slightly darker on hover */
+}
+
+#left-side-tool-div .icon-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #1E88E5;                          /* Blue stroke */
+  stroke-width: 2;
+}
+
+#left-side-tool-div .icon-btn.active {
+  background-color: #cce0ff;
+  border-color: #0d47a1;
+  box-shadow: 0 0 4px #1E88E5;
+}
+
+
+#dynamic-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 14px;
+  border: 2px solid #1E88E5;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 6px 10px;
+  max-width: fit-content;
+  z-index: 10;
+}
+
+
+#dynamic-buttons .tooltip-container + .tooltip-container {
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.sub-button-svg {
+  width: 24px;
+  height: 24px;
+  stroke: #1E88E5;
+  background-color: #f5f5f5;
+  border: 1px solid rgba(0, 0, 0, 0.1)
+  stroke-width: 3;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.sub-button-svg:hover {
+  transform: scale(1.1);
+}
+
+.sub-button-svg.active {
+  stroke: #0d47a1;
+  stroke-width: 3.5;
+}
+
+/* Tooltip for Sub-Buttons */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: #1E88E5;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+  bottom: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease-in-out;
+  white-space: nowrap;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #1E88E5 transparent;
+}
+
+/* ===========================
+   Right Sidebar Tables
+=========================== */
+#right-sidebar h3 {
+  font-size: 16px;
+  color: #1E88E5;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+#right-sidebar table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 13px;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+#right-sidebar th,
+#right-sidebar td {
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#right-sidebar input[type="text"] {
+  width: 60px;
+  padding: 4px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+#right-sidebar table caption {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+/* ===========================
+   Debug & Visual Tools
+=========================== */
+.size-label {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 10px;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 4px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#left-sidebar, #additional-div, .canvas-wrapper, #right-sidebar {
+  position: relative;
+}
+
+/* ===========================
+   Responsive Breakpoints
+=========================== */
+@media screen and (max-width: 1366px) {
+  .sidebar-container,
+  .sidebar.right {
+    width: 22vw;
+  }
+
+  .additional-div {
+    width: 50px;
+  }
+
+  .sub-button-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  #dynamic-buttons {
+    top: 80px;
+    right: 10px;
+    gap: 12px;
+    padding: 6px;
+  }
+
+  .canvas-container {
+    width: 56vw;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .sidebar.left,
+  .sidebar.right {
+    width: 22vw;
+  }
+
+  .canvas-container {
+    width: 60vw;
+  }
+
+  .additional-div {
+    width: 70px;
+  }
+
+  .sub-button-svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  #dynamic-buttons {
+    top: 100px;
+    right: 40px;
+    gap: 24px;
+    padding: 12px;
+  }
+}
+.size-label {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 10px;
+  color: #666;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 4px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+#left-sidebar, #additional-div, .canvas-wrapper, #right-sidebar {
+  position: relative;
+}
+
+
+.sidebar.left {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  padding-right: 12px;
+}
+
+.sidebar.left h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #1E88E5;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.sidebar.left p,
+.sidebar.left li {
+  margin-bottom: 8px;
+}
+
+.sidebar.left ul {
+  padding-left: 18px;
+  list-style-type: disc;
+}
+
+#right-sidebar h3 {
+  font-size: 16px;
+  color: #1E88E5;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+#right-sidebar table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+#right-sidebar th,
+#right-sidebar td {
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#right-sidebar input[type="text"] {
+  width: 60px;
+  padding: 4px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+#right-sidebar table {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px;
+}
+#right-sidebar table caption {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+}
+

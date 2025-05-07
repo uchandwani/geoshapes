@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shape Drawer</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+    .controls {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+   <script type="module" src="./shapes.js"></script>
+  <div class="controls">
+    <label>
+      Mode:
+      <input type="radio" name="mode" value="create" checked> Create
+      <label>
+      Shape Type:
+      <select id="shapeType">
+        <option value="point">Point</option>
+        <option value="line">Line</option>
+        <option value="circle">Circle</option>
+        <option value="triangle">Triangle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="protractor">Protractor</option>
+        <option value="angle">Angle<option>
+      </select>
+    </label>
+      <input type="radio" name="mode" value="modify"> Modify
+      <input type="radio" name="mode" value="delete"> Delete
+    </label>
+    
+    <button onclick="resetCanvas()">Reset Canvas</button>
+  </div>
+  <canvas id="canvas" width="800" height="600"></canvas>
+   
+</body>
+</html>

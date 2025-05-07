@@ -266,10 +266,15 @@ calculateAngle() {
     }    
 
 isPointInside(x, y) {
-    const distToStart = Math.hypot(this.startPoint.x - x, this.startPoint.y - y);
-    const distToEnd = Math.hypot(this.endPoint.x - x, this.endPoint.y - y);
-    const lineLength = this.getLength();
-
+        if (!this.enableDrag) {
+            console.log("🚫 isPointInside: Dragging is disabled for this line.");
+            return false;
+        }
+    
+        const distToStart = Math.hypot(this.startPoint.x - x, this.startPoint.y - y);
+        const distToEnd = Math.hypot(this.endPoint.x - x, this.endPoint.y - y);
+        const lineLength = this.getLength();
+    
         if (distToStart < 10) {
             this.draggingPoint = this.startPoint; // Start point selected
             return true;
@@ -279,11 +284,11 @@ isPointInside(x, y) {
         } else {
             this.draggingPoint = null; // No specific point selected
         }
-
-    // Check if the click is near the line itself
-    return Math.abs(distToStart + distToEnd - lineLength) < 1;
+    
+        // Check if the click is near the line itself
+        return Math.abs(distToStart + distToEnd - lineLength) < 1;
     }
-
+    
 
 setEnableDrag(enable) {
     this.enableDrag = enable;

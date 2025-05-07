@@ -6,70 +6,109 @@ export  const functionalityConfig = {
         defaultButtonType: 'sin',    
         theoremDefinition: "To Verify that the value of sin θ increases with the increase in θ when 0 ≤ θ ≤ 90⁰",
         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200], 
-             lines: [ {
-                      type: 'cos',
-                      endA: {x:400, y:400},
-                      endB: {x:400, y:200},
-                    },
-                 {
-                      type: 'cos',
-                      endA: {x:400, y:401},
-                      endB: {x:600, y:401},
-                    },
-            ], 
-            triangles: [
-                {
-                    type: 'cos', 
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [5,85], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'A', C: 'E' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'E', C: 'A' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [45, 45],
-                    radius: 200,
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [85,5],
-                    radius: 200,
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                }
-            ]
-        
-    }, buttonSet: [
-                { label: "regular", type: "sin" },
-                { label: "edge", type: "cos" },
-                
+            circle: [{ x: 300, y: 300 }, 200],
+          
+            lines: [
+              {
+                type: 'cos',
+                endA: { x: 300, y: 300 },
+                endB: { x: 300, y: 100 },
+              },
+              {
+                type: 'cos',
+                endA: { x: 300, y: 301 },
+                endB: { x: 500, y: 301 },
+              }
             ],
+          
+            triangles: [
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [5, 85],
+                radius: 200,
+                labels: { A: 'P', B: 'A', C: 'E' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'E', C: 'A' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [45, 45],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [85, 5],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: false
+            }
+        ]
+    
+
+    },
+    
+        buttonSet: [
+
+                {
+                    label: "Regular",
+                    type: "sin",
+                    svg: `
+                     <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                       <circle cx="0" cy="100" r="100" stroke="black" stroke-width="2" fill="none" />
+                        <line x1="0" y1="100" x2="100" y2="100" stroke="black" stroke-width="2" />
+                        <line x1="0" y1="0" x2="0" y2="100" stroke="black" stroke-width="2" />
+                        <line x1="0" y1="100" x2="80" y2="20" stroke="blue" stroke-width="2" />
+                        <line x1="0" y1="100" x2="60" y2="40" stroke="blue" stroke-width="2" />
+                        <line x1="0" y1="100" x2="40" y2="60" stroke="blue" stroke-width="2" />
+                        <line x1="40" y1="60" x2="40" y2="100" stroke="blue" stroke-width="2" />
+                        <line x1="60" y1="40" x2="60" y2="100" stroke="blue" stroke-width="2" />
+                        <line x1="80" y1="20" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                    </svg>
+                                            `
+                      },
+                      {
+                    label: "Edge",
+                    type: "cos",
+                    svg: `
+                        <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                        <circle cx="0" cy="100" r="100" stroke="black" stroke-width="2" fill="none" />
+                        <line x1="0" y1="100" x2="100" y2="100" stroke="red" stroke-width="2" />
+                        <line x1="0" y1="100" x2="0" y2="0" stroke="red" stroke-width="2" />
+                        <line x1="0" y1="100" x2="80" y2="20" stroke="blue" stroke-width="2" />
+                        <line x1="20" y1="100" x2="20" y2="40" stroke="blue" stroke-width="2" />
+                        <line x1="80" y1="20" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                        <line x1="20" y1="40" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                    </svg>
+                            `
+                        },
+                     
+                                   
+                ],
 
         leftSidebarContent: `
 
@@ -123,19 +162,19 @@ export  const functionalityConfig = {
     <table>
 
     <colgroup>
-        <col style="width: 5%;">
+        <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
         <thead>
-            <tr>
-                <th>Angle "θ"</th>
-                <th>Perpendicular "P"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Sine of the Angle<br>Sin(θ) = P / H</th>
-            </tr>
-        </thead>
+    <tr>
+      <th>Angle "θ"</th>
+      <th title="Perpendicular">P</th>
+      <th title="Hypotenuse">H</th>
+      <th title="Sine(θ) = Perpendicular / Hypotenuse">Sin θ (P/H)</th>
+    </tr>
+  </thead>
         <tbody style="background-color: #d9e1f2; style="width: 70%">
            
             <tr>
@@ -172,20 +211,21 @@ export  const functionalityConfig = {
             <h2>Table 1</h2>
     <table>
     <colgroup>
-        <col style="width: 5%;">
+        <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
         <thead>
-            <tr>
-                <th>Angle "θ"</th>
-                <th>Perpendicular "P"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Sine of the Angle<br>Sin(θ) = P / H</th>
-            </tr>
-        </thead>
-        <tbody style="background-color: #d9e1f2; style="width: 70%">
+    <tr>
+      <th>Angle "θ"</th>
+      <th title="Perpendicular">P</th>
+      <th title="Hypotenuse">H</th>
+      <th title="Sine(θ) = Perpendicular / Hypotenuse">Sin θ (P/H)</th>
+    </tr>
+  </thead>
+
+      <tbody style="background-color: #d9e1f2; style="width: 70%">
             <tr>
                
                 <td> 0°</td>
@@ -226,71 +266,106 @@ export  const functionalityConfig = {
         defaultButtonType: 'sin',
         theoremDefinition: "To Verify that the value of cos θ decreases with the increase in θ when 0 ≤ θ ≤ 90⁰",
         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200],
-            lines: [ {
-                      type: 'cos',
-                      endA: {x:400, y:400},
-                      endB: {x:400, y:200},
-                    },
-                 {
-                      type: 'cos',
-                      endA: {x:400, y:401},
-                      endB: {x:600, y:401},
-                    },
-            ], 
+            circle: [{ x: 300, y: 300 }, 200],
+          
+            lines: [
+              {
+                type: 'cos',
+                endA: { x: 300, y: 300 },
+                endB: { x: 300, y: 100 },
+              },
+              {
+                type: 'cos',
+                endA: { x: 300, y: 301 },
+                endB: { x: 500, y: 301 },
+              }
+            ],
+          
             triangles: [
-                {
-                    type: 'cos', 
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [5,85], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'D', C: 'B' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'E', C: 'A' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [45, 45],
-                    radius: 200,
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   
-                    type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                },
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [85,5],
-                    radius: 200,
-                    labels: { A: 'P', B: 'U', C: 'V' },
-                    showMidpoints: false,
-                    setShowMeasurements:false
-                }
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [5, 85],
+                radius: 200,
+                labels: { A: 'P', B: 'D', C: 'B' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'E', C: 'A' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [45, 45],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [85, 5],
+                radius: 200,
+                labels: { A: 'P', B: 'U', C: 'V' },
+                showMidpoints: false,
+                setShowMeasurements: false
+              }
             ]
-        
-    
-        },
-        buttonSet: [
-                { label: "regular", type: "sin" },
-                { label: "edge", type: "cos" },
-                
+          },
+          
+          buttonSet: [
+
+            {
+                label: "Regular",
+                type: "sin",
+                svg: `
+                 <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                   <circle cx="0" cy="100" r="100" stroke="black" stroke-width="2" fill="none" />
+                    <line x1="0" y1="100" x2="100" y2="100" stroke="black" stroke-width="2" />
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="black" stroke-width="2" />
+                    <line x1="0" y1="100" x2="80" y2="20" stroke="blue" stroke-width="2" />
+                    <line x1="0" y1="100" x2="60" y2="40" stroke="blue" stroke-width="2" />
+                    <line x1="0" y1="100" x2="40" y2="60" stroke="blue" stroke-width="2" />
+                    <line x1="40" y1="60" x2="40" y2="100" stroke="blue" stroke-width="2" />
+                    <line x1="60" y1="40" x2="60" y2="100" stroke="blue" stroke-width="2" />
+                    <line x1="80" y1="20" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                </svg>
+                                        `
+                  },
+                  {
+                label: "Edge",
+                type: "cos",
+                svg: `
+                    <svg class="sub-button-svg" width="36" height="36" viewBox="0 0 100 100">
+                    <circle cx="0" cy="100" r="100" stroke="black" stroke-width="2" fill="none" />
+                    <line x1="0" y1="100" x2="100" y2="100" stroke="red" stroke-width="2" />
+                    <line x1="0" y1="100" x2="0" y2="0" stroke="red" stroke-width="2" />
+                    <line x1="0" y1="100" x2="80" y2="20" stroke="blue" stroke-width="2" />
+                    <line x1="20" y1="100" x2="20" y2="40" stroke="blue" stroke-width="2" />
+                    <line x1="80" y1="20" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                    <line x1="20" y1="40" x2="80" y2="100" stroke="blue" stroke-width="2" />
+                </svg>
+                        `
+                    },
+                 
+                               
             ],
         leftSidebarContent: `
 
@@ -357,11 +432,15 @@ export  const functionalityConfig = {
         <thead>
             <tr>
                 <th>Angle "θ"</th>
-                <th>Base "B"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Cosine of the Angle<br>Cos(θ) = B / H</th>
+               
+                <th title="Base">B</th>
+                 <th title="Hypotenuse">H</th>
+                 <th title = "Cosine θ  = Base/ Hypotenuse" > Cosθ (B / H) </th>
             </tr>
         </thead>
+           
+
+
         <tbody style="background-color: #d9e1f2; style="width: 70%">
            
             <tr>
@@ -406,9 +485,10 @@ export  const functionalityConfig = {
         <thead>
             <tr>
                 <th>Angle "θ"</th>
-                <th>Base "B"</th>
-                <th>Hypotenuse "H"</th>
-                <th>Cosine of the Angle<br>Cos(θ) = B / H</th>
+               
+                <th title="Base">B</th>
+                 <th title="Hypotenuse">H</th>
+                <th title = "Cosine θ  = Base/ Hypotenuse" > Cosθ (B / H) </th>
             </tr>
         </thead>
         <tbody style="background-color: #d9e1f2; style="width: 70%">
@@ -447,47 +527,50 @@ export  const functionalityConfig = {
 }},
     trigonoRatios: {
         theoremDefinition: "Trig. Ratios don’t change even if the length of the sides of the triangle changes.",
-         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200], // Circle center and radius
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200], // Circle center and radius
+          
             triangles: [
-                {
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [45, 45], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-                {
-                    vertexA: { x: 400, y: 400 },
-                    angles: [45, 45],
-                    radius: 300,
-                    labels: { A: 'P', B: 'A', C: 'E' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-
-                {
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [60, 30], // Adjacent angles
-                    radius: 200, // Circle radius
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-                {
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 300,
-                    labels: { A: 'P', B: 'V', C: 'W' },
-                    showMidpoints: false,
-                    setShowMeasurements:true
-                },
-              
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [45, 45],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [45, 45],
+                radius: 300,
+                labels: { A: 'P', B: 'A', C: 'E' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 300,
+                labels: { A: 'P', B: 'V', C: 'W' },
+                showMidpoints: false,
+                setShowMeasurements: true
+              }
             ]
-        
-    },
-      
+          },
+          
+                
         leftSidebarContent: `
             
        <h3>Instructions</h3>
@@ -661,61 +744,98 @@ export  const functionalityConfig = {
     trigonoIdentities: {
         defaultButtonType: 'sin',
         theoremDefinition: "Trigono Identities.",
-         canvasConfig: {
-            circle: [{ x: 400, y: 400 }, 200], // Circle center and radius
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200], // Circle center and radius
+          
             triangles: [
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'sin',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                },
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'cos',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                },
-                {   type:'tan',
-                    vertexA: { x: 400, y: 400 }, // Center of the circle
-                    angles: [30, 60], // Adjacent angles
-                    radius: 200, // Circle radius
-                   labels: { A: 'P', B: 'R', C: 'Q' },
-                    showMidpoints: false
-                },
-                
-                {   type:'tan',
-                    vertexA: { x: 400, y: 400 },
-                    angles: [60, 30],
-                    radius: 200,
-                    labels: { A: 'P', B: 'S', C: 'T' },
-                    showMidpoints: false
-                }
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'sin',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'cos',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              },
+              {
+                type: 'tan',
+                vertexA: { x: 300, y: 300 }, // Center of the circle
+                angles: [30, 60],
+                radius: 200,
+                labels: { A: 'P', B: 'R', C: 'Q' },
+                showMidpoints: false
+              },
+              {
+                type: 'tan',
+                vertexA: { x: 300, y: 300 },
+                angles: [60, 30],
+                radius: 200,
+                labels: { A: 'P', B: 'S', C: 'T' },
+                showMidpoints: false
+              }
             ]
-        
-        },
+          },
+          
          buttonSet: [
-                { label: "sin²θ + cos²θ = 1", type: "sin" },
-                { label: "1 + tan²θ = sec²θ", type: "cos" },
-                { label: "cot²θ + 1 = cosec²θ", type: "tan" },
+
+            {
+                label: "sin\u00B2\u03B8 + cos\u00B2\u03B8 = 1",
+                type: "sin",
+                svg: `
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" stroke="blue" fill="none" stroke-width="4"/>
+                  <line x1="50" y1="50" x2="90" y2="50" stroke="black" stroke-width="4"/>
+                  <line x1="90" y1="50" x2="50" y2="10" stroke="black" stroke-width="4"/>
+                  <line x1="50" y1="10" x2="50" y2="50" stroke="black" stroke-width="4"/>
+                  </svg>
+                      `
+                  },
+                  {
+                label: "1 + tan\u00B2\u03B8 = sec\u00B2\u03B8",
+                type: "cos",
+                svg: `
+                    <svg width="24" height="24" viewBox="0 0 100 100">
+                    <line x1="10" y1="90" x2="90" y2="90" stroke="black" stroke-width="4"/>
+                    <line x1="90" y1="90" x2="90" y2="10" stroke="black" stroke-width="4"/>
+                    <line x1="10" y1="90" x2="90" y2="10" stroke="red" stroke-width="4"/>
+                    </svg>
+                        `
+                    },
+                 {
+                label:"cot\u00B2\u03B8 + 1 = cosec\u00B2\u03B8",
+                type: "tan",
+                svg: `
+                   <svg width="24" height="24" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="black" fill="none" stroke-width="4"/>
+                    <line x1="10" y1="90" x2="90" y2="10" stroke="green" stroke-width="4"/>
+                    <line x1="50" y1="50" x2="50" y2="5" stroke="black" stroke-width="4"/>
+                    </svg>
+                        `
+                    },    
+                               
             ],
        
         leftSidebarContent: `

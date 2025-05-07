@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Dashboard</title>
+    <style>
+        #dashboard {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #dashboard th, #dashboard td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #dashboard th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas Dashboard</h1>
+    <table id="dashboard">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button id="grid-toggle">Toggle Grid</button>
+
+    <canvas id="canvas" width="800" height="600" style="border: 1px solid black;"></canvas>
+    <script type="module">
+    import { canvasManager } from './CanvasManager.js';
+    <script type="module" src="./shapes/CanvasManager.js"></script>
+    <script type="module">
+        import { canvasManager } from './shapes/CanvasManager.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+           
+
+            function updateDashboard() {
+                const shapesData = canvasManager.getShapeDetails();
+                const tbody = document.querySelector('#dashboard tbody');
+                tbody.innerHTML = '';
+
+                shapesData.forEach((shape) => {
+                    const row = document.createElement('tr');
+                    const typeCell = document.createElement('td');
+                    const detailsCell = document.createElement('td');
+
+                    typeCell.textContent = shape.type || 'Unknown';
+                    detailsCell.textContent = JSON.stringify(shape);
+
+                    row.appendChild(typeCell);
+                    row.appendChild(detailsCell);
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Add event listener for grid toggle
+            document.getElementById('grid-toggle')?.addEventListener('click', () => {
+                canvasManager.render(ctx, canvas, true);
+            });
+
+            // Initial render
+            canvasManager.render(ctx, canvas);
+            updateDashboard();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shape Drawer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: grid;
+      grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+    }
+
+    header {
+      grid-area: header;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 5px;
+      height: 40px; /* Fixed height */
+     
+    }
+
+    aside {
+      grid-area: sidebar;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+    }
+
+    main {
+      grid-area: main;
+      padding: 10px;
+    }
+
+    footer {
+      grid-area: footer;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 5px;
+      height: 10px; /* Fixed height */
+    }
+
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .controls label, .controls button {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Parallel lines and Triangle Properties</h1>
+  </header>
+  <aside>
+    <h3>Controls</h3>
+    <div class="controls">
+      <label>
+        Mode:
+        <input type="radio" name="mode" value="create" checked> Create
+        <input type="radio" name="mode" value="modify"> Modify
+        <input type="radio" name="mode" value="delete"> Delete
+      </label>
+      <label>
+        Shape Type:
+        <select id="shapeType">
+          <option value="point">Point</option>
+          <option value="line">Line</option>
+          <option value="circle">Circle</option>
+          <option value="triangle">Triangle</option>
+          <option value="rectangle">Rectangle</option>
+          <option value="protractor">Protractor</option>
+          <option value="angle">Angle</option>
+        </select>
+      </label>
+      <button onclick="resetCanvas()">Reset Canvas</button>
+    </div>
+  </aside>
+  <main>
+    <canvas id="canvas" width="800" height="800"></canvas>
+  </main>
+  <footer>
+    <p>&copy; 2024 Shape Drawer. All Rights Reserved.</p>
+  </footer>
+  <script type="module" src="./shapes.js"></script>
+  <script type="module" src="./parallel_lines.js"></script>
+</body>
+</html>

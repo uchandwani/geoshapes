@@ -1,0 +1,152 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Theorems</title>
+    <link rel="stylesheet" href="./css/style.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Triangle Theorems</h1>
+    </header>
+
+        
+
+    <!--div class="container"-->
+       
+
+ <!--div class="additional-div">
+        
+         <button id="draw-line" class="icon-btn" title="Draw Line">
+            <img src="icons/line-icon.png" alt="Line Icon" />
+          </button>
+          <!-button id="draw-scale"class="icon-btn" title="Show Scale">Add Scale</button>
+
+          <button id="add-divider" class="icon-btn" title="Add Divider">
+          <img src="./icons/divider-icon.png" alt="Add Divider" />
+          </button>
+
+           <button id="add-compass" class="icon-btn" title="Add Compass">
+          <img src="./icons/divider-icon.png" alt="Add Compass" />
+          </button>
+
+          <button id="toggle-scale" class="icon-btn" title="Show Scale">Toggle Scale</button>
+
+          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
+            <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
+          </button>
+          <button id="draw-rectangle" class="icon-btn" title="Draw Rectangle">
+            <img src="./icons/rectangle-icon.png" alt="Protractor Icon" />
+          </button>
+
+        <button id="draw-circle" class="icon-btn" title="Draw Circle">
+            <img src="./icons/circle-icon.png" alt="Circle Icon" />
+          </button>
+          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
+          </button>
+          <button id="modify-shape" class="icon-btn" title="Modify Shape">
+            <img src="icons/modify-icon.png" alt="Modify Icon" />
+          </button>
+          <button id="delete-shape" class="icon-btn" title="Delete Shape">
+            <img src="icons/delete-icon.png" alt="Delete Icon" />
+          </button>
+         </div--> 
+
+
+
+      
+           
+             <div id="left-sidebar" class="sidebar left">
+            <h3>Instructions</h3>
+            <p>Select a theorem to see the instructions here.</p>
+        </div>
+    <div class="canvas-container">
+         <div class="nav-bar">
+               
+                <button id="mid-segment-theorem-button" data-functionality="midSegmentTheorem">Mid Segment Theorem</button>
+                <button id="basic-proportionality-button" data-functionality="basicProportionalityTheorem">Basic Proportionality Theorem</button>
+                <button id="angle-bisector-theorem-button" data-functionality="angleBisectorTheorem">Angle Bisector Theorem</button>
+                <button id="properties-of-triangles-button" data-functionality="propertiesOfTriangles">Properties of Triangles</button>
+                
+            </div>
+            <div id="theorem-definition" class="theorem-definition">
+            <p id="theorem-text">Select a theorem to see its definition here.</p>
+            </div>
+  <!--div id="sub-header" -->
+            
+               
+                <div class="canvas-wrapper">
+                   <div class="additional-div">  
+
+                   
+        
+         <button id="draw-line" class="icon-btn" title="Draw Line">
+            <img src="icons/line-icon.png" alt="Line Icon" />
+          </button>
+          <!--button id="draw-scale"class="icon-btn" title="Show Scale">Add Scale</button-->
+
+          <button id="add-divider" class="icon-btn" title="Add Divider">
+          <img src="./icons/divider-icon.png" alt="Add Divider" />
+          </button>
+
+           <!--button id="add-compass" class="icon-btn" title="Add Compass">
+          <img src="./icons/divider-icon.png" alt="Add Compass" />
+          </button-->
+
+          <button id="toggle-scale" class="icon-btn" title="Show Scale">Toggle Scale</button>
+
+          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
+            <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
+          </button>
+          <!--button id="draw-rectangle" class="icon-btn" title="Draw Rectangle">
+            <img src="./icons/rectangle-icon.png" alt="Protractor Icon" />
+          </button>
+
+        <button id="draw-circle" class="icon-btn" title="Draw Circle">
+            <img src="./icons/circle-icon.png" alt="Circle Icon" />
+          </button-->
+          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
+          </button>
+          <button id="modify-shape" class="icon-btn" title="Modify Shape">
+            <img src="icons/modify-icon.png" alt="Modify Icon" />
+          </button>
+          <button id="delete-shape" class="icon-btn" title="Delete Shape">
+            <img src="icons/delete-icon.png" alt="Delete Icon" />
+          </button>
+         </div>  
+                    <canvas id="canvas" width="900" height="700"></canvas>
+                    <div id="dynamic-buttons" class="triangle-buttons"></div>
+                 <!--div class="canvas-buttons">
+                    <button id="right-angle-button">Right Angle Triangle</button>
+                    <button id="acute-angle-button">Acute Triangle</button>
+                    <button id="obtuse-angle-button">Obtuse Triangle</button>
+                </div>  -->
+
+
+            </div>
+          
+        
+        </div>
+
+            <div id="right-sidebar" class="sidebar right">
+                <h3>Verification</h3>
+                <p>Select a theorem to see the verification steps here.</p>
+            </div>
+    
+
+    <footer>
+        <p>© Triangle Theorems Interactive Tool</p>
+    </footer>
+
+    <script type="module" src="./shapes.js"></script>
+    <script type="module" src="./shapes/CanvasManager.js"></script>
+    <script type="module" src="./js/functionalityConfig.js"></script>
+    <script type="module" src="./js/eventHandlers.js"></script>
+    <script type="module" src="./js/trianglePage.js"></script>
+</body>
+</html>

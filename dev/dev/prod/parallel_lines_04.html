@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parallel Lines Theorems</title>
+
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <script type="module" src="./js/parallelLinesPage.js"></script>
+  <script type="module">
+    import {
+      sumMeasures, compareMeasures, compareDividedMeasures, calculateRatio,
+      updateMessage, calculateSin, calculateCos, calculateTrig,
+      decimalToFraction, calcTrig
+    } from './js/parallelLinesPage.js';
+
+    window.sumMeasures = sumMeasures;
+    window.compareMeasures = compareMeasures;
+    window.updateMessage = updateMessage;
+    window.calculateSin = calculateSin;
+    window.calculateCos = calculateCos;
+    window.calculateTrig = calculateTrig;
+    window.calcTrig = calcTrig;
+    window.decimalToFraction = decimalToFraction;
+  </script>
+</head>
+
+<body>
+
+<!-- 🔵 SVG Template for Reuse -->
+<template id="shared-svg-icons">
+  <svg id="icon-home" viewBox="0 0 24 24" fill="none" stroke="#1E88E5"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+    <path d="M3 12L12 3l9 9" />
+    <path d="M9 21V12h6v9" />
+  </svg>
+
+  <svg id="icon-sin" viewBox="0 0 24 24" fill="none" stroke="#1E88E5"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="12" x2="20" y2="12" />
+    <line x1="22" y1="12" x2="22" y2="24" />
+    <line x1="12" y1="12" x2="7" y2="19" />
+    <line x1="5" y1="21" x2="-5" y2="10" />
+    <line x1="12" y1="12" x2="7" y2="5" />
+    <line x1="7" y1="5" x2="12" y2="-4" />
+  </svg>
+
+  <svg id="icon-cos" viewBox="0 0 24 24" fill="none" stroke="#1E88E5"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="2" x2="4" y2="20" />
+    <line x1="12" y1="2" x2="20" y2="20" />
+  </svg>
+
+  <svg id="icon-ratio" viewBox="0 0 24 24" fill="none" stroke="#1E88E5"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="4" y1="12" x2="20" y2="4" />
+    <line x1="4" y1="12" x2="20" y2="20" />
+  </svg>
+
+  <svg id="icon-identity" viewBox="0 0 24 24" fill="none" stroke="#1E88E5"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12l2 2 4-4" />
+  </svg>
+</template>
+
+<!-- 🔵 Navigation Header -->
+<div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #6a9be8;">
+  <div class="nav-bar-left">
+    <button class="nav-icon-btn" onclick="location.href='index.html'" id="home-button"></button>
+    <button class="nav-icon-btn" id="sineTheta-button"></button>
+    <button class="nav-icon-btn" id="cosineTheta-button"></button>
+  </div>
+
+  <h1>Parallel Lines Theorems</h1>
+
+  <div class="nav-bar-right">
+    <button class="nav-icon-btn" id="trigonoRatios-button"></button>
+    <button class="nav-icon-btn" id="trigonoIdentities-button"></button>
+  </div>
+</div>
+
+<!-- 🔶 Theorem Definition and Layout -->
+<div class="container">
+  <!-- Left Sidebar -->
+  <div id="theorem-definition" class="theorem-definition">
+    <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+  </div>
+
+  <div class="sidebar left" id="left-sidebar">
+    <h3>Instructions</h3>
+    <p>Select a theorem from the navigation bar above to see its instructions here.</p>
+  </div>
+
+  <!-- Main Canvas Area -->
+  <div class="canvas-container">
+    <div class="navigation-buttons">
+      <button id="sineTheta-button" class="icon-btn" title="Theorem A">Vertically Opposite Angles</button>
+      <button id="cosineTheta-button" class="icon-btn" title="Theorem B">Parallel Lines - Properties</button>
+      <button id="trigonoIdentities-button" class="icon-btn" title="Theorem D">Triangles - Exterior Angles</button>
+      <button id="trigonoRatios-button" class="icon-btn" title="Trigono Ratios">Triangles - Angle Sum Properties</button>
+    </div>
+
+    <div id="dynamic-buttons" class="triangle-buttons">
+      <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
+      <button id="tab-other" onclick="showTab('other')">Other Tab</button>
+    </div>
+
+    <div class="canvas-wrapper">
+      <div class="additional-div">
+        <button id="draw-line" class="icon-btn" title="Draw Line"><img src="icons/line-icon.png" alt="Line Icon" /></button>
+        <button id="draw-scale" class="icon-btn" title="Show Scale">Add Scale</button>
+        <button id="add-divider" class="icon-btn" title="Add Divider"><img src="./icons/divider-icon.png" alt="Add Divider" /></button>
+        <button id="draw-triangle" class="icon-btn" title="Draw Triangle"><img src="./icons/triangle-icon.png" alt="Triangle Icon" /></button>
+        <button id="draw-protractor" class="icon-btn" title="Draw Protractor"><img src="./icons/protractor-icon.png" alt="Protractor Icon" /></button>
+        <button id="modify-shape" class="icon-btn" title="Modify Shape"><img src="icons/modify-icon.png" alt="Modify Icon" /></button>
+        <button id="delete-shape" class="icon-btn" title="Delete Shape"><img src="icons/delete-icon.png" alt="Delete Icon" /></button>
+      </div>
+      <canvas id="canvas" width="800" height="800"></canvas>
+    </div>
+  </div>
+
+  <!-- Right Sidebar -->
+  <div class="sidebar right" id="right-sidebar">
+    <h3>Exercises / Results</h3>
+    <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+      <thead>
+        <tr>
+          <th>Readings</th>
+          <th>Measure of Angle ABD</th>
+          <th>Corresponding Angle ACF</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;" /></td>
+          <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;" /></td>
+          <td><input type="text" placeholder="Enter remarks" style="width: 90%;" /></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><input type="text" placeholder="Enter angle ABD" style="width: 90%;" /></td>
+          <td><input type="text" placeholder="Enter angle ACF" style="width: 90%;" /></td>
+          <td><input type="text" placeholder="Enter remarks" style="width: 90%;" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer><p></p></footer>
+
+<!-- Load Canvas Scripts -->
+<script type="module" src="./shapes.js"></script>
+<script type="module" src="./shapes/CanvasManager.js"></script>
+
+<!-- Load Header Logic -->
+<script type="module" src="./js/header.js"></script>
+<script type="module" src="./js/parallelLinesPage.js"></script>
+
+<!-- Inject SVG Icons -->
+<script>
+function injectSVG(iconId, buttonId) {
+  const template = document.querySelector('#shared-svg-icons');
+  const svgIcon = template.content.querySelector(`#${iconId}`).cloneNode(true);
+  document.getElementById(buttonId).appendChild(svgIcon);
+}
+
+// ✅ Wait for the full DOM to load before injecting icons
+document.addEventListener("DOMContentLoaded", () => {
+  injectSVG('icon-home', 'home-button');
+  injectSVG('icon-sin', 'sineTheta-button');
+  injectSVG('icon-cos', 'cosineTheta-button');
+  injectSVG('icon-ratio', 'trigonoRatios-button');
+  injectSVG('icon-identity', 'trigonoIdentities-button');
+});
+</script>
+
+
+</body>
+</html>

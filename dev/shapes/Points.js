@@ -11,7 +11,9 @@ import * as shapes from '../shapes.js';
             this.radius = radius; // Radius for drawing the point
             this.showLabel = false; // Whether to display label
             this.showCoordinates = false; // Whether to display coordinates
+            this.enableDrag = true; // ✅ Default allow dragging
         }
+        
 
         // Draw the point on the canvas
         draw(ctx, showLabel=this.label, showCoordinates = this.showCoordinates, color = this.color) {
@@ -44,9 +46,14 @@ import * as shapes from '../shapes.js';
 
     // Check if a point is inside the clickable area (for dragging)
     isPointInside(mouseX, mouseY) {
+        if (!this.enableDrag) {
+            console.log("🚫 isPointInside: Dragging is disabled for this point.");
+            return false;
+        }
         const distance = Math.hypot(mouseX - this.x, mouseY - this.y);
         return distance <= this.radius;
     }
+    
 
     // Toggle label visibility
     toggleLabel() {
@@ -58,9 +65,23 @@ import * as shapes from '../shapes.js';
         this.showCoordinates = !this.showCoordinates;
     }
 
+    setEnableDrag(enable) {
+        this.enableDrag = enable;
+    }
+    
+    getEnableDrag() {
+        return this.enableDrag;
+    }
+    
+
     // Drag the point
     drag(dx, dy) {
+        if (!this.enableDrag) {
+            console.log("🚫 Dragging is disabled for this point.");
+            return;
+        }
         this.x += dx;
         this.y += dy;
     }
+    
 }

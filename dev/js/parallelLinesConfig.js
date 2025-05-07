@@ -2,51 +2,53 @@ export  const functionalityConfig = {
 
         
     
-        sineTheta: {
+        verticallyOpposite: {
            
         theoremDefinition: "Vertically Opposite Angles theorem states that when two lines intersect each other, the vertically opposite angles are equal",
         canvasConfig: {
             
            
             points: [
-                { x: 445, y: 200, label: "A", color: "red", radius: 5 },
-                { x: 200, y: 200, label: "M", color: "red", radius: 5 },
-                { x: 620, y: 200, label: "N", color: "red", radius: 5 },
-
-                { x: 140, y: 420, label: "P", color: "red", radius: 5 },
-               
-                { x: 430, y: 420, label: "D", color: "red", radius: 5},
-                { x: 375, y: 420, label: "B", color: "red", radius: 5},
-                { x: 555, y: 420, label: "F", color: "red", radius: 5},
-                { x: 700, y: 420, label: "Q", color: "red", radius: 5},
-
-                { x: 350, y: 500, label: "C", color: "red", radius: 5},
-                { x: 425, y: 500, label: "E", color: "red", radius: 5},
-                { x: 596    , y: 500, label: "G", color: "red", radius: 5},
-
-                { x: 200, y: 500, label: "S", color: "red", radius: 5},
-                { x: 700, y: 500, label: "T", color: "red", radius: 5},
-                
-                { x: 325, y: 580, label: "W", color: "red", radius: 5},
-                { x: 422, y: 580, label: "V", color: "red", radius: 5},
-                { x: 640, y: 580, label: "U", color: "red", radius: 5},
-            ],
+                { x: 345, y: 100, label: "A", color: "red", radius: 5 },
+                { x: 100, y: 100, label: "M", color: "red", radius: 5 },
+                { x: 520, y: 100, label: "N", color: "red", radius: 5 },
+              
+                { x: 40, y: 320, label: "P", color: "red", radius: 5 },
+              
+                { x: 330, y: 320, label: "D", color: "red", radius: 5 },
+                { x: 275, y: 320, label: "B", color: "red", radius: 5 },
+                { x: 455, y: 320, label: "F", color: "red", radius: 5 },
+                { x: 600, y: 320, label: "Q", color: "red", radius: 5 },
+              
+                { x: 250, y: 400, label: "C", color: "red", radius: 5 },
+                { x: 325, y: 400, label: "E", color: "red", radius: 5 },
+                { x: 496, y: 400, label: "G", color: "red", radius: 5 },
+              
+                { x: 100, y: 400, label: "S", color: "red", radius: 5 },
+                { x: 600, y: 400, label: "T", color: "red", radius: 5 },
+              
+                { x: 225, y: 480, label: "W", color: "red", radius: 5 },
+                { x: 322, y: 480, label: "V", color: "red", radius: 5 },
+                { x: 540, y: 480, label: "U", color: "red", radius: 5 },
+              ],
+              
 
             // Lines drawn without labels
             lines: [
                 // Parallel lines
-                { endA: { x: 100, y: 200 }, endB: { x: 700, y: 200 }, type: "parallel",color: "green", enableDrag:false   },
-             
-                { endA: { x: 140, y: 420 }, endB: { x: 700, y: 420 }, type: "parallel",color: "green", enableDrag:false    },
+                // Parallel lines
+                { endA: { x: 40, y: 100 }, endB: { x: 600, y: 100 }, type: "parallel", color: "green", enableDrag: false },
+                { endA: { x: 40, y: 320 }, endB: { x: 600, y: 320 }, type: "parallel", color: "green", enableDrag: false },
 
-                // Transversals
-                { endA: { x: 400, y: 110 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false   },
-                { endA: { x: 450, y: 80 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 480, y: 80 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false   },
 
-                // Connecting lines
-               
-                { endA: { x: 140, y: 500 }, endB: { x: 700, y: 500 }, type: "connecting", color: "green", enableDrag:false   },
+             // Transversals
+            { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 350, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
+            { endA: { x: 365, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
+
+            // Connecting lines
+            { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
+
 
                
             ]
@@ -79,153 +81,100 @@ export  const functionalityConfig = {
         `,
         rightSidebarContent: `
             
-    <h3>Verification - Vertically Opposite Angles </h3>
-
-    <h4>Table 1</h4>
+<h4>Verification - Vertically Opposite Angles</h4>
 <table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠AGT</th>
-        <th>Vertically Opposite ∠EGU </th>
-        <th>Is ∠AGT = ∠EGU ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_abd" placeholder="Enter ∠AGT" style="width: 90%;"
-        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf'); ">
-</td>
-<td>
-    <input type="number" name="angle_acf" placeholder="Enter ∠EGU" style="width: 90%;"
+  <colgroup>
+    <col style="width: 15%;">
+    <col style="width: 15%;">
+    <col style="width: 20%;">
+  </colgroup>
+  <tr>
+    <th>Angle Measure</th>
+    <th>Vertically Opposite</th>
+    <th>Equality Check</th>
+  </tr>
+
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AGT</span><br>
+      <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
-</td>
-<td>
-    <span name="is_abd_acf"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠AGE</th>
-        <th>Vertically Opposite ∠TGU</th>
-        <th>Is ∠AGE = ∠TGU ?</th>
-    </tr>   
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_adb" placeholder="Enter ∠AGE" style="width: 90%;"
+    </td>
+    <td><span>∠EGU</span><br>
+      <input type="number" name="angle_acf" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
+    </td>
+    <td><span name="is_abd_acf"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AGE</span><br>
+      <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
-</td>
-<td>
-    <input type="number" name="angle_afc2" placeholder="Enter ∠TGU" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); ">
-</td>
-<td>
-    <span name="is_adb_afc"></span>
-</td>
+    </td>
+    <td><span>∠TGU</span><br>
+      <input type="number" name="angle_afc2" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
+    </td>
+    <td><span name="is_adb_afc"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠ABP</th>
-        <th>Measure of ∠QBW </th>
-        <th>Is ∠ABP = ∠QBW ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2; ">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abp', 'angle_qbw', 'is_abp_qbw');">
-</td>
-<td>
-    <input type="number" name="angle_qbw" placeholder="Enter ∠QBW" style="width: 90%;"
+    </td>
+    <td><span>∠QBW</span><br>
+      <input type="number" name="angle_qbw" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abp', 'angle_qbw', 'is_abp_qbw');">
-</td>
-<td>
-    <span name="is_abp_qbw"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠ABQ</th>
-        <th>Vertically Opposite ∠PBW</th>
-        <th>Is ∠ABQ = ∠PBW ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_abq" placeholder="Enter ∠ABQ" style="width: 90%;"
+    </td>
+    <td><span name="is_abp_qbw"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ABQ</span><br>
+      <input type="number" name="angle_abq" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abq', 'angle_pbw', 'is_abq_pbw');">
-</td>
-<td>
-    <input type="number" name="angle_pbw" placeholder="Enter ∠PBW" style="width: 90%;"
+    </td>
+    <td><span>∠PBW</span><br>
+      <input type="number" name="angle_pbw" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abq', 'angle_pbw', 'is_abq_pbw');">
-</td>
-<td>
-    <span name="is_abq_pbw"></span>
-</td>
+    </td>
+    <td><span name="is_abq_pbw"></span></td>
+  </tr>
 
-    </tr>
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AEG</span><br>
+      <input type="number" name="angle_aeg" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
+    </td>
+    <td><span>∠SEV</span><br>
+      <input type="number" name="angle_sev" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
+    </td>
+    <td><span name="is_aeg_sev"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AES</span><br>
+      <input type="number" name="angle_aes" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
+    </td>
+    <td><span>∠TEV</span><br>
+      <input type="number" name="angle_tev" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
+    </td>
+    <td><span name="is_aes_tev"></span></td>
+  </tr>
 </table>
 
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠AEG</th>
-        <th>Vertically Opposite ∠SEV </th>
-        <th>Is ∠AEG = ∠SEV ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_aeg" placeholder="Enter ∠AEG" style="width: 90%;"
-        oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
-</td>
-<td>
-    <input type="number" name="angle_sev" placeholder="Enter ∠SEV" style="width: 90%;"
-        oninput="compareMeasures('angle_aeg', 'angle_sev', 'is_aeg_sev');">
-</td>
-<td>
-    <span name="is_aeg_sev"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠AES</th>
-        <th>Vertically Opposite ∠TEV</th>
-        <th>Is ∠AES = ∠TEV ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_aes" placeholder="Enter ∠AES" style="width: 90%;"
-        oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
-</td>
-<td>
-    <input type="number" name="angle_tev" placeholder="Enter ∠TEV" style="width: 90%;"
-        oninput="compareMeasures('angle_aes', 'angle_tev', 'is_aes_tev');">
-</td>
-<td>
-    <span name="is_aes_tev"></span>
-</td>
-
-    </tr>
-</table>
 
 
         `,
 },
-    cosineTheta: {
+    parallelProperties: {
 
         defaultButtonType: 'sin',
        
@@ -239,53 +188,94 @@ export  const functionalityConfig = {
         canvasConfig: {
             
            
-            points: [
-                { x: 445, y: 200, label: "A", color: "red", radius: 5},
-                { x: 200, y: 200, label: "M", color: "red", radius: 5},
-                { x: 620, y: 200, label: "N", color: "red", radius: 5},
+          points: [
+            { x: 345, y: 100, label: "A", color: "red", radius: 5 },
+            { x: 100, y: 100, label: "M", color: "red", radius: 5 },
+            { x: 520, y: 100, label: "N", color: "red", radius: 5 },
+          
+            { x: 40, y: 320, label: "P", color: "red", radius: 5 },
+          
+            { x: 330, y: 320, label: "D", color: "red", radius: 5 },
+            { x: 275, y: 320, label: "B", color: "red", radius: 5 },
+            { x: 455, y: 320, label: "F", color: "red", radius: 5 },
+            { x: 600, y: 320, label: "Q", color: "red", radius: 5 },
+          
+            { x: 250, y: 400, label: "C", color: "red", radius: 5 },
+            { x: 325, y: 400, label: "E", color: "red", radius: 5 },
+            { x: 496, y: 400, label: "G", color: "red", radius: 5 },
+          
+            { x: 100, y: 400, label: "S", color: "red", radius: 5 },
+            { x: 600, y: 400, label: "T", color: "red", radius: 5 },
+          
+            { x: 225, y: 480, label: "W", color: "red", radius: 5 },
+            { x: 322, y: 480, label: "V", color: "red", radius: 5 },
+            { x: 540, y: 480, label: "U", color: "red", radius: 5 },
+          ],
+          
 
-                { x: 140, y: 420, label: "P", color: "red", radius: 5},
-               
-                { x: 430, y: 420, label: "D", color: "red", radius: 5},
-                { x: 375, y: 420, label: "B", color: "red", radius: 5},
-                { x: 555, y: 420, label: "F", color: "red", radius: 5},
-                { x: 700, y: 420, label: "Q", color: "red", radius: 5},
+        // Lines drawn without labels
+        lines: [
+            // Parallel lines
+            // Parallel lines
+            { endA: { x: 40, y: 100 }, endB: { x: 600, y: 100 }, type: "parallel", color: "green", enableDrag: false },
+            { endA: { x: 40, y: 320 }, endB: { x: 600, y: 320 }, type: "parallel", color: "green", enableDrag: false },
 
-                { x: 350, y: 500, label: "C", color: "red", radius: 5},
-                { x: 425, y: 500, label: "E", color: "red", radius: 5},
-                { x: 596    , y: 500, label: "G", color: "red", radius: 5},
 
-                { x: 200, y: 500, label: "S", color: "red", radius: 5},
-                { x: 700, y: 500, label: "T", color: "red", radius: 5},
-                
-                { x: 325, y: 580, label: "W", color: "red", radius: 5},
-                { x: 422, y: 580, label: "V", color: "red", radius: 5},
-                { x: 640, y: 580, label: "U", color: "red", radius: 5},
-            ],
+         // Transversals
+        { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 350, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 365, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
-            // Lines drawn without labels
-            lines: [
-                // Parallel lines
-                { endA: { x: 100, y: 200 }, endB: { x: 700, y: 200 }, type: "parallel",color: "green", enableDrag:false  },
-             
-                { endA: { x: 140, y: 420 }, endB: { x: 700, y: 420 }, type: "parallel",color: "green",enableDrag:false   },
+        // Connecting lines
+        { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
 
-                // Transversals
-                { endA: { x: 405, y: 120 }, endB: { x: 700, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 450, y: 100 }, endB: { x: 415, y: 700 }, type: "transversal", enableDrag:false  },
-                { endA: { x: 475, y: 100 }, endB: { x: 290, y: 700 }, type: "transversal", enableDrag:false  },
 
-                // Connecting lines
-               
-                { endA: { x: 140, y: 500 }, endB: { x: 700, y: 500 }, type: "connecting", color: "green" ,enableDrag:false },
-
-               
-            ]
+           
+        ]
         },
         buttonSet: [
-                { label: "Corresponding Angles", type: "sin" },
-                { label: "Alternate Angles", type: "cos" },
-                { label: "Interior Angles", type: "tan" },
+                {
+      label: "Corresponding Angles",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs for corresponding angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M30 70 A10 10 0 0 1 40 60" stroke-width="2"/>
+        </svg>
+      `
+    },
+      {
+      label: "Alternate Angles",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs for alternate angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M70 70 A10 10 0 0 1 60 60" stroke-width="2"/>
+        </svg>
+      `
+    },
+      {
+      label: "Interior Angles",
+      type: "tan",
+      svg: `
+        <svg viewBox="0 0 100 100" width="40" height="40" stroke="#1E88E5" fill="none" stroke-width="3">
+          <line x1="10" y1="30" x2="90" y2="30" />
+          <line x1="10" y1="70" x2="90" y2="70" />
+          <line x1="30" y1="10" x2="70" y2="90" />
+          <!-- Arcs on same side to represent interior angles -->
+          <path d="M30 30 A10 10 0 0 1 40 40" stroke-width="2"/>
+          <path d="M30 70 A10 10 0 0 1 40 60" stroke-width="2"/>
+        </svg>
+      `
+    },
                 
             ],
         
@@ -380,147 +370,97 @@ export  const functionalityConfig = {
 
         rightSidebarContent: {
         sin:  `
-             <h3>Verification - Correponding Angles </h3>
-
-    <h4>Table 1</h4>
+            <h3>Verification - Corresponding Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠AFQ</th>
-        <th>Corresponding ∠AGT </th>
-        <th>Is ∠AFQ = ∠AGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id ="angle_afq" name="angle_afq" placeholder="Enter ∠AFQ" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <input type="number" id ="angle_agt" name="angle_agt" placeholder="Enter ∠AGT" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <span id="is_afq_agt" name="is_afq_agt"></span>
-</td>
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 18%;">
+    <col style="width: 22%;">
+  </colgroup>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠AFD</th>
-        <th>Corresponding ∠AGE</th>
-        <th>Is ∠AFD = ∠AGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_afd" name="angle_afd" placeholder="Enter ∠AFD" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <input type="number" id="angle_age" name="angle_age" placeholder="Enter ∠AGE" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <span id="is_afd_age" name="is_afd_age"></span>
-</td>
+  <tr>
+    <th>Angle Measure</th>
+    <th>Corresponding Angle</th>
+    <th>Equality Check</th>
+  </tr>
 
-    </tr>
-</table>
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AFQ</span><br>
+      <input type="number" id="angle_afq" name="angle_afq" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
+    </td>
+    <td><span>∠AGT</span><br>
+      <input type="number" id="angle_agt" name="angle_agt" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
+    </td>
+    <td><span id="is_afq_agt" name="is_afq_agt"></span></td>
+  </tr>
 
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠ADF</th>
-        <th>Corresponding ∠AEG </th>
-        <th>Is ∠ADF = ∠AEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id ="angle_adf" name="angle_adf" placeholder="Enter ∠ADF" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠AFD</span><br>
+      <input type="number" id="angle_afd" name="angle_afd" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
+    </td>
+    <td><span>∠AGE</span><br>
+      <input type="number" id="angle_age" name="angle_age" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
+    </td>
+    <td><span id="is_afd_age" name="is_afd_age"></span></td>
+  </tr>
+
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠ADF</span><br>
+      <input type="number" id="angle_adf" name="angle_adf" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-</td>
-<td>
-    <input type="number" id="angle_aeg" name="angle_aeg" placeholder="Enter ∠AEG" style="width: 90%;"
+    </td>
+    <td><span>∠AEG</span><br>
+      <input type="number" id="angle_aeg" name="angle_aeg" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-</td>
-<td>
-    <span id="is_adf_aeg" name="is_adf_aeg"></span>
-</td>
+    </td>
+    <td><span id="is_adf_aeg" name="is_adf_aeg"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠PDV</th>
-        <th>Corresponding ∠SEV</th>
-        <th>Is ∠PDV = ∠SEV ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_pdv" name="angle_pdv" placeholder="Enter ∠PDV" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDV</span><br>
+      <input type="number" id="angle_pdv" name="angle_pdv" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-</td>
-<td>
-    <input type="number" id="angle_sev"  name="angle_sev" placeholder="Enter ∠SEV" style="width: 90%;"
+    </td>
+    <td><span>∠SEV</span><br>
+      <input type="number" id="angle_sev" name="angle_sev" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-</td>
-<td>
-    <span id="is_pdv_sev" name="is_pdv_sev"></span>
-</td>
+    </td>
+    <td><span id="is_pdv_sev" name="is_pdv_sev"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Corresponding ∠QBC </th>
-        <th>Is ∠NAB = ∠QBC ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc'); ">
-</td>
-<td>
-    <input type="number" id="angle_qbc" name="angle_qbc" placeholder="Enter ∠QBC" style="width: 90%;"
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
-</td>
-<td>
-    <span id="is_nab_qbc" name="is_nab_qbc"></span>
-</td>
+    </td>
+    <td><span>∠QBC</span><br>
+      <input type="number" id="angle_qbc" name="angle_qbc" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
+    </td>
+    <td><span id="is_nab_qbc" name="is_nab_qbc"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Corresponding ∠PBC</th>
-        <th>Is ∠MAB = ∠PBC ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" id="angle_mab" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc'); ">
-</td>
-<td>
-    <input type="number" id="angle_pbc" name="angle_pbc" placeholder="Enter ∠PBC" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" id="angle_mab" name="angle_mab" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
-</td>
-<td>
-    <span id="is_mab_pbc" name="is_mab_pbc"></span>
-</td>
-
-    </tr>
+    </td>
+    <td><span>∠PBC</span><br>
+      <input type="number" id="angle_pbc" name="angle_pbc" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
+    </td>
+    <td><span id="is_mab_pbc" name="is_mab_pbc"></span></td>
+  </tr>
 </table>
 
 
@@ -528,368 +468,293 @@ export  const functionalityConfig = {
         `,
 
         cos:  `
-            <h3>Verification - Alternate Angles </h3>
-
-    <h4>Table 1</h4>
+            <h3>Verification - Alternate Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠QFG</th>
-        <th>Alternate Interior ∠FGE </th>
-        <th>Is ∠QFG = ∠FGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_abd" placeholder="Enter ∠QFG" style="width: 90%;"
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 18%;">
+    <col style="width: 22%;">
+  </colgroup>
+
+  <tr>
+    <th>Angle Measure</th>
+    <th>Alternate Interior Angle</th>
+    <th>Equality Check</th>
+  </tr>
+
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠QFG</span><br>
+      <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
-</td>
-<td>
-    <input type="number" name="angle_acf" placeholder="Enter ∠FGE" style="width: 90%;"
-        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf'); ">
-</td>
-<td>
-    <span name="is_abd_acf"></span>
-</td>
+    </td>
+    <td><span>∠FGE</span><br>
+      <input type="number" name="angle_acf" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
+    </td>
+    <td><span name="is_abd_acf"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠DFG</th>
-        <th>Alternate Interior ∠FGT</th>
-        <th>Is ∠DFG = ∠FGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_adb" placeholder="Enter ∠DFG" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); ">
-</td>
-<td>
-    <input type="number" name="angle_afc2" placeholder="Enter ∠FGT" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc'); ">
-</td>   
-<td>
-    <span name="is_adb_afc"></span>
-</td>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠DFG</span><br>
+      <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
+    </td>
+    <td><span>∠FGT</span><br>
+      <input type="number" name="angle_afc2" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
+    </td>
+    <td><span name="is_adb_afc"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠PDE</th>
-        <th>Alternate Interior ∠DEG </th>
-        <th>Is ∠PDE = ∠DEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_pde" placeholder="Enter ∠PDE" style="width: 90%;"
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDE</span><br>
+      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-</td>
-<td>
-    <input type="number" name="angle_deg" placeholder="Enter ∠DEG" style="width: 90%;"
+    </td>
+    <td><span>∠DEG</span><br>
+      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-</td>
-<td>
-    <span name="is_pde_deg"></span>
-</td>
+    </td>
+    <td><span name="is_pde_deg"></span></td>
+  </tr>
 
-    </tr>
-    <tr>
-        <th>Measure of ∠FDE </th>
-        <th>Alternate Interior ∠DES</th>
-        <th>Is ∠FDE = ∠DES ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_fde" placeholder="Enter ∠FDE" style="width: 90%;"
-        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des'); ">
-</td>
-<td>
-    <input type="number" name="angle_des" placeholder="Enter ∠DES" style="width: 90%;"
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠FDE</span><br>
+      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
         oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
-</td>
-<td>
-    <span name="is_fde_des"></span>
-</td>
+    </td>
+    <td><span>∠DES</span><br>
+      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
+    </td>
+    <td><span name="is_fde_des"></span></td>
+  </tr>
 
-    </tr>
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
+    </td>
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
+    </td>
+    <td><span name="is_nab_abp"></span></td>
+  </tr>
+
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
+    </td>
+    <td><span>∠ABF</span><br>
+      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
+        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
+    </td>
+    <td><span name="is_mab_abf"></span></td>
+  </tr>
 </table>
 
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Alternate Interior ∠ABP </th>
-        <th>Is ∠NAB = ∠ABP ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp'); ">
-</td>
-<td>
-    <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp'); ">
-</td>
-<td>
-    <span name="is_nab_abp"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Alternate Interior ∠ABF</th>
-        <th>Is ∠MAB = ∠ABF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf'); ">
-</td>
-<td>
-    <input type="number" name="angle_abf" placeholder="Enter ∠ABF" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf'); ">
-</td>
-<td>
-    <span name="is_mab_abf"></span>
-</td>
-
-    </tr>
-</table>
 
 
            
     `, tan : `
            
-           <h3>Verification - Interior Angles </h3>
-
-    <h4>Table 1</h4>
+          <h3>Verification - Interior Angles</h3>
 <table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠QFG</th>
-        <th>Corresponding Interior ∠FGT </th>
-        <th> ∠QFG + ∠FGT ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_qfg" placeholder="Enter ∠QFG" style="width: 90%;"
-        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt'); ">
-</td>
-<td>
-    <input type="number" name="angle_fgt" placeholder="Enter ∠FGT" style="width: 90%;"
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+  </colgroup>
+
+  <tr>
+    <th>Angle Measure</th>
+    <th>Corresponding Interior Angle</th>
+    <th>Sum = ?</th>
+  </tr>
+
+  <!-- Table 1 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠QFG</span><br>
+      <input type="number" name="angle_qfg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
-</td>
-<td>
-    <span name="sum_qfg_fgt"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠DFG</th>
-        <th>Corresponding Interior ∠FGE</th>
-        <th> ∠DFG + ∠FGE ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_dfg" placeholder="Enter ∠DFG" style="width: 90%;"
+    </td>
+    <td><span>∠FGT</span><br>
+      <input type="number" name="angle_fgt" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
+    </td>
+    <td><span name="sum_qfg_fgt"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠DFG</span><br>
+      <input type="number" name="angle_dfg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-</td>
-<td>
-    <input type="number" name="angle_fge" placeholder="Enter ∠FGE" style="width: 90%;"
+    </td>
+    <td><span>∠FGE</span><br>
+      <input type="number" name="angle_fge" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-</td>   
-<td>
-    <span name="sum_dfg_fge"></span>
-</td>
+    </td>
+    <td><span name="sum_dfg_fge"></span></td>
+  </tr>
 
-    </tr>
-</table>
-
- <h4>Table 2</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠PDE</th>
-        <th>Corresponding Interior ∠DES </th>
-        <th> ∠PDE + ∠DES ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_pde" placeholder="Enter ∠PDE" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des'); ">
-</td>
-<td>
-    <input type="number" name="angle_des" placeholder="Enter ∠DES" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des'); ">
-</td>
-<td>
-    <span name="sum_pde_des"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠FDE </th>
-        <th>Corresponding Interior ∠DEG</th>
-        <th> ∠FDE + ∠DEG ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_fde" placeholder="Enter ∠FDE" style="width: 90%;"
+  <!-- Table 2 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠PDE</span><br>
+      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
+    </td>
+    <td><span>∠DES</span><br>
+      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
+    </td>
+    <td><span name="sum_pde_des"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠FDE</span><br>
+      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-</td>
-<td>
-    <input type="number" name="angle_deg" placeholder="Enter ∠DEG" style="width: 90%;"
+    </td>
+    <td><span>∠DEG</span><br>
+      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
         oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-</td>
-<td>
-    <span name="sum_fde_deg"></span>
-</td>
+    </td>
+    <td><span name="sum_fde_deg"></span></td>
+  </tr>
 
-    </tr>
+  <!-- Table 3 -->
+  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠NAB</span><br>
+      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
+    </td>
+    <td><span>∠ABF</span><br>
+      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
+    </td>
+    <td><span name="sum_nab_abf"></span></td>
+  </tr>
+  <tr style="background-color: #d9e1f2;">
+    <td><span>∠MAB</span><br>
+      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
+    </td>
+    <td><span>∠ABP</span><br>
+      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
+        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
+    </td>
+    <td><span name="sum_mab_abp"></span></td>
+  </tr>
 </table>
 
- <h4>Table 3</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
-    <tr>
-        <th>Measure of ∠NAB</th>
-        <th>Corresponding Interior ∠ABF </th>
-        <th> ∠NAB + ∠ABF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_nab" placeholder="Enter ∠NAB" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf'); ">
-</td>
-<td>
-    <input type="number" name="angle_abf" placeholder="Enter ∠ABF" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf'); ">
-</td>
-<td>
-    <span name="sum_nab_abf"></span>
-</td>
-
-    </tr>
-    <tr>
-        <th>Measure of ∠MAB</th>
-        <th>Corresponding Interior ∠ABP</th>
-        <th> ∠MAB + ∠ABP ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_mab" placeholder="Enter ∠MAB" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp'); ">
-</td>
-<td>
-    <input type="number" name="angle_abp" placeholder="Enter ∠ABP" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp'); ">
-</td>
-<td>
-    <span name="sum_mab_abp"></span>
-</td>
-
-    </tr>
-</table>
-            
             
         `, 
 }},
    
-    trigonoIdentities: {
+    exteriorAngles: {
         defaultButtonType: 'sin',
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
            
-        points: [
-            { x: 700, y: 500, label: "E", color: "black", radius: 5},
-            { x: 100, y: 600, label: "F", color: "black", radius: 4, type: 'sin' },
-            { x: 300, y: 600, label: "F", color: "black", radius: 5, type: 'cos' },
-
-            { x: 340, y: 600, label: "F", color: "black", radius: 4, type: 'tan' },
-      
+          points: [
+            { x: 620, y: 400, label: "E", color: "black", radius: 5 },
+            { x: 20,  y: 500, label: "F", color: "black", radius: 4, type: 'sin' },
+            { x: 220, y: 500, label: "F", color: "black", radius: 5, type: 'cos' },
+            { x: 260, y: 500, label: "F", color: "black", radius: 4, type: 'tan' },
         ],
-
-       lines: [
-                // Parallel lines
-                { endA: { x: 600, y: 500 }, endB: { x: 700, y: 500 }, type: "parallel",color: "blue", enableDrag: false  },
-
-                ],
-
-        triangles: [
-                {   type:'sin',
-                   
-                vertices: [
-                    { x: 200, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 400, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-                
-               
-                {   type:'cos',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 300, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,             
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-
-                {   type:'tan',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 200, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,             
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-            ]
         
-        },
+        lines: [
+            // Parallel lines
+            { endA: { x: 520, y: 400 }, endB: { x: 620, y: 400 }, type: "parallel", color: "blue", enableDrag: false },
+        ],
+        
+        triangles: [
+            {
+                type: 'sin',
+                vertices: [
+                    { x: 120, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 320, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'cos',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 220, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'tan',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 120, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+        ]
+      },
          buttonSet: [
-                { label: "Acute Angle", type: "sin" },
-                { label: "Right Angle", type: "cos" },
-                { label: "Obtuse Angle", type: "tan" },
+                 {
+    type: "sin",
+    label: "Acute Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Acute Angle">
+        <!-- Short angle -->
+        <line x1="20" y1="80" x2="50" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "cos",
+    label: "Right Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Right Angle">
+        <!-- Right angle shape -->
+        <line x1="20" y1="80" x2="20" y2="30" />
+        <line x1="20" y1="80" x2="70" y2="80" />
+        <line x1="20" y1="30" x2="70" y2="80" />
+        <!-- Right angle indicator -->
+        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "tan",
+    label: "Obtuse Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Obtuse Angle">
+        <!-- Long angle -->
+        <line x1="20" y1="80" x2="60" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      </svg>
+    `
+  },
             ],
        
         leftSidebarContent: {
@@ -1167,72 +1032,98 @@ export  const functionalityConfig = {
 
 },
 
-trigonoRatios: {
+angleSumProperties: {
         defaultButtonType: 'sin',
         theoremDefinition: "The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
          canvasConfig: {
            
-        points: [
-            { x: 700, y: 500, label: "E", color: "black", radius: 5},
-            
-      
+          points: [
+            { x: 620, y: 400, label: "E", color: "black", radius: 5 },
         ],
-
-       lines: [
-                // Parallel lines
-                { endA: { x: 600, y: 500 }, endB: { x: 700, y: 500 }, type: "parallel",color: "blue", enableDrag:false   },
-
-                ],
-
-        triangles: [
-                {   type:'sin',
-                   
-                vertices: [
-                    { x: 200, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 400, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                              
-                showMidpoints: false,
-                showMeasurements: false,
-                enableDrag:false,
-                },
-                
-               
-                {   type:'cos',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 300, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-
-                {   type:'tan',
-                     vertices: [
-                    { x: 300, y: 500 },
-                    { x: 600, y: 500 },
-                    { x: 200, y: 200 },
-                ],
-            
-                labels: { A: 'B', B: 'C', C: 'A' }, // Custom vertex labels
-                enableDrag:false,              
-                showMidpoints: false,
-                showMeasurements: false,
-                },
-            ]
         
-        },
+        lines: [
+            // Parallel lines
+            { endA: { x: 520, y: 400 }, endB: { x: 620, y: 400 }, type: "parallel", color: "blue", enableDrag: false },
+        ],
+        
+        triangles: [
+            {
+                type: 'sin',
+                vertices: [
+                    { x: 120, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 320, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'cos',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 220, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+            {
+                type: 'tan',
+                vertices: [
+                    { x: 220, y: 400 },
+                    { x: 520, y: 400 },
+                    { x: 120, y: 100 },
+                ],
+                labels: { A: 'B', B: 'C', C: 'A' },
+                enableDrag: false,
+                showMidpoints: false,
+                showMeasurements: false,
+            },
+        ]
+      },       
          buttonSet: [
-                { label: "Acute Angle", type: "sin" },
-                { label: "Right Angle", type: "cos" },
-                { label: "Obtuse Angle", type: "tan" },
+                 {
+    type: "sin",
+    label: "Acute Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Acute Angle">
+        <!-- Short angle -->
+        <line x1="20" y1="80" x2="50" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M30 80 A10 10 0 0 1 40 70" stroke="#1E88E5" stroke-width="4" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "cos",
+    label: "Right Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Right Angle">
+        <!-- Right angle shape -->
+        <line x1="20" y1="80" x2="20" y2="30" />
+        <line x1="20" y1="80" x2="70" y2="80" />
+        <line x1="20" y1="30" x2="70" y2="80" />
+        <!-- Right angle indicator -->
+        <path d="M20 70 L30 70 L30 80" stroke="#1E88E5" stroke-width="4" fill="none"/>
+      </svg>
+    `
+  },
+  {
+    type: "tan",
+    label: "Obtuse Angle",
+    svg: `
+      <svg viewBox="0 0 100 100" fill="none" stroke="#1E88E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" title="Obtuse Angle">
+        <!-- Long angle -->
+        <line x1="20" y1="80" x2="0" y2="20" />
+        <line x1="20" y1="80" x2="80" y2="80" />
+        <path d="M35 80 A20 20 0 0 1 65 60" stroke="#1E88E5" stroke-width="4" fill="none"/>
+      </svg>
+    `
+  },
             ],
        
         leftSidebarContent: {

@@ -2,23 +2,23 @@ export  const functionalityConfig = {
 
         
     
-        sineTheta: {
+    radiusTangent: {
            
         theoremDefinition: "Tangent to a circle is perpendicular to the radius of the circle at the point of contact.",
         canvasConfig: {
             
-            circle: [{ x: 400, y: 400 }, 200], 
+            circle: [{ x: 300, y: 300 }, 200], 
            
             points: [
-                { x: 400, y: 400, label: "O", color: "red", radius: 5 },
-                { x: 400, y: 200, label: "A", color: "red", radius: 5 },
-                { x: 540, y: 540, label: "B", color: "red", radius: 5 },
+                { x: 300, y: 300, label: "O", color: "red", radius: 5 },
+                { x: 300, y: 100, label: "A", color: "red", radius: 5 },
+                { x: 440, y: 440, label: "B", color: "red", radius: 5 },
 
-                { x: 200, y: 400, label: "C", color: "red", radius: 5 },
+                { x: 100, y: 300, label: "C", color: "red", radius: 5 },
                
-                { x: 700, y: 200, label: "L", color: "red", radius: 5},
-                { x: 720, y: 360, label: "M", color: "red", radius: 5},
-                { x: 200, y: 700, label: "N", color: "red", radius: 5},
+                { x: 600, y: 100, label: "L", color: "red", radius: 5},
+                { x: 620, y: 260, label: "M", color: "red", radius: 5},
+                { x: 100, y: 600, label: "N", color: "red", radius: 5},
 
                
             ],
@@ -26,18 +26,18 @@ export  const functionalityConfig = {
             // Lines drawn without labels
             lines: [
                 // Parallel lines
-                { endA: { x: 200, y: 400 }, endB: { x: 400, y: 400 }, type: "parallel",color: "green", enableDrag:false   },
+                { endA: { x: 100, y: 300 }, endB: { x: 300, y: 300 }, type: "parallel",color: "green", enableDrag:false   },
              
-                { endA: { x: 400, y: 200 }, endB: { x: 400, y: 400 }, type: "parallel",color: "green", enableDrag:false    },
+                { endA: { x: 300, y: 100 }, endB: { x: 300, y: 300 }, type: "parallel",color: "green", enableDrag:false    },
 
                 // Transversals
-                { endA: { x: 540, y: 540 }, endB: { x: 400, y: 400 }, type: "transversal", color: "green",enableDrag:false   },
-                { endA: { x: 400, y: 200 }, endB: { x: 700, y: 200 }, type: "transversal", color: "green",enableDrag:false  },
-                { endA: { x: 200, y: 400 }, endB: { x: 200, y: 700 }, type: "transversal", color: "green",enableDrag:false   },
+                { endA: { x: 440, y: 440 }, endB: { x: 300, y: 300 }, type: "transversal", color: "green",enableDrag:false   },
+                { endA: { x: 300, y: 100 }, endB: { x: 600, y: 100 }, type: "transversal", color: "green",enableDrag:false  },
+                { endA: { x: 100, y: 300 }, endB: { x: 100, y: 600 }, type: "transversal", color: "green",enableDrag:false   },
 
                 // Connecting lines
                
-                { endA: { x: 540, y: 540 }, endB: { x: 720, y: 360 }, type: "connecting", color: "green", enableDrag:false   },
+                { endA: { x: 440, y: 440 }, endB: { x: 620, y: 260 }, type: "connecting", color: "green", enableDrag:false   },
 
                
             ]
@@ -71,168 +71,133 @@ export  const functionalityConfig = {
     <h3>Verification - Radius Tangent Theorem </h3>
 
     <h4>Table 1</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 20%;">
-        <col style="width: 18%;">
-        <col style="width: 22%;">
-    </colgroup>
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; text-align: center; font-family: Arial, sans-serif; font-size: 14px; width: 100%;">
+  <thead style="background-color: #1f4e79; color: white;">
     <tr>
-        <th>Measure of ∠AFQ</th>
-        <th>Corresponding ∠AGT </th>
-        <th>Is ∠AFQ = ∠AGT ?</th>
+      <th>Reading</th>
+      <th>Measure of Angle</th>
+      <th>Is it perpendicular?</th>
     </tr>
+  </thead>
+  <tbody>
     <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="angle_afq" placeholder="Enter ∠AFQ" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <input type="number" name="angle_agt" placeholder="Enter ∠AGT" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt'); ">
-</td>
-<td>
-    <span name="is_afq_agt"></span>
-</td>
-
+      <td>1</td>
+      <td>∠LAO</td>
+      <td>Yes/No</td>
     </tr>
     <tr>
-        <th>Measure of ∠AFD</th>
-        <th>Corresponding ∠AGE</th>
-        <th>Is ∠AFD = ∠AGE ?</th>
+      <td></td>
+      <td><input type="text" name="angle_lao" placeholder="Enter ∠LAO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular1" placeholder="Yes/No" style="width: 90%;"></td>
     </tr>
     <tr style="background-color: #d9e1f2;">
-        <td>
-    <input type="number" name="angle_afd" placeholder="Enter ∠AFD" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <input type="number" name="angle_age" placeholder="Enter ∠AGE" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age'); ">
-</td>
-<td>
-    <span name="is_afd_age"></span>
-</td>
-
+      <td>2</td>
+      <td>∠MBO</td>
+      <td>Yes/No</td>
     </tr>
+    <tr>
+      <td></td>
+      <td><input type="text" name="angle_mbo" placeholder="Enter ∠MBO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular2" placeholder="Yes/No" style="width: 90%;"></td>
+    </tr>
+    <tr style="background-color: #d9e1f2;">
+      <td>3</td>
+      <td>∠NCO</td>
+      <td>Yes/No</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="text" name="angle_nco" placeholder="Enter ∠NCO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular3" placeholder="Yes/No" style="width: 90%;"></td>
+    </tr>
+  </tbody>
 </table>
-
-
-    <h3>Verification - Vertically Opposite Angles </h3>
-
-    <h4>Table 1</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
-    <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-</td>
-<td>
-    <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-</td>
-<td>
-    <span name="is_la_lb"></span>
-</td>
-
-    </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
-    </tr>
-
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
-</table>
-
 
 
         `,
 },
-    cosineTheta: {
+    twoTangents: {
 
         defaultButtonType: 'sin',
        
         theoremDefinition: "This Theorem states that two tangent segments drawn to a circle from the same external point are equal in length.",
 
     
-        canvasConfig : {
-
-      
-            circle: [{ x: 400, y: 400 }, 200],
-
+        canvasConfig: {
+            circle: [{ x: 300, y: 300 }, 200],
+          
             points: [
-            { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" }, // Center
-
-            // First set of tangents for "sin"
-            { x: 400, y: 200, label: "A", color: "green", radius: 5, type: "tangent", subtype: "sin" },
-            { x: 600, y: 400, label: "B", color: "green", radius: 5, type: "tangent", subtype: "sin" },
-
-            // Second set of tangents for "cos"
-            { x: 600, y: 400, label: "C", color: "green", radius: 5, type: "tangent", subtype: "cos" },
-            { x: 400, y: 600, label: "D", color: "green", radius: 5, type: "tangent", subtype: "cos" },
-
-            // Third set of tangents for "tan"
-            { x: 560, y: 280, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
-            { x: 560, y: 520, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" }, // Center
+          
+              // First set of tangents for "sin"
+              { x: 300, y: 100, label: "A", color: "green", radius: 5, type: "tangent", subtype: "sin" },
+              { x: 500, y: 300, label: "B", color: "green", radius: 5, type: "tangent", subtype: "sin" },
+          
+              // Second set of tangents for "cos"
+              { x: 500, y: 300, label: "C", color: "green", radius: 5, type: "tangent", subtype: "cos" },
+              { x: 300, y: 500, label: "D", color: "green", radius: 5, type: "tangent", subtype: "cos" },
+          
+              // Third set of tangents for "tan"
+              { x: 440, y: 157.16, label: "E", color: "green", radius: 5, type: "tangent", subtype: "tan" },
+              { x: 440, y: 442.84, label: "F", color: "green", radius: 5, type: "tangent", subtype: "tan" },
             ],
-
+          
             externalPoints: {
-                sin: { label: "L", color: "blue", radius: 5 },
-                cos: { label: "M", color: "blue", radius: 5 },
-                tan: { label: "N", color: "blue", radius: 5 },
+              sin: { label: "L", color: "blue", radius: 5 },
+              cos: { label: "M", color: "blue", radius: 5 },
+              tan: { label: "N", color: "blue", radius: 5 },
             },
           
             lines: []
-        },
+          },
+          
 
         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-                
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="15" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="30" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="80" y1="40" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="15" y1="75" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="5" x2="20" y2="75" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="75" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="85" y1="85" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+        </svg>
+        `
+    },
+
+            
             ],
         
 
@@ -292,45 +257,8 @@ export  const functionalityConfig = {
         </td>
 
     </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
-    </tr>
-
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
+   
+     
 </table>
               
         `,
@@ -345,25 +273,7 @@ export  const functionalityConfig = {
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
-    <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-</td>
-<td>
-    <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-</td>
-<td>
-    <span name="is_la_lb"></span>
-</td>
-
-    </tr>
+   
    <tr>
         <th>Measure of Length MC</th>
         <th>Measure of Length MD </th>
@@ -384,25 +294,7 @@ export  const functionalityConfig = {
 
     </tr>
 
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
+    
 </table>
               
         `, tan :  `
@@ -415,46 +307,8 @@ export  const functionalityConfig = {
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
-    <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-</td>
-<td>
-    <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-</td>
-<td>
-    <span name="is_la_lb"></span>
-</td>
-
-    </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
-    </tr>
-
-     <tr>
+   
+       <tr>
         <th>Measure of Length NE</th>
         <th>Measure of Length NF </th>
         <th>Is NE = NF ?</th>
@@ -480,82 +334,119 @@ export  const functionalityConfig = {
    
     subtendedAngles: {
         defaultButtonType: 'sin',
-        theoremDefinition: "The angle subtended by an arc at the center is double the angle subtended by the same arc at the circumference. The angles subtended by the same arc on the circumference are equal.The exterior angle of a triangle is equal to the sum of its two interior opposite angles",
+        theoremDefinition: "The angle subtended by an arc at the center is double the angle subtended by the same arc at the circumference. The angles subtended by the same arc on the circumference are equal.",
          canvasConfig: {
       
-    "circle": [{ "x": 400, "y": 400 }, 200],
+    "circle": [{ "x": 300, "y": 300 }, 200],
 
-    "points": [
-        // Common center
-        { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" },
+"points": [
+    // Common center
+    { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" },
 
-        // "sin" - First Figure: ∠COB = 60°
-       
-        { x: 280, y: 560, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 520, y: 560, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-        { x: 500, y: 224, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    // "sin" - First Figure: ∠COB = 60°
+    { x: 180, y: 460, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 420, y: 460, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+    { x: 400, y: 124, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
 
-        // "cos" - Second Figure: ∠COB = 100°
-        { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-        { x: 240, y: 280, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    // "cos" - Second Figure: ∠COB = 100°
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+    { x: 140, y: 180, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
 
-        // "tan" - Special Case: ∠COB = 180°
-        { x: 200, y: 400, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 600, y: 400, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 520, y: 240, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-        { x: 260, y: 540, label: "E", color: "red", radius: 5, type: "subtended", subtype: "tan" }
-    ],
+    // "tan" - Special Case: ∠COB = 180°
+    { x: 100, y: 300, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 500, y: 300, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 420, y: 140, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+    { x: 160, y: 440, label: "E", color: "red", radius: 5, type: "subtended", subtype: "tan" }
+],
 
+"lines": [
+    // Figure "sin"
+    { endA: { x: 300, y: 300 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-    "lines": [
-        // Figure "sin"
-        {  endA: { x: 400, y: 400 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    { endA: { x: 300, y: 100 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-        {  endA: { x: 400, y: 200 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    { endA: { x: 400, y: 124 }, endB: { x: 180, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
+    { endA: { x: 400, y: 124 }, endB: { x: 420, y: 460 }, color: "green", subtype: "sin", enableDrag: false },
 
-        {  endA: { x: 500, y: 224 }, endB: { x: 280, y: 560 },color: "green", subtype: "sin",enableDrag:false },
-        {  endA: { x: 500, y: 224 }, endB: { x: 520, y: 560 },color: "green", subtype: "sin",enableDrag:false },
+    // Figure "cos"
+    { endA: { x: 300, y: 300 }, endB: { x: 124, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 476, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
+    { endA: { x: 300, y: 100 }, endB: { x: 126, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 474, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
-        {  endA: { x: 400, y: 400 }, endB: { x: 224, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 576, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    { endA: { x: 140, y: 180 }, endB: { x: 126, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
+    { endA: { x: 140, y: 180 }, endB: { x: 474, y: 400 }, color: "green", subtype: "cos", enableDrag: false },
 
-        {  endA: { x: 400, y: 200 }, endB: { x: 226, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 574, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    // Figure "tan"
+    { endA: { x: 300, y: 300 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 300, y: 300 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
-        {  endA: { x: 240, y: 280 }, endB: { x: 226, y: 500 },color: "green", subtype: "cos",enableDrag:false },
-        {  endA: { x: 240, y: 280 }, endB: { x: 574, y: 500 },color: "green", subtype: "cos",enableDrag:false },
+    { endA: { x: 300, y: 100 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 300, y: 100 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
+    { endA: { x: 420, y: 140 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 420, y: 140 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
 
-        {  endA: { x: 400, y: 400 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 400, y: 400 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 400, y: 200 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 400, y: 200 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 520, y: 240 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 520, y: 240 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        {  endA: { x: 260, y: 540 }, endB: { x: 200, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-        {  endA: { x: 260, y: 540 }, endB: { x: 600, y: 400 },color: "green", subtype: "tan",enableDrag:false },
-
-        
-      
-        ]
+    { endA: { x: 160, y: 440 }, endB: { x: 100, y: 300 }, color: "green", subtype: "tan", enableDrag: false },
+    { endA: { x: 160, y: 440 }, endB: { x: 500, y: 300 }, color: "green", subtype: "tan", enableDrag: false }
+]
 
 
         },
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-            ],
+        buttonSet: [
+
+            {
+  label: "Figure 1",
+  type: "sin",
+  svg: `
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="15" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+    `
+    },
+      {
+  label: "Figure 2",
+  type: "cos",
+  svg: `
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="20" y1="30" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="80" y1="40" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="15" y1="75" x2="50" y2="50" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+  `
+},
+
+          {
+  label: "Figure 3",
+  type: "tan",
+  svg: `
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+      <line x1="50" y1="5" x2="20" y2="75" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="20" y1="75" x2="85" y2="85" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="85" y1="85" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <line x1="50" y1="50" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+      <circle cx="50" cy="50" r="2" fill="#1E88E5"/>
+    </svg>
+    `
+},
+
+        
+        ],
        
         leftSidebarContent: {
             
@@ -848,79 +739,144 @@ alternateSegments: {
         defaultButtonType: 'sin',
         theoremDefinition: "The theorem states that for any circle, the angle formed between the tangent and the chord through the point of contact of the tangent is equal to the angle formed by the chord in the alternate segment",
          canvasConfig: {
-    
-          circle: [{ x: 400, y: 400 }, 200],
+  circle: [{ x: 300, y: 300 }, 200],
 
-          points: [
-            { x: 400, y: 400, label: "O", color: "red", radius: 5, type: "regular" },
+  points: [
+    { x: 300, y: 300, label: "O", color: "red", radius: 5, type: "regular" },
 
-            // "sin" - First Figure: ∠ABC = ∠CAD = 30°
-            { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 400, y: 200, label: "A", color: "red", radius: 5, type: "alternate", subtype: "sin" },
-            { x: 250, y: 200, label: "D", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    // "sin"
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 300, y: 100, label: "A", color: "red", radius: 5, type: "alternate", subtype: "sin" },
+    { x: 150, y: 100, label: "D", color: "red", radius: 5, type: "alternate", subtype: "sin" },
 
-            // "cos" - Second Figure: ∠ABC = ∠CAD = 120°
-            { x: 224, y: 500, label: "C", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 576, y: 500, label: "B", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 600, y: 380, label: "A", color: "red", radius: 5, type: "alternate", subtype: "cos" },
-            { x: 590, y: 280, label: "D", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    // "cos"
+    { x: 124, y: 400, label: "C", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 476, y: 400, label: "B", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 500, y: 280, label: "A", color: "red", radius: 5, type: "alternate", subtype: "cos" },
+    { x: 490, y: 180, label: "D", color: "red", radius: 5, type: "alternate", subtype: "cos" },
 
-            // "tan" - Special Case: ∠ABC = ∠CAD = 45°
-            { x: 240, y: 520, label: "C", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 560, y: 520, label: "B", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 240, y: 280, label: "A", color: "red", radius: 5, type: "alternate", subtype: "tan" },
-            { x: 180, y: 360, label: "D", color: "red", radius: 5, type: "alternate", subtype: "tan" }
-          ],
+    // "tan"
+    { x: 140, y: 420, label: "C", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 460, y: 420, label: "B", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 140, y: 180, label: "A", color: "red", radius: 5, type: "alternate", subtype: "tan" },
+    { x: 80, y: 260, label: "D", color: "red", radius: 5, type: "alternate", subtype: "tan" }
+  ],
 
-          lines: [
-            // Figure "sin"
-            { endA: { x: 224, y: 500 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "sin" },
-            { endA: { x: 224, y: 500 }, endB: { x: 400, y: 200 }, color: "green", subtype: "sin" },
-            { endA: { x: 400, y: 200 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "sin" },
-          
+  arcs: [
+    // Arc at A for ∠DAC (top left arrow in image)
+    {
+      center: { x: 300, y: 100 },        // Point A
+      start: { x: 150, y: 100 },         // Point D
+      end: { x: 124, y: 400 },           // Point C
+      radius: 30,
+      color: "red",
+      direction: "anticlockwise",
+      subtype: "sin"
+    },
+    // Arc at O for ∠CÔB (bottom arc)
+    {
+      center: { x: 300, y: 300 },        // Point O
+      start: { x: 124, y: 400 },         // Point C
+      end: { x: 476, y: 400 },           // Point B
+      radius: 40,
+      color: "red",
+      direction: "clockwise",
+      subtype: "sin"
+    }
+  ],
+  
 
-            // Figure "cos"
-            { endA: { x: 224, y: 500 }, endB: { x: 600, y: 380 }, color: "green", subtype: "cos" },
-            { endA: { x: 576, y: 500 }, endB: { x: 600, y: 380 }, color: "blue", subtype: "cos" },
-            { endA: { x: 224, y: 500 }, endB: { x: 576, y: 500 }, color: "blue", subtype: "cos" },
-           
+  lines: [
+    // "sin"
+    { endA: { x: 124, y: 400 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "sin" },
+    { endA: { x: 124, y: 400 }, endB: { x: 300, y: 100 }, color: "green", subtype: "sin" },
+    { endA: { x: 300, y: 100 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "sin" },
 
-            // Figure "tan"
-            { endA: { x: 240, y: 280 }, endB: { x: 560, y: 520 }, color: "blue", subtype: "tan" },
-            { endA: { x: 240, y: 520 }, endB: { x: 240, y: 280 }, color: "green", subtype: "tan" },
-            { endA: { x: 240, y: 520 }, endB: { x: 560, y: 520 }, color: "blue", subtype: "tan" },
-           
-          ],
+    // "cos"
+    { endA: { x: 124, y: 400 }, endB: { x: 500, y: 280 }, color: "green", subtype: "cos" },
+    { endA: { x: 476, y: 400 }, endB: { x: 500, y: 280 }, color: "blue", subtype: "cos" },
+    { endA: { x: 124, y: 400 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "cos" },
 
- 
+    // "tan"
+    { endA: { x: 140, y: 180 }, endB: { x: 460, y: 420 }, color: "blue", subtype: "tan" },
+    { endA: { x: 140, y: 420 }, endB: { x: 140, y: 180 }, color: "green", subtype: "tan" },
+    { endA: { x: 140, y: 420 }, endB: { x: 460, y: 420 }, color: "blue", subtype: "tan" }
+  ],
+
   tangentLines: [
     {
-      midpoint: { x: 400, y: 200, label: "A" },  // ✅ Explicit midpoint label
-      length: 300,  // Extend equally on both sides
+      midpoint: { x: 300, y: 100, label: "A" },
+      length: 300,
       color: "green",
       subtype: "sin"
     },
     {
-      midpoint: { x: 600, y: 380, label: "A" },  // ✅ Explicit midpoint label
-      length: 200,  // Extend equally on both sides
+      midpoint: { x: 500, y: 280, label: "A" },
+      length: 200,
       color: "green",
       subtype: "cos"
     },
     {
-      midpoint: { x: 240, y: 280, label: "A" },  // ✅ Explicit midpoint label
+      midpoint: { x: 140, y: 180, label: "A" },
       length: 200,
       color: "green",
       subtype: "tan"
     }
   ]
 }
+
 ,
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
-            ],
+       
+
+     buttonSet: [
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="50" y1="50" x2="20" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="50" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="80" y1="80" x2="50" y2="5" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="40" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="40" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <line x1="20" y1="80" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="20" y1="80" x2="50" y2="20" stroke="#1E88E5" stroke-width="2"/>
+          <line x1="50" y1="20" x2="80" y2="80" stroke="#1E88E5" stroke-width="2"/>
+        </svg>
+                `
+    },
+
+     ],
+
+
+
        
         leftSidebarContent: {
             
@@ -1136,67 +1092,97 @@ alternateSegments: {
 
 quadrilaterals: {
         defaultButtonType: 'sin',
-        theoremDefinition: "The theorem states that for any circle, the angle formed between the tangent and the chord through the point of contact of the tangent is equal to the angle formed by the chord in the alternate segment",
+        theoremDefinition: "In a cyclic quadrilateral, the sum of either pair of opposite angles is supplementary.If one side of a cyclic quadrilateral is extended then the exterior angle so produced is equal to the interior angle at the opposite vertex.",
          canvasConfig: {
     
-         circle: [{ x: 400, y: 400 }, 200],
+            circle: [{ x: 300, y: 300 }, 200],
 
-  points: [
-    // Quadrilateral (Figure 1) - sin
-    { x: 280, y: 240, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 560, y: 280, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 520, y: 560, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 320, y: 580, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
-    { x: 600, y: 550, label: "E", color: "blue", radius: 5, type: "external", subtype: "sin" },
-
-    // Square (Figure 2) - cos
-    { x: 259, y: 259, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 541, y: 259, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 541, y: 541, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 259, y: 541, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
-    { x: 259, y: 620, label: "E", color: "blue", radius: 5, type: "external", subtype: "cos" },
-
-    // Trapezium (Figure 3) - tan
-    { x: 300, y: 573, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 500, y: 573, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 550, y: 270, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 250, y: 270, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
-    { x: 180, y: 270, label: "E", color: "blue", radius: 5, type: "external", subtype: "tan" }
-  ],
-
-  lines: [
-    // Quadrilateral (Figure 1) - sin
-    { endA: { x: 280, y: 240 }, endB: { x: 560, y: 280 }, color: "blue", subtype: "sin" },
-    { endA: { x: 560, y: 280 }, endB: { x: 520, y: 560 }, color: "blue", subtype: "sin" },
-    { endA: { x: 520, y: 560 }, endB: { x: 320, y: 580 }, color: "blue", subtype: "sin" },
-    { endA: { x: 320, y: 580 }, endB: { x: 280, y: 240 }, color: "blue", subtype: "sin" },
-    { endA: { x: 320, y: 580 }, endB: { x: 600, y: 550 }, color: "blue", subtype: "sin" },
-
-    // Square (Figure 2) - cos
-    { endA: { x: 259, y: 259 }, endB: { x: 541, y: 259 }, color: "blue", subtype: "cos" },
-    { endA: { x: 541, y: 259 }, endB: { x: 541, y: 541 }, color: "blue", subtype: "cos" },
-    { endA: { x: 541, y: 541 }, endB: { x: 259, y: 541 }, color: "blue", subtype: "cos" },
-    { endA: { x: 259, y: 541 }, endB: { x: 259, y: 259 }, color: "blue", subtype: "cos" },
-    { endA: { x: 259, y: 541 }, endB: { x: 259, y: 620 }, color: "blue", subtype: "cos" },
-
-    // Trapezium (Figure 3) - tan
-    { endA: { x: 300, y: 573 }, endB: { x: 500, y: 573 }, color: "blue", subtype: "tan" },
-    { endA: { x: 500, y: 573 }, endB: { x: 550, y: 270 }, color: "blue", subtype: "tan" },
-    { endA: { x: 550, y: 270 }, endB: { x: 250, y: 270 }, color: "blue", subtype: "tan" },
-    { endA: { x: 250, y: 270 }, endB: { x: 300, y: 573 }, color: "blue", subtype: "tan" },
-    { endA: { x: 250, y: 270 }, endB: { x: 180, y: 270 }, color: "blue", subtype: "tan" }
-  ]
-
-,
-
-}
-
-,
-         buttonSet: [
-                { label: "Figure 1", type: "sin" },
-                { label: "Figure 2", type: "cos" },
-                { label: "Figure 3", type: "tan" },
+            points: [
+              // Quadrilateral (Figure 1) - sin
+              { x: 180, y: 140, label: "D", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 460, y: 180, label: "A", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 420, y: 460, label: "B", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 220, y: 480, label: "C", color: "red", radius: 5, type: "subtended", subtype: "sin" },
+              { x: 500, y: 450, label: "E", color: "blue", radius: 5, type: "external", subtype: "sin" },
+            
+              // Square (Figure 2) - cos
+              { x: 159, y: 159, label: "C", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 441, y: 159, label: "D", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 441, y: 441, label: "A", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 159, y: 441, label: "B", color: "red", radius: 5, type: "subtended", subtype: "cos" },
+              { x: 159, y: 520, label: "E", color: "blue", radius: 5, type: "external", subtype: "cos" },
+            
+              // Trapezium (Figure 3) - tan
+              { x: 200, y: 473, label: "A", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 400, y: 473, label: "D", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 450, y: 170, label: "C", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 150, y: 170, label: "B", color: "red", radius: 5, type: "subtended", subtype: "tan" },
+              { x: 80, y: 170, label: "E", color: "blue", radius: 5, type: "external", subtype: "tan" }
             ],
+            
+            lines: [
+              // Quadrilateral (Figure 1) - sin
+              { endA: { x: 180, y: 140 }, endB: { x: 460, y: 180 }, color: "blue", subtype: "sin" },
+              { endA: { x: 460, y: 180 }, endB: { x: 420, y: 460 }, color: "blue", subtype: "sin" },
+              { endA: { x: 420, y: 460 }, endB: { x: 220, y: 480 }, color: "blue", subtype: "sin" },
+              { endA: { x: 220, y: 480 }, endB: { x: 180, y: 140 }, color: "blue", subtype: "sin" },
+              { endA: { x: 220, y: 480 }, endB: { x: 500, y: 450 }, color: "blue", subtype: "sin" },
+            
+              // Square (Figure 2) - cos
+              { endA: { x: 159, y: 159 }, endB: { x: 441, y: 159 }, color: "blue", subtype: "cos" },
+              { endA: { x: 441, y: 159 }, endB: { x: 441, y: 441 }, color: "blue", subtype: "cos" },
+              { endA: { x: 441, y: 441 }, endB: { x: 159, y: 441 }, color: "blue", subtype: "cos" },
+              { endA: { x: 159, y: 441 }, endB: { x: 159, y: 159 }, color: "blue", subtype: "cos" },
+              { endA: { x: 159, y: 441 }, endB: { x: 159, y: 520 }, color: "blue", subtype: "cos" },
+            
+              // Trapezium (Figure 3) - tan
+              { endA: { x: 200, y: 473 }, endB: { x: 400, y: 473 }, color: "blue", subtype: "tan" },
+              { endA: { x: 400, y: 473 }, endB: { x: 450, y: 170 }, color: "blue", subtype: "tan" },
+              { endA: { x: 450, y: 170 }, endB: { x: 150, y: 170 }, color: "blue", subtype: "tan" },
+              { endA: { x: 150, y: 170 }, endB: { x: 200, y: 473 }, color: "blue", subtype: "tan" },
+              { endA: { x: 150, y: 170 }, endB: { x: 80, y: 170 }, color: "blue", subtype: "tan" }
+            ]
+        }          
+
+,
+          buttonSet: [
+
+                {
+      label: "Figure 1",
+      type: "sin",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <polyline points="20,30 80,30 70,85 25,85 20,30"
+                    stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+        `
+        },
+          {
+      label: "Figure 2",
+      type: "cos",
+      svg: `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <rect x="25" y="25" width="50" height="50"
+                stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+      `
+    },
+
+              {
+      label: "Figure 3",
+      type: "tan",
+      svg: `
+       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#1E88E5" stroke-width="2" fill="none"/>
+          <polyline points="20,70 30,20 70,20 80,70 20,70"
+                    stroke="#1E88E5" stroke-width="2" fill="none"/>
+        </svg>
+                `
+    },
+
+     ],
        
         leftSidebarContent: {
             
