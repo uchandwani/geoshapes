@@ -329,45 +329,8 @@ export  const functionalityConfig = {
         </td>
 
     </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
-    </tr>
-
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
+   
+     
 </table>
               
         `,
@@ -382,25 +345,7 @@ export  const functionalityConfig = {
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
-    <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-</td>
-<td>
-    <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-</td>
-<td>
-    <span name="is_la_lb"></span>
-</td>
-
-    </tr>
+   
    <tr>
         <th>Measure of Length MC</th>
         <th>Measure of Length MD </th>
@@ -421,25 +366,7 @@ export  const functionalityConfig = {
 
     </tr>
 
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
+    
 </table>
               
         `, tan :  `
@@ -452,46 +379,8 @@ export  const functionalityConfig = {
         <col style="width: 15%;">
         <col style="width: 20%;">
     </colgroup>
-    <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-</td>
-<td>
-    <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-        oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-</td>
-<td>
-    <span name="is_la_lb"></span>
-</td>
-
-    </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
-    </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
-    </tr>
-
-     <tr>
+   
+       <tr>
         <th>Measure of Length NE</th>
         <th>Measure of Length NF </th>
         <th>Is NE = NF ?</th>
