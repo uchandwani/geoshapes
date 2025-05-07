@@ -399,13 +399,7 @@ function drawShapes(fkey, canvasConfig, buttonType) {
         console.warn(`⚠️ No valid tangent points or tangent lines found for subtype "${buttonType}".`);
     }
 
-    if (canvasConfig.arcs) {
-        console.log("✅ Drawing Arcs");
-        drawArcs(canvasConfig, buttonType);
-    } else {
-        console.warn("⚠️ No Arcs found in `canvasConfig.arcs`");
-    }
-
+    
     if (canvasConfig.lines) {
         console.log("✅ Drawing Lines");
         drawLines(canvasConfig, buttonType);
