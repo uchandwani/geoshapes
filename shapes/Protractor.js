@@ -279,44 +279,7 @@ resize(mouseX, mouseY) {
     }
 }
     
-
-// Function to snap protractor to the nearest vertex
-function snapDividerLegToNearestPoint(divider, shapes) {
-    if (!divider.draggingLeg) return; // No leg is being dragged
-  
-    const draggedPoint = divider[divider.draggingLeg];
-    let closest = null;
-    let minDistance = Infinity;
-  
-    shapes.forEach((shape) => {
-      // Snap to standalone points
-      if (shape instanceof Point) {
-        const dist = Math.hypot(draggedPoint.x - shape.x, draggedPoint.y - shape.y);
-        if (dist < minDistance) {
-          minDistance = dist;
-          closest = shape;
-        }
-      }
-  
-      // Snap to triangle vertices
-      if (shape.constructor.name === 'Triangle' && Array.isArray(shape.points)) {
-        shape.points.forEach((vertex) => {
-          const dist = Math.hypot(draggedPoint.x - vertex.x, draggedPoint.y - vertex.y);
-          if (dist < minDistance) {
-            minDistance = dist;
-            closest = vertex;
-          }
-        });
-      }
-    });
-  
-    if (closest && minDistance < 20) {
-      draggedPoint.x = closest.x;
-      draggedPoint.y = closest.y;
-      console.log(`✅ Divider ${divider.draggingLeg} snapped to:`, closest.label || '(unnamed point)', closest);
-    }
-  }
-  
+ 
 
 // In your mousemove or drag logic
 
