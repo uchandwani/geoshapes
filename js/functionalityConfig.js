@@ -184,6 +184,11 @@ export  const functionalityConfig = {
 
 <!-- Table 2 -->
 <table class="table" style="width:100%; margin-top: 10px;">
+<colgroup>
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
+  </colgroup>
   <tr><th colspan="3" style="text-align:left; background:#e2efd9;">Table 2</th></tr>
   <tr style="background-color: #d9e1f2;">
     <td><span>Length of BD</span><br>
