@@ -15,7 +15,7 @@ export  const functionalityConfig = {
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -27,7 +27,7 @@ export  const functionalityConfig = {
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -39,7 +39,7 @@ export  const functionalityConfig = {
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -424,7 +424,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -436,7 +436,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
@@ -448,7 +448,7 @@ obtuse:
             { x: 600, y: 400 },
             { x: 200, y: 100 }
           ],
-          labels: { A: "C", B: "E", C: "A" },
+          labels: { A: "C", B: "F", C: "A" },
           midpointLabels: { M1: "G", M2: "D", M3: "B" },
           showMidPoints: true,
           showMeasurements: false
