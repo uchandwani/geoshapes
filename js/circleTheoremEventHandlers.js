@@ -399,7 +399,12 @@ function drawShapes(fkey, canvasConfig, buttonType) {
         console.warn(`⚠️ No valid tangent points or tangent lines found for subtype "${buttonType}".`);
     }
 
-
+    if (canvasConfig.arcs) {
+        console.log("✅ Drawing Arcs");
+        drawArcs(canvasConfig, buttonType);
+    } else {
+        console.warn("⚠️ No Arcs found in `canvasConfig.arcs`");
+    }
 
     if (canvasConfig.lines) {
         console.log("✅ Drawing Lines");
@@ -411,7 +416,27 @@ function drawShapes(fkey, canvasConfig, buttonType) {
     canvasManager.render();
 }
 
-
+function drawArcs(config, subtype) {
+    if (!config.arcs) return;
+  
+    const ctx = canvasManager.getContext();
+    config.arcs
+      .filter(arc => arc.subtype === subtype)
+      .forEach(({ center, start, end, radius, color = 'red', direction = 'clockwise' }) => {
+        const startAngle = Math.atan2(start.y - center.y, start.x - center.x);
+        const endAngle = Math.atan2(end.y - center.y, end.x - center.x);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.arc(center.x, center.y, radius, startAngle, endAngle, direction === 'anticlockwise');
+        ctx.stroke();
+  
+        // Optional: add arrowhead on end point
+        const arrowAngle = direction === 'anticlockwise' ? endAngle - 0.1 : endAngle + 0.1;
+        drawArrowhead(ctx, center.x + radius * Math.cos(endAngle), center.y + radius * Math.sin(endAngle), arrowAngle);
+      });
+  }
+  
 
 
 /**
