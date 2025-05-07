@@ -763,6 +763,30 @@ alternateSegments: {
     { x: 80, y: 260, label: "D", color: "red", radius: 5, type: "alternate", subtype: "tan" }
   ],
 
+  arcs: [
+    // Arc at A for ∠DAC (top left arrow in image)
+    {
+      center: { x: 300, y: 100 },        // Point A
+      start: { x: 150, y: 100 },         // Point D
+      end: { x: 124, y: 400 },           // Point C
+      radius: 30,
+      color: "red",
+      direction: "anticlockwise",
+      subtype: "sin"
+    },
+    // Arc at O for ∠CÔB (bottom arc)
+    {
+      center: { x: 300, y: 300 },        // Point O
+      start: { x: 124, y: 400 },         // Point C
+      end: { x: 476, y: 400 },           // Point B
+      radius: 40,
+      color: "red",
+      direction: "clockwise",
+      subtype: "sin"
+    }
+  ],
+  
+
   lines: [
     // "sin"
     { endA: { x: 124, y: 400 }, endB: { x: 476, y: 400 }, color: "blue", subtype: "sin" },
