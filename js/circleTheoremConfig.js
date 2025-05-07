@@ -1092,7 +1092,7 @@ alternateSegments: {
 
 quadrilaterals: {
         defaultButtonType: 'sin',
-        theoremDefinition: "The theorem states that for any circle, the angle formed between the tangent and the chord through the point of contact of the tangent is equal to the angle formed by the chord in the alternate segment",
+        theoremDefinition: "In a cyclic quadrilateral, the sum of either pair of opposite angles is supplementary.If one side of a cyclic quadrilateral is extended then the exterior angle so produced is equal to the interior angle at the opposite vertex.",
          canvasConfig: {
     
             circle: [{ x: 300, y: 300 }, 200],
