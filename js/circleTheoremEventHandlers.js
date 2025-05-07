@@ -298,8 +298,8 @@ function drawTangents(config, subtype) {
             drawLines({ lines: [{ endA, endB, color }] });
 
             // Draw the midpoint itself
-            externalPoint.enableDrag = false;
-            drawPoints({ points: [externalPoint] });
+            midpoint.enableDrag = false;
+            drawPoints({ points: [midpoint] });
 
         });
     }
