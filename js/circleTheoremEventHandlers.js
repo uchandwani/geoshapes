@@ -530,7 +530,7 @@ export function handleTriangleType(fkey, type) {
 }
 
 
-export function switchFunctionality(functionalityKey, buttonType) {
+export function switchFunctionality(functionalityKey, buttonType = null) {
     console.log(`🟢 [switchFunctionality] Key: ${functionalityKey}, Sub-Button: ${buttonType}`);
     console.log(`🚨 switchFunctionality triggered from sub-button with:`, functionalityKey, buttonType);
 
@@ -599,10 +599,10 @@ export function switchFunctionality(functionalityKey, buttonType) {
     canvasManager.clearAllShapes();
     console.log("🧹 Cleared canvas shapes");
 
-    drawShapes(functionalityKey, config.canvasConfig, buttonType);
+    drawShapes(functionalityKey, config.canvasConfig, effectiveType);
 
-    updateUI(config, functionalityKey, buttonType);
-    updateLeftSidebar(functionalityKey, buttonType);
+    updateUI(config, functionalityKey, effectiveType);
+    updateLeftSidebar(functionalityKey, effectiveType);
   
     updateRightSidebar(functionalityKey, effectiveType);
 
