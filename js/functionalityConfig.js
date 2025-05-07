@@ -21,7 +21,7 @@ export  const functionalityConfig = {
           showMeasurements: false
         },
         {
-          type: "acute",
+          type: "obtuse",
           vertices: [
             { x: 300, y: 400 },
             { x: 600, y: 400 },
@@ -33,7 +33,7 @@ export  const functionalityConfig = {
           showMeasurements: false
         },
         {
-          type: "obtuse",
+          type: "acute",
           vertices: [
             { x: 100, y: 400 },
             { x: 600, y: 400 },
