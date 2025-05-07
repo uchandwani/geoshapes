@@ -173,7 +173,7 @@ function drawPoints(config, subtype) {
  */
 function drawLines(canvasConfig, subtype = null) {
     console.log(`%cFunction DWL - Drawing Lines for subtype: "${subtype}"`, 'color: blue;', canvasConfig);
-
+    debugger;    
     if (!canvasConfig.lines || !Array.isArray(canvasConfig.lines)) {
         console.warn("⚠️ No valid lines data in canvasConfig:", canvasConfig.lines);
         return;
