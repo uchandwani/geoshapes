@@ -307,71 +307,48 @@ export  const functionalityConfig = {
              <h3>Verification - Two Tangent Theorem </h3>
 
     <h4>Table 1</h4>
-<table class="table">
-    <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 15%;">
-        <col style="width: 20%;">
-    </colgroup>
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; text-align: center; font-family: Arial, sans-serif; font-size: 14px; width: 100%;">
+  <thead style="background-color: #1f4e79; color: white;">
     <tr>
-        <th>Measure of Length LA</th>
-        <th>Measure of Length LB </th>
-        <th>Is LA = LB ?</th>
+      <th>Reading</th>
+      <th>Measure of Angle</th>
+      <th>Is it perpendicular?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #d9e1f2;">
+      <td>1</td>
+      <td>∠LAO</td>
+      <td>Yes/No</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="text" name="angle_lao" placeholder="Enter ∠LAO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular1" placeholder="Yes/No" style="width: 90%;"></td>
     </tr>
     <tr style="background-color: #d9e1f2;">
-       <td>
-        <input type="number" name="tangent_la" placeholder="Enter LA" style="width: 90%;"
-            oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb'); ">
-        </td>
-        <td>
-            <input type="number" name="tangent_lb" placeholder="Enter LB" style="width: 90%;"
-                oninput="compareMeasures('tangent_la', 'tangent_lb', 'is_la_lb');">
-        </td>
-        <td>
-            <span name="is_la_lb"></span>
-        </td>
-
+      <td>2</td>
+      <td>∠MBO</td>
+      <td>Yes/No</td>
     </tr>
-   <tr>
-        <th>Measure of Length MC</th>
-        <th>Measure of Length MD </th>
-        <th>Is MC = MD ?</th>
+    <tr>
+      <td></td>
+      <td><input type="text" name="angle_mbo" placeholder="Enter ∠MBO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular2" placeholder="Yes/No" style="width: 90%;"></td>
     </tr>
     <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_mc" placeholder="Enter MC" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md'); ">
-</td>
-<td>
-    <input type="number" name="tangent_md" placeholder="Enter MD" style="width: 90%;"
-        oninput="compareMeasures('tangent_mc', 'tangent_md', 'is_mc_md');">
-</td>
-<td>
-    <span name="is_mc_md"></span>
-</td>
-
+      <td>3</td>
+      <td>∠NCO</td>
+      <td>Yes/No</td>
     </tr>
-
-     <tr>
-        <th>Measure of Length NE</th>
-        <th>Measure of Length NF </th>
-        <th>Is NE = NF ?</th>
+    <tr>
+      <td></td>
+      <td><input type="text" name="angle_nco" placeholder="Enter ∠NCO" style="width: 90%;"></td>
+      <td><input type="text" name="perpendicular3" placeholder="Yes/No" style="width: 90%;"></td>
     </tr>
-    <tr style="background-color: #d9e1f2;">
-       <td>
-    <input type="number" name="tangent_ne" placeholder="Enter NE" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf'); ">
-</td>
-<td>
-    <input type="number" name="tangent_nf" placeholder="Enter NF" style="width: 90%;"
-        oninput="compareMeasures('tangent_ne', 'tangent_nf', 'is_ne_nf');">
-</td>
-<td>
-    <span name="is_ne_nf"></span>
-</td>
-
-    </tr>
+  </tbody>
 </table>
+
               
         `,
 
