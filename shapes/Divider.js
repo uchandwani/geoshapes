@@ -393,7 +393,7 @@ constrainToCanvas(canvasWidth, canvasHeight) {
     return false;
 }
 
-function snapDividerLegToNearestPoint(divider, shapes) {
+snapDividerLegToNearestPoint(divider, shapes) {
     if (!divider.draggingLeg) return; // No leg is being dragged
   
     const draggedPoint = divider[divider.draggingLeg];
