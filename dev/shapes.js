@@ -10,7 +10,7 @@ import { CanvasManager, canvasManager } from './shapes/CanvasManager.js';
 import { Divider } from './shapes/Divider.js';
 import { Compass } from './shapes/Compass.js';
 import {Arc} from './shapes/Arc.js';
-import { currentPageFeatures } from '../js/commonConfig.js';
+import { currentPageFeatures } from './js/commonConfig.js';
 
 
 
