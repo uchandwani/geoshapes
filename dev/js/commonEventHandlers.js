@@ -379,19 +379,15 @@ function drawShapes(canvasConfig, buttonType = null) {
   if (canvasConfig.lines) drawLines(canvasConfig, buttonType);
 }
 
-function drawPoints(canvasConfig, subtype = null) {
-  const showLabels = canvasConfig.showLabels === true;
-
-  canvasConfig.points
-      .filter(p => p.subtype === subtype || p.type === "regular") // ✅ Filter on subtype strictly
-      .forEach(({ x, y, label, color = "black", radius = 5, enableDrag = false }) => {
-          if (x === undefined || y === undefined) return;
-
-          const point = new Point(x, y, label, color, radius);
-          point.setEnableDrag(false);
-          point.showLabel = showLabels;
-          canvasManager.addShape(point);
-      });
+function drawPoints(canvasConfig, buttonType = null) {
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = false }) => {
+        if (!type || type === buttonType) {
+            const point = new Point(x, y, label, color, radius);
+            point.setEnableDrag(false); // ✅ Control dragging based on config
+            canvasManager.addShape(point);
+          
+        }
+    });
 }
 
 

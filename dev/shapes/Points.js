@@ -9,9 +9,9 @@ import * as shapes from '../shapes.js';
             this.label = label || shapes.generatePointLabel(); // Label for the point
             this.color = color; // Default color
             this.radius = radius; // Radius for drawing the point
-            this.showLabel = false; // Whether to display label
+            this.showLabel = true; // Whether to display label
             this.showCoordinates = false; // Whether to display coordinates
-            this.enableDrag = true; // ✅ Default allow dragging
+            this.enableDrag = false; // ✅ Default allow dragging
         }
         
 

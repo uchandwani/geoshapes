@@ -7,7 +7,7 @@ export  const functionalityConfig = {
     theoremDefinition: "Vertically Opposite Angles theorem states that when two lines intersect each other, the vertically opposite angles are equal",
     canvasConfig: {
         
-       
+        showLabels: true ,
         points: [
             { x: 345, y: 100, label: "A", color: "red", radius: 5 },
             { x: 100, y: 100, label: "M", color: "red", radius: 5 },
@@ -42,9 +42,9 @@ export  const functionalityConfig = {
 
 
          // Transversals
-        { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 305, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
         { endA: { x: 350, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
-        { endA: { x: 365, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
+        { endA: { x: 370, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
         // Connecting lines
         { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
@@ -238,7 +238,7 @@ parallelProperties: {
 
     canvasConfig: {
         
-       
+      showLabels: true , 
       points: [
         { x: 345, y: 100, label: "A", color: "red", radius: 5 },
         { x: 100, y: 100, label: "M", color: "red", radius: 5 },
@@ -273,9 +273,9 @@ parallelProperties: {
 
 
      // Transversals
-    { endA: { x: 300, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
+    { endA: { x: 305, y: 20 }, endB: { x: 600, y: 600 }, type: "transversal", enableDrag: false },
     { endA: { x: 350, y: 20 }, endB: { x: 315, y: 600 }, type: "transversal", enableDrag: false },
-    { endA: { x: 365, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
+    { endA: { x: 370, y: 20 }, endB: { x: 190, y: 600 }, type: "transversal", enableDrag: false },
 
     // Connecting lines
     { endA: { x: 40, y: 400 }, endB: { x: 600, y: 400 }, type: "connecting", color: "green", enableDrag: false },
