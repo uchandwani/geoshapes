@@ -1,4 +1,3 @@
-
 export  const functionalityConfig = {
 
            
@@ -1930,7 +1929,7 @@ svg: `
         <tr>
           
             <td>∠SPT 60°</td>
-            <td><input type="text" id="base-60" oninput="calculateSin(60)" /></td>
+            <td><input type="text" id="perpendicular-60" oninput="calculateSin(60)" /></td>
             <td><input type="text" id="hypotenuse-60" oninput="calculateSin(60)" /></td>
             <td id="sin-60"></td>
         </tr>

@@ -1,29 +1,74 @@
-import { updatePageTitle} from './header.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
-import { functionalityConfig } from './commonConfig.js';
-import { switchFunctionality } from './commonEventHandlers.js';
-
+import { functionalityConfig } from './PLTConfig.js';
+import { switchFunctionality } from './PLTEventHandlers.js';
+import { attachNavBarListeners } from './PLTEventHandlers.js';
 import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
 import {Circle} from '../shapes/Circle.js';
 
     
-window.switchFunctionality = switchFunctionality;
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Triangle Properties Page Loaded");
 
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("Trigonometric Properties Page Loaded");
-      updatePageTitle();
-      switchFunctionality('sineTheta','sin'); // default
-    });
-
-    window.addEventListener("nav-select", (e) => {
-      const { functionalityKey, subtype } = e.detail;
-      console.log("📥 Received nav-select:", functionalityKey, subtype);
-      switchFunctionality(functionalityKey, subtype);
-    });
-   
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
     
+   /* console.log('Current Mode:', mode);
+    const buttonActions = {
+        
+        'icon-btn-1': () => console.log('Placeholder Icon 1 Clicked'),
+        'icon-btn-2': () => console.log('Placeholder Icon 2 Clicked'),
+        'icon-btn-3': () => console.log('Placeholder Icon 3 Clicked'),
+        'icon-btn-4': () => console.log('Placeholder Icon 4 Clicked'),
+        'icon-btn-5': () => console.log('Placeholder Icon 5 Clicked'),
+        'icon-btn-6': () => console.log('Placeholder Icon 6 Clicked'),
+        'icon-btn-7': () => console.log('Placeholder Icon 7 Clicked'),
+        'icon-btn-8': () => console.log('Placeholder Icon 8 Clicked'),
+        'icon-btn-14': () => console.log('Placeholder Icon 14 Clicked'),
+        'icon-btn-16': () => console.log('Placeholder Icon 16 Clicked'),
+        'icon-btn-9': () => console.log('Placeholder Icon 9 Clicked'),
+        'icon-btn-10': () => console.log('Placeholder Icon 10 Clicked'),
+        'icon-btn-11': () => console.log('Placeholder Icon 11 Clicked'),
+        'icon-btn-12': () => console.log('Placeholder Icon 12 Clicked'),
+        'icon-btn-13': () => console.log('Placeholder Icon 13 Clicked'),
+         'icon-btn-15': () => console.log('Placeholder Icon 15 Clicked'),
+    };
+
+    Object.keys(buttonActions).forEach((id) => {
+        const button = document.getElementById(id);
+        if (button) {
+            button.addEventListener('click', buttonActions[id]);
+            console.log(`Listener attached to button: ${id}`);
+        } else {
+            console.warn(`Button with ID ${id} not found.`);
+        }
+    });//});
+ */
+    
+    attachNavBarListeners(); // Set up listeners for nav buttons
+    const defaultFunctionality = 'sineTheta';
+   
+
+    switchFunctionality(defaultFunctionality);
+    // Function to handle button activation
+    // Step 3: Set the default button as active
+   /* const defaultButton = document.getElementById(`${defaultFunctionality}-button`);
+    if (defaultButton) {
+        defaultButton.classList.add('active');
+    console.log("active button changed")  ;  
+    } */
+    });
+    // Default state: Activate Sin Theta and load default functionality
+        
+   
+  //setupEventHandlers(ctx, canvas);
+  //  loadTriangle('default');
+    // Draw a default triangle on page load
+  // drawDefaultCircle(ctx, canvas);
+  // a(ctx, canvas)
+
+
 // Function to draw the default triangle on page load
 function drawDefaultCircle(ctx,canvas) {
     const centerPoint = new Point(300, 300);
@@ -64,58 +109,44 @@ export function decimalToFraction(decimal) {
 
 
  export function calculateSin(rowId) {
-  const perpInput = document.getElementById(`perpendicular-${rowId}`);
-  const hypoInput = document.getElementById(`hypotenuse-${rowId}`);
-  const sinCell = document.getElementById(`sin-${rowId}`);
+            const perpendicular = parseFloat(document.getElementById(`perpendicular-${rowId}`).value);
+            const hypotenuse = parseFloat(document.getElementById(`hypotenuse-${rowId}`).value);
+            const sinCell = document.getElementById(`sin-${rowId}`);
 
-  if (!perpInput || !hypoInput || !sinCell) {
-    console.warn("Missing input or output elements for row:", rowId);
-    return;
-  }
+            console.log("The value of input for calculation is", perpendicular, hypotenuse);
+            
+            if (!isNaN(perpendicular) && !isNaN(hypotenuse) && hypotenuse !== 0) {
+                const sinValue = (perpendicular / hypotenuse).toFixed(2);
+                console.log("The sinValue is", sinValue);
+            const epsilon = 0.01;
 
-  const perpendicular = parseFloat(perpInput.value);
-  const hypotenuse = parseFloat(hypoInput.value);
+                switch (true) {
+                    case Math.abs(sinValue - 0.50) < epsilon:
+                        sinCell.textContent = "1/2";
+                        break;
+                    case Math.abs(sinValue - 0.7071) < epsilon:
+                        sinCell.textContent = "√2/2";
+                        break;
+                    case Math.abs(sinValue - 0.86602) < epsilon:
+                        sinCell.textContent = "√3/2";
+                        break;
+                    case Math.abs(sinValue - 0.0872 ) < epsilon:
+                        sinCell.textContent = "0.0872";
+                        break;
+                    case Math.abs(sinValue - 0.9962) < epsilon:
+                        sinCell.textContent = "0.9962";
+                        break;
+                    default:
+                        sinCell.textContent = "Invalid";
+                        break;
+                
 
-  console.log(`🔢 Inputs for row ${rowId}: perpendicular=${perpendicular}, hypotenuse=${hypotenuse}`);
-
-  // Only proceed if both values are entered and valid
-  if (
-    perpInput.value.trim() !== "" &&
-    hypoInput.value.trim() !== "" &&
-    !isNaN(perpendicular) &&
-    !isNaN(hypotenuse) &&
-    hypotenuse !== 0
-  ) {
-    const sinValue = (perpendicular / hypotenuse).toFixed(4);
-    console.log(`✅ sin θ = ${sinValue}`);
-
-    const epsilon = 0.01;
-
-    switch (true) {
-      case Math.abs(sinValue - 0.50) < epsilon:
-        sinCell.textContent = "1/2";
-        break;
-      case Math.abs(sinValue - 0.7071) < epsilon:
-        sinCell.textContent = "√2/2";
-        break;
-      case Math.abs(sinValue - 0.8660) < epsilon:
-        sinCell.textContent = "√3/2";
-        break;
-      case Math.abs(sinValue - 0.0872) < epsilon:
-        sinCell.textContent = "0.0872";
-        break;
-      case Math.abs(sinValue - 0.9962) < epsilon:
-        sinCell.textContent = "0.9962";
-        break;
-      default:
-        sinCell.textContent = sinValue; // fallback to showing decimal value
-        break;
+    console.log(`Updated sinCell content: ${sinCell.textContent}`);
     }
-  } else {
-    // Don't update yet while user is typing
-    sinCell.textContent = "";
-  }
-}
+            } else {
+                sinCell.textContent = "Invalid";
+            }
+        }
 
 export function calculateCos(rowId) {
     console.log(`Calculating cos for row: ${rowId}`);
@@ -459,6 +490,17 @@ export function renderCanvas(config) {
 
     // Clear the canvas before drawing
    // canvasManager.clearCanvas();
+
+    const testPoint = new Point(300, 300, "P", "green", 5);
+    canvasManager.addSpecificPoint(testPoint);
+    
+    console.log("Added test point to canvasManager:", canvasManager.specificPoints);
+
+    // Draw the test line
+    const testLine = new Line({ x: 50, y: 50 }, { x: 200, y: 200 }, 'red');
+    canvasManager.addShape(testLine);
+    canvasManager.render();
+    
 
     // Draw the circle
     if (canvasConfig.circle) {

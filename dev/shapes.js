@@ -286,7 +286,7 @@ canvas.addEventListener('mousedown', (e) => {
             const shapeType = selectedShape.constructor.name;
             console.log("Shape Type in mousedown:", shapeType);
             const distanceToCenter = Math.hypot(offsetX - selectedShape.center?.x, offsetY - selectedShape.center?.y);
-
+            
             switch (shapeType) {
                 case 'Line':
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
@@ -296,11 +296,13 @@ canvas.addEventListener('mousedown', (e) => {
                     break;
 
                 case 'Circle':
+                    debugger;
                     const distanceFromCenter = Math.hypot(offsetX - selectedShape.center.x, offsetY - selectedShape.center.y);
                     
                     if (Math.abs(distanceFromCenter - selectedShape.radius) < 10) {
+                        if(selectedShape.enableStretch){
                         selectedShape.draggingEdge = true; // Dragging radius
-                        console.log("Dragging Circle Edge for resizing.");
+                        console.log("Dragging Circle Edge for resizing."); }
                     } else {
                         selectedShape.draggingCenter = true; // Dragging entire circle
                         console.log("Dragging Circle Center.");
