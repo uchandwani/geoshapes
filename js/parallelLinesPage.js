@@ -378,8 +378,7 @@
 } */
 
 export function compareMeasures(input1Name, input2Name, resultName) {
-  console.log("Inside compareMeasures", input1Name, input2Name, resultName);
-
+ 
   const input1 = document.getElementsByName(input1Name)[0];
   const input2 = document.getElementsByName(input2Name)[0];
   const result = document.getElementsByName(resultName)[0] || document.getElementById(resultName);

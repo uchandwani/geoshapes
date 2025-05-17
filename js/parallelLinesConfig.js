@@ -1,7 +1,6 @@
 export  const functionalityConfig = {
 
-        
-    
+           
         verticallyOpposite: {
            
         theoremDefinition: "Vertically Opposite Angles theorem states that when two lines intersect each other, the vertically opposite angles are equal",
@@ -169,6 +168,22 @@ export  const functionalityConfig = {
     <td><span name="is_aes_tev"></span></td>
   </tr>
 </table>
+
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
 
 
@@ -387,81 +402,99 @@ export  const functionalityConfig = {
   <!-- Table 1 -->
   <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
   <tr style="background-color: #d9e1f2;">
-    <td><span>∠AFQ</span><br>
-      <input type="number" id="angle_afq" name="angle_afq" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
-    </td>
-    <td><span>∠AGT</span><br>
-      <input type="number" id="angle_agt" name="angle_agt" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_afq', 'angle_agt', 'is_afq_agt');">
-    </td>
-    <td><span id="is_afq_agt" name="is_afq_agt"></span></td>
-  </tr>
+  <td><span>∠AFQ</span><br>
+    <input type="number" name="angle1" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span>∠AGT</span><br>
+    <input type="number" name="angle2" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span name="is_angle1_angle2"></span></td>
+</tr>
 
   <tr style="background-color: #d9e1f2;">
-    <td><span>∠AFD</span><br>
-      <input type="number" id="angle_afd" name="angle_afd" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
-    </td>
-    <td><span>∠AGE</span><br>
-      <input type="number" id="angle_age" name="angle_age" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_afd', 'angle_age', 'is_afd_age');">
-    </td>
-    <td><span id="is_afd_age" name="is_afd_age"></span></td>
-  </tr>
+  <td><span>∠AFD</span><br>
+    <input type="number" name="angle3" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span>∠AGE</span><br>
+    <input type="number" name="angle4" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span name="is_angle3_angle4"></span></td>
+</tr>
 
   <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠ADF</span><br>
-      <input type="number" id="angle_adf" name="angle_adf" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-    </td>
-    <td><span>∠AEG</span><br>
-      <input type="number" id="angle_aeg" name="angle_aeg" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_adf', 'angle_aeg', 'is_adf_aeg');">
-    </td>
-    <td><span id="is_adf_aeg" name="is_adf_aeg"></span></td>
-  </tr>
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠ADF</span><br>
+    <input type="number" id="angle5" name="angle5" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span>∠AEG</span><br>
+    <input type="number" id="angle6" name="angle6" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span id="is_angle5_angle6" name="is_angle5_angle6"></span></td>
+</tr>
 
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠PDV</span><br>
-      <input type="number" id="angle_pdv" name="angle_pdv" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-    </td>
-    <td><span>∠SEV</span><br>
-      <input type="number" id="angle_sev" name="angle_sev" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_pdv', 'angle_sev', 'is_pdv_sev');">
-    </td>
-    <td><span id="is_pdv_sev" name="is_pdv_sev"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠PDV</span><br>
+    <input type="number" id="angle7" name="angle7" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span>∠SEV</span><br>
+    <input type="number" id="angle8" name="angle8" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span id="is_angle7_angle8" name="is_angle7_angle8"></span></td>
+</tr>
+
 
   <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠NAB</span><br>
-      <input type="number" id="angle_nab" name="angle_nab" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
-    </td>
-    <td><span>∠QBC</span><br>
-      <input type="number" id="angle_qbc" name="angle_qbc" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_qbc', 'is_nab_qbc');">
-    </td>
-    <td><span id="is_nab_qbc" name="is_nab_qbc"></span></td>
-  </tr>
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠NAB</span><br>
+    <input type="number" id="angle9" name="angle9" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span>∠QBC</span><br>
+    <input type="number" id="angle10" name="angle10" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span id="is_angle9_angle10" name="is_angle9_angle10"></span></td>
+</tr>
 
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠MAB</span><br>
-      <input type="number" id="angle_mab" name="angle_mab" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
-    </td>
-    <td><span>∠PBC</span><br>
-      <input type="number" id="angle_pbc" name="angle_pbc" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_pbc', 'is_mab_pbc');">
-    </td>
-    <td><span id="is_mab_pbc" name="is_mab_pbc"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠MAB</span><br>
+    <input type="number" id="angle11" name="angle11" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span>∠PBC</span><br>
+    <input type="number" id="angle12" name="angle12" placeholder="Enter" style="width: 90%;"
+      oninput="compareMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span id="is_angle11_angle12" name="is_angle11_angle12"></span></td>
+</tr>
+
 </table>
+
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave('parallelProperties', 'sin')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit('parallelProperties', 'sin')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
 
               
@@ -482,85 +515,101 @@ export  const functionalityConfig = {
     <th>Equality Check</th>
   </tr>
 
-  <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠QFG</span><br>
-      <input type="number" name="angle_abd" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
-    </td>
-    <td><span>∠FGE</span><br>
-      <input type="number" name="angle_acf" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_abd', 'angle_acf', 'is_abd_acf');">
-    </td>
-    <td><span name="is_abd_acf"></span></td>
-  </tr>
+ <!-- Table 1 -->
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠QFG</span><br>
+    <input type="number" name="angle1" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span>∠FGE</span><br>
+    <input type="number" name="angle2" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span id="is_angle1_angle2" name="is_angle1_angle2"></span></td>
+</tr>
 
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠DFG</span><br>
-      <input type="number" name="angle_adb" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
-    </td>
-    <td><span>∠FGT</span><br>
-      <input type="number" name="angle_afc2" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_adb', 'angle_afc2', 'is_adb_afc');">
-    </td>
-    <td><span name="is_adb_afc"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠DFG</span><br>
+    <input type="number" name="angle3" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span>∠FGT</span><br>
+    <input type="number" name="angle4" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span id="is_angle3_angle4" name="is_angle3_angle4"></span></td>
+</tr>
 
-  <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠PDE</span><br>
-      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-    </td>
-    <td><span>∠DEG</span><br>
-      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_pde', 'angle_deg', 'is_pde_deg');">
-    </td>
-    <td><span name="is_pde_deg"></span></td>
-  </tr>
+<!-- Table 2 -->
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠PDE</span><br>
+    <input type="number" name="angle5" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span>∠DEG</span><br>
+    <input type="number" name="angle6" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span id="is_angle5_angle6" name="is_angle5_angle6"></span></td>
+</tr>
 
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠FDE</span><br>
-      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
-    </td>
-    <td><span>∠DES</span><br>
-      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_fde', 'angle_des', 'is_fde_des');">
-    </td>
-    <td><span name="is_fde_des"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠FDE</span><br>
+    <input type="number" name="angle7" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span>∠DES</span><br>
+    <input type="number" name="angle8" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span id="is_angle7_angle8" name="is_angle7_angle8"></span></td>
+</tr>
 
-  <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠NAB</span><br>
-      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
-    </td>
-    <td><span>∠ABP</span><br>
-      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_nab', 'angle_abp', 'is_nab_abp');">
-    </td>
-    <td><span name="is_nab_abp"></span></td>
-  </tr>
+<!-- Table 3 -->
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠NAB</span><br>
+    <input type="number" name="angle9" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span>∠ABP</span><br>
+    <input type="number" name="angle10" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span id="is_angle9_angle10" name="is_angle9_angle10"></span></td>
+</tr>
 
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠MAB</span><br>
-      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
-    </td>
-    <td><span>∠ABF</span><br>
-      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
-        oninput="compareMeasures('angle_mab', 'angle_abf', 'is_mab_abf');">
-    </td>
-    <td><span name="is_mab_abf"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠MAB</span><br>
+    <input type="number" name="angle11" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span>∠ABF</span><br>
+    <input type="number" name="angle12" placeholder="Enter" style="width: 90%;" 
+      oninput="compareMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span id="is_angle11_angle12" name="is_angle11_angle12"></span></td>
+</tr>
 </table>
 
+
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave('parallelProperties', 'cos')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit('parallelProperties', 'cos')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
 
            
@@ -581,84 +630,142 @@ export  const functionalityConfig = {
   </tr>
 
   <!-- Table 1 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠QFG</span><br>
-      <input type="number" name="angle_qfg" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
-    </td>
-    <td><span>∠FGT</span><br>
-      <input type="number" name="angle_fgt" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_qfg', 'angle_fgt', 'sum_qfg_fgt');">
-    </td>
-    <td><span name="sum_qfg_fgt"></span></td>
-  </tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠DFG</span><br>
-      <input type="number" name="angle_dfg" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-    </td>
-    <td><span>∠FGE</span><br>
-      <input type="number" name="angle_fge" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_dfg', 'angle_fge', 'sum_dfg_fge');">
-    </td>
-    <td><span name="sum_dfg_fge"></span></td>
-  </tr>
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 1</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠QFG</span><br>
+    <input type="number" name="angle1" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span>∠FGT</span><br>
+    <input type="number" name="angle2" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle1', 'angle2', 'is_angle1_angle2');">
+  </td>
+  <td><span id="is_angle1_angle2" name="is_angle1_angle2"></span></td>
+</tr>
 
-  <!-- Table 2 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠PDE</span><br>
-      <input type="number" name="angle_pde" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
-    </td>
-    <td><span>∠DES</span><br>
-      <input type="number" name="angle_des" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_pde', 'angle_des', 'sum_pde_des');">
-    </td>
-    <td><span name="sum_pde_des"></span></td>
-  </tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠FDE</span><br>
-      <input type="number" name="angle_fde" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-    </td>
-    <td><span>∠DEG</span><br>
-      <input type="number" name="angle_deg" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_fde', 'angle_deg', 'sum_fde_deg');">
-    </td>
-    <td><span name="sum_fde_deg"></span></td>
-  </tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠DFG</span><br>
+    <input type="number" name="angle3" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span>∠FGE</span><br>
+    <input type="number" name="angle4" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle3', 'angle4', 'is_angle3_angle4');">
+  </td>
+  <td><span id="is_angle3_angle4" name="is_angle3_angle4"></span></td>
+</tr>
 
-  <!-- Table 3 -->
-  <tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠NAB</span><br>
-      <input type="number" name="angle_nab" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
-    </td>
-    <td><span>∠ABF</span><br>
-      <input type="number" name="angle_abf" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_nab', 'angle_abf', 'sum_nab_abf');">
-    </td>
-    <td><span name="sum_nab_abf"></span></td>
-  </tr>
-  <tr style="background-color: #d9e1f2;">
-    <td><span>∠MAB</span><br>
-      <input type="number" name="angle_mab" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
-    </td>
-    <td><span>∠ABP</span><br>
-      <input type="number" name="angle_abp" placeholder="Enter" style="width: 90%;"
-        oninput="sumMeasures('angle_mab', 'angle_abp', 'sum_mab_abp');">
-    </td>
-    <td><span name="sum_mab_abp"></span></td>
-  </tr>
+<!-- Table 2 -->
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 2</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠PDE</span><br>
+    <input type="number" name="angle5" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span>∠DES</span><br>
+    <input type="number" name="angle6" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle5', 'angle6', 'is_angle5_angle6');">
+  </td>
+  <td><span id="is_angle5_angle6" name="is_angle5_angle6"></span></td>
+</tr>
+
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠FDE</span><br>
+    <input type="number" name="angle7" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span>∠DEG</span><br>
+    <input type="number" name="angle8" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle7', 'angle8', 'is_angle7_angle8');">
+  </td>
+  <td><span id="is_angle7_angle8" name="is_angle7_angle8"></span></td>
+</tr>
+
+<!-- Table 3 -->
+<tr><th colspan="3" style="text-align:left; background:#d9e1f2;">Table 3</th></tr>
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠NAB</span><br>
+    <input type="number" name="angle9" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span>∠ABF</span><br>
+    <input type="number" name="angle10" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle9', 'angle10', 'is_angle9_angle10');">
+  </td>
+  <td><span id="is_angle9_angle10" name="is_angle9_angle10"></span></td>
+</tr>
+
+<tr style="background-color: #d9e1f2;">
+  <td><span>∠MAB</span><br>
+    <input type="number" name="angle11" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span>∠ABP</span><br>
+    <input type="number" name="angle12" placeholder="Enter" style="width: 90%;"
+      oninput="SumMeasures('angle11', 'angle12', 'is_angle11_angle12');">
+  </td>
+  <td><span id="is_angle11_angle12" name="is_angle11_angle12"></span></td>
+</tr>
 </table>
+
+
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave('parallelProperties', 'tan')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit('parallelProperties', 'tan')" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
             
         `, 
-}},
+},
+
+formStructure: {
+  sin: {
+    fields: [
+      { angle1: "angle1", label1: "∠AFQ", angle2: "angle2", label2: "∠AGT", result: "is_angle1_angle2" },
+      { angle1: "angle3", label1: "∠AFD", angle2: "angle4", label2: "∠AGE", result: "is_angle3_angle4" },
+      { angle1: "angle5", label1: "∠ADF", angle2: "angle6", label2: "∠AEG", result: "is_angle5_angle6" },
+      { angle1: "angle7", label1: "∠PDV", angle2: "angle8", label2: "∠SEV", result: "is_angle7_angle8" },
+      { angle1: "angle9", label1: "∠NAB", angle2: "angle10", label2: "∠QBC", result: "is_angle9_angle10" },
+      { angle1: "angle11", label1: "∠MAB", angle2: "angle12", label2: "∠PBC", result: "is_angle11_angle12" }
+    ],
+    conclusion: "studentConclusion"
+  },
+  cos: {
+    fields: [
+      { angle1: "angle1", label1: "∠QFG", angle2: "angle2", label2: "∠FGE", result: "is_angle1_angle2" },
+      { angle1: "angle3", label1: "∠DFG", angle2: "angle4", label2: "∠FGT", result: "is_angle3_angle4" },
+      { angle1: "angle5", label1: "∠PDE", angle2: "angle6", label2: "∠DEG", result: "is_angle5_angle6" },
+      { angle1: "angle7", label1: "∠FDE", angle2: "angle8", label2: "∠DES", result: "is_angle7_angle8" },
+      { angle1: "angle9", label1: "∠NAB", angle2: "angle10", label2: "∠ABP", result: "is_angle9_angle10" },
+      { angle1: "angle11", label1: "∠MAB", angle2: "angle12", label2: "∠ABF", result: "is_angle11_angle12" }
+    ],
+    conclusion: "studentConclusion"
+  },
+  tan: {
+    fields: [
+      { angle1: "angle1", label1: "∠QFG", angle2: "angle2", label2: "∠FGT", result: "sum_qfg_fgt" },
+      { angle1: "angle3", label1: "∠DFG", angle2: "angle4", label2: "∠FGE", result: "sum_dfg_fge" },
+      { angle1: "angle5", label1: "∠PDE", angle2: "angle6", label2: "∠DES", result: "sum_pde_des" },
+      { angle1: "angle7", label1: "∠FDE", angle2: "angle8", label2: "∠DEG", result: "sum_fde_deg" },
+      { angle1: "angle9", label1: "∠NAB", angle2: "angle10", label2: "∠ABF", result: "sum_nab_abf" },
+      { angle1: "angle11", label1: "∠MAB", angle2: "angle12", label2: "∠ABP", result: "sum_mab_abp" }
+    ],
+    conclusion: "studentConclusion"
+  }
+},
+
+
    
     exteriorAngles: {
         defaultButtonType: 'sin',
@@ -895,6 +1002,22 @@ export  const functionalityConfig = {
     </tbody>
 </table>
 
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ 
+   <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
 
                
@@ -960,7 +1083,22 @@ export  const functionalityConfig = {
     </tbody>
 </table>
             
-            
+  <!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
+        
         `, 
 
            tan : `
@@ -1022,7 +1160,23 @@ export  const functionalityConfig = {
         
     </tbody>
 </table>
-            
+  
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
+
             
         `,  
 
@@ -1231,6 +1385,21 @@ angleSumProperties: {
     </tbody>
 </table>
         
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
 
     
                
@@ -1283,7 +1452,23 @@ angleSumProperties: {
         
     </tbody>
 </table>
-        
+    
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
+
             
         `, 
 
@@ -1334,9 +1519,29 @@ angleSumProperties: {
         
     </tbody>
 </table>
-        
+    
+<!-- Conclusion and Submit -->
+<div style="margin-top: 15px;">
+  <label for="studentConclusion" style="font-weight: bold;">Student's Conclusion (50 words):</label>
+  <textarea id="studentConclusion" name="studentConclusion" placeholder="Enter your conclusion here..." 
+            style="width: 100%; height: 80px; resize: none;"  ></textarea>
+</div>
+
+<div style="margin-top: 15px;">
+ <button id="save-btn" onclick="handleSave()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Save
+  </button>
+  <button id="submitButton" onclick="handleSubmit()" style="background-color: #6a9be8; color: white; border: none; padding: 10px 20px; cursor: pointer; font-size: 16px;">
+    Submit
+  </button>
+</div>
+
 
         `,  
-    },
-},
-}
+      }, // end of rightSidebarContent
+    }, // end of angleSumProperties
+  }, // end of functionalityConfig object
+ } 
+  // ✅ Proper export statement
+ // export { functionalityConfig };
+  

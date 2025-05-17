@@ -30,7 +30,18 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #6a9be8;
+  background-color: #28a745 ;
+  height: 5vh;
+  padding: 0 20px;
+  color: #1E88E5;
+  position: relative;
+}
+
+header-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #28a745 ;
   height: 5vh;
   padding: 0 20px;
   color: #1E88E5;

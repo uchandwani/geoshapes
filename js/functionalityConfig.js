@@ -421,43 +421,51 @@ obtuse:
          
       canvasConfig: {
       autoloadShape: "triangle",
-      triangles: [
-        {
-          type: "right",
-          vertices: [
-            { x: 200, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 100 }
-          ],
-          labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "E", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-        },
-        {
-          type: "obtuse",
-          vertices: [
-            { x: 300, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 100 }
-          ],
-          labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "E", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-        },
-        {
-          type: "acute",
-          vertices: [
-            { x: 100, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 100 }
-          ],
-          labels: { A: "C", B: "F", C: "A" },
-          midpointLabels: { M1: "E", M2: "D", M3: "B" },
-          showMidPoints: true,
-          showMeasurements: false
-    },
+      points: [
+        // Quadrilateral (Figure 1) - sin
+        { x: 350, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "right" },
+        { x: 417.8, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "obtuse" },
+        { x: 294.2, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "acute" },
+    ],
+
+
+triangles: [
+  {
+    type: "right",
+    vertices: [
+      { x: 200, y: 400 },
+      { x: 600, y: 400 },
+      { x: 200, y: 100 }
+    ],
+    labels: { A: "C", B: "F", C: "A" },
+    midpointLabels: { M1: "G", M2: "D", M3: "B" },
+    showMidPoints: true,
+    showMeasurements: false
+  },
+  {
+    type: "obtuse",
+    vertices: [
+      { x: 300, y: 400 },
+      { x: 600, y: 400 },
+      { x: 200, y: 100 }
+    ],
+    labels: { A: "C", B: "F", C: "A" },
+    midpointLabels: { M1: "G", M2: "D", M3: "B" },
+    showMidPoints: true,
+    showMeasurements: false
+  },
+  {
+    type: "acute",
+    vertices: [
+      { x: 100, y: 400 },
+      { x: 600, y: 400 },
+      { x: 200, y: 100 }
+    ],
+    labels: { A: "C", B: "F", C: "A" },
+    midpointLabels: { M1: "G", M2: "D", M3: "B" },
+    showMidPoints: true,
+    showMeasurements: false
+},
 ]
 },
         buttonSet: [
