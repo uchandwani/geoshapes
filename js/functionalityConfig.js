@@ -422,7 +422,7 @@ obtuse:
       canvasConfig: {
       autoloadShape: "triangle",
       points: [
-        // Quadrilateral (Figure 1) - sin
+     
         { x: 350, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "right" },
         { x: 417.8, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "obtuse" },
         { x: 294.2, y: 400, label: "E", color: "red", radius: 5, type: "angleBisector", subtype: "acute" },
