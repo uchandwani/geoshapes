@@ -4,11 +4,20 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Page</title>
+    <title>Circle Theorems </title>
     
-    <link rel="stylesheet" href="./css/header_styles.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="./js/circleTheoremPage.js"></script>
+    <!-- ✅ CSS Files -->
+  <link rel="stylesheet" href="./css/header_styles.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- ✅ JS Modules -->
+
+  <script type="module" src="./shapes/CanvasManager.js"> </script>
+  <script type="module" src="./js/responsiveCanvas.js"> </script>
+  <script type="module" src="./shapes.js"></script>
+        <!-- Page Scripts -->
+ 
+    
     <script type="module">
     import {sumMeasures, compareMeasures} from './js/circleTheoremPage.js';
 
@@ -28,68 +37,71 @@
     
     <div class="container">
         <!-- Left Sidebar -->
+         <div class="sidebar-container">
+
+         <div id="theorem-definition" class="theorem-definition">
+             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
+             </div> 
+                
         <div class="sidebar left" id="left-sidebar">
             <h3>Instructions</h3>
             <p>Select a theorem from the navigation bar above to see its instructions here.</p>
         </div>
             
-
+    </div>
         <!-- Main Canvas -->
         <div class="canvas-container">
-            <div class="navigation-buttons">
-          
-                
-                <button id="sineTheta-button" class="icon-btn" title="Radius Tangent Theorem">Radius Tangent Theorem</button>
-                <button id="cosineTheta-button" class="icon-btn" title="Two Tangent Theorem">Two Tangent Theorem</button>
-                <button id="subtendedAngles-button" class="icon-btn" title="Theorem C">Subtended Angles Theorems</button>
-                <button id="alternateSegments-button" class="icon-btn" title="Alternate Segment"> Alternate Segment Theorem</button>
-                <button id="quadrilaterals-button" class="icon-btn" title="Cyclic Quadrilateral"> Cyclic Quadrilateral</button>
-                        
-                </div>
-            <div id="theorem-definition" class="theorem-definition">
-             <p id="theorem-text">Definition of the currently selected theorem will appear here.</p>
-             </div> 
-
-             <div id="dynamic-buttons" class="triangle-buttons">
-    <button id="tab-verify" onclick="showTab('other')">Verify Trigonometric Identities</button>
-    <button id="tab-other" onclick="showTab('other')">Other Tab</button>
-   </div>
-
-             <!--div id="dynamic-buttons" class="triangle-buttons"></div-->
-                     <div class="canvas-wrapper">
-             <div class="additional-div">
+            
+            
+    <div class="canvas-wrapper">
+             <div id="dynamic-buttons" class="triangle-buttons">  </div>
+              <div class="size-label"></div>
+                   <!-- Tool Buttons -->
+                          
         
-         <button id="draw-line" class="icon-btn" title="Draw Line">
-            <img src="icons/line-icon.png" alt="Line Icon" />
-          </button>
-          <button id="draw-scale"class="icon-btn" title="Show Scale">Add Scale</button>
-
-          <button id="add-divider" class="icon-btn" title="Add Divider">
-          <img src="./icons/divider-icon.png" alt="Add Divider" />
-          </button>
-
+                <div id="left-side-tool-div">
+                    <button id="draw-line" class="icon-btn" title="Draw Line">
+                      <!-- Line Icon -->
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <line x1="4" y1="20" x2="20" y2="4" stroke="#1E88E5" stroke-width="2"/>
+                      </svg>
+                    </button>
+                  
+                    <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
+                      <!-- Protractor Icon -->
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M12 3a9 9 0 0 0-9 9v3h18v-3a9 9 0 0 0-9-9zM5 12a7 7 0 0 1 14 0v1H5v-1z" fill="#000"/>
+                      </svg>
+                    </button>
+                  
+                    
+                  
+                    <button id="delete-shape" class="icon-btn" title="Delete Shape">
+                      <!-- Trash Icon -->
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <rect x="5" y="7" width="14" height="14" rx="2" fill="none" stroke="#1E88E5" stroke-width="2"/>
+                        <line x1="3" y1="7" x2="21" y2="7" stroke="#1E88E5" stroke-width="2"/>
+                        <line x1="10" y1="11" x2="10" y2="17" stroke="#1E88E5" stroke-width="2"/>
+                        <line x1="14" y1="11" x2="14" y2="17" stroke="#1E88E5" stroke-width="2"/>
+                      </svg>
+                    </button>
           
-
-          <button id="draw-triangle" class="icon-btn" title="Draw Triangle">
-            <img src="./icons/triangle-icon.png" alt="Triangle Icon" />
-          </button>
+                    <button id="add-divider" class="icon-btn" title="Add Divider">
+                      <!-- Divider Icon (Compass) -->
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <circle cx="12" cy="4" r="2" fill="#000"/>
+                        <path d="M12 6v5m0 0l-4 11m4-11l4 11" stroke="#1E88E5" stroke-width="2"/>
+                      </svg>
+                    </button>
           
-
-          <button id="draw-protractor" class="icon-btn" title="Draw Protractor">
-            <img src="./icons/protractor-icon.png" alt="Protractor Icon" />
-          </button>
-          <button id="modify-shape" class="icon-btn" title="Modify Shape">
-            <img src="icons/modify-icon.png" alt="Modify Icon" />
-          </button>
-          <button id="delete-shape" class="icon-btn" title="Delete Shape">
-            <img src="icons/delete-icon.png" alt="Delete Icon" />
-          </button>
-         </div>
+                  </div>
         
-                    <canvas id="canvas" width="800" height="800" ></canvas>
+                  <div class="canvas-scroll-container" style="position: relative;">
+                    <canvas id="canvas"></canvas>
+                   
+                  </div>
                 </div>
-        </div>
-
+            </div>
         <!-- Right Sidebar -->
         <div class="sidebar right" id="right-sidebar">
             <h3>Exercises / Results</h3>
@@ -125,32 +137,30 @@
     <footer>
         <p></p>
     </footer>
-     <!-- Page Scripts -->
-  <script type="module" src="./js/circleTheoremPage.js"></script>
-  <script type="module" src="./shapes.js"></script>
-  <script type="module" src="./shapes/CanvasManager.js"></script>
+ 
 
   <!-- Dynamically load header.html and header.js -->
-  <script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
 
-      // Dynamically load header.js *after* header.html is loaded
-      const script = document.createElement('script');
-      script.src = './js/header.js';
-      script.onload = () => {
-        if (typeof updatePageTitle === "function") {
-          updatePageTitle();  // ✅ This should be defined in header.js
-        } else {
-          console.warn("⚠️ updatePageTitle not found.");
-        }
-      };
-      document.head.appendChild(script);
-    });
-</script>
+  <script type="module">
+    const html = await fetch('./header.html').then(res => res.text());
+    document.getElementById('header-placeholder').innerHTML = html;
+  
+    const { updatePageTitle, loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
+    updatePageTitle();
+    loadSubHeaderIcons();
+    
+  
+    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
+    attachNavBarListeners();
 
+    window.addEventListener("nav-select", (e) => {
+    const { functionalityKey, subtype } = e.detail;
+    console.log("📥 Received nav-select:", functionalityKey, subtype);
+    switchFunctionality(functionalityKey, subtype);
+  });
+
+    switchFunctionality('twoTangents', 'sin'); // or your preferred default
+  </script>
   
 </body>
 </html>

@@ -1,10 +1,21 @@
-import { functionalityConfig } from './functionalityConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { functionalityConfig } from './commonConfig.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import {Point} from '../shapes/Points.js';
-
+import { Circle } from '../shapes/Circle.js';
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
 // Function to handle navigation and update the screen
 let setShowMidpoints =true;
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
 
 
 export function generateButtons(buttonSet = [], defaultType = 'right') {
@@ -212,33 +223,6 @@ export function handleTriangleType(fkey,type) {
     console.log(`${type} triangle drawn with vertexLabels:`, vertexLabels, "and midpointLabels:", midpointLabels);
 }
 
-export function updateRightSidebar(functionalityKey, subClassification) {
-    console.log('Functionality Key:', functionalityKey);
-    console.log('Subclassification:', subClassification);
-     console.log('Functionality Configuration:', functionalityConfig);
-
-    const config = functionalityConfig[functionalityKey];
-    if (!config) {
-        console.error(`No configuration found for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    const rightSidebarContent = config.rightSidebarContent;
-    if (!rightSidebarContent) {
-        console.error(`No rightSidebarContent defined for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    const content = rightSidebarContent[subClassification];
-    if (!content) {
-        console.error(`No content found for subClassification: ${subClassification}`);
-        document.querySelector('.sidebar.right').innerHTML = `<p>Content not available.</p>`;
-        return;
-    }
-
-    // Update the sidebar
-    document.querySelector('.sidebar.right').innerHTML = content;
-}
 
 export function addSpecificPoints(points, ctx) {
     if (!points || !Array.isArray(points)) {
@@ -255,9 +239,9 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-export function switchFunctionality(functionalityKey) {
+/* export function switchFunctionality(functionalityKey, buttonType=null) {
 
-    console.log(`Switching to functionality: ${functionalityKey}`);
+    console.log(`Switching to functionality: ${functionalityKey}`, buttonType);
     canvasManager.clearSpecificPoints();
     // Get the selected functionality configuration
     const config = functionalityConfig[functionalityKey];
@@ -300,84 +284,247 @@ export function switchFunctionality(functionalityKey) {
     }
     
     
+*/
 
-    updateRightSidebar(functionalityKey, defaultType);
+window.switchFunctionality = switchFunctionality;
 
-    if (config.buttonSet) {
-        console.log("Generating buttons for functionality:", functionalityKey);
-        generateButtons(config.buttonSet, defaultType);
-    } else {
-        console.warn(`No buttonSet defined for functionality: ${functionalityKey}`);
-        generateButtons(); // Clear existing buttons
-    }
+/**
+ * Main function to update functionality and render new shapes + UI.
+ * 
+ * @param {string} functionalityKey - The key for the selected functionality
+ * @param {string|null} subtype - Optional subtype (e.g. 'right', 'sin'); fallback applied if not provided
+ */
+export function switchFunctionality(functionalityKey, subtype = null) {
+  console.log("🔁 switchFunctionality called with:", functionalityKey, subtype);
 
+  const config = functionalityConfig[functionalityKey];
+  if (!config) {
+    console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
+    return;
+  }
 
-    // Update the canvas
-   
- // Update the canvas with the default triangle using defaultType
-    if (defaultType) {
-        console.log("The functionalitykey and type", functionalityKey,defaultType);
-        handleTriangleType(functionalityKey,defaultType); // Dynamically create and render the default triangle
-    }
+  // 🧠 Determine fallback subtype if not explicitly provided
+  const effectiveSubtype = subtype || (Array.isArray(config.buttonSet) && config.buttonSet.length > 0
+    ? config.buttonSet[0]
+    : null);
 
-    canvasManager.render();
+  console.log("🎯 Using subtype:", effectiveSubtype);
 
-    } 
+  // ✅ Clear canvas
+  canvasManager.clearAllShapes();
+
+  // ✅ Update content areas
+  updateTheoremText(config, effectiveSubtype);
+  updateLeftSidebar(config, effectiveSubtype);
+  updateRightSidebar(config, effectiveSubtype);
+
+  // ✅ Update visuals on canvas
+  drawShapes(config.canvasConfig, effectiveSubtype);
+
+  // ✅ Update active icon styles
+ // updateActiveSubHeaderButton(functionalityKey);
+
+  // ✅ Update dynamic sub-buttons if needed
+ // showSubButtons(config.buttonSet || [], functionalityKey);
+
+  canvasManager.render();
+ 
+  } 
 
 // Attach event listeners to navigation buttons
 
-function logDynamicButtons() {
-    const buttonContainer = document.getElementById('dynamic-buttons');
-    const buttons = buttonContainer.querySelectorAll('button');
-    buttons.forEach((button, index) => {
-        console.log(`Button ${index + 1}:`, button.textContent, button.dataset.type);
+
+function drawShapes(canvasConfig, buttonType = null) {
+  
+    if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
+    if (canvasConfig.circle) drawCircle(canvasConfig);
+    if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
+    if (canvasConfig.lines) drawLines(canvasConfig);
+}
+
+function drawPoints(canvasConfig, buttonType = null) {
+    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type }) => {
+        if (!type || type === buttonType) {
+            const point = new Point(x, y, label, color, radius);
+            canvasManager.addShape(point);
+        }
     });
 }
 
-export function attachNavBarListeners() {
-    
-    const navButtons = {
-       
-        midSegmentTheorem: document.getElementById('midSegmentTheorem-button'),
-        basicProportionalityTheorem: document.getElementById('basicProportionalityTheorem-button'),
-        angleBisectorTheorem: document.getElementById('angleBisectorTheorem-button'),
-        propertiesOfTriangles: document.getElementById('propertiesOfTriangles-button'),};
-      
-
-    // Add event listeners to each button
-    Object.entries(navButtons).forEach(([key, button]) => {
-        if (button) {
-            button.addEventListener('click', () => {
-                // Switch to the corresponding functionality
-                switchFunctionality(key);
-
-                // Remove the active class from all buttons
-                Object.values(navButtons).forEach((btn) => {
-                    btn.classList.remove('active');
-                });
-
-                // Add the active class to the clicked button
-                button.classList.add('active');
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
+function drawLines(canvasConfig) {
+    canvasConfig.lines.forEach(({ endA, endB, color = "black" }) => {
+        if (endA && endB) {
+            const line = new Line(endA, endB, color);
+            line.setEnableDrag(canvasConfig.enableDrag ?? true);
+            canvasManager.addShape(line);
         }
     });
+}
 
-    // Highlight the default button initially
-    const defaultKey = 'midSegmentTheorem'; // Change if a different default is desired
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
+function drawCircle(canvasConfig) {
+    const [center, radius] = canvasConfig.circle;
+    const circle = new Circle(center, radius);
+    circle.setEnableDrag(canvasConfig.enableDrag ?? true);
+    canvasManager.addShape(circle);
+}
+
+function drawTriangles(canvasConfig, buttonType = null) {
+    const triangles = buttonType
+        ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
+        : canvasConfig.triangles;
+
+    
+    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidPoints, showMeasurements }) => {
+        if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
+        const triangle = new Triangle(vertexA, vertexB, vertexC);
+        triangle.setVertexLabels(labels);
+        triangle.setEnableDrag(canvasConfig.enableDrag ?? true);
+        triangle.setShowMidpoints(showMidPoints);
+        triangle.setShowMeasurements(showMeasurements);
+        canvasManager.addShape(triangle);
+    });
+}
+
+
+export function updateActiveSubHeaderButton(buttonElement) {
+    const current = document.querySelector(".navigation-buttons button.active, .triangle-button.active");
+    if (current !== buttonElement) {
+        document.querySelectorAll(".navigation-buttons button, .triangle-button").forEach(btn => btn.classList.remove("active"));
+        buttonElement?.classList.add("active");
     }
 }
 
+/**
+ * updateUI - Renders theorem definition and subtype buttons dynamically based on configuration
+ *
+ * @param {Object} config - Configuration object for the selected functionality
+ * @param {string} functionalityKey - The main functionality key (e.g., "midSegmentTheorem")
+ * @param {Object|null} buttonType - Subtype object (e.g., { label, type, svg }) or null
+ */
+function updateUI(config, functionalityKey, buttonType = null) {
+    // 🧠 Step 1: Choose correct theorem definition for selected subtype (if available)
+    const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
+  
+    // 🧠 Step 2: Update the theorem text, canvas, and sidebar areas
+    updateTheoremText(config, buttonType);
+  
+    // 🧠 Step 3: Handle dynamic button rendering for subtypes (right sidebar)
+    const dynamicButtons = document.getElementById("dynamic-buttons");
+  
+    if (Array.isArray(config.buttonSet)) {
+      // Clear previous buttons
+      dynamicButtons.innerHTML = "";
+  
+      // Loop through each subtype button definition
+      config.buttonSet.forEach(({ label, type, svg }) => {
+        // 🔹 Create a tooltip-enabled container for each button
+        const wrapper = document.createElement("div");
+        wrapper.className = "tooltip-container";
+  
+        // 🔹 Add SVG icon if provided, otherwise fallback to plain button
+        if (svg) {
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = svg.trim();
+          const svgEl = tempDiv.firstChild;
+          svgEl.classList.add("sub-button-svg");
+          wrapper.appendChild(svgEl);
+        } else {
+          const fallbackBtn = document.createElement("button");
+          fallbackBtn.classList.add("triangle-button");
+          fallbackBtn.textContent = label;
+          wrapper.appendChild(fallbackBtn);
+        }
+  
+        // 🔹 Add tooltip label
+        const tooltip = document.createElement("span");
+        tooltip.className = "tooltip-text";
+        tooltip.textContent = label;
+        wrapper.appendChild(tooltip);
+  
+        // ✅ Attach click handler to switch subtype
+        wrapper.addEventListener("click", () => {
+          console.log("📥 Subtype button clicked:", functionalityKey, { label, type, svg });
+          switchFunctionality(functionalityKey, { label, type, svg });
+        });
+  
+        // Add to right sidebar container
+        dynamicButtons.appendChild(wrapper);
+      });
+  
+      // Ensure dynamic buttons are visible
+      dynamicButtons.style.display = "block";
+    } else {
+      // If no buttons defined, hide the container
+      dynamicButtons.style.display = "none";
+    }
+  }
+  
 
-// Initialize event handlers
-document.addEventListener('DOMContentLoaded', () => {
-    attachNavBarListeners();
+export function updateLeftSidebar(functionalityKey, subtype = null) {
+    const config = functionalityConfig[functionalityKey];
+    if (!config) return;
 
-    // Auto-load the first functionality (e.g., Triangle Theorem) on page load
-    switchFunctionality('midSegmentTheorem');
-});
+    const sidebar = document.querySelector(".sidebar.left");
+    const allContent = config.leftSidebarContent;
+
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
+        // ✅ Try in this order: specific subtype > defaultButtonType > fallback message
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
+    }
+
+    sidebar.innerHTML = content;
+}
+
+export function updateRightSidebar(functionalityKey, subtype = null) {
+    const config = functionalityConfig[functionalityKey];
+    if (!config) return;
+
+    const sidebar = document.querySelector(".sidebar.right");
+    const allContent = config.rightSidebarContent;
+
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
+    }
+
+    sidebar.innerHTML = content;
+}
+
+export function updateTheoremText(config, subtype = null) {
+    console.log("Inside updateTheoremText", config, subtype);
+
+    let definitionText = "";
+
+    // ✅ Try subtype-specific definition first
+    if (config.theoremDefinitions && typeof config.theoremDefinitions === 'object') {
+        if (subtype && config.theoremDefinitions[subtype]) {
+            definitionText = config.theoremDefinitions[subtype];
+        } else {
+            // ✅ Use any available definition as fallback
+            const values = Object.values(config.theoremDefinitions);
+            if (values.length > 0) {
+                definitionText = values[0];  // take the first available
+            }
+        }
+    }
+
+    // ✅ Fallback to single-string definition (optional)
+    if (!definitionText && typeof config.theoremDefinition === 'string') {
+        definitionText = config.theoremDefinition;
+    }
+
+    // ✅ Final fallback
+    if (!definitionText) {
+        definitionText = "Definition not available.";
+    }
+
+    document.getElementById("theorem-text").innerHTML = definitionText;
+}
+

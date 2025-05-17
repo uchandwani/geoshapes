@@ -3,25 +3,27 @@ import { Point } from './Points.js';
 import {Triangle} from './Triangle.js'
 
 
-import {functionalityConfig} from '/geoshapes/js/functionalityConfig.js';
-import {currentPageFeatures } from '/geoshapes/js/functionalityConfig.js';
+import {functionalityConfig} from '/geoshapes/js/commonConfig.js';
+import {currentPageFeatures } from '/geoshapes/js/commonConfig.js';
 import {canvasManager} from '../shapes/CanvasManager.js';
 
 const enableSnapping = currentPageFeatures.enableProtractorSnapping || false;
 
 export class Protractor extends Shape {
-    constructor(center, radius = 80, style = 'modern') {
+    constructor(center, radius, style = 'classic') {
         super();
-        this.type = 'protractor'; // important for cleanup
         this.center = center;
         this.radius = radius;
         this.style = style;
-        this.angleStep = 5;
+        this.draggingEdge = false;
+        this.draggingCenter = false;
+        this.rotating = false;
+        this.previousMousePos = null;
         this.angleOffset = 0;
-        this.draggingEdge = false; 
-        this.draggingCenter = false;// Track if the edge is being dragged
-        this.rotationControls = null; // To hold button elements
+        this.wasSnapped = false; // ✅ Important missing line
+        this.snappingEnabled = true;
     }
+    
 
     draw(ctx) {
         // Draw the protractor (existing code)
@@ -34,48 +36,84 @@ export class Protractor extends Shape {
 
         this.center.draw(ctx);
 
-         if (!this.rotationControls) {
-            this.addRotationControls();
+            
+    }
+
+           addRotationControls() {
+            const rotateLeft1 = this.createButton('−1°', -1);
+            const rotateRight1 = this.createButton('+1°', 1);
+            const rotateLeft5 = this.createButton('−5°', -5);
+            const rotateRight5 = this.createButton('+5°', 5);
+        
+            document.body.appendChild(rotateLeft1);
+            document.body.appendChild(rotateRight1);
+            document.body.appendChild(rotateLeft5);
+            document.body.appendChild(rotateRight5);
+        
+            this.rotationControls = {
+                rotateLeft1,
+                rotateRight1,
+                rotateLeft5,
+                rotateRight5
+            };
+        
+            const majorLineColor = '#CB4154';
+            Object.values(this.rotationControls).forEach((button) => {
+                button.style.backgroundColor = majorLineColor;
+                button.style.color = 'white';
+                button.style.border = `1px solid ${majorLineColor}`;
+                button.style.borderRadius = '5px';
+                button.style.padding = '5px';
+                button.style.cursor = 'pointer';
+            });
+        
+            this.updateRotationControlsPosition();
         }
-       
-    }
+        
+        createButton(label, rotationStep) {
+            const button = document.createElement('button');
+            button.innerText = label;
+            button.style.position = 'absolute';
+            button.style.zIndex = '10';
+            button.addEventListener('click', () => {
+                console.log(`🔁 Button "${label}" clicked → Rotating by ${rotationStep}°`);
+                this.rotateByDegrees(rotationStep); // ✅ Main rotation method
+            });
+            return button;
+        }
+        
+        rotateByDegrees(degrees) {
+            this.angleOffset = (this.angleOffset + degrees + 360) % 360;
+            console.log(`✅ Protractor rotated by ${degrees}°. New offset: ${this.angleOffset}`);
+            this.updateRotationControlsPosition(); // Keep buttons positioned
+            canvasManager.render(); // ✅ Redraw canvas and protractor
+        }
 
-   addRotationControls() {
-        const rotateLeft1 = this.createButton('−1°', -1);
-        const rotateRight1 = this.createButton('+1°', 1);
-        const rotateLeft5 = this.createButton('−5°', -5);
-        const rotateRight5 = this.createButton('+5°', 5);
+        drawSnapToggleButton(ctx) {
+            const cx = this.center.x;
+            const cy = this.center.y + this.radius + 30; // position below protractor
+            const radius = 12;
+        
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = this.snappingEnabled ? '#4CAF50' : '#aaa';
+            ctx.fill();
+            ctx.strokeStyle = 'white';
+            ctx.stroke();
+        
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = '14px sans-serif';
+            ctx.fillText(this.snappingEnabled ? '🧲' : '⛔', cx, cy + 1);
+        
+            this._snapButton = { x: cx, y: cy, r: radius };
+        }
+        
+        
+      
 
-        document.body.appendChild(rotateLeft1);
-        document.body.appendChild(rotateRight1);
-        document.body.appendChild(rotateLeft5);
-        document.body.appendChild(rotateRight5);
-
-        this.rotationControls = { rotateLeft1, rotateRight1, rotateLeft5, rotateRight5 };
-
-        const majorLineColor = '#CB4154'; // Same color as major lines
-        Object.values(this.rotationControls).forEach((button) => {
-            button.style.backgroundColor = majorLineColor;
-            button.style.color = 'white'; // Ensure good contrast
-            button.style.border = `1px solid ${majorLineColor}`; // Optional: add a border matching the line
-            button.style.borderRadius = '5px'; // Optional: round edges
-            button.style.padding = '5px'; // Adjust padding
-    });
-
-        this.updateRotationControlsPosition(); // Position buttons near the protractor
-    }
-
-    createButton(label, rotationStep) {
-        const button = document.createElement('button');
-        button.innerText = label;
-        button.style.position = 'absolute';
-        button.style.zIndex = '10';
-        button.addEventListener('click', () => {
-            this.rotateByDegrees(rotationStep);
-            canvasManager.render(); // Redraw the canvas after rotation
-        });
-        return button;
-    }
+    
 
    updateRotationControlsPosition() {
     if (this.rotationControls) {
@@ -109,6 +147,21 @@ export class Protractor extends Shape {
     }
 }
 
+clampCenterWithinCanvas() {
+
+    const canvas = this.canvas; // use internal canvas object
+    if (!canvas) {
+        console.error("🚫 Canvas not found inside Protractor!");
+        return;
+    }
+    const minX = this.radius;
+    const minY = this.radius;
+    const maxX = canvas.width - this.radius;
+    const maxY = canvas.height - this.radius;
+
+    this.center.x = Math.max(minX, Math.min(this.center.x, maxX));
+    this.center.y = Math.max(minY, Math.min(this.center.y, maxY));
+}
 
     removeRotationControls() {
         if (this.rotationControls) {
@@ -122,11 +175,7 @@ export class Protractor extends Shape {
     }
 
 
-    rotateByDegrees(degrees) {
-        this.angleOffset = (this.angleOffset + degrees + 360) % 360;
-        console.log(`Protractor rotated by ${degrees}°. Current offset: ${this.angleOffset}`);
-        this.updateRotationControlsPosition(); // Update button positions
-    }
+    
 
  /*   resize(newRadius) {
         this.radius = newRadius;
@@ -136,15 +185,15 @@ export class Protractor extends Shape {
 */
 
 
-     handleMouseDown(x, y, isShiftKey = false) {
+handleMouseDown(x, y, isShiftKey = false) {
         const distance = Math.hypot(x - this.center.x, y - this.center.y);
         if (Math.abs(distance - this.radius) < 10) {
             this.draggingEdge = true; // Resizing the radius
             this.draggingCenter = false;
             this.rotating = false;
-        } else if (distance <= this.radius && isShiftKey) {
-            this.rotating = true; // Start rotation
-            this.previousMousePos = { x, y }; // Initialize previous mouse position
+
+            // Deleted else if button for shift
+        
         } else if (distance <= this.radius) {
             this.draggingCenter = true; // Dragging the center
             this.draggingEdge = false;
@@ -230,54 +279,12 @@ resize(mouseX, mouseY) {
     }
 }
     
-
-// Function to snap protractor to the nearest vertex
-snapToVertex(protractor, triangles) {
-    let closestVertex = null;
-    let minDistance = Infinity;
-
-    // Find the nearest vertex to the protractor's center
-    triangles.forEach((triangle) => {
-        triangle.points.forEach((vertex) => {
-            const distance = Math.hypot(protractor.center.x - vertex.x, protractor.center.y - vertex.y);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestVertex = vertex;
-            }
-        });
-    });
-
-    // Snap the protractor to the closest vertex
-    if (closestVertex && minDistance < 20) { // Snap if within a threshold
-        protractor.center.x = closestVertex.x;
-        protractor.center.y = closestVertex.y;
-        console.log("Protractor snapped to vertex:", closestVertex);
-    }
-}
+ 
 
 // In your mousemove or drag logic
 
-snapToNearestPoint(protractor, shapes) {
-    let closestPoint = null;
-    let minDistance = Infinity;
-
-    // Iterate through all shapes to find the nearest point
-    shapes.forEach((shape) => {
-        if (shape instanceof Point) { // Only check Point objects
-            const distance = Math.hypot(protractor.center.x - shape.x, protractor.center.y - shape.y);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestPoint = shape;
-            }
-        }
-    });
-
-    // Snap to the closest point if within threshold (e.g., 20px)
-    if (closestPoint && minDistance < 20) {
-        protractor.center.x = closestPoint.x;
-        protractor.center.y = closestPoint.y;
-        console.log("✅ Protractor snapped to nearest point:", closestPoint);
-    }
+removeDOMElements() {
+    this.removeRotationControls?.();
 }
 
 
@@ -292,13 +299,53 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
     console.log(`Protractor aligned to smaller angle. Offset: ${this.angleOffset}`);
 }
 
+drawCanvasButtons(ctx) {
+    const cx = this.center.x;
+    const cy = this.center.y;
+    const spacing = 20;
+    const btnSize = 20;
+
+    const buttons = [
+        { label: '-5°', dx: -spacing, dy: -spacing, delta: -5 },
+        { label: '-1°', dx: -spacing, dy: spacing, delta: -1 },
+        { label: '+1°', dx: spacing, dy: -spacing, delta: 1 },
+        { label: '+5°', dx: spacing, dy: spacing, delta: 5 },
+    ];
+
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    this._canvasButtons = [];
+
+    buttons.forEach(({ label, dx, dy, delta }) => {
+        const x = cx + dx;
+        const y = cy + dy;
+
+        ctx.beginPath();
+        ctx.rect(x - btnSize / 2, y - btnSize / 2, btnSize, btnSize);
+        ctx.fillStyle = '#CB4154';
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+
+        ctx.fillStyle = 'white';
+        ctx.fillText(label, x, y);
+
+        this._canvasButtons.push({ x, y, w: btnSize, h: btnSize, delta });
+    });
+    this.drawSnapToggleButton(ctx);
+
+}
 
 
-    drawModern(ctx) {
+
+drawModern(ctx) {
     const fullLineLength = this.radius;
     const majorLineLength = 40;  // Length of major lines (multiples of 5 degrees)
     const minorLineLength = 20;  // Length of minor lines (other degrees)
 
+ 
     
     //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
     // Draw the outer circle
@@ -346,6 +393,7 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
             ctx.fillText(`${angle}`, labelX, labelY);
         }
     }
+    this.drawCanvasButtons(ctx);  
 }
 
 
@@ -384,95 +432,71 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
             console.log(`Protractor resized to radius: ${this.radius}`);
         }
     }
-/*
-    drag(dx, dy) {
-        console.log("The status of draggingEdge, draggingCenter are", this.draggingEdge,this.draggingCenter);
-        if (this.draggingEdge) {
-           this.radius += dx; // Resize (stretch radius)
-            if (this.radius < 5) this.radius = 5; 
-            
-            console.log(`Protractor resized: New radius = ${this.radius}`); // Resizing logic
-            
-        } else if (this.draggingCenter) {
-            this.center.x += dx;
-            this.center.y += dy;
-        console.log(`Protractor dragged to (${this.center.x}, ${this.center.y})`);
-    }
-}*/
 
- drag(dx, dy, enableSnapping = false, geoshapes = [],isModifierKeyPressed = false,currentMousePos, intersections=false, ) {
-    // Resizing the protractor (dragging the edge)
-    const angleStep = 1;
+     
 
-    if (this.draggingEdge) {
-        const newRadius = this.radius + dx; // Adjust radius using dx
-        this.radius = Math.max(newRadius, 10); // Set minimum radius to prevent collapse
-        console.log(`Resized Protractor: Radius = ${this.radius}`);
-    } 
-    // Dragging the center of the protractor
-    else if (this.draggingCenter) {
-        this.center.x += dx;
-        this.center.y += dy;
+    drag(dx, dy, geoshapes = []) {
+    if (!this.center) return;
 
-        this.updateRotationControlsPosition(); 
+    // First, move the center by dx, dy
+    this.center.x += dx;
+    this.center.y += dy;
 
-        console.log(`Dragged Protractor: Center = (${this.center.x}, ${this.center.y})`);
+    // Snap only if enabled and geoshapes available
+    const shouldSnap = this.snappingEnabled && geoshapes.length > 0;
 
-        console.log("The enable snapping status inside Protractor is",enableSnapping); // Handle snapping to vertices if enabled
-        if (enableSnapping  && !isModifierKeyPressed) {
-            const closestVertex = this.findClosestVertex(this.center, canvasManager.shapes);
-            console.log("The closest Vertex is", closestVertex);
-            const closestPoint = findClosestPoint(this.center,canvasManager.shapes);
-            if (closestVertex) {
-                this.center.x = closestVertex.x;
-                this.center.y = closestVertex.y;
-                console.log("Protractor snapped to vertex at:", this.center);
-            } else {
+    if (shouldSnap) {
+        let closestPoint = null;
+        let minDistance = Infinity;
 
-                this.center.x = closestPoint.x;
-                this.center.y = closestPoint.y;
-                console.log("Protractor snapped to vertex at:", this.center);
+        geoshapes.forEach((shape) => {
+            if (shape instanceof Point) {
+                const dist = Math.hypot(this.center.x - shape.x, this.center.y - shape.y);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    closestPoint = shape;
+                }
+            } else if (shape.constructor.name === 'Triangle') {
+                shape.points?.forEach((vertex) => {
+                    const dist = Math.hypot(this.center.x - vertex.x, this.center.y - vertex.y);
+                    if (dist < minDistance) {
+                        minDistance = dist;
+                        closestPoint = vertex;
+                    }
+                });
+            }
+        });
 
-           }
+        if (closestPoint && minDistance < 20) {
+            this.center.x = closestPoint.x;
+            this.center.y = closestPoint.y;
+            console.log("✅ Snapped to closest Point or Triangle Vertex:", closestPoint.label || '(unnamed)');
         }
-
-        // Snap to intersections if any exist
-        if (intersections && intersections.length > 0) {
-            this.snapToIntersection(intersections);
-        }
-    } 
-    // Rotating the protractor
-    else if (this.rotating && this.previousMousePos) {
-        const prevAngle = Math.atan2(
-            this.previousMousePos.y - this.center.y,
-            this.previousMousePos.x - this.center.x
-        );
-        const currentAngle = Math.atan2(
-            currentMousePos.y - this.center.y,
-            currentMousePos.x - this.center.x
-        );
-        let angleDelta = ((currentAngle - prevAngle) * 180) / Math.PI;
-
-        if (angleDelta > 180) angleDelta -= 360;
-        if (angleDelta < -180) angleDelta += 360;
-
-        const adjustedDelta = Math.round(angleDelta / angleStep) * angleStep;
-
-        this.angleOffset = (this.angleOffset + adjustedDelta + 360) % 360; // Update rotation angle
-        console.log(`Protractor rotated. Current offset: ${this.angleOffset} (adjusted by ${adjustedDelta}°)`);
-
-        this.previousMousePos = currentMousePos; // Update previous position
     }
+
+    // Keep center within canvas bounds
+    if (typeof canvas !== "undefined" && canvas) {
+        this.clampCenterWithinCanvas(canvas);
+    }
+}
 
         
-}
+    
+    
+ clampCenterWithinCanvas(canvas) {
+        if (!canvas) {
+            console.error("🚫 Canvas not found inside Protractor!");
+            return;
+        }
+        this.center.x = Math.min(Math.max(this.center.x, this.radius), canvas.width - this.radius);
+        this.center.y = Math.min(Math.max(this.center.y, this.radius), canvas.height - this.radius);
+ }
+    
 
-rotateByDegrees(degrees) {
-    this.angleOffset = (this.angleOffset + degrees + 360) % 360;
-    console.log(`Protractor rotated by ${degrees}°. Current offset: ${this.angleOffset}`);
-}
 
-     findClosestVertex(currentPosition, canvasshapes) {
+
+
+findClosestVertex(currentPosition, canvasshapes) {
         const snapThreshold = 10; // Distance threshold for snapping
         let closestVertex = null;
         let minDistance = Infinity;
@@ -499,7 +523,7 @@ rotateByDegrees(degrees) {
     }
 
 
-    findClosestPoint(currentPosition, canvasShapes) {
+findClosestPoint(currentPosition, canvasShapes) {
     const snapThreshold = 10; // Distance threshold for snapping
     let closestPoint = null;
     let minDistance = Infinity;
@@ -525,31 +549,90 @@ rotateByDegrees(degrees) {
 }
 
 
+isPointInside(x, y) {
+    const buttonPadding = 4; // ➡️ Allow slight forgiveness around button box
 
-
-    isPointInside(x, y) {
-        const distance = Math.hypot(x - this.center.x, y - this.center.y);
-        if (Math.abs(distance - this.radius) <= 10) {
-            // Near the circumference for resizing
-            this.draggingEdge = true;
-            this.draggingCenter = false;
-            return true;
-        } else if (distance <= this.radius) {
-            // Inside the circle for dragging the center
-            this.draggingCenter = true;
-            this.draggingEdge = false;
-            return true;
+    if (this._canvasButtons) {
+        for (let btn of this._canvasButtons) {
+            const { x: bx, y: by, w, h, delta } = btn;
+            const left = bx - w / 2 - buttonPadding;
+            const right = bx + w / 2 + buttonPadding;
+            const top = by - h / 2 - buttonPadding;
+            const bottom = by + h / 2 + buttonPadding;
+            if (x >= left && x <= right && y >= top && y <= bottom) {
+                console.log(`🖱 Click detected inside button (${delta}°) → setting pendingRotation.`);
+                this.pendingRotation = delta;
+                this.draggingCenter = true; // ✅ Ensures shape is selected
+                return true;
+            }
         }
-        return false; // Not inside the Protractor
     }
+
+    // ✅ Check snap toggle button
+        if (this._snapButton) {
+            const dx = x - this._snapButton.x;
+            const dy = y - this._snapButton.y;
+            const dist = Math.hypot(dx, dy);  // 🔧 Define dist before using it
+
+            if (dist <= this._snapButton.r) {
+                this.snappingEnabled = !this.snappingEnabled;
+                console.log("🧲 Snapping toggled to:", this.snappingEnabled);
+                canvasManager.render();
+
+                // Prevent unintended dragging or rotation
+                this.draggingEdge = false;
+                this.draggingCenter = false;
+                this.pendingRotation = null;
+
+                return true;
+            }
+}
+
+    
+
+    const distance = Math.hypot(x - this.center.x, y - this.center.y);
+    if (Math.abs(distance - this.radius) <= 10) {
+        this.draggingEdge = true;
+        this.draggingCenter = false;
+        return true;
+    } else if (distance <= this.radius) {
+        this.draggingCenter = true;
+        this.draggingEdge = false;
+        return true;
+    }
+    return false;
+}
+
 
  
-    handleMouseUp() {
-        this.draggingEdge = false;
-        this.draggingCenter = false;
+handleMouseUp() {
+    console.log("🖐 Mouse Up event");
+
+    // Reset dragging states in all cases
+    this.draggingEdge = false;
+    this.draggingCenter = false;
+
+    // 🧲 Apply rotation if any
+    if (this.pendingRotation != null) {
+        console.log(`⏳ Applying pending rotation: ${this.pendingRotation}°`);
+        this.rotateByDegrees(this.pendingRotation);
+        this.pendingRotation = null;
+        canvasManager.render();
+        return; // ✅ Done — don’t allow further action
     }
+
+    // 🧲 Edge case: ensure no phantom dragging was triggered by snap toggle
+    if (!this.draggingEdge && !this.draggingCenter) {
+        console.log("❎ No dragging active — likely a snap toggle click");
+        return;
+    }
+
+    // ✋ Other drag end logic (if needed) can go here...
+}
+
+    
   
-    getPointsForDragging() {
+getPointsForDragging() {
         return [this.center];
     }
 }

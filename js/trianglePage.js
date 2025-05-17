@@ -1,316 +1,158 @@
-import { Triangle } from '../shapes/Triangle.js';
+// Imports
+import { updatePageTitle } from './header.js';
+import { switchFunctionality } from './commonEventHandlers.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
-import { functionalityConfig } from './functionalityConfig.js';
-import { pageFeatures  } from './functionalityConfig.js';
-import { switchFunctionality } from './eventHandlers.js';
-import { attachNavBarListeners } from './eventHandlers.js';
-import { handleTriangleType } from './eventHandlers.js';
-import {Line} from '../shapes/Lines.js';
-import {Protractor} from '../shapes/Protractor.js';
-import {updateRightSidebar} from './eventHandlers.js';
+import { Line } from '../shapes/Lines.js';
+import { Point } from '../shapes/Points.js';
+import { Triangle } from '../shapes/Triangle.js';
+import { Circle } from '../shapes/Circle.js';
+import { handleSubmit, handleSave } from './formUtils.js';
 
-    
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Triangle Theorem Page Loaded");
-
-    const defaultFunctionality = 'midSegmentTheorem';
-    const defaultSubClassification = 'right';
-    const buttons = document.querySelectorAll('.nav-icon-btn');
-
-
-
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const link = button.getAttribute('data-link');
-            if (link) {
-                window.open(link, '_self'); // Change '_self' to '_blank' for a new tab
-            }
-        });
-    });
-
-     console.log("Calling switchFunctionality with" , defaultFunctionality);
-      switchFunctionality(defaultFunctionality);
-
-    // Initialize right sidebar with the default sub-classification
-    updateRightSidebar(defaultFunctionality, defaultSubClassification);
-
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-
-    console.log('Canvas Element:', canvas);
-    console.log('Canvas Context:', ctx);
-
-    // Check CanvasManager initialization
-    console.log('CanvasManager:', canvasManager);
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-
-    console.log('Adjusted Canvas Dimensions:', canvas.width, canvas.height); 
-
-    attachNavBarListeners(); // Set up listeners for nav buttons
-    switchFunctionality('midSegmentTheorem');
-
-    // Set the default triangle type to "Right Angle Triangle"
-    handleTriangleType('midSegmentTheorem','right');
-
-     console.log("The functionality config is", pageFeatures.enableProtractorSnapping) ;
-    if (pageFeatures.enableProtractorSnapping) {
-        console.log("The page enables snap vertex functionality");
-    
-    }
+// ✅ Load default triangle theorem
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("📘 Triangle Page Loaded");
+  updatePageTitle();
+  switchFunctionality('midSegmentTheorem', 'right'); // Default
 });
-    // TrianglePage.js
 
-// Function to compare two measures (e.g., lengths or angles)
-   export function compareMeasures(input1Name, input2Name, resultName) {
-    console.log("Inside compare Measures");
-    const input1 = document.getElementsByName(input1Name)[0];
-    const input2 = document.getElementsByName(input2Name)[0];
-    const result = document.getElementsByName(resultName)[0];
+// ✅ Handle navigation trigger
+window.addEventListener("nav-select", (e) => {
+  const { functionalityKey, subtype } = e.detail;
+  console.log("📥 Received nav-select:", functionalityKey, subtype);
+  switchFunctionality(functionalityKey, subtype);
+});
 
-    if (input1.value && input2.value) {
-        const match = parseFloat(input1.value) === parseFloat(input2.value);
-        result.textContent = match ? "Yes" : "No";
-        // Change background color
-        input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-        input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-    } else {
-        result.textContent = ""; // Clear the content if values are not entered
-        input1.style.backgroundColor = ""; // Reset to default
-        input2.style.backgroundColor = ""; // Reset to default
-    }
+// ========== Utility Functions (for now, will be modularized later) ==========
+
+export function compareMeasures(input1Name, input2Name, resultName) {
+  console.log("Inside compareMeasures", input1Name, input2Name, resultName);
+
+  const input1 = document.getElementsByName(input1Name)[0];
+  const input2 = document.getElementsByName(input2Name)[0];
+  const result = document.getElementsByName(resultName)[0] || document.getElementById(resultName);
+
+  if (!input1 || !input2 || !result) {
+    console.error("❌ Element not found", { input1, input2, result });
+    return;
+  }
+
+  const val1 = input1.value.trim();
+  const val2 = input2.value.trim();
+
+  if (val1 !== "" && val2 !== "") {
+    const match = parseFloat(val1) === parseFloat(val2);
+    result.textContent = match ? "Yes" : "No";
+    input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+    input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+  } else {
+    result.textContent = "";
+    input1.style.backgroundColor = "";
+    input2.style.backgroundColor = "";
+  }
 }
 
 export function compareDividedMeasures(input1Name, input2Name, resultName, divisor) {
-    const input1 = document.getElementsByName(input1Name)[0];
-    const input2 = document.getElementsByName(input2Name)[0];
-    const result = document.getElementsByName(resultName)[0];
+  const input1 = document.getElementsByName(input1Name)[0];
+  const input2 = document.getElementsByName(input2Name)[0];
+  const result = document.getElementsByName(resultName)[0];
 
-    if (input1.value && input2.value) {
-        const value1 = parseFloat(input1.value);
-        const value2 = parseFloat(input2.value) / divisor;
-
-        // Handle floating-point precision with a tolerance
-        const tolerance = 0.001; // Adjust as needed
-        const match = Math.abs(value1 - value2) <= tolerance;
-
-        result.textContent = match ? "Yes" : "No";
-
-        // Change background color
-        input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-        input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-    } else {
-        result.textContent = ""; // Clear the content if values are not entered
-        input1.style.backgroundColor = ""; // Reset to default
-        input2.style.backgroundColor = ""; // Reset to default
-    }
+  if (input1.value && input2.value) {
+    const value1 = parseFloat(input1.value);
+    const value2 = parseFloat(input2.value) / divisor;
+    const tolerance = 0.001;
+    const match = Math.abs(value1 - value2) <= tolerance;
+    result.textContent = match ? "Yes" : "No";
+    input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+    input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+  } else {
+    result.textContent = "";
+    input1.style.backgroundColor = "";
+    input2.style.backgroundColor = "";
+  }
 }
-
-export function addSpecificPoints(points, ctx) {
-    if (!points || !Array.isArray(points)) {
-        console.error("Invalid points array provided.");
-        return;
-    }
-
-    points.forEach(({ x, y, label, color, radius }) => {
-        const point = new Point(x, y, label, color, radius);
-        point.draw(ctx, true, false); // Show label, no coordinates
-    });
-}
-
 
 export function updateMessage(ans1Name, ans2Name, messageAreaId, successMessage) {
-    const ans1 = document.getElementsByName(ans1Name)[0]?.textContent.trim();
-    const ans2 = document.getElementsByName(ans2Name)[0]?.textContent.trim();
-    const messageArea = document.getElementById(messageAreaId);
-
-    if (!messageArea) {
-        console.error(`Element with id "${messageAreaId}" not found.`);
-        return;
-    }
-
-    if (ans1 === "Yes" && ans2 === "Yes") {
-        messageArea.textContent = successMessage ;
-    
-}
+  const ans1 = document.getElementsByName(ans1Name)[0]?.textContent.trim();
+  const ans2 = document.getElementsByName(ans2Name)[0]?.textContent.trim();
+  const messageArea = document.getElementById(messageAreaId);
+  if (!messageArea) {
+    console.error(`Element with id "${messageAreaId}" not found.`);
+    return;
+  }
+  if (ans1 === "Yes" && ans2 === "Yes") {
+    messageArea.textContent = successMessage;
+  }
 }
 
 export function calculateRatio(input1Name, input2Name, resultName) {
-    const input1 = document.getElementsByName(input1Name)[0].value;
-    const input2 = document.getElementsByName(input2Name)[0].value;
-    const result = document.getElementsByName(resultName)[0];
-
-    if (input1 && input2 && parseFloat(input2) !== 0) {
-        const ratio = parseFloat(input1) / parseFloat(input2);
-        result.value = ratio.toFixed(2); // Limit to 2 decimal places
-    } else {
-        result.value = ""; // Clear the content if inputs are invalid
-    }
+  const input1 = document.getElementsByName(input1Name)[0].value;
+  const input2 = document.getElementsByName(input2Name)[0].value;
+  const result = document.getElementsByName(resultName)[0];
+  if (input1 && input2 && parseFloat(input2) !== 0) {
+    const ratio = parseFloat(input1) / parseFloat(input2);
+    result.value = ratio.toFixed(2);
+  } else {
+    result.value = "";
+  }
 }
 
-
-
-
-
-    /* document.getElementById("submitButton").addEventListener("click", function() {
-         document.getElementById("conclusionMessage").style.display = "block";  
-    }); */
-
-
-    // Check geoshapes array
-   // console.log('Geoshapes Array:', geoshapes);
-
-    // Check current mode
-   // console.log('Current Mode:', mode);
-
-
-    
-    
-   
-    // Auto-load the first functionality (e.g., Triangle Theorem) on page load
-    
-
- /*   const rightAngleButton = document.getElementById('right-angle-button');
-    const acuteAngleButton = document.getElementById('acute-angle-button');
-    const obtuseAngleButton = document.getElementById('obtuse-angle-button');
-
-    if (rightAngleButton) {
-        rightAngleButton.addEventListener('click', () => loadTriangle('rightAngle'));
-    } else {
-        console.error('Right Angle Button is not found');
-    }
-
-    if (acuteAngleButton) {
-        acuteAngleButton.addEventListener('click', () => loadTriangle('acute'));
-    } else {
-        console.error('Acute Angle Button is not found');
-    }
-
-    if (obtuseAngleButton) {
-        obtuseAngleButton.addEventListener('click', () => loadTriangle('obtuse'));
-    } else {
-        console.error('Obtuse Angle Button is not found');
-    }
-*/
-   
-  //  setupEventHandlers(ctx, canvas);
-  //  loadTriangle('default');
-    // Draw a default triangle on page load
-   //drawDefaultTriangle(ctx, canvas);
-
-
-// Function to draw the default triangle on page load
-function drawDefaultTriangle(ctx, canvas) {
-    console.log("Drawing default triangle on load...");
-
-    // Define vertices for the triangle
-    const p1 = { x: 200, y: 500 };
-    const p2 = { x: 600, y: 500 };
-    const p3 = { x: 400, y: 200 };
-
-    // Create a triangle and set properties
-    const triangle = new Triangle(p1, p2, p3);
-    triangle.setVertexLabels({ A: 'C', B: 'A', C: 'F' });
-    triangle.setMidpointLabels({ M1: 'E', M2: 'D', M3: 'B' }); // Custom midpoint labels
-    triangle.setShowMeasurements(false);
-    triangle.setShowLabels(true);
-
-    // Add triangle to canvas manager and render it
-    canvasManager.addShape(triangle);
-    canvasManager.render();
-
-    console.log("Default triangle drawn.");
+export function toFraction(decValue) {
+  const epsilon = 0.01;
+  if (Math.abs(decValue - 0.50) < epsilon) return "1/2";
+  if (Math.abs(decValue - 0.7071) < epsilon) return "√2/2";
+  if (Math.abs(decValue - 0.86602) < epsilon) return "√3/2";
+  if (Math.abs(decValue - 0.5773) < epsilon) return "√3/3";
+  if (Math.abs(decValue - 1.732) < epsilon) return "√3";
+  if (Math.abs(decValue - 0.3333) < epsilon) return "1/3";
+  if (Math.abs(decValue - 3.99) < epsilon) return "4";
+  if (Math.abs(decValue - 1.34) < epsilon) return "4/3";
+  return Math.round(decValue);
 }
 
+export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null) {
+  const input1 = document.getElementById(input1Id);
+  const input2 = document.getElementById(input2Id);
+  const input3 = input3Id ? document.getElementById(input3Id) : null;
+  const result = document.getElementById(resultId);
 
-function loadTriangle(type) {
-    console.log(`Loading ${type} triangle`);
+  if (!input1 || !input2 || !result) {
+    console.error("❌ Error: One or more elements not found!", { input1, input2, input3, result });
+    return;
+  }
 
-    // Define vertices and labels for different triangle types
-    const triangleConfig = {
-        rightAngle: {
-            vertices: [
-                { x: 200, y: 500 },
-                { x: 600, y: 500 },
-                { x: 200, y: 200 },
-            ],
-            vertexLabels: { A: 'C', B: 'A', C: 'F' },
-            midpointLabels: { M1: ' ', M2: 'D', M3: 'B' },
-        },
-        acute: {
-            vertices: [
-                 { x: 200, y: 500 },
-                { x: 600, y: 500 },
-                { x: 300, y: 200 },
-            ],
-            vertexLabels: { A: 'C', B: 'A', C: 'F' },
-            midpointLabels: { M1: ' ', M2: 'D', M3: 'B' },
-        },
-        obtuse: {
-            vertices: [
-                 { x: 200, y: 500 },
-                { x: 600, y: 500 },
-                { x: 100, y: 200 },
-            ],
-            vertexLabels: { A: 'C', B: 'A', C: 'F' },
-            midpointLabels:{ M1: ' ', M2: 'D', M3: 'B' },
-        },
-        default: {
-            vertices: [
-                { x: 200, y: 500 },
-                { x: 600, y: 500 },
-                { x: 200, y: 200 },
-            ],
-            vertexLabels: { A: 'C', B: 'A', C: 'F' },
-            midpointLabels: { M1: ' ', M2: 'D', M3: 'B' },
-        },
-    };
+  const value1 = parseFloat(input1.value) || 0;
+  const value2 = parseFloat(input2.value) || 0;
+  const value3 = input3 ? parseFloat(input3.value) || 0 : 0;
+  const sum = value1 + value2 + value3;
 
-    // Get configuration for the selected type
-    const config = triangleConfig[type];
+  result.textContent = sum;
 
-    if (!config) {
-        console.error(`Invalid triangle type: ${type}`);
-        return;
-    }
+  let targetValue;
+  if (typeof target === "number") {
+    targetValue = target;
+  } else {
+    const targetElement = document.getElementById(target);
+    targetValue = targetElement ? parseFloat(targetElement.value) || null : null;
+  }
 
-    // Clear the existing canvas
-    canvasManager.clear();
-
-    // Create and add the new triangle
-    const triangle = new Triangle(
-        config.vertices[0],
-        config.vertices[1],
-        config.vertices[2]
-    );
-
-    // Set custom labels
-    triangle.setVertexLabels(config.vertexLabels);
-
-    if (functionalityKey === "basicProportionalityTheorem") {
-        // Define specific points
-        const pointsToDraw = [
-            { x: 350, y: 400, label: "P1", color: "red", radius: 5 },
-            { x: 600, y: 300, label: "P2", color: "blue", radius: 5 },
-            { x: 450, y: 450, label: "P3", color: "green", radius: 5 },
-        ];
-
-        // Draw specific points
-        console.log("The context information is",ctx);
-        addSpecificPoints(pointsToDraw, ctx);
-    }
-    triangle.setMidpointLabels(config.midpointLabels);
-
-    // Set properties
-    triangle.setShowMeasurements(false);
-    triangle.setShowLabels(true);
-
-    canvasManager.addShape(triangle);
-    canvasManager.render();
-
-    console.log(`${type} triangle drawn.`);
+  if (targetValue !== null) {
+    updateInputStyles([input1, input2, input3].filter(Boolean), sum === targetValue);
+  } else {
+    resetInputStyles([input1, input2, input3].filter(Boolean), result);
+  }
 }
 
+function updateInputStyles(inputs, condition) {
+  const color = condition ? "lightgreen" : "lightcoral";
+  inputs.forEach(input => input.style.backgroundColor = color);
+}
 
+function resetInputStyles(inputs, result) {
+  inputs.forEach(input => input.style.backgroundColor = "");
+  result.textContent = "";
+}
+
+export function showTab(tabId) {
+  const dynamicDiv = document.getElementById('dynamic-buttons');
+  dynamicDiv.style.display = tabId === 'verify' ? 'block' : 'none';
+}

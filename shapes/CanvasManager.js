@@ -73,6 +73,32 @@ calculatemidPoints(vertices) {
     this.midPoints.push(...midPoints); // Add midPoints to CanvasManager
     return midPoints;
 }
+    renderOnly(shape) {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (shape && typeof shape.draw === 'function') {
+        shape.draw(this.ctx);
+
+        // If it’s a Divider, update button positions explicitly
+        if (shape instanceof Divider && shape.updateRotationControls) {
+            shape.updateRotationControls();
+        }
+    }
+}
+
+getSnapCandidates() {
+    return this.shapes.flatMap(shape => {
+        // Include standalone points
+        if (shape instanceof Point) return [shape];
+
+        // Include triangle vertices (but not midpoints or internal points)
+        if (shape.points && shape.constructor.name === "Triangle") {
+            return shape.points;
+        }
+
+        return [];
+    });
+}
 
 
     clearTrianglesOnly() {
@@ -360,13 +386,22 @@ calculatemidPoints(vertices) {
         });
     }
 
-    clearAllShapes() {
-    console.log("Clearing all shapes! Shapes before clearing:", canvasManager.shapes);
-    
+   clearAllShapes() {
+    console.log("Clearing all shapes! Shapes before clearing:", this.shapes);
+
+    this.shapes.forEach(shape => {
+        shape.removeDOMElements?.(); // ✅ Clean up buttons or overlays
+    });
+
     this.shapes = [];
+    this.specificPoints = [];
+    this.midPoints = [];
+    this.intersections = [];
+
     const ctx = this.canvas.getContext('2d');
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
+
 
     addProgrammaticShape(shape) {
     this.shapes.push(shape);
@@ -481,17 +516,10 @@ calculatemidPoints(vertices) {
             }
         });
     });
-}
-
-
-    drawCircleProgrammatically(centerX, centerY, radius, color = 'black') {
-    const center = new Point(centerX, centerY);
-    const circle = new Circle(center, radius);
-    circle.color = color;
-
-    canvasManager.addProgrammaticShape(circle);
-    
 }}
+
+
+    
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');

@@ -12,7 +12,7 @@ import { Point } from '../shapes/Points.js';
 import { updatePageTitle } from './header.js';
 import { updateHeaderLabels } from './header.js';
 import { loadProgress, saveProgress, getProgressStatus, loadSavedProgress } from './progress.js';
-import { handleSubmit,handleSave } from './formUtils.js';
+import { handleSubmit,handleSave, resolveFormStructure } from './formUtils.js';
 let currentSubtype = null;  // define at top of your JS file
 
 import { db } from './firebase-init.js';
@@ -192,176 +192,226 @@ function updateSidebarStatus(subtype, status) {
  * 🔄 Switches functionality, redraws shapes, and updates UI.
  */
 export async function switchFunctionality(functionalityKey, buttonType = null) {
-    console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
-  
-    const fnConfig = functionalityConfig[functionalityKey];
-    if (!fnConfig) {
-      console.error("❌ Invalid functionalityKey:", functionalityKey);
-      return;
-    }
-  
-    const effectiveType = buttonType || fnConfig.defaultButtonType || null;
-    console.log("🎯 Using subtype:", effectiveType);
-    currentSubtype = effectiveType;
-  
-    // ✅ Store state globally
-    window.currentFunctionalityKey = functionalityKey;
-    window.currentSubtype = effectiveType;
-    let topicId = functionalityKey;
-    let subtype = effectiveType;
-    // 🔹 Header Titles
-    const page = location.pathname.split("/").pop();
-    const pageTitles = {
-      "index.html": "Home",
-      "parallel_lines_04.html": "Parallel Lines",
-      "triangle_theorem_07.html": "Triangle Theorems",
-      "trig_properties_09.html": "Trigonometric Properties",
-      "circle_theorems_02.html": "Circle Theorems"
-    };
-    const mainTitle = pageTitles[page] || "Math App";
-  
-    const subtitleMap = {
-      verticallyOpposite: "Vertically Opposite",
-      parallelProperties: "Parallel Line Properties",
-      exteriorAngles: "Exterior Angles",
-      angleSumProperties: "Angle Sum"
-    };
-    const subtitleLabel = subtitleMap[functionalityKey] || "";
-  
-    let activeSubBtnLabel = "";
-    if (fnConfig.buttonSet && effectiveType) {
-      const match = fnConfig.buttonSet.find(btn => btn.type === effectiveType);
-      activeSubBtnLabel = match?.label || "";
-    }
-  
-    
-    updateHeaderLabels({
-      title: mainTitle,
-      subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
-      subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
-    });
-  
-    // 🧹 Canvas and UI
-    canvasManager.clearAllShapes();
-    drawShapes(fnConfig.canvasConfig, effectiveType);
-    updateUI(fnConfig, functionalityKey, effectiveType);
-    updateLeftSidebar(functionalityKey, effectiveType);
-    canvasManager.render();
-    
-    // 🔁 Submission-aware behavior
-    const uid = localStorage.getItem("uid");
-    if (uid) {
-      const docId = `${uid}_${topicId}_${subtype}`;
-      const docRef = doc(db, "progress", docId);
-      const status = await getProgressStatus(uid, topicId, subtype);
+  console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
 
-  if (status === "submitted") {
-    console.log("📥 Already submitted. Loading summary...");
-    await loadProgress(uid, topicId, subtype, "submitted");
-
-  } else if (status === "saved") {
-    console.log("💾 Found saved progress. Rendering form and applying saved values...");
-    
-    const savedData = await loadSavedProgress(uid, topicId, subtype);
-    updateRightSidebar(topicId, subtype);  // Step 1: Draw the form
-    updateRightSidebarAfterSubmit({
-      topicId,
-      subtype,
-      responses: savedData.responses   // Step 2: Fill values
-    });
-
-  } else {
-    console.log("📝 No submission yet, loading fresh form...");
-    updateRightSidebar(topicId, subtype);
-    await saveProgress(uid, topicId, subtype, "in-progress", {});
-
-  }
-}
-
-  }
-  
-  export function updateRightSidebar(functionalityKey, subtype = null) {
-    const config = functionalityConfig[functionalityKey];
-    if (!config) return;
-
-    const sidebar = document.querySelector(".sidebar.right");
-    const allContent = config.rightSidebarContent;
-
-    let content = "<p>Content not available.</p>";
-
-    if (typeof allContent === "string") {
-        content = allContent;
-    } else if (typeof allContent === "object") {
-        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
-    }
-
-    sidebar.innerHTML = content;
-}
-
-
-
-export function updateRightSidebarAfterSubmit({ topicId, subtype, responses }) {
-  const formStructure = resolveFormStructure(topicId, subtype);
-  const fields = getApplicableFields(formStructure, subtype);
-  if (!formStructure || !Array.isArray(fields)) {
-    console.warn("⚠️ Invalid or missing formStructure for", topicId, subtype);
+  const fnConfig = functionalityConfig[functionalityKey];
+  if (!fnConfig) {
+    console.error("❌ Invalid functionalityKey:", functionalityKey);
     return;
   }
 
-  fields.forEach(({ angle1, angle2, result }) => {
-    const input1 = document.querySelector(`[name="${angle1}"]`);
-    const input2 = document.querySelector(`[name="${angle2}"]`);
-    const resultSpan = document.querySelector(`[name="${result}"], [id="${result}"]`);
+  const effectiveType = buttonType !== null && buttonType !== undefined
+    ? buttonType
+    : (fnConfig.defaultButtonType || null);
 
-    if (input1) input1.value = responses[angle1] || '';
-    if (input2) input2.value = responses[angle2] || '';
-    if (resultSpan) resultSpan.innerText = responses[result] || '';
+  const topicId = functionalityKey;
+  const subtype = effectiveType || null;
+
+  console.log("The values of topicId and subtype are", { topicId, subtype });
+
+  window.currentFunctionalityKey = functionalityKey;
+  window.currentSubtype = subtype;
+
+  // Header updates
+  const page = location.pathname.split("/").pop();
+  const pageTitles = {
+    "index.html": "Home",
+    "parallel_lines_04.html": "Parallel Lines",
+    "triangle_theorem_07.html": "Triangle Theorems",
+    "trig_properties_09.html": "Trigonometric Properties",
+    "circle_theorems_02.html": "Circle Theorems"
+  };
+  const mainTitle = pageTitles[page] || "Math App";
+  const subtitleLabel = fnConfig.theoremTitle || "";
+  const activeSubBtnLabel = fnConfig.buttonSet?.find(btn => btn.type === effectiveType)?.label || "";
+
+  updateHeaderLabels({
+    title: mainTitle,
+    subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+    subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
   });
 
-  const conclusionField = document.querySelector(`[name="${formStructure.conclusion}"], [id="${formStructure.conclusion}"]`);
-  if (conclusionField) {
-    conclusionField.value = responses[formStructure.conclusion] || '';
+  // Redraw canvas and UI
+  canvasManager.clearAllShapes();
+  drawShapes(fnConfig.canvasConfig, subtype);
+  updateUI(fnConfig, functionalityKey, subtype);
+  updateLeftSidebar(functionalityKey, subtype);
+  canvasManager.render();
+
+  // Progress load logic
+  const uid = localStorage.getItem("uid");
+  if (uid) {
+    const docId = `${uid}_${topicId}_${subtype}`;
+    const status = await getProgressStatus(uid, topicId, subtype);
+    console.log("The topic is",topicId);
+    if (status === "submitted") {
+      console.log("📥 Already submitted. Loading summary...");
+
+      updateRightSidebar(topicId, subtype);
+      
+      const savedData = await loadProgress(uid, topicId, subtype, "submitted");  // ✅ FIXED
+      console.log("The save data is ", savedData);
+      updateRightSidebarAfterSubmit(
+        topicId,
+        subtype,
+        savedData
+      );
+
+    } else if (status === "saved") {
+      console.log("💾 Found saved progress. Rendering form and applying saved values...");
+      
+      const savedData = await loadSavedProgress(uid, topicId, subtype);
+
+      updateRightSidebar(topicId, subtype);
+      console.log("🧪 Inputs currently in DOM:", Array.from(document.querySelectorAll("#right-sidebar input")).map(el => el.name));
+
+      updateRightSidebarAfterSubmit(
+        topicId,
+        subtype,
+        savedData
+      );
+
+    } else {
+      console.log("📝 No submission yet. Initializing empty form...");
+      updateRightSidebar(topicId, subtype);
+      await saveProgress(uid, topicId, subtype, "in-progress", {});
+    }
   }
+}
+
+
+
+export function updateRightSidebar(functionalityKey, subtype = null) {
+  console.log("➡️ updateRightSidebar called with:", functionalityKey, subtype);
+   const fnConfig = functionalityConfig[functionalityKey];  // ✅ Add this line
+  const content = fnConfig?.rightSidebarContent?.[subtype];
+
+  if (!content) {
+    console.warn("⚠️ No sidebar content found for", functionalityKey, subtype);
+    return;
+  }
+
+  document.getElementById("right-sidebar").innerHTML = content;
+  console.log("✅ Sidebar content inserted.");
+}
+
+
+
+export function updateRightSidebarAfterSubmit(topicId, subtype, savedData) {
+  console.log("The topic is", topicId);
+  const config = functionalityConfig[topicId];
+  console.log("The config structure is ", config);
+
+  const formStructure = config?.formStructure;
+  console.log("The form structure is ", formStructure);
+
+  if (!formStructure || !formStructure.fields) {
+    console.warn("⚠️ No form structure found for topic:", topicId);
+    return;
+  }
+
+  // ✅ Collect all matching field blocks
+  const fieldBlocks = formStructure.fields.filter(f => f.subtype === subtype || !f.subtype);
+  if (fieldBlocks.length === 0) {
+    console.warn(`⚠️ No form field block found for subtype: ${subtype}`);
+    return;
+  }
+
+  const idsToRestore = [];
+
+  // ✅ Collect all expected IDs from all matching field blocks
+  fieldBlocks.forEach(field => {
+    field.angles?.forEach(({ id }) => idsToRestore.push(id));
+    field.lengths?.forEach(({ id }) => idsToRestore.push(id));
+    field.results?.forEach(({ id }) => idsToRestore.push(id));
+  });
+
+  // 📌 Add conclusion field
+  if (formStructure.conclusion) {
+    idsToRestore.push(formStructure.conclusion);
+  }
+
+  // 🧠 Loop and restore values
+  idsToRestore.forEach(id => {
+    const el = document.getElementById(id);
+    const savedValue = savedData[id];
+    if (!el || savedValue === undefined) {
+      console.warn("⚠️ Skipping missing response for:", id);
+      return;
+    }
+
+    if (el.tagName === "SPAN") {
+      el.innerText = savedValue;
+    } else {
+      el.value = savedValue;
+    }
+  });
+
+  if (formStructure.conclusion) {
+    const el = document.getElementById(formStructure.conclusion);
+    const savedValue = savedData[formStructure.conclusion];
+    if (el && savedValue !== undefined) {
+      el.value = savedValue;
+    }
+  }
+
   console.log("✅ Right sidebar inputs updated from saved responses.");
 }
 
 
 
-  
-  
-
 /**
  * 🖌️ Draws points, lines, triangles, circles depending on config and buttonType
  */
 function drawShapes(canvasConfig, buttonType = null) {
-    if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
-    if (canvasConfig.circle) drawCircle(canvasConfig);
-    if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
-    if (canvasConfig.lines) drawLines(canvasConfig);
+  if (canvasConfig.points) drawPoints(canvasConfig, buttonType);
+  if (canvasConfig.circle) drawCircle(canvasConfig);
+
+  const hasTraditionalTangents = canvasConfig.externalPoints && canvasConfig.externalPoints[buttonType];
+  const hasMidpointTangents = Array.isArray(canvasConfig.tangentLines) &&
+                               canvasConfig.tangentLines.some(t => t.subtype === buttonType);
+
+  if (hasTraditionalTangents || hasMidpointTangents) {
+      drawTangents(canvasConfig, buttonType);
+  }
+
+  if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
+  if (canvasConfig.lines) drawLines(canvasConfig, buttonType);
 }
 
-function drawPoints(canvasConfig, buttonType = null) {
-    canvasConfig.points.forEach(({ x, y, label, color = "black", radius = 5, type, enableDrag = false }) => {
-        if (!type || type === buttonType) {
-            const point = new Point(x, y, label, color, radius);
-            point.setEnableDrag(false); // ✅ Control dragging based on config
-            canvasManager.addShape(point);
-          
-        }
-    });
+function drawPoints(canvasConfig, subtype = null) {
+  const showLabels = canvasConfig.showLabels === true;
+
+  canvasConfig.points
+      .filter(p => p.subtype === subtype || p.type === "regular") // ✅ Filter on subtype strictly
+      .forEach(({ x, y, label, color = "black", radius = 5, enableDrag = false }) => {
+          if (x === undefined || y === undefined) return;
+
+          const point = new Point(x, y, label, color, radius);
+          point.setEnableDrag(false);
+          point.showLabel = showLabels;
+          canvasManager.addShape(point);
+      });
 }
 
 
-function drawLines(canvasConfig) {
-    if (!canvasConfig.lines) return;
-    canvasConfig.lines.forEach(({ endA, endB, color = "black", enableDrag = false }) => {
-        if (endA && endB) {
-            const line = new Line(endA, endB, color);
-            line.setEnableDrag(false); 
-            canvasManager.addShape(line);
-        }
-    });
+
+function drawLines(canvasConfig, subtype = null) {
+  if (!canvasConfig.lines) return;
+
+  canvasConfig.lines
+      .filter(line =>
+          !line.subtype || line.subtype === subtype  // ✅ relaxed filter
+      )
+      .forEach(({ endA, endB, color = "black", enableDrag = false }) => {
+          if (endA && endB) {
+              const line = new Line(endA, endB, color);
+              line.setEnableDrag(false);
+              canvasManager.addShape(line);
+          }
+      });
 }
+
 
 function drawCircle(canvasConfig) {
     if (!canvasConfig.circle) return;
@@ -375,20 +425,176 @@ function drawCircle(canvasConfig) {
 
 
 function drawTriangles(canvasConfig, buttonType = null) {
-    const triangles = buttonType
-        ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
-        : canvasConfig.triangles;
+  const triangles = buttonType
+    ? canvasConfig.triangles.filter(tri => tri.type === buttonType)
+    : canvasConfig.triangles;
 
-    triangles.forEach(({ vertices, vertexA, vertexB, vertexC, labels, showMidpoints = true, showMeasurements = true, enableDrag = false }) => {
-        if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
-        const triangle = new Triangle(vertexA, vertexB, vertexC);
-        triangle.setVertexLabels(labels);
-        triangle.setEnableDrag(enableDrag);
-        triangle.setShowMidpoints(showMidpoints);
-        triangle.setShowMeasurements(showMeasurements);
-        triangle.setShowLabels(true); // ✅ Enable vertex labels
-        canvasManager.addShape(triangle);
-    });
+  triangles.forEach((triangleData) => {
+    let {
+      vertices,
+      vertexA,
+      vertexB,
+      vertexC,
+      labels,
+      midpointLabels,
+      showMidpoints = true,
+      showMeasurements = true,    
+      enableDrag = false
+    } = triangleData;
+
+    // Support both vertices array and individual points
+    if (vertices?.length === 3) [vertexA, vertexB, vertexC] = vertices;
+
+    if (!vertexA || !vertexB || !vertexC) {
+      console.warn("⚠️ Incomplete triangle vertices:", triangleData);
+      return;
+    }
+
+    const triangle = new Triangle(vertexA, vertexB, vertexC);
+
+    triangle.setVertexLabels(labels);
+    triangle.setMidpointLabels(midpointLabels);      // ✅ fix for midpoint label issue
+    triangle.setEnableDrag(enableDrag);
+    triangle.setShowMidpoints(showMidpoints);
+    triangle.setShowMeasurements(showMeasurements);
+    triangle.setShowLabels(true);                    // ✅ show A/B/C labels
+
+    canvasManager.addShape(triangle);
+  });
+}
+
+
+function drawTangents(config, subtype) {
+  console.log(`🎯 Processing Tangents for ${subtype}`);
+
+  console.log(`🎯 drawTangents() called for subtype: ${subtype}`);
+
+  const { circle, points = [], externalPoints = {}, tangentLines = [] } = config;
+
+  const tangentPoints = points.filter(p => p.type === "tangent" && p.subtype === subtype);
+  const hasTangentLines = Array.isArray(tangentLines) && tangentLines.some(t => t.subtype === subtype);
+  
+  if (tangentPoints.length !== 2 && !hasTangentLines) {
+      console.warn(`⚠️ No valid tangent points or tangent lines found for subtype "${subtype}". Skipping drawTangents.`);
+      return;
+  }
+  
+  if (!circle || !points) {
+      console.warn("⚠️ Invalid tangent configuration.");
+      return;
+  }
+
+  const [center, radius] = circle;
+
+  /*** 📌 Step 1: Handle Standard Two-Point Tangents ***/
+  
+  if (tangentPoints.length === 2) {
+      console.log(`✅ Found two tangent points for ${subtype}:`, tangentPoints);
+
+      const [point1, point2] = tangentPoints;
+
+      // Compute external intersection dynamically
+      const computedExternal = findTangentIntersection(center, radius, point1, point2);
+      if (!computedExternal) {
+          console.warn("❌ Could not compute external tangent intersection.");
+          return;
+      }
+
+      // Assign metadata from config.externalPoints
+      const externalPointConfig = externalPoints[subtype] || {};
+      const externalPoint = {
+          ...computedExternal,
+          label: externalPointConfig.label || subtype.toUpperCase(),
+          color: externalPointConfig.color || "blue",
+          radius: externalPointConfig.radius || 5
+      };
+
+      console.log(`✅ Using tangent points for ${subtype}:`, point1, point2, "and external point:", externalPoint);
+
+      // Draw traditional tangents
+      drawLines({
+          lines: [
+              { endA: point1, endB: externalPoint, color: "red" },
+              { endA: point2, endB: externalPoint, color: "red" }
+          ]
+      });
+
+      // Draw external point
+      console.log("🖊 Drawing external point:", externalPoint);
+      externalPoint.enableDrag = false;
+      drawPoints({ points: [externalPoint] });
+
+
+      console.log(`🎯 Tangents drawn for ${subtype} with external point ${externalPoint.label}`);
+  } else if (tangentPoints.length > 2) {
+      console.warn(`⚠️ Expected 2 tangent points for ${subtype}, but found more.`);
+  }
+
+  /*** 📌 Step 2: Handle Midpoint-Based Tangents ***/
+  console.log("The tangentLines are", tangentLines);
+  if (tangentLines) {
+      const midTangents = tangentLines.filter(t => t.subtype === subtype);
+      console.log("The mid Tangents are ", midTangents);
+      midTangents.forEach(({ midpoint, length, color = "black" }) => {
+          if (!midpoint || !length) {
+              console.warn("⚠️ Skipping invalid midpoint tangent (missing parameters):", { midpoint, length });
+              return;
+          }
+
+          // Compute perpendicular direction to the radius
+          let dx = midpoint.x - center.x;
+          let dy = midpoint.y - center.y;
+
+          // Compute perpendicular (rotate 90 degrees)
+          let perpX = -dy;
+          let perpY = dx;
+
+          // Normalize
+          let magnitude = Math.sqrt(perpX * perpX + perpY * perpY);
+          perpX /= magnitude;
+          perpY /= magnitude;
+
+          // Compute endpoints
+          let halfLength = length / 2;
+          let endA = { x: midpoint.x + halfLength * perpX, y: midpoint.y + halfLength * perpY };
+          let endB = { x: midpoint.x - halfLength * perpX, y: midpoint.y - halfLength * perpY };
+
+          console.log(`📏 Drawing midpoint tangent from (${endA.x}, ${endA.y}) to (${endB.x}, ${endB.y})`);
+
+          // Draw the midpoint tangent
+          drawLines({ lines: [{ endA, endB, color }] });
+
+          // Draw the midpoint itself
+          midpoint.enableDrag = false;
+          drawPoints({ points: [midpoint] });
+
+      });
+  }
+
+  console.log(`🎯 Tangents processing complete for ${subtype}`);
+}
+
+function findTangentIntersection(center, radius, point1, point2) {
+  const { x: h, y: k } = center;
+  const r = radius;
+  
+  // Compute slope of the line joining two tangent points
+  const slope = (point2.y - point1.y) / (point2.x - point1.x);
+
+  // Compute the perpendicular slope
+  const perpSlope = -1 / slope;
+
+  // Midpoint of tangent points
+  const midX = (point1.x + point2.x) / 2;
+  const midY = (point1.y + point2.y) / 2;
+
+  // External point should be positioned further along the perpendicular line
+  const distance = Math.sqrt(r * r - ((midX - h) ** 2 + (midY - k) ** 2));
+
+  return {
+      x: midX + distance * Math.cos(Math.atan(perpSlope)),
+      y: midY + distance * Math.sin(Math.atan(perpSlope))
+  };
 }
 
 
@@ -584,30 +790,8 @@ export async function saveProgressToFirestore(payload) {
  * ✅ Collects responses from the right sidebar form for a given topic and subtype
  * Used by both Save and Submit operations.
  */
-  export function collectFormResponses(topicId, subtype) {
-    const formStructure = resolveFormStructure(topicId, subtype);
-    const fields = getApplicableFields(formStructure, subtype);
   
-    if (!formStructure || !fields.length) {
-      console.warn("⚠️ No formStructure or applicable fields for", topicId, subtype);
-      return {};
-    }
   
-    const responses = {};
-  
-    fields.forEach(({ angle1, angle2, result }) => {
-      responses[angle1] = document.querySelector(`[name="${angle1}"]`)?.value || "";
-      responses[angle2] = document.querySelector(`[name="${angle2}"]`)?.value || "";
-      const resEl = document.querySelector(`[name="${result}"], [id="${result}"]`);
-      responses[result] = resEl?.innerText || resEl?.value || "";
-    });
-  
-    const conclusion = document.querySelector(`[name="${formStructure.conclusion}"], [id="${formStructure.conclusion}"]`)?.value || "";
-    responses[formStructure.conclusion] = conclusion;
-  
-    console.log("✅ Form responses collected:", responses);
-    return responses;
-  }
   
   
   /*

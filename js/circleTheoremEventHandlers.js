@@ -27,13 +27,24 @@
  * updateUI              | UUI     | config, functionalityKey           | Updates UI elements like sidebars and dynamic buttons.
  */
 
-import { functionalityConfig } from './circleTheoremConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { functionalityConfig } from './commonConfig.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 import { setMode } from '../shapes.js';
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
 
 
 // Functions ordered alphabetically
@@ -74,45 +85,6 @@ export function addSpecificPoints(points, ctx) {
 }
 
 /**
- * Attaches event listeners to navigation buttons.
- */
-export function attachNavBarListeners() {
-    const navButtons = {
-        sineTheta: document.getElementById("sineTheta-button"),
-        cosineTheta: document.getElementById("cosineTheta-button"),
-        alternateSegments: document.getElementById("alternateSegments-button"),
-        subtendedAngles: document.getElementById("subtendedAngles-button"),
-        quadrilaterals: document.getElementById("quadrilaterals-button"),
-    };
-
-    Object.entries(navButtons).forEach(([key, button]) => {
-        console.log("Function NBL - navbarListeneres, key button is ", key, button);
-        if (button) {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-
-            newButton.addEventListener("click", () => {
-                console.log("The clicked button is ", key, button);
-                if (key === "sineTheta") {
-                    switchFunctionality(key);
-                } else {
-                    switchFunctionality(key, "sin");
-                }
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
-        }
-    });
-
-    const defaultKey = 'sinTheta';
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
-    }
-}
-
-/**
  * Draws a circle based on the given configuration.
  */
 function drawCircle(canvasConfig) {
@@ -140,7 +112,8 @@ function drawCircle(canvasConfig) {
     const circleShape = new Circle(center, radius);
     
     // 🔹 Ensure enableDrag is applied properly
-    circleShape.setEnableDrag(canvasConfig.enableDrag ?? true);  
+    circleShape.setEnableDrag(false);  
+    circleShape.setEnableStretch(false); 
 
     canvasManager.addShape(circleShape);
     canvasManager.render();
@@ -184,7 +157,7 @@ function drawPoints(config, subtype) {
 
         // ✅ Correctly create and store the Point object
         const point = new Point(x, y, label || "", color, radius);
-
+        point.enableDrag = false;
         console.log(`🖊 Adding point ${label} at (${x}, ${y})`);
 
         // ✅ First add the point to the canvas
@@ -200,7 +173,7 @@ function drawPoints(config, subtype) {
  */
 function drawLines(canvasConfig, subtype = null) {
     console.log(`%cFunction DWL - Drawing Lines for subtype: "${subtype}"`, 'color: blue;', canvasConfig);
-
+      
     if (!canvasConfig.lines || !Array.isArray(canvasConfig.lines)) {
         console.warn("⚠️ No valid lines data in canvasConfig:", canvasConfig.lines);
         return;
@@ -221,7 +194,7 @@ function drawLines(canvasConfig, subtype = null) {
     filteredLines.forEach(({ endA, endB, color = "black", enableDrag = true }) => {
         if (endA && endB) {
             const line = new Line(endA, endB, color);
-            line.setEnableDrag(enableDrag);  // Apply dragging setting from config
+            line.setEnableDrag(false);  // Apply dragging setting from config
 
             canvasManager.addShape(line);
             console.log(`📏 Drawing line from (${endA.x}, ${endA.y}) to (${endB.x}, ${endB.y}) in color "${color}"`);
@@ -281,7 +254,9 @@ function drawTangents(config, subtype) {
 
         // Draw external point
         console.log("🖊 Drawing external point:", externalPoint);
+        externalPoint.enableDrag = false;
         drawPoints({ points: [externalPoint] });
+
 
         console.log(`🎯 Tangents drawn for ${subtype} with external point ${externalPoint.label}`);
     } else if (tangentPoints.length > 2) {
@@ -323,7 +298,9 @@ function drawTangents(config, subtype) {
             drawLines({ lines: [{ endA, endB, color }] });
 
             // Draw the midpoint itself
+            midpoint.enableDrag = false;
             drawPoints({ points: [midpoint] });
+
         });
     }
 
@@ -422,8 +399,7 @@ function drawShapes(fkey, canvasConfig, buttonType) {
         console.warn(`⚠️ No valid tangent points or tangent lines found for subtype "${buttonType}".`);
     }
 
-
-
+    
     if (canvasConfig.lines) {
         console.log("✅ Drawing Lines");
         drawLines(canvasConfig, buttonType);
@@ -434,7 +410,27 @@ function drawShapes(fkey, canvasConfig, buttonType) {
     canvasManager.render();
 }
 
-
+function drawArcs(config, subtype) {
+    if (!config.arcs) return;
+  
+    const ctx = canvasManager.getContext();
+    config.arcs
+      .filter(arc => arc.subtype === subtype)
+      .forEach(({ center, start, end, radius, color = 'red', direction = 'clockwise' }) => {
+        const startAngle = Math.atan2(start.y - center.y, start.x - center.x);
+        const endAngle = Math.atan2(end.y - center.y, end.x - center.x);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.arc(center.x, center.y, radius, startAngle, endAngle, direction === 'anticlockwise');
+        ctx.stroke();
+  
+        // Optional: add arrowhead on end point
+        const arrowAngle = direction === 'anticlockwise' ? endAngle - 0.1 : endAngle + 0.1;
+        drawArrowhead(ctx, center.x + radius * Math.cos(endAngle), center.y + radius * Math.sin(endAngle), arrowAngle);
+      });
+  }
+  
 
 
 /**
@@ -543,7 +539,7 @@ export function handleTriangleType(fkey, type) {
     // Draw triangles
     drawTriangles(canvasConfig, type);
 
-    if(fkey === "sineTheta" || fkey === "cosineTheta" ) {
+    if(fkey === "radiusTangent" || fkey === "twoTriangles" ) {
        
             drawLines(canvasConfig, type);
     }    
@@ -553,7 +549,7 @@ export function handleTriangleType(fkey, type) {
 }
 
 
-export function switchFunctionality(functionalityKey, buttonType) {
+export function switchFunctionality(functionalityKey, buttonType = null) {
     console.log(`🟢 [switchFunctionality] Key: ${functionalityKey}, Sub-Button: ${buttonType}`);
     console.log(`🚨 switchFunctionality triggered from sub-button with:`, functionalityKey, buttonType);
 
@@ -565,11 +561,47 @@ export function switchFunctionality(functionalityKey, buttonType) {
         return;
     }
 
+    const effectiveType = buttonType || config.defaultButtonType || null;
+
     console.log("🟡 [switchFunctionality] Loaded config:", config);
 
     // 🔧 PATCH: Remove rotation controls from any active Divider objects
     
+    const page = location.pathname.split("/").pop();
+    const pageTitles = {
+      "index.html": "Home",
+      "parallel_lines_04.html": "Parallel Lines",
+      "triangle_theorem_07.html": "Triangle Theorems",
+      "trig_properties_09.html": "Trigonometric Properties",
+      "circle_theorems_02.html": "Circle Theorems"
+    };
+    const mainTitle = pageTitles[page] || "Math App";
+  
+    const icon = document.getElementById(`${functionalityKey}-button`);
+    const subtitleMap = {
+    radiusTangent: "Radius Tangent",
+    twoTangents: "Two Tangents",
+    subtendedAngles : "Subtended Angles",
+    alternateSegments: "Alternate Segments",
+    quadrilaterals: "Quadrilaterals"
+      };
+   const subtitleLabel = subtitleMap[functionalityKey] || "";
+  
+  
+    let activeSubBtnLabel = "";
+    if (config.buttonSet && effectiveType) {
+      const match = config.buttonSet.find(btn => btn.type === effectiveType);
+      activeSubBtnLabel = match?.label || "";
+    }
+  
     
+    // ✅ Compose header with dividers only if parts are present
+    updateHeaderLabels({
+        title: mainTitle,
+      subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+      subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+    });
+  
     canvasManager.shapes.forEach(shape => {
         if (shape.type === 'divider' && typeof shape.removeRotationControls === 'function') {
             shape.removeRotationControls();
@@ -586,11 +618,12 @@ export function switchFunctionality(functionalityKey, buttonType) {
     canvasManager.clearAllShapes();
     console.log("🧹 Cleared canvas shapes");
 
-    drawShapes(functionalityKey, config.canvasConfig, buttonType);
+    drawShapes(functionalityKey, config.canvasConfig, effectiveType);
 
-    updateUI(config, functionalityKey, buttonType);
-    updateLeftSidebar(functionalityKey, buttonType);
-    updateRightSidebar(functionalityKey, buttonType);
+    updateUI(config, functionalityKey, effectiveType);
+    updateLeftSidebar(functionalityKey, effectiveType);
+  
+    updateRightSidebar(functionalityKey, effectiveType);
 
     // 🛠️ Prevents unintended drawing
     setMode("modify");
@@ -622,69 +655,68 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey, buttonType) {
-    console.log("Function UUI - Updating UI for:", functionalityKey, config);
-    console.log("🔍 updateTheoremText call in updateUI below");
+function updateUI(config, functionalityKey, buttonType = null) {
+  const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
+  updateTheoremText(config, buttonType);
 
+  const dynamicButtons = document.getElementById("dynamic-buttons");
 
-   updateTheoremText(config);
+  if (Array.isArray(config.buttonSet)) {
+    dynamicButtons.innerHTML = "";
 
-    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
-    console.log("🧩 dynamicButtonsContainer:", dynamicButtonsContainer);
+    const buttonsMap = {};
 
-    if (functionalityKey === "sineTheta") {
-        dynamicButtonsContainer.style.display = "none";
-        return;
+    config.buttonSet.forEach(({ label, type, svg }) => {
+      // ✅ Tooltip wrapper
+      const wrapper = document.createElement("div");
+      wrapper.className = "tooltip-container";
+
+      // 🎯 Create SVG element
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = svg.trim();
+      const svgEl = tempDiv.firstChild;
+      svgEl.classList.add("sub-button-svg");
+      svgEl.dataset.type = type;
+
+      // 🔹 Add event listener
+      svgEl.addEventListener("click", () => {
+        // 🧼 Remove previous active
+        document.querySelectorAll(".sub-button-svg").forEach(el => el.classList.remove("active"));
+
+        // ✅ Activate selected
+        svgEl.classList.add("active");
+
+        // 🔁 Switch functionality
+        switchFunctionality(functionalityKey, type);
+      });
+
+      // 🏷️ Tooltip
+      const tooltip = document.createElement("span");
+      tooltip.className = "tooltip-text";
+      tooltip.textContent = label;
+
+      // 📦 Assemble button
+      wrapper.appendChild(svgEl);
+      wrapper.appendChild(tooltip);
+      dynamicButtons.appendChild(wrapper);
+
+      buttonsMap[type] = svgEl;
+    });
+
+    dynamicButtons.style.display = "flex";
+
+    // 🎯 Activate default or passed type
+    const activeType = buttonType || config.defaultButtonType || config.buttonSet[0]?.type;
+    if (buttonsMap[activeType]) {
+      buttonsMap[activeType].classList.add("active");
+      if (!buttonType) buttonsMap[activeType].click();
     }
 
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        console.log("🛠 Rendering buttons for:", functionalityKey);
-        console.log("🔍 buttonSet:", config.buttonSet);
-        console.log("📌 dynamicButtonsContainer found:", !!dynamicButtonsContainer);
-
-        dynamicButtonsContainer.innerHTML = "";
-
-        let buttonsMap = {};
-
-        config.buttonSet.forEach((buttonConfig) => {
-            const btn = document.createElement("button");
-            btn.classList.add("triangle-button");
-            btn.textContent = buttonConfig.label;
-            btn.dataset.type = buttonConfig.type;
-            btn.dataset.functionalityKey = functionalityKey;
-
-            // Store in map for later access
-            buttonsMap[buttonConfig.type] = btn;
-
-            btn.addEventListener("click", () => {
-                console.log(`🔵 Clicked Sub-Button: ${buttonConfig.type}`);
-                document.querySelectorAll(".triangle-button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                switchFunctionality(functionalityKey, buttonConfig.type);
-            });
-
-            dynamicButtonsContainer.appendChild(btn);
-        });
-
-        dynamicButtonsContainer.style.display = "block";
-
-        // ✅ Mark the right sub-button active (don't click it again!)
-        if (buttonType) {
-            if (buttonsMap[buttonType]) {
-                buttonsMap[buttonType].classList.add("active");
-            }
-        } else {
-            const defaultType = config.defaultButtonType || config.buttonSet[0]?.type;
-            if (buttonsMap[defaultType]) {
-                buttonsMap[defaultType].classList.add("active");
-                buttonsMap[defaultType].click(); // Trigger once at top level
-            }
-        }
-
-    } else {
-        dynamicButtonsContainer.style.display = "none";
-    }
+  } else {
+    dynamicButtons.style.display = "none";
+  }
 }
+
 
 
 
@@ -713,7 +745,7 @@ export function updateRightSidebar(functionalityKey, subClassification) {
 
     let content = rightSidebarContent[subClassification];
 
-    if (functionalityKey === "sineTheta") 
+    if (functionalityKey === "radiusTangent") 
             content = rightSidebarContent;
     
     if (!content) {
@@ -739,7 +771,7 @@ export function updateLeftSidebar(functionalityKey, subClassification) {
     const leftSidebarContent = config.leftSidebarContent;
 
     let content;
-    if (functionalityKey === "sineTheta" || functionalityKey === "cosineTheta") {
+    if (functionalityKey === "radiusTangent" || functionalityKey === "twoTangents") {
         content = leftSidebarContent;
     } else {
         content = typeof leftSidebarContent === 'object'

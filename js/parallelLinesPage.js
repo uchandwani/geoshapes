@@ -1,75 +1,31 @@
+    import { updatePageTitle} from './header.js';
     import { Triangle } from '../shapes/Triangle.js';
     import { canvasManager } from '../shapes/CanvasManager.js';
-    import { functionalityConfig } from './parallelLinesConfig.js';
-    import { switchFunctionality } from './parallelLinesEventHandlers.js';
-    import { addSpecificPoints } from './parallelLinesEventHandlers.js';
-    import { attachNavBarListeners } from './parallelLinesEventHandlers.js';
+    import { functionalityConfig } from './commonConfig.js';
+   // import { addSpecificPoints } from './parallelLinesEventHandlers.js';
     import {Line} from '../shapes/Lines.js';
     import {Point} from '../shapes/Points.js';
     import {Circle} from '../shapes/Circle.js';
-
-        
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log("Triangle Properties Page Loaded");
-
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        
-       /* console.log('Current Mode:', mode);
-        const buttonActions = {
-            
-            'icon-btn-1': () => console.log('Placeholder Icon 1 Clicked'),
-            'icon-btn-2': () => console.log('Placeholder Icon 2 Clicked'),
-            'icon-btn-3': () => console.log('Placeholder Icon 3 Clicked'),
-            'icon-btn-4': () => console.log('Placeholder Icon 4 Clicked'),
-            'icon-btn-5': () => console.log('Placeholder Icon 5 Clicked'),
-            'icon-btn-6': () => console.log('Placeholder Icon 6 Clicked'),
-            'icon-btn-7': () => console.log('Placeholder Icon 7 Clicked'),
-            'icon-btn-8': () => console.log('Placeholder Icon 8 Clicked'),
-            'icon-btn-14': () => console.log('Placeholder Icon 14 Clicked'),
-            'icon-btn-16': () => console.log('Placeholder Icon 16 Clicked'),
-            'icon-btn-9': () => console.log('Placeholder Icon 9 Clicked'),
-            'icon-btn-10': () => console.log('Placeholder Icon 10 Clicked'),
-            'icon-btn-11': () => console.log('Placeholder Icon 11 Clicked'),
-            'icon-btn-12': () => console.log('Placeholder Icon 12 Clicked'),
-            'icon-btn-13': () => console.log('Placeholder Icon 13 Clicked'),
-             'icon-btn-15': () => console.log('Placeholder Icon 15 Clicked'),
-        };
-
-        Object.keys(buttonActions).forEach((id) => {
-            const button = document.getElementById(id);
-            if (button) {
-                button.addEventListener('click', buttonActions[id]);
-                console.log(`Listener attached to button: ${id}`);
-            } else {
-                console.warn(`Button with ID ${id} not found.`);
-            }
-        });//});
-     */
-        
-        attachNavBarListeners(); // Set up listeners for nav buttons
-        const defaultFunctionality = 'sineTheta';
-       
-
-        switchFunctionality(defaultFunctionality);
-        // Function to handle button activation
-        // Step 3: Set the default button as active
-       /* const defaultButton = document.getElementById(`${defaultFunctionality}-button`);
-        if (defaultButton) {
-            defaultButton.classList.add('active');
-        console.log("active button changed")  ;  
-        } */
-        });
-        // Default state: Activate Sin Theta and load default functionality
-            
-       
-      //setupEventHandlers(ctx, canvas);
-      //  loadTriangle('default');
-        // Draw a default triangle on page load
-      // drawDefaultCircle(ctx, canvas);
-      // a(ctx, canvas)
+    import { switchFunctionality } from './commonEventHandlers.js';
+    window.switchFunctionality = switchFunctionality;
 
 
+    window.switchFunctionality = switchFunctionality;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("Parallel Lines Page Loaded");
+      updatePageTitle();
+      switchFunctionality('verticallyOpposite'); // default
+    });
+
+    window.addEventListener("nav-select", (e) => {
+      const { functionalityKey, subtype } = e.detail;
+      console.log("📥 Received nav-select:", functionalityKey, subtype);
+      switchFunctionality(functionalityKey, subtype);
+    });
+
+
+ 
     // Function to draw the default triangle on page load
     function drawDefaultCircle(ctx,canvas) {
         const centerPoint = new Point(300, 300);
@@ -205,7 +161,7 @@
         // Add triangle to canvas manager and render it
         //canvasManager.addShape(triangle);
         //canvasManager.render();
-        renderCanvas(functionalityConfig.sineTheta);
+        renderCanvas(functionalityConfig.verticallyOpposite);
 
         console.log("Default triangle drawn.");
     }
@@ -396,33 +352,40 @@
         }
     }
 
+/*  
+export function compareMeasures(input1Name, input2Name, resultName) {
+ 
+  const input1 = document.getElementsByName(input1Name)[0];
+  const input2 = document.getElementsByName(input2Name)[0];
+  const result = document.getElementsByName(resultName)[0] || document.getElementById(resultName);
 
-  export function compareMeasures(input1Id, input2Id, resultId) {
-    console.log("Inside compareMeasures", input1Id, input2Id, resultId);
+  if (!input1 || !input2 || !result) {
+    console.error("❌ Element not found", { input1, input2, result });
+    return;
+  }
 
-    const input1 = document.getElementById(input1Id);
-    const input2 = document.getElementById(input2Id);
-    const result = document.getElementById(resultId);
+  const val1 = input1.value.trim();
+  const val2 = input2.value.trim();
 
-    if (!input1 || !input2 || !result) {
-        console.error("❌ Error: One or more elements not found!", { input1, input2, result });
-        return;
-    }
-
-    const value1 = parseFloat(input1.textContent) || null;
-    const value2 = parseFloat(input2.value) || null;
-
-    if (value1 !== null && value2 !== null) {
-        result.textContent = value1 === value2 ? "Yes" : "No";
-    } else {
-        result.textContent = ""; // Clear result if inputs are empty
-    }
+  // ✅ Only run comparison when both inputs are filled
+  if (val1 !== "" && val2 !== "") {
+    const match = parseFloat(val1) === parseFloat(val2);
+    result.textContent = match ? "Yes" : "No";
+    input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+    input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
+  } else {
+    result.textContent = "";
+    input1.style.backgroundColor = "";
+    input2.style.backgroundColor = "";
+  }
 }
+
+
 
 
 export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null) {
     console.log("Inside sumMeasures", input1Id, input2Id, input3Id, resultId, target);
-
+    
     const input1 = document.getElementById(input1Id);
     const input2 = document.getElementById(input2Id);
     const input3 = input3Id ? document.getElementById(input3Id) : null;
@@ -458,7 +421,7 @@ export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = nul
     }
 }
 
-
+*/
 
 
 // Utility function to update input styles
@@ -474,98 +437,7 @@ function resetInputStyles(inputs, result) {
     result.textContent = "";
 }
 
-
-
-    export function compareDividedMeasures(input1Name, input2Name, resultName, divisor) {
-        const input1 = document.getElementsByName(input1Name)[0];
-        const input2 = document.getElementsByName(input2Name)[0];
-        const result = document.getElementsByName(resultName)[0];
-
-        if (input1.value && input2.value) {
-            const value1 = parseFloat(input1.value);
-            const value2 = parseFloat(input2.value) / divisor;
-
-            // Handle floating-point precision with a tolerance
-            const tolerance = 0.001; // Adjust as needed
-            const match = Math.abs(value1 - value2) <= tolerance;
-
-            result.textContent = match ? "Yes" : "No";
-
-            // Change background color
-            input1.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-            input2.style.backgroundColor = match ? "lightgreen" : "lightcoral";
-        } else {
-            result.textContent = ""; // Clear the content if values are not entered
-            input1.style.backgroundColor = ""; // Reset to default
-            input2.style.backgroundColor = ""; // Reset to default
-        }
-    }
-
-    export function updateMessage(ans1Name, ans2Name, messageAreaId, successMessage) {
-        const ans1 = document.getElementsByName(ans1Name)[0]?.textContent.trim();
-        const ans2 = document.getElementsByName(ans2Name)[0]?.textContent.trim();
-        const messageArea = document.getElementById(messageAreaId);
-
-        if (!messageArea) {
-            console.error(`Element with id "${messageAreaId}" not found.`);
-            return;
-        }
-
-        if (ans1 === "Yes" && ans2 === "Yes") {
-            messageArea.textContent = successMessage ;
-        
-    }
-    }
-
-    export function calculateRatio(input1Name, input2Name, resultName) {
-        const input1 = document.getElementsByName(input1Name)[0].value;
-        const input2 = document.getElementsByName(input2Name)[0].value;
-        const result = document.getElementsByName(resultName)[0];
-
-        if (input1 && input2 && parseFloat(input2) !== 0) {
-            const ratio = parseFloat(input1) / parseFloat(input2);
-            result.value = ratio.toFixed(2); // Limit to 2 decimal places
-        } else {
-            result.value = ""; // Clear the content if inputs are invalid
-        }
-    }
-
-    export function toFraction(decValue) {
-        const epsilon = 0.01; // Margin of error for comparison
-
-        console.log("The decValue is:", decValue);
-
-        if (Math.abs(decValue - 0.50) < epsilon) {
-            console.log("Matched 0.50");
-            return "1/2";
-        } else if (Math.abs(decValue - 0.7071) < epsilon) {
-            console.log("Matched 0.7071");
-            return "√2/2";
-        } else if (Math.abs(decValue - 0.86602) < epsilon) {
-            console.log("Matched 0.86602");
-            return "√3/2";
-         } else if (Math.abs(decValue - 0.5773) < epsilon) {
-            console.log("Matched 0.5773");
-            return "√3/3";
-
-        } else if (Math.abs(decValue - 1.732) < epsilon) {
-            
-            return "√3";
-        } else if (Math.abs(decValue - .3333) < epsilon) {
-            
-            return "1/3";
-        } else if (Math.abs(decValue - 3.99) < epsilon) {
-            
-            return "4";
-        } else if (Math.abs(decValue - 1.34) < epsilon) {
-            
-            return "4/3";    
-        
-       } else {
-            console.log("No match, returning original value");
-            return Math.round(decValue); // Ensure consistent precision for other decimals
-        }
-    }
+    
 
     export function handleTriangleType(fkey, type) {
         const config = functionalityConfig[fkey];
@@ -697,8 +569,23 @@ function resetInputStyles(inputs, result) {
 
 
     // Call renderCanvas with the desired configuration
-    renderCanvas(functionalityConfig.sineTheta);
+    renderCanvas(functionalityConfig.verticallyOpposite);
 
+    function logDivSizes() {
+      const elements = ['left-sidebar', 'additional-div', 'canvas-wrapper', 'right-sidebar'];
+      elements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          console.log(`${id} → width: ${rect.width}px, height: ${rect.height}px`);
+        } else {
+          console.warn(`⚠️ Element with ID "${id}" not found.`);
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', logDivSizes);
+    window.addEventListener('resize', logDivSizes);
 
 
 

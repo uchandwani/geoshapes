@@ -72,6 +72,14 @@ export class Circle extends Shape {
         return this.enableDrag;
     }
 
+    setEnableStretch(enable) {
+        this.enableStretch = enable;
+    }
+
+    getEnableStretch() {
+        return this.enableStretch;
+    }
+
     // Main draw function
     draw(ctx) {
         console.log(`Drawing Circle at (${this.center.x}, ${this.center.y}) with radius ${this.radius}`);// Draw circle

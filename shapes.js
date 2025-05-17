@@ -6,12 +6,13 @@ import { Circle } from './shapes/Circle.js';
 import { Triangle } from './shapes/Triangle.js';
 import { Rectangle } from './shapes/Rectangle.js';
 import { Protractor } from './shapes/Protractor.js';
-import { canvasManager } from './shapes/CanvasManager.js';
+import { CanvasManager, canvasManager } from './shapes/CanvasManager.js';
 import { Divider } from './shapes/Divider.js';
 import { Compass } from './shapes/Compass.js';
 import {Arc} from './shapes/Arc.js';
-import { functionalityConfig } from '/geoshapes/js/functionalityConfig.js';
-import { currentPageFeatures } from '/geoshapes/js/functionalityConfig.js';
+import { functionalityConfig } from '/geoshapes/js/commonConfig.js';
+import { currentPageFeatures } from '/geoshapes/js/commonConfig.js';
+
 
 
 
@@ -21,6 +22,20 @@ export const allshapes = {
     currentArc: null,
     geoshapes: []
 };
+
+// Track if Alt key is pressed
+let isAltPressed = false;
+let isAltPressedDuringDrag = false;
+
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Alt") isAltPressed = true;
+});
+
+window.addEventListener("keyup", (e) => {
+    if (e.key === "Alt") isAltPressed = false;
+});
+
 
 let dragCallback = null; 
 
@@ -88,20 +103,8 @@ function attachButtonListener(buttonId, callback, fallbackMessage) {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    attachButtonListener('toggle-grid', toggleGrid, 'Grid button not found in the DOM');
-    attachButtonListener('style-classic', () => {
-        activeStyle = 'classic';
-        console.log('Classic style selected');
-    }, 'Classic button not found in the DOM');
-    attachButtonListener('style-modern', () => {
-        activeStyle = 'modern';
-        console.log('Modern style selected');
-    }, 'Modern button not found in the DOM');
 
-    attachButtonListener('toggle-measurements', () => {
-        canvasManager.toggleGlobalMeasurements();
-        canvasManager.render(ctx, canvas);
-    }, 'Measurements toggle button not found in the DOM');
+      
 
     attachButtonListener('add-divider', () => {
     activateMode('create', 'divider', 'Add Divider');
@@ -111,15 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activateMode('create', 'compass', 'Add Compass');
     }, 'Compass button not found in the DOM');
 
-    attachButtonListener('toggle-labels', () => {
-        canvasManager.toggleGlobalLabels();
-        canvasManager.render(ctx, canvas);
-    }, 'Labels toggle button not found in the DOM');
-
-    attachButtonListener('toggle-coordinates', () => {
-        canvasManager.toggleGlobalCoordinates();
-        canvasManager.render(ctx, canvas);
-    }, 'Coordinates toggle button not found in the DOM');
+      
 
     // Shape buttons
     const shapeButtons = [
@@ -272,7 +267,8 @@ export function generatePointLabel() {
 canvas.addEventListener('mousedown', (e) => {
     const { offsetX, offsetY } = e;
 
-     
+    isAltPressedDuringDrag = e.altKey; // ✅ capture ALT status
+
     if (mode === 'modify') {
         // Detect shape under the cursor
         console.log("The available shapes are", canvasManager.shapes);
@@ -312,19 +308,34 @@ canvas.addEventListener('mousedown', (e) => {
                     break;
   
 
-                case 'Protractor':
-                    if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
-                        selectedShape.draggingEdge = true;
-                        console.log(`${shapeType} resizing initiated.`);
-                    } else if (e.shiftKey) {
-                        selectedShape.rotating = true;
-                        console.log(`${shapeType} rotation initiated.`);
-                    } else {
-                        selectedShape.draggingEdge = false;
-                        selectedShape.draggingPoint = selectedShape.center;
-                        console.log(`${shapeType} center dragging initiated.`);
-                    }
-                    break;
+                    case 'Protractor':
+                        const distanceToCenter = Math.hypot(offsetX - selectedShape.center.x, offsetY - selectedShape.center.y);
+                    
+                        const isInsideRotationButton = selectedShape.pendingRotation != null;
+                    
+                        if (isInsideRotationButton) {
+                            console.log("🖱️ Canvas rotation button clicked → will rotate on mouseup.");
+                            // Do not engage in dragging or resizing if it's a rotation button
+                            selectedShape.draggingEdge = false;
+                            selectedShape.isCenterDragging = false;
+                            selectedShape.draggingPoint = null;
+                            break;  // ✅ Exit the case cleanly without doing anything else
+                        }
+                    
+                        if (Math.abs(distanceToCenter - selectedShape.radius) < 10) {
+                            selectedShape.draggingEdge = true;   // Near circumference → Resize
+                            selectedShape.isCenterDragging = false;
+                            console.log("🛞 Protractor resizing initiated.");
+                        } else {
+                            selectedShape.draggingEdge = false;
+                            selectedShape.isCenterDragging = true;  // Near center → Drag center
+                            selectedShape.draggingPoint = selectedShape.center;
+                            console.log("🎯 Protractor center dragging initiated.");
+                        }
+                        break;
+                    
+                    
+                    
 
                 case 'Triangle':
                 case 'Rectangle':
@@ -334,28 +345,51 @@ canvas.addEventListener('mousedown', (e) => {
                     console.log(`Dragging vertex for: ${shapeType}`);
                     break;
                 case 'Divider':
+                    
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
-                        if (e.shiftKey) {
-                            // Enable rotation mode for the divider
-                            selectedShape.rotating = true;
-                            console.log("🔄 Divider rotation initiated.");
+                        if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
+                            selectedShape.dragging = 'leg1';
+                            console.log("📏 Dragging Divider Leg 1.");
+                        } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
+                            selectedShape.dragging = 'leg2';
+                            console.log("📏 Dragging Divider Leg 2.");
+                        } else if (selectedShape.pivotDraggable) {
+                            selectedShape.dragging = 'pivot';
+                            console.log("📌 Dragging Divider Pivot.");
                         } else {
-                            // Detect which part of the divider is clicked and set `dragging`
-                            if (selectedShape.isNearPivot && selectedShape.isNearPivot(offsetX, offsetY)) {
+                            selectedShape.dragging = null;
+                            console.log("🚫 Divider not draggable now.");
+                        }
+                    }
+                    break;
+
+
+
+                        /*else {
+                            // Check where the click happened
+                            const clickedPart = selectedShape.isPointInside(offsetX, offsetY); // custom method
+
+                            if (clickedPart === 'pivot') {
                                 selectedShape.dragging = 'pivot';
-                                console.log("📌 Dragging Divider Pivot.");
-                            } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
+                                selectedShape.pivotDraggable = true;  // ✅ Set to true only here
+                                console.log("📌 Dragging Divider Pivot. 🔴 pivotDraggable = true");
+                            } else if (selectedShape.isNearLeg(offsetX, offsetY, 'leg1')) {
                                 selectedShape.dragging = 'leg1';
+                                selectedShape.pivotDraggable = false;
                                 console.log("📏 Dragging Divider Leg 1.");
-                            } else if (selectedShape.isNearLeg && selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
+                            } else if (selectedShape.isNearLeg(offsetX, offsetY, 'leg2')) {
                                 selectedShape.dragging = 'leg2';
+                                selectedShape.pivotDraggable = false;
                                 console.log("📏 Dragging Divider Leg 2.");
                             } else {
+                                selectedShape.dragging = null;
+                                selectedShape.pivotDraggable = false;
                                 console.log("❌ Clicked inside divider but no part was selected.");
                             }
                         }
                     }
-                 break;
+                    break; */
+
 
                 case 'Compass':
                     const dx = offsetX - selectedShape.leg2.x;
@@ -431,7 +465,7 @@ canvas.addEventListener('mousemove', (e) => {
                 selectedShape.drag(dx, dy);
                 break;
             case 'Protractor':
-                handleProtractorMove(selectedShape, dx, dy, offsetX, offsetY, e);
+                handleProtractorMove(selectedShape, dx, dy, offsetX, offsetY, isAltPressedDuringDrag);
                 break;
 
             case 'Circle':
@@ -448,29 +482,31 @@ canvas.addEventListener('mousemove', (e) => {
     
 
             case 'Divider':
-                console.log("Inside divider selectedShape is ", selectedShape);
-                if (selectedShape.rotating) {
-                    // Handle rotation logic
-                   const angleIncrement = Math.atan2(offsetY - selectedShape.pivot.y, offsetX - selectedShape.pivot.x) -
-                               Math.atan2(dragStart.y - selectedShape.pivot.y, dragStart.x - selectedShape.pivot.x);
+                    console.log("Inside divider selectedShape is ", selectedShape);
 
-                    // Step 4: Fine rotation step logic
-                    const rotationStep = Math.PI / 60; // 3 degrees in radians
-                    const adjustedIncrement = Math.round(angleIncrement / rotationStep) * rotationStep;
 
-                    // Rotate the divider using the adjusted increment
-                    selectedShape.rotateDivider(adjustedIncrement);
+                    if (selectedShape instanceof Divider) {
+                        const hovered = selectedShape.isNearScrew(offsetX, offsetY);
+                        canvas.title = hovered && selectedShape.pivotDraggable ? "Click screw to disable dragging" : "";
+                    }
 
-                     console.log(`Rotating Divider by: ${adjustedIncrement} radians (adjusted from ${angleIncrement} radians).`);
-                } else if (selectedShape.dragging === 'pivot') {
-                    selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
-                    console.log("Dragging Divider Pivot.");
-                } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
-                    selectedShape.adjustLeg(offsetX, offsetY);
-                    console.log(`Adjusting Divider ${selectedShape.dragging}.`);
-                }
-               // handleDividerMove(selectedShape,dx, dy,offsetX,offsetY);
-                break;
+
+                    if (selectedShape.dragging === 'pivot') {
+                        selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
+                        console.log("📌 Dragging Divider Pivot.");
+                    } else if (selectedShape.dragging === 'leg1' || selectedShape.dragging === 'leg2') {
+                        if (selectedShape.snappingEnabled) {
+                            snapDividerToNearestVertex(selectedShape, canvasManager.shapes);
+                          } else {
+                        selectedShape.adjustLeg(offsetX, offsetY,canvasManager.shapes);
+                        console.log(`📏 Adjusting Divider ${selectedShape.dragging}.`);
+                          }
+                    } else {
+                        console.log("❌ No dragging action set for Divider.");
+                    }
+
+                    break;
+
 
             case 'Compass':
                 console.log("Mouse down : Selected shape:", selectedShape);
@@ -512,6 +548,8 @@ canvas.addEventListener('mousemove', (e) => {
 
             default:
                 console.log(`Dragging ${selectedShape.constructor.name}: dx = ${dx}, dy = ${dy}`);
+              
+                
                 selectedShape.drag(dx, dy, e.shiftKey, ctx, offsetX, offsetY);
                 break;
         }
@@ -520,13 +558,15 @@ canvas.addEventListener('mousemove', (e) => {
         dragStart = { x: offsetX, y: offsetY };
        // console.log('Rendering updated shape compass with arc', selectedShape.arc?.currentAngle);
 
-        // Re-render the canvas
-        canvasManager.render(ctx, canvas);
+        
+        canvasManager.render(); // Fallback
+    
     }
 });
 
 canvas.addEventListener('mouseup', (e) => {
     console.log(`Inside mouse up Mouse Up at: X = ${e.offsetX}, Y = ${e.offsetY}`);
+    
     
     if (!selectedShape) {
         console.log("No shape was selected before mouse up. Exiting safely.");
@@ -537,9 +577,36 @@ canvas.addEventListener('mouseup', (e) => {
 
     switch (selectedShape.constructor.name) {
         case 'Divider':
-            selectedShape.draggingLeg = null;
-            selectedShape.rotating = false;
+        // Clear the dragging state (either 'pivot', 'leg1', or 'leg2')
+        selectedShape.dragging = null;
+
+        // No need for rotating or pivotDraggable flags now
+        // They can be safely removed unless you're using them elsewhere
+
+        console.log("🖱️ Mouse up: Reset Divider dragging state.");
+        canvasManager.render(); // Ensure any final position is rendered
+        break;
+
+        case 'Protractor':
+            console.log("🖐 Mouse Up event");
+        
+            // Reset dragging flags on the selected Protractor
+            selectedShape.draggingEdge = false;
+            selectedShape.draggingCenter = false;
+            selectedShape.isCenterDragging = false;
+            selectedShape.draggingPoint = null;
+        
+            // Apply pending rotation if set
+            if (selectedShape.pendingRotation != null) {
+                console.log(`⏳ Applying pending rotation: ${selectedShape.pendingRotation}°`);
+                selectedShape.rotateByDegrees(selectedShape.pendingRotation);
+                selectedShape.pendingRotation = null;
+                canvasManager.render();
+            }
+        
+            console.log("🖱️ Mouse up: Stopped Protractor movement.");
             break;
+     
 
         case 'Compass':
             console.log("Mouse up on Compass. Finalizing changes.");
@@ -581,28 +648,24 @@ function determineLeg(x, y, shape) {
 }
 
 // Specific handlers for different shapes
-function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, event) {
-    if (protractor.draggingEdge) {
-        protractor.resize(mouseX, mouseY);
-        console.log("Protractor resized.");
-    } else if (event.shiftKey) {
-        protractor.rotateLabels(mouseX, mouseY, dragStart);
-        console.log("Protractor rotated.");
-    } else {
-        console.log("The enableProtractorSnapping status",currentPageFeatures.enableProtractorSnapping );
-       
-        protractor.drag(
-            dx,
-            dy,
-            currentPageFeatures.enableProtractorSnapping,
-            canvasManager.shapes,
-            event.altkey,
-            { x: mouseX, y: mouseY }
-                    
-        );
-        console.log("Protractor dragged.");
-    }
+
+function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, isAltPressed) {
+    if (!protractor) return;
+
+    console.log("🔍 canvasManager in drag handler:", canvasManager);
+    console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
+    console.log("🛑 ALT Key Pressed (persisted):", isAltPressed);
+
+    protractor.drag(
+        dx,
+        dy,
+        canvasManager.shapes
+     );
+
+    console.log("✋ Protractor dragged.");
 }
+
+
 
 
 function handleDividerMove(shape, dx, dy, offsetX, offsetY) {

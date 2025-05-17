@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Su-Art Math Labs</title>
   <style>
     body {
@@ -20,10 +20,17 @@
 
     header {
       grid-area: header;
-      background-color:#6a9be8;
+      background-color: #6a9be8;
       color: white;
-      text-align: center;
       padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #auth-box {
+      font-size: 0.9em;
+      text-align: right;
     }
 
     aside {
@@ -59,7 +66,7 @@
 
     footer {
       grid-area: footer;
-      background-color:#6a9be8;
+      background-color: #6a9be8;
       color: white;
       text-align: center;
       padding: 10px;
@@ -70,48 +77,51 @@
       display: block;
       margin: 0 auto;
     }
+
+    button {
+      margin-left: 5px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>   Su-Art Learning Aids</h1>
+    <h1>Su-Art Learning Aids</h1>
+    <div id="auth-box">
+      <span id="user-info">Not  ged in</span><br>
+      <button onclick="loginWithGoogle()">Login with Google</button>
+      
+      <button onclick="logout()">Logout</button>
+    </div>
   </header>
+
   <aside>
     <h3>Navigation</h3>
     <ul>
-      
       <li><a href="parallel_lines_04.html">Parallel Lines</a></li>
       <li><a href="triangle_theorem_07.html">Triangles Theorems</a></li>
       <li><a href="trig_properties_09.html">Trigonometric Properties</a></li>
-       <li><a href="circle_theorems_02.html"> Circle Theorems </a></li>
-      
-      
+      <li><a href="circle_theorems_02.html">Circle Theorems</a></li>
     </ul>
   </aside>
+
   <main>
-
-<p>Su-Art Learning Aids has conceptualised, designed the innovative Mathematics apparatuses for the school’s existing Math lab. Our products are unique and one of its kind.
-
-These exciting apparatuses provide the opportunity for the students to explore research, collect data, test, and verify the multiple mathematical theorems and concepts. All these theorems and concepts are mapped to CBSE / ICSE / State board math curriculum.
-</p>
-
-<h2> Apparatus advantage </h2>
-
-<p> To students – Students can explore, verify, and test the Math theorems and concepts that are already taught in the class. The suggested system will make the students learning more systemic. The system strongly advocates the students should state the hypothesis, collect data. And finally, test the hypothesis against the collected data.
-
-To Teachers – Teachers can carry these apparatuses in the class to demonstrate the Math concepts.
-
-To school – Schools can have these apt Mathematical apparatuses in their Math lab. These mathematical apparatuses also contribute effectively to BaLA (Building as Learning Aids)
-</p> 
-
-
-
-
-Su-Art learning Aids also designs and establish Mathematics laboratory in schools
+    <p>Su-Art Learning Aids has conceptualised, designed the innovative Mathematics apparatuses...</p>
+    <h2>Apparatus advantage</h2>
+    <p>To students – Students can explore, verify, and test the Math theorems and concepts...</p>
+    <p>Su-Art learning Aids also designs and establish Mathematics laboratory in schools</p>
   </main>
+
   <footer>
     <p>&copy; 2024 Su-Art. All Rights Reserved.</p>
   </footer>
-  <script type="module" src="./shapes.js"></script>
+
+  <!-- Firebase SDKs -->
+ <script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js?module"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js?module"></script>
+
+
+  <!-- Firebase Config & Auth Logic -->
+  <script type="module" src="js/firebase-init.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>

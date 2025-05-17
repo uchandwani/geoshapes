@@ -1,88 +1,28 @@
+import { updatePageTitle} from './header.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
-import { functionalityConfig } from './circleTheoremConfig.js';
-import { switchFunctionality } from './circleTheoremEventHandlers.js';
-import { attachNavBarListeners } from './circleTheoremEventHandlers.js';
+import { functionalityConfig } from './commonConfig.js';
+import { switchFunctionality } from './commonEventHandlers.js';
+
 import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
 import {Circle} from '../shapes/Circle.js';
 
-    
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Triangle Properties Page Loaded");
 
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+ window.switchFunctionality = switchFunctionality;
 
-
-    // 1️⃣ Fix: Explicitly set width & height in JavaScript (Avoid CSS scaling)
-    canvas.width = 800;  // Change as needed
-    canvas.height = 800;
-
-    // 2️⃣ Fix: Prevent distortion from high-DPI screens
-    const scale = window.devicePixelRatio; // Get device pixel ratio
-    canvas.width *= scale;
-    canvas.height *= scale;
-    ctx.scale(scale, scale); // Scale drawing context
-
-    // 3️⃣ Fix: Ensure No Transformation is Applied Before Drawing
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-    
-   /* console.log('Current Mode:', mode);
-    const buttonActions = {
-        
-        'icon-btn-1': () => console.log('Placeholder Icon 1 Clicked'),
-        'icon-btn-2': () => console.log('Placeholder Icon 2 Clicked'),
-        'icon-btn-3': () => console.log('Placeholder Icon 3 Clicked'),
-        'icon-btn-4': () => console.log('Placeholder Icon 4 Clicked'),
-        'icon-btn-5': () => console.log('Placeholder Icon 5 Clicked'),
-        'icon-btn-6': () => console.log('Placeholder Icon 6 Clicked'),
-        'icon-btn-7': () => console.log('Placeholder Icon 7 Clicked'),
-        'icon-btn-8': () => console.log('Placeholder Icon 8 Clicked'),
-        'icon-btn-14': () => console.log('Placeholder Icon 14 Clicked'),
-        'icon-btn-16': () => console.log('Placeholder Icon 16 Clicked'),
-        'icon-btn-9': () => console.log('Placeholder Icon 9 Clicked'),
-        'icon-btn-10': () => console.log('Placeholder Icon 10 Clicked'),
-        'icon-btn-11': () => console.log('Placeholder Icon 11 Clicked'),
-        'icon-btn-12': () => console.log('Placeholder Icon 12 Clicked'),
-        'icon-btn-13': () => console.log('Placeholder Icon 13 Clicked'),
-         'icon-btn-15': () => console.log('Placeholder Icon 15 Clicked'),
-    };
-
-    Object.keys(buttonActions).forEach((id) => {
-        const button = document.getElementById(id);
-        if (button) {
-            button.addEventListener('click', buttonActions[id]);
-            console.log(`Listener attached to button: ${id}`);
-        } else {
-            console.warn(`Button with ID ${id} not found.`);
-        }
-    });//});
- */
-    
-    attachNavBarListeners(); // Set up listeners for nav buttons
-    const defaultFunctionality = 'sineTheta';
-    const defaultType = 'sin';
-
-    switchFunctionality(defaultFunctionality, defaultType);
-    // Function to handle button activation
-    // Step 3: Set the default button as active
-   /* const defaultButton = document.getElementById(`${defaultFunctionality}-button`);
-    if (defaultButton) {
-        defaultButton.classList.add('active');
-    console.log("active button changed")  ;  
-    } */
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      updatePageTitle();
+      switchFunctionality('radiusTangent'); // default
     });
-    // Default state: Activate Sin Theta and load default functionality
-        
-   
-  //setupEventHandlers(ctx, canvas);
-  //  loadTriangle('default');
-    // Draw a default triangle on page load
-  // drawDefaultCircle(ctx, canvas);
-  // a(ctx, canvas)
 
+    window.addEventListener("nav-select", (e) => {
+      const { functionalityKey, subtype } = e.detail;
+      console.log("📥 Received nav-select:", functionalityKey, subtype);
+      switchFunctionality(functionalityKey, subtype);
+    });
+      
 
 // Function to draw the default triangle on page load
 function drawDefaultCircle(ctx,canvas) {
@@ -318,7 +258,7 @@ function drawDefaultTriangle(ctx, canvas) {
     // Add triangle to canvas manager and render it
     //canvasManager.addShape(triangle);
     //canvasManager.render();
-    renderCanvas(functionalityConfig.sineTheta);
+    renderCanvas(functionalityConfig.radiusTangent);
 
     console.log("Default triangle drawn.");
 }
@@ -661,7 +601,7 @@ export function renderCanvas(config) {
 
 
 // Call renderCanvas with the desired configuration
-renderCanvas(functionalityConfig.sineTheta);
+renderCanvas(functionalityConfig.radiusTangent);
 
 
 

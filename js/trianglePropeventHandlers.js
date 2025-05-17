@@ -27,11 +27,23 @@
  * updateUI              | UUI     | config, functionalityKey           | Updates UI elements like sidebars and dynamic buttons.
  */
 
-import { functionalityConfig } from './trianglePropConfig.js';
-import { canvasManager } from '../shapes/CanvasManager.js';
+import { functionalityConfig } from './commonConfig.js';
+import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
+import { Point } from '../shapes/Points.js';
+import { updatePageTitle } from './header.js';
+import { updateHeaderLabels } from './header.js';
+
+const page = location.pathname.split("/").pop();
+const pageTitles = {
+  "index.html": "Home",
+  "parallel_lines_04.html": "Parallel Lines",
+  "triangle_theorem_07.html": "Triangle Theorems",
+  "trig_properties_09.html": "Trigonometric Properties",
+  "circle_theorems_02.html": "Circle Theorems"
+};
 
 // Functions ordered alphabetically
 
@@ -69,43 +81,6 @@ export function addSpecificPoints(points, ctx) {
     canvasManager.render();
 }
 
-/**
- * Attaches event listeners to navigation buttons.
- */
-export function attachNavBarListeners() {
-    const navButtons = {
-        sineTheta: document.getElementById("sineTheta-button"),
-        cosineTheta: document.getElementById("cosineTheta-button"),
-        trigonoRatios: document.getElementById("trigonoRatios-button"),
-        trigonoIdentities: document.getElementById("trigonoIdentities-button"),
-    };
-
-    Object.entries(navButtons).forEach(([key, button]) => {
-        console.log("Function NBL - navbarListeneres, key button is ", key, button);
-        if (button) {
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-
-            newButton.addEventListener("click", () => {
-                console.log("The clicked button is ", key, button);
-                if (key === "trigonoRatios") {
-                    switchFunctionality(key);
-                } else {
-                    switchFunctionality(key, "sin");
-                }
-            });
-
-            console.log(`Listener attached to button: ${key}`);
-        } else {
-            console.warn(`Button for ${key} not found.`);
-        }
-    });
-
-    const defaultKey = 'sinTheta';
-    if (navButtons[defaultKey]) {
-        navButtons[defaultKey].classList.add('active');
-    }
-}
 
 /**
  * Draws a circle based on the given configuration.
@@ -134,6 +109,8 @@ function drawCircle(canvasConfig) {
 
     canvasManager.clearAllShapes();
     const circleShape = new Circle(center, radius);
+    circleShape.setEnableDrag(false);  
+    circleShape.setEnableStretch(false); 
     canvasManager.addShape(circleShape);
     canvasManager.render();
 
@@ -143,7 +120,7 @@ function drawCircle(canvasConfig) {
 /**
  * Draws lines filtered by the specified type.
  */
-function drawLines(canvasConfig, type) {
+function drawLines(canvasConfig, type = null) {
     if (canvasConfig.lines && Array.isArray(canvasConfig.lines)) {
         const filteredLines = canvasConfig.lines.filter(line => line.type === type);
         filteredLines.forEach(lineConfig => {
@@ -232,36 +209,31 @@ function drawShapes(fkey, canvasConfig, buttonType) {
  * Draws triangles according to configuration and type.
  
  */
-function drawTriangles(canvasConfig, buttonType) {
-    console.log('%c' + "Function DWT - canvasConfig, buttonType", 'color: green;', canvasConfig, buttonType);
+function drawTriangles(canvasConfig, effectiveType) {
+    console.log('%c' + "Function DWT - canvasConfig, buttonType", 'color: green;', canvasConfig, effectiveType);
     const { triangles } = canvasConfig;
-    
+
     if (!triangles || !Array.isArray(triangles)) {
         console.warn("Invalid or missing triangles configuration:", triangles);
         return;
     }
 
-    const filteredTriangles = buttonType
-        ? triangles.filter(triangle => triangle.type === buttonType)
+    const filteredTriangles = effectiveType
+        ? triangles.filter(triangle => triangle.type === effectiveType)
         : triangles;
 
     if (filteredTriangles.length === 0) {
-        console.warn(`No triangles found for type: ${buttonType}`);
+        console.warn(`No triangles found for type: ${effectiveType}`);
         return;
     }
 
-    console.log(`Drawing ${filteredTriangles.length} triangles for type: ${buttonType || "all"}`);
+    console.log(`Drawing ${filteredTriangles.length} triangles for type: ${effectiveType || "all"}`);
 
     filteredTriangles.forEach(triangleConfig => {
-        
-
         let { vertexA, vertexB, vertexC, angles, radius, labels, showMidPoints = false, showMeasurements = false } = triangleConfig;
 
         if (triangleConfig.vertexA && triangleConfig.angles && triangleConfig.radius) {
             console.log("Inside if vertex, angles and radius defined", triangleConfig);
-            // ✅ **Case 1: Calculate vertices from vertexA, angles, and radius**
-           
-            
             const angle1 = (angles[0] * Math.PI) / 180;
 
             vertexB = {
@@ -272,31 +244,24 @@ function drawTriangles(canvasConfig, buttonType) {
                 x: vertexB.x,
                 y: vertexA.y,
             };
-        } else if (triangleConfig.vertices) {
-            // ✅ **Case 2: Use provided three vertices**
-
-            if (triangleConfig.vertices.length === 3) {
-                 console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
-                [vertexA, vertexB, vertexC] = triangleConfig.vertices;
-            } else {
-                console.warn("⚠️ Invalid vertices configuration. Expected exactly 3 points.");
-                return;
-            }
+        } else if (triangleConfig.vertices && triangleConfig.vertices.length === 3) {
+            console.log("Inside else if : Three vertices are defined", triangleConfig.vertices);
+            [vertexA, vertexB, vertexC] = triangleConfig.vertices;
         } else {
             console.warn("⚠️ Triangle configuration missing required data.");
             return;
         }
 
-        // ✅ Create Triangle and Add to Canvas
         const triangle = new Triangle(vertexA, vertexB, vertexC);
+        triangle.setEnableDrag(false); 
         triangle.setVertexLabels(labels);
-        triangle.setShowLabels(true); // Ensure labels appear
+        triangle.setShowLabels(true);
         triangle.setShowMidpoints(showMidPoints);
         triangle.setShowMeasurements(showMeasurements);
         if (triangleConfig.labels) {
             triangle.setVertexLabels(triangleConfig.labels);
         }
-        
+
         canvasManager.addShape(triangle);
     });
 
@@ -318,7 +283,7 @@ function handleNavButtons(functionalityKey) {
 export function handleTriangleType(fkey, type) {
 
     console.log('%c'+ "Function HTT fkey, type", 'color : green ;', fkey, type);
-    const config = functionalityConfig[fkey];
+    let config = functionalityConfig[fkey];
     if (!config || !config.canvasConfig) {
         console.error("Invalid configuration for functionality key:", fkey);
         return;
@@ -348,23 +313,75 @@ export function handleTriangleType(fkey, type) {
 export function switchFunctionality(functionalityKey, buttonType) {
     console.log(`Switching functionality: ${functionalityKey}, buttonType: ${buttonType}`);
 
-    // Activate the main functionality button
-    handleNavButtons(functionalityKey);
+   
+    const config = functionalityConfig[functionalityKey];
+      if (!config) {
+        console.error("❌ Invalid functionalityKey:", functionalityKey);
+        return;
+      }
+    
+      const effectiveType = buttonType || config.defaultButtonType || null;
+      console.log("🎯 Using subtype:", effectiveType);
+    
+      // 🔹 Title and subtitle updates
+      const page = location.pathname.split("/").pop();
+      const pageTitles = {
+        "index.html": "Home",
+        "parallel_lines_04.html": "Parallel Lines",
+        "triangle_theorem_07.html": "Triangle Theorems",
+        "trig_properties_09.html": "Trigonometric Properties",
+        "circle_theorems_02.html": "Circle Theorems"
+      };
+      const mainTitle = pageTitles[page] || "Math App";
+    
+      const icon = document.getElementById(`${functionalityKey}-button`);
+      const subtitleMap = {
+      SineTheta: "Sine Theta",
+      basicProportionalityTheorem: "Basic Proportionately Theorem",
+      angleBisectorTheorem: "Angle Bisector Theorem",
+      propertiesOfTriangles: "Properties of Triangles"
+        };
+     const subtitleLabel = subtitleMap[functionalityKey] || "";
+    
+    
+      let activeSubBtnLabel = "";
+      if (config.buttonSet && effectiveType) {
+        const match = config.buttonSet.find(btn => btn.type === effectiveType);
+        activeSubBtnLabel = match?.label || "";
+      }
+    
+    console.log("🧠 Header Composition Check");
+    console.log("   Main Title:", mainTitle);
+    console.log("   Subtitle (from icon title):", subtitleLabel);
+    console.log("   Sub-button label (from config):", activeSubBtnLabel);
+    
+      // ✅ Compose header with dividers only if parts are present
+     updateHeaderLabels({
+    
+     
+    
+        title: mainTitle,
+        subtitle: subtitleLabel ? `| ${subtitleLabel}` : "",
+        subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+      });
+    
 
     // Update the UI
-    const config = functionalityConfig[functionalityKey];
+    
     if (config) {
 
     const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
     const activeSubButton = dynamicButtonsContainer?.querySelector(".triangle-button.active");
 
+    const effectiveType = buttonType || config.defaultButtonType || null;
+
         // Use the active sub-button if available, otherwise default
         const effectiveButtonType = activeSubButton?.dataset.type || config.defaultButtonType;
 
 
-        drawShapes(functionalityKey,config.canvasConfig, buttonType);
+        drawShapes(functionalityKey,config.canvasConfig, effectiveType);
         updateUI(config, functionalityKey);
-        updateRightSidebar(functionalityKey, buttonType);
+        updateRightSidebar(functionalityKey, effectiveType);
 
         // If buttonType is specified, activate it
         if (buttonType) {
@@ -398,7 +415,7 @@ function updateActiveButton(buttonElement) {
     }
 }
 
-function updateUI(config, functionalityKey) {
+function updateUI(config, functionalityKey, buttonType = null) {
     console.log("Function UUI - Updating UI for:", functionalityKey, config);
 
 
@@ -407,85 +424,67 @@ function updateUI(config, functionalityKey) {
         leftSidebar.innerHTML = config.leftSidebarContent || "";
     }
 
-    updateTheoremText(config);
+    updateTheoremText(config, buttonType);
     // Update dynamic sub-buttons
-    const dynamicButtonsContainer = document.getElementById("dynamic-buttons");
-    if (config.buttonSet && Array.isArray(config.buttonSet)) {
-        dynamicButtonsContainer.innerHTML = ""; // Clear existing buttons
-
-        // Render sub-buttons
-        config.buttonSet.forEach((buttonConfig) => {
-            const btn = document.createElement("button");
-            btn.classList.add("triangle-button");
-            btn.textContent = buttonConfig.label;
-            btn.dataset.type = buttonConfig.type;
-            btn.dataset.functionalityKey = functionalityKey;
-
-            // Attach click handler
-            btn.addEventListener("click", () => {
-                activateButton("#dynamic-buttons", btn);
-                switchFunctionality(functionalityKey, buttonConfig.type);
-            });
-
-            dynamicButtonsContainer.appendChild(btn);
-        });
-
-        dynamicButtonsContainer.style.display = "block";
-
-        // Activate default sub-button if none is active
-        const activeSubButton = dynamicButtonsContainer.querySelector(".triangle-button.active");
-        const effectiveSubButton =
-            activeSubButton ||
-            dynamicButtonsContainer.querySelector(
-                `button[data-type="${config.defaultButtonType}"]`
-            );
-
-        if (effectiveSubButton) {
-            activateButton("#dynamic-buttons", effectiveSubButton);
+     const dynamicButtons = document.getElementById("dynamic-buttons");
+    if (Array.isArray(config.buttonSet)) {
+      dynamicButtons.innerHTML = "";
+    
+      config.buttonSet.forEach(({ label, type, svg }) => {
+        // ✅ Use required tooltip container class
+        const wrapper = document.createElement("div");
+        wrapper.className = "tooltip-container";  // 👈 KEY FIX
+    
+        // 🔹 Inject SVG or fallback to label
+        if (svg) {
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = svg.trim();
+          const svgEl = tempDiv.firstChild;
+          svgEl.classList.add("sub-button-svg");
+          wrapper.appendChild(svgEl);
+        } else {
+          const fallbackBtn = document.createElement("button");
+          fallbackBtn.classList.add("triangle-button");
+          fallbackBtn.textContent = label;
+          wrapper.appendChild(fallbackBtn);
         }
+    
+        // 🔹 Tooltip span (now styled correctly)
+        const tooltip = document.createElement("span");
+        tooltip.className = "tooltip-text";
+        tooltip.textContent = label;
+        wrapper.appendChild(tooltip);
+    
+        // 🔹 Click handler
+        wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
+    
+        dynamicButtons.appendChild(wrapper);
+      });
+    
+      dynamicButtons.style.display = "block";
     } else {
-        dynamicButtonsContainer.style.display = "none"; // Hide if no buttons
+      dynamicButtons.style.display = "none";
     }
 }
 
-export function updateRightSidebar(functionalityKey, subClassification) {
-    console.log('%c' + "Function URS : Functionality Key,Subclassification: ", 'color: green;', functionalityKey, subClassification);
-   
-    
-
+export function updateRightSidebar(functionalityKey, subtype = null) {
     const config = functionalityConfig[functionalityKey];
+    if (!config) return;
 
-     console.log('Functionality Configuration:', config);
+    const sidebar = document.querySelector(".sidebar.right");
+    const allContent = config.rightSidebarContent;
 
-    if (!config) {
-        console.error(`No configuration found for functionality key: ${functionalityKey}`);
-        return;
+    let content = "<p>Content not available.</p>";
+
+    if (typeof allContent === "string") {
+        content = allContent;
+    } else if (typeof allContent === "object") {
+        content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
     }
 
-    const rightSidebarContent = config.rightSidebarContent;
-
-  //  console.log("RHS Functionality Configuration:", rightSidebarContent);
-
-    if (!rightSidebarContent) {
-        console.error(`No rightSidebarContent defined for functionality key: ${functionalityKey}`);
-        return;
-    }
-
-    let content = rightSidebarContent[subClassification];
-
-    if (functionalityKey === "trigonoRatios") 
-            content = rightSidebarContent;
-    
-    if (!content) {
-        console.error(`No content found for subClassification: ${subClassification}`);
-        document.querySelector('.sidebar.right').innerHTML = `<p>Content not available.</p>`;
-        return;
-    }
-
-    // Update the sidebar
-    document.querySelector('.sidebar.right').innerHTML = content;
-   // console.log("Right Sidebar updated with:", content);
+    sidebar.innerHTML = content;
 }
+
 
 function updateSidebars(config) {
     const leftSidebar = document.querySelector('.sidebar.left');
@@ -495,11 +494,33 @@ function updateSidebars(config) {
     console.log("The sidebars updated with", leftSidebar.innerHTML, rightSidebar.innerHTML);
 }
 
-function updateTheoremText(config) {
-    console.log("Inside updateTheoremText", config);
-    const theoremText = document.getElementById('theorem-text');
-    if (theoremText) {
-        console.log(`Updating theorem definition to: ${config.theoremDefinition}`);
-        theoremText.textContent = config.theoremDefinition || 'No definition available for this theorem.';
+export function updateTheoremText(config, subtype = null) {
+    console.log("Inside updateTheoremText", config, subtype);
+
+    let definitionText = "";
+
+    // ✅ Try subtype-specific definition first
+    if (config.theoremDefinitions && typeof config.theoremDefinitions === 'object') {
+        if (subtype && config.theoremDefinitions[subtype]) {
+            definitionText = config.theoremDefinitions[subtype];
+        } else {
+            // ✅ Use any available definition as fallback
+            const values = Object.values(config.theoremDefinitions);
+            if (values.length > 0) {
+                definitionText = values[0];  // take the first available
+            }
+        }
     }
+
+    // ✅ Fallback to single-string definition (optional)
+    if (!definitionText && typeof config.theoremDefinition === 'string') {
+        definitionText = config.theoremDefinition;
+    }
+
+    // ✅ Final fallback
+    if (!definitionText) {
+        definitionText = "Definition not available.";
+    }
+
+    document.getElementById("theorem-text").innerHTML = definitionText;
 }

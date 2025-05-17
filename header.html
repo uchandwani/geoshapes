@@ -1,64 +1,86 @@
-<!-- header.html -->
-<!-- header.html -->
-<!-- header.html -->
-
-<!-- header.html -->
-<div id="main-header" style="display: flex; align-items: center; padding: 10px; background-color: #f5f5f5;">
+<!-- ✅ Main Header -->
+<div id="main-header" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #ee3b2f;">
   
-  <!-- 🔹 Navigation Icons on the Left -->
-  <div class="nav-icons" style="display: flex; gap: 5px;">
-    
-    <!-- 🏠 Home -->
+  <!-- 🔹 Left Navigation Icons -->
+  <div class="nav-icons" style="display: flex; gap: 8px;">
     <a href="index.html" title="Home">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 12L12 3l9 9" />
         <path d="M9 21V12h6v9" />
       </svg>
     </a>
-
-    <!-- 📐 Parallel Lines -->
-   <a href="parallel_lines_04.html" title="Parallel Lines">
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Parallel Lines -->
-    <line x1="4" y1="10" x2="20" y2="10" />
-    <line x1="4" y1="16" x2="20" y2="16" />
-    <!-- Cutting Slanted Line: extended beyond -->
-    <line x1="6" y1="4" x2="16" y2="20" />
-  </svg>
-</a>
-
-    <!-- 🔺 Triangle Theorems -->
+    <a href="parallel_lines_04.html" title="Parallel Lines">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="10" x2="20" y2="10" />
+        <line x1="4" y1="16" x2="20" y2="16" />
+        <line x1="6" y1="4" x2="16" y2="20" />
+      </svg>
+    </a>
     <a href="triangle_theorem_07.html" title="Triangle Theorems">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="12 4 20 20 4 20" />
       </svg>
     </a>
-
-    <!-- 📈 Trigonometric Properties -->
     <a href="trig_properties_09.html" title="Trigonometric Properties">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
         <path d="M8 12l2 2 4-4" />
       </svg>
     </a>
-
-    <!-- ⚪ Circle Theorems -->
     <a href="circle_theorems_02.html" title="Circle Theorems">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="header-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10" />
       </svg>
     </a>
-
   </div>
 
-
+  <!-- 🔹 Page Title -->
   <div class="header-center">
-    <h1 id="page-title">Loading...</h1>
+    <h1 style="color: white; font-weight: 600; font-size: 28px;">
+      <span id="page-title" style="font-size: 28px; font-weight: 700; color: white;"></span>
+      <span id="page-subtitle" style="font-size: 20px; font-weight: 400; color: white;"></span>
+      <span id="active-sub-button" style="font-size: 20px; font-weight: 400; color: white;"></span>
+    </h1>
   </div>
 
-  <div class="header-right">
-    <!-- (Optional) Future right-side icons or leave empty -->
-  </div>
+  <!-- 🔹 Sub-Header Icons and Auth -->
+  <div class="sub-header-icons" style="display: flex; align-items: center; gap: 20px;">
+    
+    <!-- ✅ Injected icons (if any) -->
+    <div id="sub-header-icons" style="display: flex; gap: 12px;"></div>
+
+    <!-- ✅ Auth Status and Buttons -->
+    <!-- Add this where you want your login/logout buttons -->
+<!-- 🔹 Auth Icons (Login/Logout) -->
+<div id="auth-buttons" style="display: flex; gap: 12px; align-items: center;">
+  <span id="submission-count" title="Total theorems submitted" style="color: white; font-size: 16px;"></span>
+
+  <!-- Login Button -->
+  <button id="login-btn" title="Login with Google"
+    style="background: none; border: none; cursor: pointer; padding: 4px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="#1E88E5""
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in">
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+      <polyline points="10 17 15 12 10 7" />
+      <line x1="15" y1="12" x2="3" y2="12" />
+    </svg>
+  </button>
+
+  <!-- Logout Button -->
+  <button id="logout-btn" title="Logout"
+    style="background: none; border: none; cursor: pointer; padding: 4px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="#1E88E5"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  </button>
+
+  <!-- User Display (optional) -->
+  <span id="user-info" style="color: white; font-size: 16px; margin-left: 8px;"></span>
 </div>
 
 
+  </div>
+</div>
