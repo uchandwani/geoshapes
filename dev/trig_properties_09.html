@@ -135,8 +135,11 @@
     </footer>
      <script type="module" src="./shapes.js"></script>
   <script type="module" src="./shapes/CanvasManager.js"></script>
-   <script type="module" src="./js/trianglePropertiesPage.js"></script>
-
+   <script type="module" src="./js/trianglePropertiesPage.js">
+   import { handleSave, handleSubmit } from './js/formUtils.js';
+   window.handleSave = handleSave; 
+   window.handleSubmit = handleSubmit; // 🔓 Expose it to HTML
+  </script>
  <script type="module">
     const html = await fetch('./header.html').then(res => res.text());
     document.getElementById('header-placeholder').innerHTML = html;
@@ -145,7 +148,7 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality } = await import('./js/trianglePropeventHandlers.js');
+    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
     attachNavBarListeners();
     switchFunctionality('sineTheta'); // Default functionality
   </script>

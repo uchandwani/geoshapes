@@ -30,7 +30,18 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #6a9be8;
+  background-color: #28a745 ;
+  height: 5vh;
+  padding: 0 20px;
+  color: #1E88E5;
+  position: relative;
+}
+
+header-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #28a745 ;
   height: 5vh;
   padding: 0 20px;
   color: #1E88E5;
@@ -525,5 +536,26 @@ canvas {
   font-weight: bold;
   color: #333;
   margin-bottom: 6px;
+}
+
+.check-button {
+  background-color: #6a9be8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.check-button:hover {
+  background-color: #3b7bd2;
+}
+
+.submitted-icon {
+  margin-left: 6px;
+  vertical-align: middle;
 }
 

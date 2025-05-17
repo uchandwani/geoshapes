@@ -19,7 +19,7 @@
 
     <script type="module">
     import { compareMeasures, compareDividedMeasures, calculateRatio, updateMessage } from './js/trianglePage.js';
-
+    import { handleSubmit, handleSave } from './js/formUtils.js';  
     // Expose functions globally
     window.compareMeasures = compareMeasures;
     window.compareDividedMeasures = compareDividedMeasures;
@@ -105,7 +105,7 @@
           </div>
 
         <!-- Right Sidebar -->
-        <div class="sidebar right">
+        <div class="sidebar right" id="right-sidebar">
             <h3>Exercises / Results</h3>
             <ul>
                 <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
@@ -142,6 +142,10 @@
 
     
      <script type="module" src="./shapes.js"></script>
+     <script type="module" src="./js/firebase-init.js"></script>
+
+<script type="module" src="./js/header.js"></script>
+
   
   <script type="module">
     const html = await fetch('./header.html').then(res => res.text());
@@ -151,7 +155,7 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality } = await import('./js/triangleEventHandlers.js');
+    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
     attachNavBarListeners();
     
     window.addEventListener("nav-select", (e) => {
@@ -161,7 +165,7 @@
   });
     
     
-    switchFunctionality('midSegmentTheorem'); // Default functionality
+    switchFunctionality('midSegmentTheorem', 'right'); // Default functionality
   </script>
  
 </body>

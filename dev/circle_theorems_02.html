@@ -150,7 +150,7 @@
     loadSubHeaderIcons();
     
   
-    const { switchFunctionality } = await import('./js/circleTheoremEventHandlers.js');
+    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
     attachNavBarListeners();
 
     window.addEventListener("nav-select", (e) => {
@@ -159,7 +159,7 @@
     switchFunctionality(functionalityKey, subtype);
   });
 
-    switchFunctionality('radiusTangent'); // or your preferred default
+    switchFunctionality('twoTangents', 'sin'); // or your preferred default
   </script>
   
 </body>

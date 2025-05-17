@@ -1,17 +1,18 @@
 // Imports
 import { updatePageTitle } from './header.js';
-import { switchFunctionality } from './triangleEventHandlers.js';
+import { switchFunctionality } from './commonEventHandlers.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
+import { handleSubmit, handleSave } from './formUtils.js';
 
 // ✅ Load default triangle theorem
 document.addEventListener("DOMContentLoaded", () => {
   console.log("📘 Triangle Page Loaded");
   updatePageTitle();
-  switchFunctionality('midSegmentTheorem'); // Default
+  switchFunctionality('midSegmentTheorem', 'right'); // Default
 });
 
 // ✅ Handle navigation trigger

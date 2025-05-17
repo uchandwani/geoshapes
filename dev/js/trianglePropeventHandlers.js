@@ -27,7 +27,7 @@
  * updateUI              | UUI     | config, functionalityKey           | Updates UI elements like sidebars and dynamic buttons.
  */
 
-import { functionalityConfig } from './trianglePropConfig.js';
+import { functionalityConfig } from './commonConfig.js';
 import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';

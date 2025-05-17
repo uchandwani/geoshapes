@@ -1,8 +1,8 @@
 import { updatePageTitle} from './header.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
-import { functionalityConfig } from './circleTheoremConfig.js';
-import { switchFunctionality } from './circleTheoremEventHandlers.js';
+import { functionalityConfig } from './commonConfig.js';
+import { switchFunctionality } from './commonEventHandlers.js';
 
 import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';

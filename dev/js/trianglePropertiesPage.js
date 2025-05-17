@@ -1,8 +1,8 @@
 import { updatePageTitle} from './header.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { canvasManager } from '../shapes/CanvasManager.js';
-import { functionalityConfig } from './trianglePropConfig.js';
-import { switchFunctionality } from './trianglePropeventHandlers.js';
+import { functionalityConfig } from './commonConfig.js';
+import { switchFunctionality } from './commonEventHandlers.js';
 
 import {Line} from '../shapes/Lines.js';
 import {Point} from '../shapes/Points.js';
@@ -14,7 +14,7 @@ window.switchFunctionality = switchFunctionality;
     document.addEventListener("DOMContentLoaded", () => {
       console.log("Trigonometric Properties Page Loaded");
       updatePageTitle();
-      switchFunctionality('sineTheta'); // default
+      switchFunctionality('sineTheta','sin'); // default
     });
 
     window.addEventListener("nav-select", (e) => {

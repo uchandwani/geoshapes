@@ -1,5 +1,80 @@
 // header.js
 
+// header.js
+
+export async function loadHeader() {
+  try {
+    const res = await fetch("header.html");
+    const html = await res.text();
+
+    // Inject header into the placeholder
+    const container = document.getElementById("header-placeholder") || document.getElementById("main-header-container");
+    if (!container) {
+      console.error("❌ No header container found.");
+      return;
+    }
+
+    container.innerHTML = html;
+    console.log("✅ Header loaded");
+
+    // ⏬ Dynamically load auth.js
+    const authModule = await import('./auth.js');
+
+    // ✅ Wire up login/logout buttons (now safely after injection)
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    if (loginBtn) {
+      loginBtn.addEventListener("click", () => {
+        console.log("🔐 Login button clicked");
+        authModule.loginWithGoogle();
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        console.log("🔓 Logout button clicked");
+        authModule.logout();
+      });
+    }
+
+  } catch (err) {
+    console.error("❌ Failed to load header or auth module:", err);
+  }
+}
+
+export function updatePageTitle() {
+  const pageTitles = {
+    "index.html": "Home",
+    "parallel_lines_04.html": "Parallel Lines",
+    "triangle_theorem_07.html": "Triangle Theorems",
+    "trig_properties_09.html": "Trigonometric Properties",
+    "circle_theorems_02.html": "Circle Theorems"
+  };
+
+  const page = location.pathname.split("/").pop();
+  const title = pageTitles[page] || "Math App";
+
+  const titleEl = document.getElementById("page-title");
+  const subtitleEl = document.getElementById("page-subtitle");
+  const subBtnEl = document.getElementById("active-sub-button");
+
+  if (titleEl) titleEl.textContent = title;
+  if (subtitleEl) subtitleEl.textContent = "";
+  if (subBtnEl) subBtnEl.textContent = "";
+
+  document.querySelectorAll(".dynamic-divider").forEach(div => div.remove());
+}
+
+// ... your loadSubHeaderIcons() and attachNavBarListeners() remain unchanged ...
+
+// 📌 Load header and icons
+loadHeader();
+loadSubHeaderIcons();
+
+
+
+
 export function attachNavBarListeners() {
   const navMap = {
     "verticallyOpposite-button": "verticallyOpposite",
@@ -42,29 +117,6 @@ export function attachNavBarListeners() {
 
 
 
-export function updatePageTitle() {
-  const pageTitles = {
-    "index.html": "Home",
-    "parallel_lines_04.html": "Parallel Lines",
-    "triangle_theorem_07.html": "Triangle Theorems",
-    "trig_properties_09.html": "Trigonometric Properties",
-    "circle_theorems_02.html": "Circle Theorems"
-  };
-
-  const page = location.pathname.split("/").pop();
-  const title = pageTitles[page] || "Math App";
-
-  const titleEl = document.getElementById("page-title");
-  const subtitleEl = document.getElementById("page-subtitle");
-  const subBtnEl = document.getElementById("active-sub-button");
-
-  if (titleEl) titleEl.textContent = title;
-  if (subtitleEl) subtitleEl.textContent = "";
-  if (subBtnEl) subBtnEl.textContent = "";
-
-  document.querySelectorAll(".dynamic-divider").forEach(div => div.remove());
-}
-
 export function updateHeaderLabels({ title, subtitle, subButton }) {
   const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
@@ -83,6 +135,10 @@ function insertDivider(leftEl, rightEl) {
   divider.style.color = "white";
   leftEl.parentNode.insertBefore(divider, rightEl);
 }
+
+// 📌 Ensure there's a container element with this ID in each HTML
+
+
 
 export function loadSubHeaderIcons() {
   const path = window.location.pathname;
@@ -250,6 +306,9 @@ export function loadSubHeaderIcons() {
     container.appendChild(wrapper);
   });
 }
+loadHeader();
+loadSubHeaderIcons();
 
-  loadSubHeaderIcons();
+// Make sure auth.js is already loaded before this
+
 

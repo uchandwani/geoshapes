@@ -1,10 +1,12 @@
-import { functionalityConfig } from './functionalityConfig.js';
+import { functionalityConfig } from './commonConfig.js';
 import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
 import { updateHeaderLabels } from './header.js';
+import { resolveFormStructure,getApplicableFields,handleSubmit,handleSave } from './formUtils.js';
+import { loadProgress, saveProgress, getProgressStatus, loadSavedProgress } from './progress.js';
 
 // 🌐 Page identification
 const page = location.pathname.split("/").pop();
@@ -17,42 +19,53 @@ const pageTitles = {
 };
 
 // 🔁 Main functionality handler
-export function switchFunctionality(functionalityKey, buttonType = null) {
-    console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
-  
-    const config = functionalityConfig[functionalityKey];
-    if (!config) {
-      console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
-      return;
-    }
-  
-    // Fallback logic to pick first subtype if buttonType is null
-    if (!buttonType && config.buttonSet && config.buttonSet.length > 0) {
-      buttonType = config.buttonSet[0];
-      console.log(`🔁 No buttonType provided. Falling back to default subtype: ${buttonType.type}`);
-    }
-  
-    const effectiveType = buttonType?.type || config.defaultButtonType || null;
-    console.log("🎯 Using subtype:", effectiveType);
-  
-    // 🧠 Header update
-    const mainTitle = pageTitles[page] || "Triangle Theorems";
-    const activeSubBtnLabel = buttonType?.label || (config.buttonSet?.find(btn => btn.type === effectiveType)?.label || "");
-  
-    updateHeaderLabels({
-      title: mainTitle,
-      subtitle: `| ${functionalityKey}`,
-      subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
-    });
-  
-    // 🔄 Clear & draw
-    canvasManager.clearAllShapes();
-    drawShapes(config.canvasConfig, effectiveType);
-    updateUI(config, functionalityKey, buttonType);
-    updateLeftSidebar(functionalityKey, effectiveType);
-    updateRightSidebar(functionalityKey, effectiveType);
-    canvasManager.render();
+export async function switchFunctionality(functionalityKey, buttonType = null) {
+  console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+
+  const config = functionalityConfig[functionalityKey];
+  if (!config) {
+    console.warn(`⚠️ Unknown functionalityKey: ${functionalityKey}`);
+    return;
   }
+
+  // Fallback logic to pick first subtype if buttonType is null
+  if (!buttonType && config.buttonSet && config.buttonSet.length > 0) {
+    buttonType = config.buttonSet[0];
+    console.log(`🔁 No buttonType provided. Falling back to default subtype: ${buttonType.type}`);
+  }
+
+  const effectiveType = buttonType?.type || config.defaultButtonType || null;
+  console.log("🎯 Using subtype:", effectiveType);
+
+  const page = location.pathname.split("/").pop();
+  const mainTitle = pageTitles[page] || "Triangle Theorems";
+  const activeSubBtnLabel = buttonType?.label || (config.buttonSet?.find(btn => btn.type === effectiveType)?.label || "");
+
+  updateHeaderLabels({
+    title: mainTitle,
+    subtitle: `| ${functionalityKey}`,
+    subButton: activeSubBtnLabel ? `| ${activeSubBtnLabel}` : ""
+  });
+
+  // 🔄 Clear & draw
+  canvasManager.clearAllShapes();
+  drawShapes(config.canvasConfig, effectiveType);
+  updateUI(config, functionalityKey, buttonType);
+  updateLeftSidebar(functionalityKey, effectiveType);
+ // updateRightSidebar(functionalityKey, effectiveType);
+  canvasManager.render();
+
+  const uid = localStorage.getItem("uid");
+
+  // ✅ Load saved/submitted progress
+  
+  if (uid) {
+    const topicId = functionalityKey;
+    const subtype = effectiveType;
+    await loadProgress(uid, topicId, subtype); // 🔄 Handles all three cases: submitted, saved, new
+  }
+  
+}
   
 
 // 🎨 Unified shape renderer
@@ -211,19 +224,66 @@ export function updateLeftSidebar(functionalityKey, subtype = null) {
   sidebar.innerHTML = content;
 }
 
-export function updateRightSidebar(functionalityKey, subtype = null) {
-  const config = functionalityConfig[functionalityKey];
-  if (!config) return;
+function updateRightSidebar(topicId, subtype) {
+  const config = functionalityConfig[topicId];
+  const html = config?.rightSidebarContent?.[subtype];
 
-  const sidebar = document.querySelector(".sidebar.right");
-  const allContent = config.rightSidebarContent;
+  const container = document.getElementById("right-sidebar");
+  if (container) {
+    container.innerHTML = html || "";
 
-  let content = "<p>Content not available.</p>";
-  if (typeof allContent === "string") {
-    content = allContent;
-  } else if (typeof allContent === "object") {
-    content = allContent?.[subtype] || allContent?.[config.defaultButtonType] || content;
+    // ✅ Always append summaryBlock so it exists
+    const summaryDiv = document.createElement("div");
+    summaryDiv.id = "summaryBlock";
+    container.appendChild(summaryDiv);
+  }
+}
+
+
+export function updateRightSidebarAfterSubmit({ topicId, subtype, responses }) {
+  const formStructure = resolveFormStructure(topicId, subtype);
+  const fields = getApplicableFields(formStructure, subtype);
+
+  if (!formStructure || !Array.isArray(fields)) {
+    console.warn("⚠️ Invalid or missing formStructure for", topicId, subtype);
+    return;
   }
 
-  sidebar.innerHTML = content;
+  const validKeys = ['length1', 'length2', 'angle1', 'angle2', 'result', 'int1', 'int2', 'ext', 'sum'];
+
+  fields.forEach((field, index) => {
+    validKeys.forEach((key) => {
+      const fieldName = field[key];
+      if (!fieldName) return;
+
+      const value = responses[fieldName];
+      if (value === undefined) {
+        console.warn(`⚠️ Missing response value for field: ${fieldName}`);
+        return;
+      }
+
+      const input = document.querySelector(`[name="${fieldName}"], [id="${fieldName}"]`);
+      if (!input) {
+        console.warn(`⚠️ Missing DOM element for: ${fieldName}`);
+        return;
+      }
+
+      if (input.tagName === 'SPAN' || key === 'result') {
+        input.innerText = value;
+      } else {
+        input.value = value;
+      }
+    });
+  });
+
+  const conclusionField = document.querySelector(`[name="${formStructure.conclusion}"], [id="${formStructure.conclusion}"]`);
+  if (conclusionField && responses[formStructure.conclusion] !== undefined) {
+    conclusionField.value = responses[formStructure.conclusion];
+  }
+
+  console.log("✅ Right sidebar inputs updated from saved responses.");
 }
+
+
+
+

@@ -1,13 +1,27 @@
-
 #!/bin/bash
 
-# Ask for a commit message
-echo "Enter commit message:"
-read msg
+# Set source and destination paths
+SRC="$HOME/Projects/geoshapes-dev/"
+DEST="$HOME/Projects/geoshapes-prod/dev/"
 
-# Add and commit
-git add .
-git commit -m "$msg"
+# Step 1: Sync updated files to dev folder inside geoshapes-prod
+echo "🔁 Syncing from $SRC to $DEST..."
+rsync -av --delete "$SRC" "$DEST"
 
-# Push silently to GitHub via SSH
-git push origin main
+# Step 2: Navigate to geoshapes-prod
+cd "$HOME/Projects/geoshapes-prod" || exit 1
+
+# Step 3: Stage and commit only dev folder
+echo "📦 Staging changes..."
+git add dev/
+
+# Step 4: Commit with timestamp
+COMMIT_MSG="Dev push on $(date '+%Y-%m-%d %H:%M:%S')"
+git commit -m "$COMMIT_MSG"
+
+# Step 5: Push to GitHub Pages (gh-pages branch)
+echo "🚀 Pushing to GitHub..."
+git push origin gh-pages
+
+echo "✅ Done: Pushed dev folder to GitHub Pages"
+

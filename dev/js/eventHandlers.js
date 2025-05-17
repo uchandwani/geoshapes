@@ -1,4 +1,4 @@
-import { functionalityConfig } from './functionalityConfig.js';
+import { functionalityConfig } from './commonConfig.js';
 import { CanvasManager, canvasManager } from '../shapes/CanvasManager.js';
 import { Triangle } from '../shapes/Triangle.js';
 import {Point} from '../shapes/Points.js';
