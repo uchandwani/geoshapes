@@ -415,6 +415,8 @@ function drawCircle(canvasConfig) {
     const circle = new Circle(center, radius);
     const enableDrag = canvasConfig.enableDrag ?? false;
     circle.setEnableDrag?.(enableDrag);
+    circle.setEnableStretch?.(false);
+
     canvasManager.addShape(circle);
 }
 
