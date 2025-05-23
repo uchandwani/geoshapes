@@ -19,13 +19,16 @@
 
     <script type="module">
     import { compareMeasures, compareDividedMeasures, calculateRatio, updateMessage } from './js/trianglePage.js';
-    import { handleSubmit, handleSave } from './js/formUtils.js';  
+    import { handleSubmit, handleSave } from './js/formUtils.js';
+    import { compareFields } from './js/utils.js'  
+    import { animateMidsegmentTheorem} from './js/commonEventHandlers.js';
     // Expose functions globally
     window.compareMeasures = compareMeasures;
+    window.compareFields = compareFields;
     window.compareDividedMeasures = compareDividedMeasures;
     window.calculateRatio = calculateRatio;
     window.updateMessage = updateMessage;
-
+    window.animateMidsegmentTheorem = animateMidsegmentTheorem;
     </script>
 </head>
 <body>
@@ -137,7 +140,6 @@
         </div>
     </div>
     <footer>
-        <p></p>
     </footer>
 
     
@@ -155,7 +157,7 @@
     updatePageTitle();
     loadSubHeaderIcons();
 
-    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
+    const { switchFunctionality, animateMidsegnmentTheorem } = await import('./js/commonEventHandlers.js');
     attachNavBarListeners();
     
     window.addEventListener("nav-select", (e) => {

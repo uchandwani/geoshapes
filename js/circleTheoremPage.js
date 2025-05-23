@@ -14,15 +14,22 @@ import {Circle} from '../shapes/Circle.js';
     document.addEventListener("DOMContentLoaded", () => {
       
       updatePageTitle();
-      switchFunctionality('radiusTangent'); // default
+      switchFunctionality('radiusTangent', 'sin'); // default
     });
 
-    window.addEventListener("nav-select", (e) => {
-      const { functionalityKey, subtype } = e.detail;
-      console.log("📥 Received nav-select:", functionalityKey, subtype);
-      switchFunctionality(functionalityKey, subtype);
-    });
-      
+   window.addEventListener("nav-select", (event) => {
+  const { functionalityKey, subtype } = event.detail;
+  const config = functionalityConfig[functionalityKey];
+  const effectiveSubtype = subtype ?? config?.defaultButtonType ?? 'sin';
+
+
+
+
+  console.log("📥 Received nav-select:", functionalityKey, effectiveSubtype);
+  switchFunctionality(functionalityKey, effectiveSubtype);
+});
+
+  
 
 // Function to draw the default triangle on page load
 function drawDefaultCircle(ctx,canvas) {

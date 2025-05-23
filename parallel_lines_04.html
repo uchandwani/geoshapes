@@ -92,12 +92,13 @@
   <script type="module">
     import { compareMeasures, compareDividedMeasures, calculateRatio, updateMessage } from './js/trianglePage.js';
     import { handleSubmit, handleSave } from './js/formUtils.js';  
+    import{sumMeasures } from './js/utils.js';
     // Expose functions globally
     window.compareMeasures = compareMeasures;
     window.compareDividedMeasures = compareDividedMeasures;
     window.calculateRatio = calculateRatio;
     window.updateMessage = updateMessage;
-
+    window.sumMeasures = sumMeasures;
     </script>
 
   <!-- ✅ Final Setup Script -->

@@ -7,6 +7,7 @@
     import {Point} from '../shapes/Points.js';
     import {Circle} from '../shapes/Circle.js';
     import { switchFunctionality } from './commonEventHandlers.js';
+    import { startTracking } from './timer.js';
     window.switchFunctionality = switchFunctionality;
 
 
@@ -18,14 +19,17 @@
       switchFunctionality('verticallyOpposite'); // default
     });
 
-    window.addEventListener("nav-select", (e) => {
-      const { functionalityKey, subtype } = e.detail;
-      console.log("📥 Received nav-select:", functionalityKey, subtype);
-      switchFunctionality(functionalityKey, subtype);
+    window.addEventListener("nav-select", (event) => {
+      const { functionalityKey, subtype } = event.detail;
+      const config = functionalityConfig[functionalityKey];
+      const effectiveSubtype = subtype ?? config?.defaultButtonType ?? null;
+
+      console.log("📥 Received nav-select:", functionalityKey, effectiveSubtype);
+      switchFunctionality(functionalityKey, effectiveSubtype);
     });
 
 
- 
+  
     // Function to draw the default triangle on page load
     function drawDefaultCircle(ctx,canvas) {
         const centerPoint = new Point(300, 300);

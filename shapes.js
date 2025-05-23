@@ -10,8 +10,8 @@ import { CanvasManager, canvasManager } from './shapes/CanvasManager.js';
 import { Divider } from './shapes/Divider.js';
 import { Compass } from './shapes/Compass.js';
 import {Arc} from './shapes/Arc.js';
-import { functionalityConfig } from '/geoshapes/js/commonConfig.js';
-import { currentPageFeatures } from '/geoshapes/js/commonConfig.js';
+import { functionalityConfig } from './js/commonConfig.js';
+import { currentPageFeatures } from './js/commonConfig.js';
 
 
 
@@ -286,7 +286,7 @@ canvas.addEventListener('mousedown', (e) => {
             const shapeType = selectedShape.constructor.name;
             console.log("Shape Type in mousedown:", shapeType);
             const distanceToCenter = Math.hypot(offsetX - selectedShape.center?.x, offsetY - selectedShape.center?.y);
-
+            
             switch (shapeType) {
                 case 'Line':
                     if (selectedShape.isPointInside(offsetX, offsetY)) {
@@ -296,11 +296,13 @@ canvas.addEventListener('mousedown', (e) => {
                     break;
 
                 case 'Circle':
+                    debugger;
                     const distanceFromCenter = Math.hypot(offsetX - selectedShape.center.x, offsetY - selectedShape.center.y);
                     
                     if (Math.abs(distanceFromCenter - selectedShape.radius) < 10) {
+                        if(selectedShape.enableStretch){
                         selectedShape.draggingEdge = true; // Dragging radius
-                        console.log("Dragging Circle Edge for resizing.");
+                        console.log("Dragging Circle Edge for resizing."); }
                     } else {
                         selectedShape.draggingCenter = true; // Dragging entire circle
                         console.log("Dragging Circle Center.");
@@ -649,20 +651,18 @@ function determineLeg(x, y, shape) {
 
 // Specific handlers for different shapes
 
-function handleProtractorMove(protractor, dx, dy, mouseX, mouseY, isAltPressed) {
-    if (!protractor) return;
+function handleProtractorMove(selectedShape, dx, dy, offsetX, offsetY, isAltPressed) {
+    if (!selectedShape || !(selectedShape instanceof Protractor)) return;
 
-    console.log("🔍 canvasManager in drag handler:", canvasManager);
-    console.log("🧲 Snapping enabled:", currentPageFeatures.enableProtractorSnapping);
-    console.log("🛑 ALT Key Pressed (persisted):", isAltPressed);
+    if (selectedShape.draggingEdge) {
+        selectedShape.resize(offsetX, offsetY);  // ✅ This is the fix
+        console.log("📐 Resizing protractor via edge drag.");
+    } else if (selectedShape.draggingCenter) {
+        selectedShape.drag(dx, dy, canvasManager.shapes);
+        console.log("🎯 Moving protractor center.");
+    }
 
-    protractor.drag(
-        dx,
-        dy,
-        canvasManager.shapes
-     );
-
-    console.log("✋ Protractor dragged.");
+    canvasManager.render();
 }
 
 
@@ -785,5 +785,6 @@ if (protractorButton) {
         addShapeAndSwitchToModify(newProtractor);
     });
 }
+
 
 

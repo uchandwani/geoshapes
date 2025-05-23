@@ -263,13 +263,13 @@ getSnapCandidates() {
     }
 
     // Render shapes
-    console.log("Rendending following shapes",this.shapes);
+    console.log("Rendering following shapes",this.shapes);
     this.shapes.forEach((shape) => {
         
         if (shape instanceof Divider) {
             
             shape.draw(this.ctx);
-        } else if (shape.type === "arc") {
+        } /* else if (shape.type === "arc") {
            
             this.ctx.beginPath();
             this.ctx.arc(
@@ -283,7 +283,7 @@ getSnapCandidates() {
             this.ctx.strokeStyle = 'black'; // Arc color
             this.ctx.lineWidth = 2;
             this.ctx.stroke(); 
-        } else if (typeof shape.draw === "function") {
+        } */ else if (typeof shape.draw === "function") {
             
             shape.draw(this.ctx);
        //     this.specificPoints.forEach((point) => point.draw(this.ctx, true, false));

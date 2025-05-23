@@ -87,10 +87,33 @@
   <header>
     <h1>Su-Art Learning Aids</h1>
     <div id="auth-box">
-      <span id="user-info">Not  ged in</span><br>
-      <button onclick="loginWithGoogle()">Login with Google</button>
+      <span id="user-info">Not logged in</span><br>
+        <div id="avatar-container"></div>
       
-      <button onclick="logout()">Logout</button>
+   <!-- Login Button -->
+<button id="login-button" title="Login with Google"
+  style="background: none; border: none; cursor: pointer; padding: 4px;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in">
+    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+    <polyline points="10 17 15 12 10 7" />
+    <line x1="15" y1="12" x2="3" y2="12" />
+  </svg>
+
+</button>
+
+<!-- Logout Button -->
+<button id="logout-button" title="Logout" style="background: none; border: none; cursor: pointer; padding: 4px; display: none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+</button>
+
+    
+
     </div>
   </header>
 
@@ -116,12 +139,53 @@
   </footer>
 
   <!-- Firebase SDKs -->
- <script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js?module"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js?module"></script>
-
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js?module"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js?module"></script>
 
   <!-- Firebase Config & Auth Logic -->
   <script type="module" src="js/firebase-init.js"></script>
   <script type="module" src="js/auth.js"></script>
+
+  <!-- Inline Auth Behavior Replication (added 3:40 PM IST) -->
+  <script type="module">
+    import { auth, provider } from './js/firebase-init.js';
+    import { signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+
+    const userInfoSpan = document.getElementById('user-info');
+   const loginButton = document.getElementById('login-button');
+  const logoutButton = document.getElementById('logout-button');
+
+
+    loginButton.addEventListener('click', async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (err) {
+    console.error('Login failed:', err);
+  }
+});
+
+logoutButton.addEventListener('click', async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.error('Logout failed:', err);
+  }
+});
+
+// Show/hide buttons based on login state
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userInfoSpan.textContent = `Logged in as: ${user.displayName || user.email}`;
+    loginButton.style.display = 'none';
+    logoutButton.style.display = 'inline-block';
+  } else {
+    userInfoSpan.textContent = 'Not logged in';
+    loginButton.style.display = 'inline-block';
+    logoutButton.style.display = 'none';
+  }
+});
+
+
+  </script>
 </body>
 </html>

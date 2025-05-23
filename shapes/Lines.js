@@ -87,7 +87,7 @@ export class Line extends Shape {
     ctx.moveTo(this.startPoint.x, this.startPoint.y);
     ctx.lineTo(this.endPoint.x, this.endPoint.y);
     ctx.strokeStyle = this.color;
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.stroke();
    
      const drawPoint = (point, isSelected) => {

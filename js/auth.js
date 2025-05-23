@@ -12,6 +12,8 @@ import {
 import {
   getFirestore,
   collection,
+  doc,
+  setDoc,
   query,
   where,
   getDocs
@@ -69,13 +71,26 @@ function loginWithGoogle() {
   loginInProgress = true;
 
   signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      loginInProgress = false;
-      const user = result.user;
-      localStorage.setItem("uid", user.uid);
-      setUserInfoDisplay(user.displayName || user.email);
-      toggleButtons(true);
-    })
+  .then(async (result) => {
+    loginInProgress = false;
+    const user = result.user;
+
+    // ✅ Store in localStorage
+    localStorage.setItem("uid", user.uid);
+    localStorage.setItem("userName", user.displayName || user.email);
+
+    // ✅ Store in Firestore "users" collection
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      name: user.displayName || user.email,
+      email: user.email,
+      lastLogin: new Date().toISOString()
+    }, { merge: true });
+
+    setUserInfoDisplay(user.displayName || user.email);
+    toggleButtons(true);
+  })
+
     .catch((error) => {
       loginInProgress = false;
       console.error("Google login error:", error);
@@ -128,6 +143,7 @@ function logout() {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     localStorage.setItem("uid", user.uid);
+    localStorage.setItem("userName", user.displayName || user.email);
     setUserInfoDisplay(user.displayName || user.email);
     toggleButtons(true);
     updateSubmissionCount(user.uid);  // 👈 Add this

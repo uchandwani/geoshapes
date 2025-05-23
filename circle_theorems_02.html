@@ -142,25 +142,35 @@
   <!-- Dynamically load header.html and header.js -->
 
   <script type="module">
-    const html = await fetch('./header.html').then(res => res.text());
-    document.getElementById('header-placeholder').innerHTML = html;
-  
-    const { updatePageTitle, loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
-    updatePageTitle();
-    loadSubHeaderIcons();
-    
-  
-    const { switchFunctionality } = await import('./js/commonEventHandlers.js');
-    attachNavBarListeners();
+  // ✅ Load config first
+  const { functionalityConfig } = await import('./js/commonConfig.js');
+  window.functionalityConfig = functionalityConfig;
 
-    window.addEventListener("nav-select", (e) => {
+  // ✅ Load header
+  const html = await fetch('./header.html').then(res => res.text());
+  document.getElementById('header-placeholder').innerHTML = html;
+
+  const { updatePageTitle, loadSubHeaderIcons, attachNavBarListeners } = await import('./js/header.js');
+  updatePageTitle();
+  loadSubHeaderIcons();
+  attachNavBarListeners();
+
+  // ✅ Load common event handler
+  const { switchFunctionality } = await import('./js/commonEventHandlers.js');
+
+  // ✅ Listen for nav-select
+  window.addEventListener("nav-select", (e) => {
     const { functionalityKey, subtype } = e.detail;
-    console.log("📥 Received nav-select:", functionalityKey, subtype);
-    switchFunctionality(functionalityKey, subtype);
+    const config = functionalityConfig[functionalityKey];
+    const effectiveSubtype = subtype ?? config?.defaultButtonType ?? null;
+    console.log("📥 Received nav-select:", functionalityKey, effectiveSubtype);
+    switchFunctionality(functionalityKey, effectiveSubtype);
   });
 
-    switchFunctionality('twoTangents', 'sin'); // or your preferred default
-  </script>
+  // ✅ Initial load
+  switchFunctionality('radiusTangent', functionalityConfig['radiusTangent']?.defaultButtonType ?? 'sin');
+</script>
+
   
 </body>
 </html>

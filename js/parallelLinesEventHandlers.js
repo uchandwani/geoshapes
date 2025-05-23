@@ -298,6 +298,42 @@ export async function switchFunctionality(functionalityKey, buttonType = null) {
     sidebar.innerHTML = content;
 }
 
+function drawAngleArc(ctx, vertex, pointA, pointB, scale = 0.3, color = 'orange', label = '') {
+  // Auto radius based on distance from vertex to pointA
+  const dx = pointA.x - vertex.x;
+  const dy = pointA.y - vertex.y;
+  const rawDistance = Math.sqrt(dx * dx + dy * dy);
+  const radius = rawDistance * scale; // 30% of the arm length
+
+  const angle1 = Math.atan2(pointA.y - vertex.y, pointA.x - vertex.x);
+  const angle2 = Math.atan2(pointB.y - vertex.y, pointB.x - vertex.x);
+
+  // Ensure proper angle direction
+  let startAngle = angle1;
+  let endAngle = angle2;
+  let anticlockwise = false;
+
+  // Swap angles if needed
+  if (angle2 < angle1) {
+    [startAngle, endAngle] = [angle2, angle1];
+    anticlockwise = true;
+  }
+
+  ctx.beginPath();
+  ctx.arc(vertex.x, vertex.y, radius, startAngle, endAngle, anticlockwise);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (label) {
+    const midAngle = (startAngle + endAngle) / 2;
+    const labelX = vertex.x + (radius + 10) * Math.cos(midAngle);
+    const labelY = vertex.y + (radius + 10) * Math.sin(midAngle);
+    ctx.font = '14px Arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText(label, labelX, labelY);
+  }
+}
 
 
 export function updateRightSidebarAfterSubmit({ topicId, subtype, responses }) {

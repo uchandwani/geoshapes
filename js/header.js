@@ -1,5 +1,5 @@
 // header.js
-
+import { functionalityConfig } from './commonConfig.js';
 // header.js
 
 export async function loadHeader() {
@@ -53,13 +53,13 @@ export function updatePageTitle() {
   };
 
   const page = location.pathname.split("/").pop();
-  const title = pageTitles[page] || "Math App";
+ // const title = pageTitles[page] || "Math App";
 
-  const titleEl = document.getElementById("page-title");
+//  const titleEl = document.getElementById("page-title");
   const subtitleEl = document.getElementById("page-subtitle");
   const subBtnEl = document.getElementById("active-sub-button");
 
-  if (titleEl) titleEl.textContent = title;
+//  if (titleEl) titleEl.textContent = title;
   if (subtitleEl) subtitleEl.textContent = "";
   if (subBtnEl) subBtnEl.textContent = "";
 
@@ -101,19 +101,25 @@ export function attachNavBarListeners() {
   
 
   Object.entries(navMap).forEach(([id, functionalityKey]) => {
+  const button = document.getElementById(id);
+  if (button) {
+    button.addEventListener("click", () => {
+      const subtype = functionalityConfig[functionalityKey]?.defaultButtonType ?? 'sin';  // ✅ dynamically fetch
 
-    const button = document.getElementById(id);
-    if (button) {
-      button.addEventListener("click", () => {
-        console.log("📣 Dispatching nav-select event:", functionalityKey);
-        const event = new CustomEvent("nav-select", {
-          detail: { functionalityKey }
-        });
-        window.dispatchEvent(event);
+      const event = new CustomEvent("nav-select", {
+        detail: {
+          functionalityKey,
+          subtype
+        }
       });
-    }
-  });
+
+      window.dispatchEvent(event);
+    });
+  }
+});
 }
+
+
 
 
 
@@ -138,7 +144,15 @@ function insertDivider(leftEl, rightEl) {
 
 // 📌 Ensure there's a container element with this ID in each HTML
 
+export function activateSubButton(buttonId) {
+  const allButtons = document.querySelectorAll('#sub-header-icons .sub-button-svg');
+  allButtons.forEach(btn => btn.classList.remove('active'));
 
+  const activeBtn = document.getElementById(buttonId);
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+  }
+}
 
 export function loadSubHeaderIcons() {
   const path = window.location.pathname;

@@ -3,8 +3,8 @@ import { Point } from './Points.js';
 import {Triangle} from './Triangle.js'
 
 
-import {functionalityConfig} from '/geoshapes/js/commonConfig.js';
-import {currentPageFeatures } from '/geoshapes/js/commonConfig.js';
+import {functionalityConfig} from '../js/commonConfig.js';
+import {currentPageFeatures } from '../js/commonConfig.js';
 import {canvasManager} from '../shapes/CanvasManager.js';
 
 const enableSnapping = currentPageFeatures.enableProtractorSnapping || false;

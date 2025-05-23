@@ -7,6 +7,7 @@ import { Point } from '../shapes/Points.js';
 import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { handleSubmit, handleSave } from './formUtils.js';
+import {functionalityConfig} from './commonConfig.js';
 
 // ✅ Load default triangle theorem
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,13 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ✅ Handle navigation trigger
-window.addEventListener("nav-select", (e) => {
-  const { functionalityKey, subtype } = e.detail;
-  console.log("📥 Received nav-select:", functionalityKey, subtype);
-  switchFunctionality(functionalityKey, subtype);
+window.addEventListener("nav-select", (event) => {
+  const { functionalityKey, subtype } = event.detail;
+  const config = functionalityConfig[functionalityKey];
+  const effectiveSubtype = subtype ?? config?.defaultButtonType ?? null;
+
+  console.log("📥 Received nav-select:", functionalityKey, effectiveSubtype);
+  switchFunctionality(functionalityKey, effectiveSubtype);
 });
 
+
+
 // ========== Utility Functions (for now, will be modularized later) ==========
+
 
 export function compareMeasures(input1Name, input2Name, resultName) {
   console.log("Inside compareMeasures", input1Name, input2Name, resultName);
@@ -50,6 +57,29 @@ export function compareMeasures(input1Name, input2Name, resultName) {
     input2.style.backgroundColor = "";
   }
 }
+
+export function checkIfSixty(inputName, resultId) {
+  const input = document.getElementsByName(inputName)[0];
+  const result = document.getElementById(resultId);
+
+  if (!input || !result) return;
+
+  const val = parseFloat(input.value);
+  if (isNaN(val)) {
+    input.style.backgroundColor = "";
+    result.textContent = "";
+    return;
+  }
+
+  if (val === 60) {
+    input.style.backgroundColor = "lightgreen";
+    result.textContent = "✅";
+  } else {
+    input.style.backgroundColor = "lightcoral";
+    result.textContent = "❌";
+  }
+}
+
 
 export function compareDividedMeasures(input1Name, input2Name, resultName, divisor) {
   const input1 = document.getElementsByName(input1Name)[0];
@@ -109,11 +139,14 @@ export function toFraction(decValue) {
   return Math.round(decValue);
 }
 
-export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null) {
+
+
+export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = null, rowId = null) {
   const input1 = document.getElementById(input1Id);
   const input2 = document.getElementById(input2Id);
   const input3 = input3Id ? document.getElementById(input3Id) : null;
   const result = document.getElementById(resultId);
+  const row = rowId ? document.getElementById(rowId) : null;
 
   if (!input1 || !input2 || !result) {
     console.error("❌ Error: One or more elements not found!", { input1, input2, input3, result });
@@ -132,13 +165,21 @@ export function sumMeasures(input1Id, input2Id, resultId, target, input3Id = nul
     targetValue = target;
   } else {
     const targetElement = document.getElementById(target);
-    targetValue = targetElement ? parseFloat(targetElement.value) || null : null;
+    if (targetElement && targetElement.value !== "") {
+      targetValue = parseFloat(targetElement.value);
+    } else {
+      targetValue = null;
+    }
   }
 
-  if (targetValue !== null) {
-    updateInputStyles([input1, input2, input3].filter(Boolean), sum === targetValue);
-  } else {
-    resetInputStyles([input1, input2, input3].filter(Boolean), result);
+  const isMatch = targetValue !== null && Math.abs(sum - targetValue) < 0.01;
+
+  // Update input styles
+  updateInputStyles([input1, input2, input3].filter(Boolean), isMatch);
+
+  // Update row background
+  if (row) {
+    row.style.backgroundColor = isMatch ? "#d4edda" : "#f8d7da"; // light green or red
   }
 }
 

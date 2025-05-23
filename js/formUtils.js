@@ -1,4 +1,5 @@
 import { functionalityConfig } from './commonConfig.js';
+import { getElapsedSeconds, clearTracking } from './timer.js';
 
 import { saveProgress, loadProgress, loadSavedProgress } from './progress.js';
 
@@ -7,16 +8,23 @@ import { db } from './firebase-init.js';
 import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 
-export function getApplicableFields(formStructure, subtype) {
-  if (!formStructure?.fields) return [];
-  return formStructure.fields.filter(f => !f.subtype || f.subtype === subtype);
+function getApplicableFields(formStructure, subtype) {
+  if (!formStructure || !formStructure.fields) return [];
+
+  // Case 1: subtype is explicitly provided
+  if (subtype !== null && subtype !== undefined) {
+    const subtypeFields = formStructure.fields.filter(f => f.subtype === subtype);
+    if (subtypeFields.length > 0) return subtypeFields;
+  }
+
+  // Case 2: fallback to fields with no subtype
+  return formStructure.fields.filter(f => !f.subtype);
 }
 
 
 export async function handleSubmit(topicId, subtype) {
   const response = collectFormResponses(topicId, subtype);
-
-  if (!response) return; // 🔁 Already logs warning if formStructure is missing
+  if (!response) return;
 
   const uid = localStorage.getItem("uid");
   if (!uid) {
@@ -24,20 +32,25 @@ export async function handleSubmit(topicId, subtype) {
     return;
   }
 
+  const timeTaken = getElapsedSeconds();
   const docId = `${uid}_${topicId}_${subtype}`;
   const docRef = doc(db, "progress", docId);
 
-  // 🔄 Add/override metadata
-  response.uid = uid;
-  response.topicId = topicId;
-  response.subtopicId = subtype;
-  response.status = "submitted";
-  response.updatedAt = new Date().toISOString();
+  const payload = {
+    ...response, // 🔄 flatten response
+    uid,
+    topicId,
+    subtopicId: subtype,
+    timeTaken,     
+    status: "submitted",
+    updatedAt: new Date().toISOString()
+  };
 
-  console.log("📨 Final response before submit:", response);
+  console.log("📨 Final response before submit:", payload);
+  clearTracking();
 
   try {
-    await setDoc(docRef, response);
+    await setDoc(docRef, payload);
     console.log("✅ Form submitted:", docId);
     alert("Submission successful!");
   } catch (error) {
@@ -48,6 +61,7 @@ export async function handleSubmit(topicId, subtype) {
 
 window.handleSubmit = handleSubmit;
 
+
 export async function handleSave(passedTopicId, passedSubtype) {
   const topicId = passedTopicId || window.currentFunctionalityKey;
   const subtype = passedSubtype || window.currentSubtype;
@@ -57,24 +71,38 @@ export async function handleSave(passedTopicId, passedSubtype) {
     return;
   }
 
-  const uid = localStorage.getItem('uid');
+  const uid = localStorage.getItem("uid");
   if (!uid) {
     console.error("❌ UID not found in localStorage");
     return;
   }
 
+  const userName = localStorage.getItem("userName") || "Unknown User";
+  console.log("🧠 Retrieved userName for save:", userName);
+
   const response = collectFormResponses(topicId, subtype);
   if (!response) return;
-
-  response.status = "saved"; // 📌 Set save status
 
   const docId = `${uid}_${topicId}_${subtype}`;
   const docRef = doc(db, "progress", docId);
 
-  console.log("📦 Final response before save:", response);
+  const timeTaken = getElapsedSeconds();
+
+  const payload = {
+    ...response,
+    uid,
+    userName,               // ✅ add username
+    topicId,
+    subtopicId: subtype,
+    timeTaken,
+    status: "saved",
+    updatedAt: new Date().toISOString(),
+  };
+
+  console.log("📦 Final save payload:", payload);
 
   try {
-    await setDoc(docRef, response);
+    await setDoc(docRef, payload);
     console.log("✅ Progress saved:", docId);
   } catch (error) {
     console.error("❌ Error saving progress:", error);
@@ -82,6 +110,7 @@ export async function handleSave(passedTopicId, passedSubtype) {
 }
 
 window.handleSave = handleSave;
+
 
 export function resolveFormStructure(topicId, subtopicId) {
     const topicConfig = functionalityConfig[topicId];
@@ -113,7 +142,7 @@ export function resolveFormStructure(topicId, subtopicId) {
 // formUtils.js (Refactored)
 
 export function collectFormResponses(topicId, subtype) {
-  console.log("Function CFR called", topicId, subtype);
+  console.log("🧩 Function CFR called", topicId, subtype);
 
   const config = functionalityConfig[topicId];
   if (!config) {
@@ -122,17 +151,18 @@ export function collectFormResponses(topicId, subtype) {
   }
 
   const formStructure = config.formStructure;
-  console.log("The formstructure is", formStructure);
-
   if (!formStructure || !formStructure.fields) {
     console.warn(`⚠️ No formStructure found for topic: ${topicId}`);
     return null;
   }
 
   const response = {};
-  const fieldBlocks = formStructure.fields.filter(f => f.subtype === subtype || !f.subtype);
-  console.log("🔍 Matching field blocks found:", fieldBlocks.length, fieldBlocks);
+  const fieldBlocks = formStructure.fields.filter(f => {
+    if (!('subtype' in f)) return true; // default block
+    return f.subtype === subtype || f.subtype === null;
+  });
 
+  console.log("🔍 Matching field blocks found:", fieldBlocks.length, fieldBlocks);
   if (fieldBlocks.length === 0) {
     console.warn(`⚠️ No field block found for subtype: ${subtype}`);
     return null;
@@ -142,43 +172,36 @@ export function collectFormResponses(topicId, subtype) {
     field.angles?.forEach(({ id }) => {
       const el = document.getElementById(id);
       const val = el?.value;
-      console.log("The values of el and val are", el, val);
-      if (val !== undefined) {
-        response[id] = val;
-        console.log("The value is ", response[id], val);
-      }
+      console.log(`🔧 [Angle] ${id}: found=${!!el}, value=${val}`);
+      if (val !== undefined) response[id] = val;
     });
-    
+
     field.lengths?.forEach(({ id }) => {
       const el = document.getElementById(id);
       const val = el?.value;
-      if (val !== undefined) {
-        response[id] = val;
-      }
+      console.log(`📏 [Length] ${id}: found=${!!el}, value=${val}`);
+      if (val !== undefined) response[id] = val;
     });
-    
+
     field.results?.forEach(({ id }) => {
       const el = document.getElementById(id);
       const val = el?.value || el?.innerText;
-      if (val !== undefined) {
-        response[id] = val;
-      }
+      console.log(`🔎 [Result] ${id}: found=${!!el}, value=${val}`);
+      if (val !== undefined) response[id] = val;
     });
-    
   });
 
-  // ✅ Add conclusion if present
+  // 📌 Add conclusion if present
   if (formStructure.conclusion) {
-    const val = document.getElementById(formStructure.conclusion)?.value;
+    const el = document.getElementById(formStructure.conclusion);
+    const val = el?.value;
+    console.log(`📝 [Conclusion] ${formStructure.conclusion}: value=${val}`);
     if (val !== undefined) response[formStructure.conclusion] = val;
-    console.log(`📝 Conclusion [${formStructure.conclusion}]:`, val);
   }
 
   console.log("📦 Final response before save:", response);
   return response;
 }
-
-
 
 
 

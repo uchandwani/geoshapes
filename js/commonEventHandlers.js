@@ -9,6 +9,7 @@ import { Triangle } from '../shapes/Triangle.js';
 import { Circle } from '../shapes/Circle.js';
 import { Line } from '../shapes/Lines.js';
 import { Point } from '../shapes/Points.js';
+import { Arc } from '../shapes/Arc.js';  // ✅ Import at the top
 import { updatePageTitle } from './header.js';
 import { updateHeaderLabels } from './header.js';
 import { loadProgress, saveProgress, getProgressStatus, loadSavedProgress } from './progress.js';
@@ -32,77 +33,7 @@ function getApplicableFields(formStructure, subtype) {
   return formStructure.fields.filter(f => !f.subtype || f.subtype === subtype);
 }
 
-
-
-/* ✅ Collect form values and save to Firestore, then update the right sidebar
-export async function handleSubmit(topicId = currentFunctionalityKey, subtype = currentSubtype) {
-  const formStructure = resolveFormStructure(topicId, subtype);
-  if (!formStructure) {
-    console.warn("⚠️ No formStructure found for", topicId, subtype);
-    return;
-  }
-
-  const fields = getApplicableFields(formStructure, subtype);
-  const responses = {};
-
-  fields.forEach(({ angle1, angle2, result }) => {
-    responses[angle1] = document.querySelector(`[name="${angle1}"]`)?.value || '';
-    responses[angle2] = document.querySelector(`[name="${angle2}"]`)?.value || '';
-    responses[result] = document.querySelector(`[name="${result}"], [id="${result}"]`)?.innerText || '';
-  });
-
-  const conclusionField = document.querySelector(`[name="${formStructure.conclusion}"], [id="${formStructure.conclusion}"]`);
-  responses[formStructure.conclusion] = conclusionField?.value || '';
-
-  const uid = localStorage.getItem("uid") || "anonymous";
-  const docId = `${uid}_${topicId}_${subtype}`;
-
-  const docRef = doc(db, "progress", docId);
-  await setDoc(docRef, {
-    uid, topicId, subtype, responses,
-    status: "submitted",
-    timestamp: serverTimestamp()
-  });
-  console.log("✅ Data saved to Firestore");
-  loadProgress(uid, topicId, subtype);
-}
-window.handleSubmit = handleSubmit;
-
-// ✅ Save form values to Firestore
-async function handleSave(topicId = currentFunctionalityKey, subtype = currentSubtype) {
-  const formStructure = resolveFormStructure(topicId, subtype);
-  if (!formStructure) {
-    console.warn("⚠️ No formStructure found for", topicId, subtype);
-    return;
-  }
-
-  const fields = getApplicableFields(formStructure, subtype);
-  const responses = {};
-  let allFilled = true;
-
-  for (const { angle1, angle2, result } of fields) {
-    const val1 = document.getElementById(angle1)?.value || "";
-    const val2 = document.getElementById(angle2)?.value || "";
-    const res = document.getElementById(result)?.textContent || "";
-    responses[angle1] = val1;
-    responses[angle2] = val2;
-    responses[result] = res;
-    if (!val1 || !val2) allFilled = false;
-  }
-
-  const conclusionEl = document.getElementById(formStructure.conclusion);
-  responses[formStructure.conclusion] = conclusionEl?.value || "";
-
-  const status = "saved";
-  const uid = localStorage.getItem("uid") || "anonymous";
-  await saveProgress(uid, topicId, subtype || null, status, responses);
-
-  alert(status === "saved" ? "✅ Saved successfully!" : "💾 Saved as draft. Complete all fields before submitting.");
-}
-window.handleSave = handleSave;
-
-*/
-
+/* 
 function renderRightSidebarFromConfig(topicId, subtype) {
     const config = functionalityConfig[topicId];
     const formStructure = config?.formStructure?.[subtype];
@@ -133,7 +64,42 @@ function renderRightSidebarFromConfig(topicId, subtype) {
       `;
     }
   }
+    */
 
+  function drawArcs(canvasConfig) {
+  if (!canvasConfig.arcs) return;
+
+  canvasConfig.arcs.forEach(({ vertex, pointA, pointB, scale = 0.2, color = '#0077cc' }) => {
+    if (!vertex || !pointA || !pointB) {
+      console.warn("⚠️ Arc config missing vertex or arc endpoints.");
+      return;
+    }
+
+    const dx = pointA.x - vertex.x;
+    const dy = pointA.y - vertex.y;
+    const radius = Math.sqrt(dx * dx + dy * dy) * scale;
+    
+    console.log("The radius is ", radius);
+    const angle1 = Math.atan2(pointA.y - vertex.y, pointA.x - vertex.x);
+    const angle2 = Math.atan2(pointB.y - vertex.y, pointB.x - vertex.x);
+
+    let startAngle = angle1;
+    let endAngle = angle2;
+    let anticlockwise = false;
+
+    if (angle2 < angle1) {
+      [startAngle, endAngle] = [angle2, angle1];
+      anticlockwise = true;
+    }
+
+    const arc = new Arc(vertex.x, vertex.y, radius, startAngle, endAngle, anticlockwise, color);
+    arc.strokeStyle = color;
+
+    canvasManager.addShape(arc);
+  });
+}
+
+/*
   function renderSubmissionTable(topicId, subtype, responses) {
     const container = document.getElementById("right-sidebar");
     console.log("The renderSubmissionTable function initiated", topicId, subtype, responses, container)
@@ -173,7 +139,7 @@ function renderRightSidebarFromConfig(topicId, subtype) {
     container.appendChild(conclusion);
   }
   
-  
+  */
 
 function updateSidebarStatus(subtype, status) {
   const el = document.getElementById(`status-${subtype}`);
@@ -193,6 +159,10 @@ function updateSidebarStatus(subtype, status) {
  */
 export async function switchFunctionality(functionalityKey, buttonType = null) {
   console.log("🔁 switchFunctionality called with:", functionalityKey, buttonType);
+  console.log("🚨 DEBUG switchFunctionality called with:", arguments);
+  window.currentFunctionalityKey = functionalityKey;
+  window.currentSubtype = buttonType; // 🟢 make sure this is set
+
 
   const fnConfig = functionalityConfig[functionalityKey];
   if (!fnConfig) {
@@ -245,18 +215,10 @@ export async function switchFunctionality(functionalityKey, buttonType = null) {
     const status = await getProgressStatus(uid, topicId, subtype);
     console.log("The topic is",topicId);
     if (status === "submitted") {
-      console.log("📥 Already submitted. Loading summary...");
-
-      updateRightSidebar(topicId, subtype);
-      
-      const savedData = await loadProgress(uid, topicId, subtype, "submitted");  // ✅ FIXED
-      console.log("The save data is ", savedData);
-      updateRightSidebarAfterSubmit(
-        topicId,
-        subtype,
-        savedData
-      );
-
+      const savedData = await loadSavedProgress(uid, topicId, subtype);
+      updateRightSidebar(topicId, subtype); // render form structure
+      updateRightSidebarAfterSubmit(topicId, subtype, savedData); // fill values
+     
     } else if (status === "saved") {
       console.log("💾 Found saved progress. Rendering form and applying saved values...");
       
@@ -283,8 +245,16 @@ export async function switchFunctionality(functionalityKey, buttonType = null) {
 
 export function updateRightSidebar(functionalityKey, subtype = null) {
   console.log("➡️ updateRightSidebar called with:", functionalityKey, subtype);
-   const fnConfig = functionalityConfig[functionalityKey];  // ✅ Add this line
-  const content = fnConfig?.rightSidebarContent?.[subtype];
+  const fnConfig = functionalityConfig[functionalityKey];
+
+  let content = "";
+  if (typeof fnConfig.rightSidebarContent === "string") {
+    // ✅ Single shared content across all subtypes
+    content = fnConfig.rightSidebarContent;
+  } else if (fnConfig.rightSidebarContent?.[subtype]) {
+    // ✅ Subtype-specific sidebar content
+    content = fnConfig.rightSidebarContent[subtype];
+  }
 
   if (!content) {
     console.warn("⚠️ No sidebar content found for", functionalityKey, subtype);
@@ -311,7 +281,10 @@ export function updateRightSidebarAfterSubmit(topicId, subtype, savedData) {
   }
 
   // ✅ Collect all matching field blocks
-  const fieldBlocks = formStructure.fields.filter(f => f.subtype === subtype || !f.subtype);
+  const fieldBlocks = formStructure.fields.filter(f => {
+      return !("subtype" in f) || f.subtype === subtype;
+    });
+
   if (fieldBlocks.length === 0) {
     console.warn(`⚠️ No form field block found for subtype: ${subtype}`);
     return;
@@ -377,22 +350,46 @@ function drawShapes(canvasConfig, buttonType = null) {
 
   if (canvasConfig.triangles) drawTriangles(canvasConfig, buttonType);
   if (canvasConfig.lines) drawLines(canvasConfig, buttonType);
+  if (canvasConfig.arcs) drawArcs(canvasConfig, buttonType);
+
 }
 
-function drawPoints(canvasConfig, subtype = null) {
-  const showLabels = canvasConfig.showLabels === true;
+export function drawPoints(canvasConfig, buttonType = null) {
+  let points = canvasConfig.points || [];
 
-  canvasConfig.points
-      .filter(p => p.subtype === subtype || p.type === "regular") // ✅ Filter on subtype strictly
-      .forEach(({ x, y, label, color = "black", radius = 5, enableDrag = false }) => {
-          if (x === undefined || y === undefined) return;
+  // ✅ Also consider external points for current subtype
+  if (canvasConfig.externalPoints) {
+    const externalPoint = canvasConfig.externalPoints[buttonType];
+    if (externalPoint) {
+      points.push(externalPoint);
+    }
+  }
 
-          const point = new Point(x, y, label, color, radius);
-          point.setEnableDrag(false);
-          point.showLabel = showLabels;
-          canvasManager.addShape(point);
-      });
+  // ✅ Filter by subtype (e.g., sin/cos/tan)
+  points = points.filter(p => !p.subtype || p.subtype === buttonType);
+
+  if (!points.length) {
+    console.warn(`⚠️ No points found for subtype "${buttonType}"`);
+    return;
+  }
+
+  points.forEach(({ x, y, label, color = "black", radius = 5 }) => {
+    if (x === undefined || y === undefined) {
+      console.warn("⚠️ Skipping invalid point:", { x, y, label });
+      return;
+    }
+
+    const point = new Point(x, y, label || "", color, radius);
+    point.setEnableDrag(false);
+    point.setShowLabel(true); // ✅ Ensure label is visible
+    canvasManager.addShape(point);
+
+    console.log(`🟢 Point added: ${label} (${x}, ${y})`);
+  });
+
+  
 }
+
 
 
 
@@ -419,6 +416,8 @@ function drawCircle(canvasConfig) {
     const circle = new Circle(center, radius);
     const enableDrag = canvasConfig.enableDrag ?? false;
     circle.setEnableDrag?.(enableDrag);
+    circle.setEnableStretch?.(false);
+
     canvasManager.addShape(circle);
 }
 
@@ -462,6 +461,57 @@ function drawTriangles(canvasConfig, buttonType = null) {
     canvasManager.addShape(triangle);
   });
 }
+
+
+function drawAngleArc(canvasConfig) {
+  if (!canvasConfig) return;
+
+  const vertex = canvasConfig.vertex;
+  const pointA = canvasConfig.pointA;
+  const pointB = canvasConfig.pointB;
+
+  if (!vertex || !pointA || !pointB) {
+    console.warn("⚠️ canvasConfig missing vertex or points");
+    return;
+  }
+
+  const label = canvasConfig.label || '';
+  const color = canvasConfig.color || 'orange';
+  const scale = canvasConfig.scale ?? 0.3; // Default scale
+
+  // Auto radius from vertex to pointA
+  const dx = pointA.x - vertex.x;
+  const dy = pointA.y - vertex.y;
+  const radius = Math.sqrt(dx * dx + dy * dy) * scale;
+
+  const angle1 = Math.atan2(pointA.y - vertex.y, pointA.x - vertex.x);
+  const angle2 = Math.atan2(pointB.y - vertex.y, pointB.x - vertex.x);
+
+  let startAngle = angle1;
+  let endAngle = angle2;
+  let anticlockwise = false;
+
+  if (angle2 < angle1) {
+    [startAngle, endAngle] = [angle2, angle1];
+    anticlockwise = true;
+  }
+
+  ctx.beginPath();
+  ctx.arc(vertex.x, vertex.y, radius, startAngle, endAngle, anticlockwise);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (label) {
+    const midAngle = (startAngle + endAngle) / 2;
+    const labelX = vertex.x + (radius + 10) * Math.cos(midAngle);
+    const labelY = vertex.y + (radius + 10) * Math.sin(midAngle);
+    ctx.font = '14px Arial';
+    ctx.fillStyle = 'black';
+    ctx.fillText(label, labelX, labelY);
+  }
+}
+
 
 
 function drawTangents(config, subtype) {
@@ -602,51 +652,62 @@ function findTangentIntersection(center, radius, point1, point2) {
  * 🧠 Updates UI elements like theorem text and sub-buttons.
  */
 function updateUI(config, functionalityKey, buttonType = null) {
+  console.log("The config received is", config, functionalityKey, buttonType);
   const theoremText = config.theoremDefinitions?.[buttonType] || config.theoremDefinition;
 
   updateTheoremText(config, buttonType);
 
   const dynamicButtons = document.getElementById("dynamic-buttons");
-if (Array.isArray(config.buttonSet)) {
   dynamicButtons.innerHTML = "";
 
+  if (Array.isArray(config.buttonSet)) {
   config.buttonSet.forEach(({ label, type, svg }) => {
-    // ✅ Use required tooltip container class
     const wrapper = document.createElement("div");
-    wrapper.className = "tooltip-container";  // 👈 KEY FIX
+    wrapper.className = "tooltip-container";
+    wrapper.dataset.type = type;
 
-    // 🔹 Inject SVG or fallback to label
-    if (svg) {
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = svg.trim();
-      const svgEl = tempDiv.firstChild;
-      svgEl.classList.add("sub-button-svg");
-      wrapper.appendChild(svgEl);
-    } else {
-      const fallbackBtn = document.createElement("button");
-      fallbackBtn.classList.add("triangle-button");
-      fallbackBtn.textContent = label;
-      wrapper.appendChild(fallbackBtn);
+    // ⬇️ SVG parsing
+    const svgWrapper = document.createElement("div");
+    svgWrapper.innerHTML = svg;
+    const icon = svgWrapper.firstElementChild;
+
+    if (!icon || !icon.classList) {
+      console.warn("⚠️ Invalid SVG element:", icon);
+      return;
     }
 
-    // 🔹 Tooltip span (now styled correctly)
+    icon.classList.add("sub-button-svg");
+    wrapper.appendChild(icon);
+
+    // Tooltip
     const tooltip = document.createElement("span");
     tooltip.className = "tooltip-text";
     tooltip.textContent = label;
     wrapper.appendChild(tooltip);
 
-    // 🔹 Click handler
-    wrapper.addEventListener("click", () => switchFunctionality(functionalityKey, type));
+    // 🔁 Click handler
+    wrapper.addEventListener("click", () => {
+      document.querySelectorAll("#dynamic-buttons .tooltip-container").forEach(el => {
+        el.classList.remove("active");
+      });
+      wrapper.classList.add("active");
+      console.log("🔘 Active subtype set:", type);
+      switchFunctionality(functionalityKey, type);
+    });
 
     dynamicButtons.appendChild(wrapper);
+
+    // ✅ Initial active state
+    if (window.currentSubtype === type) {
+      wrapper.classList.add("active");
+    }
   });
-
-  dynamicButtons.style.display = "block";
-} else {
-  dynamicButtons.style.display = "none";
+  } else {
+  console.warn("⚠️ No buttonSet defined for:", functionalityKey);
+  }
+  dynamicButtons.style.display = "flex";
 }
 
-}
 
 
 export function updateLeftSidebar(functionalityKey, subtype = null) {
@@ -858,4 +919,44 @@ export async function saveProgressToFirestore(payload) {
     return null;
   } */
   
- 
+ export function animateMidsegmentTheorem() {
+    canvasManager.clear(); // Step 0: Clear canvas
+    const ctx = canvasManager.ctx; // Optional direct access
+    // Step 1: Draw triangle vertices
+    const A = new Point(300, 200, "A", "red", 5);
+    const B = new Point(200, 400, "B", "red", 5);
+    const C = new Point(400, 400, "C", "red", 5);
+
+    setTimeout(() => {
+        drawPoints({ points: [A, B, C] });
+    }, 300);
+
+    // Step 2: Draw triangle sides
+    setTimeout(() => {
+        drawLines({ lines: [
+            { endA: A, endB: B, color: "black" },
+            { endA: B, endB: C, color: "black" },
+            { endA: C, endB: A, color: "black" }
+        ]});
+    }, 800);
+
+    // Step 3: Compute & draw midpoints D and E
+    const D = new Point((A.x + B.x) / 2, (A.y + B.y) / 2, "D", "blue", 5);
+    const E = new Point((A.x + C.x) / 2, (A.y + C.y) / 2, "E", "blue", 5);
+
+    setTimeout(() => {
+        drawPoints({ points: [D, E] });
+    }, 1500);
+
+    // Step 4: Draw midsegment DE
+    setTimeout(() => {
+        drawLines({ lines: [
+            { endA: D, endB: E, color: "green", dashed: true }
+        ]});
+    }, 2200);
+
+    // Step 5: Optional Text or Highlight
+    setTimeout(() => {
+        canvasManager.showText?.("DE ∥ BC and DE = ½ × BC", 240, 160, "darkgreen");
+    }, 2800);
+}

@@ -30,63 +30,45 @@ export function compareMeasures(input1Name, input2Name, resultName) {
   
   
 
-  export function sumMeasures(input1Name, input2Name, resultId, expectedSum = null, comparisonInputName = null) {
-    const input1 = document.getElementsByName(input1Name)[0];
-    const input2 = document.getElementsByName(input2Name)[0];
-    const resultSpan = document.getElementById(resultId);
-  
-    // Optional: compare sum with a third input (like in triangle sum checks)
-    const comparisonInput = comparisonInputName ? document.getElementsByName(comparisonInputName)[0] : null;
-  
-    if (!input1 || !input2 || !resultSpan) {
-      console.warn("⚠️ Required input or result element not found", { input1, input2, resultSpan });
-      return;
-    }
-  
-    const val1 = input1.value.trim();
-    const val2 = input2.value.trim();
-  
-    // Exit early if either field is empty
-    if (val1 === "" || val2 === "") {
-      resultSpan.textContent = "";
-      input1.style.backgroundColor = "";
-      input2.style.backgroundColor = "";
-      return;
-    }
-  
-    const num1 = parseFloat(val1);
-    const num2 = parseFloat(val2);
-  
-    // Exit early if invalid numbers
-    if (isNaN(num1) || isNaN(num2)) {
-      resultSpan.textContent = "";
-      input1.style.backgroundColor = "";
-      input2.style.backgroundColor = "";
-      return;
-    }
-  
-    const sum = num1 + num2;
-    resultSpan.textContent = sum;
-  
-    let isCorrect = true;
-  
-    if (expectedSum !== null) {
-      isCorrect = sum === expectedSum;
-    } else if (comparisonInput) {
-      const targetVal = parseFloat(comparisonInput.value.trim());
-      isCorrect = !isNaN(targetVal) && sum === targetVal;
-    }
-  
-    // Apply coloring only when both inputs are present and check is meaningful
-    const color = isCorrect ? "lightgreen" : "lightcoral";
-    input1.style.backgroundColor = color;
-    input2.style.backgroundColor = color;
-  
-    // Optional: also highlight the comparison input if used
-    if (comparisonInput) {
-      comparisonInput.style.backgroundColor = color;
-    }
+ export function sumMeasures(input1Name, input2Name, resultId, expectedSum = null, comparisonInputName = null, input3Name = null) {
+  const input1 = document.getElementsByName(input1Name)[0];
+  const input2 = document.getElementsByName(input2Name)[0];
+  const input3 = input3Name ? document.getElementsByName(input3Name)[0] : null;
+  const resultSpan = document.getElementById(resultId);
+  const comparisonInput = comparisonInputName ? document.getElementsByName(comparisonInputName)[0] : null;
+
+  if (!input1 || !input2 || !resultSpan) {
+    console.warn("⚠️ Required input or result element not found", { input1, input2, input3, resultSpan });
+    return;
   }
+
+  const num1 = parseFloat(input1.value.trim()) || 0;
+  const num2 = parseFloat(input2.value.trim()) || 0;
+  const num3 = input3 ? parseFloat(input3.value.trim()) || 0 : 0;
+
+  const sum = num1 + num2 + num3;
+  resultSpan.textContent = sum;
+
+  let isCorrect = true;
+  let target = expectedSum;
+
+  if (comparisonInput) {
+    const targetVal = parseFloat(comparisonInput.value.trim());
+    if (!isNaN(targetVal)) target = targetVal;
+  }
+
+  if (target != null) {
+    isCorrect = (sum === target);
+  }
+
+  const color = isCorrect ? "lightgreen" : "lightcoral";
+  input1.style.backgroundColor = color;
+  input2.style.backgroundColor = color;
+  if (input3) input3.style.backgroundColor = color;
+  if (comparisonInput) comparisonInput.style.backgroundColor = color;
+}
+
+
   
   export function compareDividedMeasures(input1Name, input2Name, resultName, divisor) {
           const input1 = document.getElementsByName(input1Name)[0];
@@ -141,6 +123,65 @@ export function compareMeasures(input1Name, input2Name, resultName) {
               result.value = ""; // Clear the content if inputs are invalid
           }
       }
+
+      /**
+ * Compare 2 or 3 fields with optional absolute or percentage tolerance.
+ * @param {string[]} fieldNames - Input field names to compare.
+ * @param {string} mode - 'allEqual', 'anyTwoEqual', or 'allDifferent'.
+ * @param {object} options - Optional: { tolerance: 0.5, percent: false }
+ *        If percent=true, tolerance is treated as a percentage of the average.
+ */
+export function compareFields(fieldNames, mode = "allEqual", options = {}) {
+  const inputs = fieldNames.map(name => document.getElementsByName(name)[0]);
+  if (inputs.some(input => !input)) {
+    console.warn("❌ One or more input fields not found.", inputs);
+    return;
+  }
+
+  const values = inputs.map(input => input.value.trim());
+  if (values.some(val => val === "")) {
+    inputs.forEach(input => input.style.backgroundColor = "");
+    return;
+  }
+
+  const numbers = values.map(parseFloat);
+  if (numbers.some(num => isNaN(num))) {
+    inputs.forEach(input => input.style.backgroundColor = "");
+    return;
+  }
+
+  const { tolerance = 0, percent = false } = options;
+
+  const getTolerance = (a, b) => {
+    if (!percent) return tolerance;
+    const avg = (a + b) / 2;
+    return (tolerance / 100) * avg;
+  };
+
+  const nearlyEqual = (a, b) => Math.abs(a - b) <= getTolerance(a, b);
+
+  const [a, b, c] = numbers;
+  let conditionMet = false;
+
+  switch (mode) {
+    case "allEqual":
+      conditionMet = nearlyEqual(a, b) && nearlyEqual(b, c);
+      break;
+    case "anyTwoEqual":
+      conditionMet = nearlyEqual(a, b) || nearlyEqual(a, c) || nearlyEqual(b, c);
+      break;
+    case "allDifferent":
+      conditionMet = !nearlyEqual(a, b) && !nearlyEqual(a, c) && !nearlyEqual(b, c);
+      break;
+    default:
+      console.error("❌ Unknown comparison mode:", mode);
+      return;
+  }
+
+  const color = conditionMet ? "lightgreen" : "lightcoral";
+  inputs.forEach(input => input.style.backgroundColor = color);
+}
+
   
       export function toFraction(decValue) {
           const epsilon = 0.01; // Margin of error for comparison

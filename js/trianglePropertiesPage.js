@@ -17,11 +17,15 @@ window.switchFunctionality = switchFunctionality;
       switchFunctionality('sineTheta','sin'); // default
     });
 
-    window.addEventListener("nav-select", (e) => {
-      const { functionalityKey, subtype } = e.detail;
-      console.log("📥 Received nav-select:", functionalityKey, subtype);
-      switchFunctionality(functionalityKey, subtype);
+    window.addEventListener("nav-select", (event) => {
+      const { functionalityKey, subtype } = event.detail;
+      const config = functionalityConfig[functionalityKey];
+      const effectiveSubtype = subtype ?? config?.defaultButtonType ?? null;
+
+      console.log("📥 Received nav-select:", functionalityKey, effectiveSubtype);
+      switchFunctionality(functionalityKey, effectiveSubtype);
     });
+
    
     
 // Function to draw the default triangle on page load
@@ -64,80 +68,114 @@ export function decimalToFraction(decimal) {
 
 
  export function calculateSin(rowId) {
-            const perpendicular = parseFloat(document.getElementById(`perpendicular-${rowId}`).value);
-            const hypotenuse = parseFloat(document.getElementById(`hypotenuse-${rowId}`).value);
-            const sinCell = document.getElementById(`sin-${rowId}`);
+  const perpInput = document.getElementById(`perpendicular-${rowId}`);
+  const hypoInput = document.getElementById(`hypotenuse-${rowId}`);
+  const sinCell = document.getElementById(`sin-${rowId}`);
 
-            console.log("The value of input for calculation is", perpendicular, hypotenuse);
-            
-            if (!isNaN(perpendicular) && !isNaN(hypotenuse) && hypotenuse !== 0) {
-                const sinValue = (perpendicular / hypotenuse).toFixed(2);
-                console.log("The sinValue is", sinValue);
-            const epsilon = 0.01;
+  if (!perpInput || !hypoInput || !sinCell) {
+    console.warn("Missing input or output elements for row:", rowId);
+    return;
+  }
 
-                switch (true) {
-                    case Math.abs(sinValue - 0.50) < epsilon:
-                        sinCell.textContent = "1/2";
-                        break;
-                    case Math.abs(sinValue - 0.7071) < epsilon:
-                        sinCell.textContent = "√2/2";
-                        break;
-                    case Math.abs(sinValue - 0.86602) < epsilon:
-                        sinCell.textContent = "√3/2";
-                        break;
-                    case Math.abs(sinValue - 0.0872 ) < epsilon:
-                        sinCell.textContent = "0.0872";
-                        break;
-                    case Math.abs(sinValue - 0.9962) < epsilon:
-                        sinCell.textContent = "0.9962";
-                        break;
-                    default:
-                        sinCell.textContent = "Invalid";
-                        break;
-                
+  const perpendicular = parseFloat(perpInput.value);
+  const hypotenuse = parseFloat(hypoInput.value);
 
-    console.log(`Updated sinCell content: ${sinCell.textContent}`);
+  console.log(`🔢 Inputs for row ${rowId}: perpendicular=${perpendicular}, hypotenuse=${hypotenuse}`);
+
+  // Only proceed if both values are entered and valid
+  if (
+    perpInput.value.trim() !== "" &&
+    hypoInput.value.trim() !== "" &&
+    !isNaN(perpendicular) &&
+    !isNaN(hypotenuse) &&
+    hypotenuse !== 0
+  ) {
+    const sinValue = (perpendicular / hypotenuse).toFixed(4);
+    console.log(`✅ sin θ = ${sinValue}`);
+
+    const epsilon = 0.01;
+
+    switch (true) {
+      case Math.abs(sinValue - 0.50) < epsilon:
+        sinCell.textContent = "1/2";
+        break;
+      case Math.abs(sinValue - 0.7071) < epsilon:
+        sinCell.textContent = "√2/2";
+        break;
+      case Math.abs(sinValue - 0.8660) < epsilon:
+        sinCell.textContent = "√3/2";
+        break;
+      case Math.abs(sinValue - 0.0872) < epsilon:
+        sinCell.textContent = "0.0872";
+        break;
+      case Math.abs(sinValue - 0.9962) < epsilon:
+        sinCell.textContent = "0.9962";
+        break;
+      default:
+        sinCell.textContent = sinValue; // fallback to showing decimal value
+        break;
     }
-            } else {
-                sinCell.textContent = "Invalid";
-            }
-        }
+  } else {
+    // Don't update yet while user is typing
+    sinCell.textContent = "";
+  }
+}
 
 export function calculateCos(rowId) {
-    console.log(`Calculating cos for row: ${rowId}`);
-    const base = parseFloat(document.getElementById(`base-${rowId}`).value);
-    const hypotenuse = parseFloat(document.getElementById(`hypotenuse-${rowId}`).value);
-    console.log(`Base: ${base}, Hypotenuse: ${hypotenuse}`);
-    
-    const cosCell = document.getElementById(`cos-${rowId}`);
-    if (!isNaN(base) && !isNaN(hypotenuse) && hypotenuse !== 0) {
-        const cosValue = (base / hypotenuse).toFixed(2);
-        const epsilon = 0.01;
+  console.log(`🧮 Calculating cos for row: ${rowId}`);
 
-                switch (true) {
-                    case Math.abs(cosValue - 0.50) < epsilon:
-                        cosCell.textContent = "1/2";
-                        break;
-                    case Math.abs(cosValue - 0.7071) < epsilon:
-                        cosCell.textContent = "√2/2";
-                        break;
-                    case Math.abs(cosValue - 0.86602) < epsilon:
-                        cosCell.textContent = "√3/2";
-                        break;
-                    case Math.abs(cosValue - 0.0872 ) < epsilon:
-                        cosCell.textContent = "0.0872";
-                        break;
-                    case Math.abs(cosValue - 0.9962) < epsilon:
-                        cosCell.textContent = "0.9962";
-                        break;
-                    default:
-                        cosCell.textContent = "Invalid";
-                        break;
-        cosCell.textContent = decimalToFraction(cosValue);
+  const baseInput = document.getElementById(`base-${rowId}`);
+  const hypoInput = document.getElementById(`hypotenuse-${rowId}`);
+  const cosCell = document.getElementById(`cos-${rowId}`);
+
+  if (!baseInput || !hypoInput || !cosCell) {
+    console.warn(`⚠️ Missing input/output element for row: ${rowId}`);
+    return;
+  }
+
+  const base = parseFloat(baseInput.value);
+  const hypotenuse = parseFloat(hypoInput.value);
+
+  console.log(`➡️ Inputs for row ${rowId}: base=${base}, hypotenuse=${hypotenuse}`);
+
+  if (
+    baseInput.value.trim() !== "" &&
+    hypoInput.value.trim() !== "" &&
+    !isNaN(base) &&
+    !isNaN(hypotenuse) &&
+    hypotenuse !== 0
+  ) {
+    const cosValue = (base / hypotenuse).toFixed(4);
+    console.log(`✅ cos θ = ${cosValue}`);
+
+    const epsilon = 0.01;
+
+    switch (true) {
+      case Math.abs(cosValue - 0.50) < epsilon:
+        cosCell.textContent = "1/2";
+        break;
+      case Math.abs(cosValue - 0.7071) < epsilon:
+        cosCell.textContent = "√2/2";
+        break;
+      case Math.abs(cosValue - 0.8660) < epsilon:
+        cosCell.textContent = "√3/2";
+        break;
+      case Math.abs(cosValue - 0.0872) < epsilon:
+        cosCell.textContent = "0.0872";
+        break;
+      case Math.abs(cosValue - 0.9962) < epsilon:
+        cosCell.textContent = "0.9962";
+        break;
+      default:
+        cosCell.textContent = cosValue; // fallback to numeric
+        break;
     }
-} else {
-        cosCell.textContent = "Invalid";
-    }
+
+    console.log(`📤 Updated cosCell content: ${cosCell.textContent}`);
+  } else {
+    // Inputs not ready yet — clear output
+    cosCell.textContent = "";
+  }
 }
 
 
