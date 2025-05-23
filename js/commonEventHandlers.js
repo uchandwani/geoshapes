@@ -1,6 +1,7 @@
 /**
  * Program: Parallel Lines Canvas Tool (Merged Final Version)
  * Description: Handles dynamic drawing and UI updates for Parallel Lines Theorem with sub-button support.
+ * 
  */
 
 import { functionalityConfig } from './commonConfig.js';
@@ -33,38 +34,6 @@ function getApplicableFields(formStructure, subtype) {
   return formStructure.fields.filter(f => !f.subtype || f.subtype === subtype);
 }
 
-/* 
-function renderRightSidebarFromConfig(topicId, subtype) {
-    const config = functionalityConfig[topicId];
-    const formStructure = config?.formStructure?.[subtype];
-  
-    if (!formStructure || !Array.isArray(formStructure.fields)) {
-      console.warn("⚠️ No form structure for", topicId, subtype);
-      return;
-    }
-  
-    const rightSidebar = document.getElementById("right-sidebar");
-    rightSidebar.innerHTML = ''; // Clear previous content
-  
-    formStructure.fields.forEach(({ angle1, angle2, result }) => {
-      rightSidebar.innerHTML += `
-        <div class="form-row">
-          <label>∠${angle1}: <input type="text" name="${angle1}" /></label><br>
-          <label>∠${angle2}: <input type="text" name="${angle2}" /></label><br>
-          <label>Equal? <span name="${result}"></span></label><hr>
-        </div>
-      `;
-    });
-  
-    if (formStructure.conclusion) {
-      rightSidebar.innerHTML += `
-        <div class="form-row">
-          <label>Conclusion: <textarea name="${formStructure.conclusion}"></textarea></label>
-        </div>
-      `;
-    }
-  }
-    */
 
   function drawArcs(canvasConfig) {
   if (!canvasConfig.arcs) return;
