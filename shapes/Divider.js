@@ -570,6 +570,28 @@ updateButtonPositions() {
     setPosition(this.buttons.rotate.plus5, this.leg2.x + 10, this.leg2.y) ;
 }
 
+getBoundingBox() {
+  const xs = [this.leg1.x, this.leg2.x, this.pivot.x];
+  const ys = [this.leg1.y, this.leg2.y, this.pivot.y];
+  return {
+    left: Math.min(...xs),
+    right: Math.max(...xs),
+    top: Math.min(...ys),
+    bottom: Math.max(...ys),
+  };
+}
+
+isRoughlyInside(x, y) {
+  const buffer = 12;
+  const box = this.getBoundingBox();
+  return (
+    x >= box.left - buffer &&
+    x <= box.right + buffer &&
+    y >= box.top - buffer &&
+    y <= box.bottom + buffer
+  );
+}
+
 
 /* 
 handleRotation(angle) {
