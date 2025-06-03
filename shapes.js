@@ -435,14 +435,24 @@ canvas.addEventListener('mousedown', (e) => {
         } 
     } else if (mode === 'create') {
         collectPoints(offsetX, offsetY);
-    } else if (mode === 'delete') {
-        const index = geoshapes.findIndex((shape) => shape.isPointInside(offsetX, offsetY));
-        if (index !== -1) {
-            canvasManager.shapes.splice(index, 1);
-            geoshapes.splice(index, 1);
-            canvasManager.render(ctx, canvas);
-        }
+     } else if (mode === 'delete') {
+    const shapeToDelete = canvasManager.shapes.find((shape) =>
+        shape.isPointInside(offsetX, offsetY)
+    );
+
+    if (shapeToDelete) {
+        console.log("🗑️ Deleting shape:", shapeToDelete);
+        if (shapeToDelete instanceof Divider) {
+            shapeToDelete.removeDOMElements?.();
+            }
+
+        canvasManager.removeShape(shapeToDelete); // ✅ Uses your existing method
+        canvasManager.render(ctx, canvas);        // ✅ Triggers redraw
+    } else {
+        console.warn("❌ No shape found under cursor. Nothing deleted.");
     }
+}
+
 });
 
 
