@@ -464,7 +464,7 @@ getSnapCandidates() {
     }
 
     // Major grid lines (blue)
-    ctx.strokeStyle = '#0056b3'; // Darker blue
+    ctx.strokeStyle = '#888'; // #0056b3'; // Darker blue
     ctx.lineWidth = 1.5;
 
     for (let x = 0; x <= canvas.width; x += scaleStep) {
