@@ -302,14 +302,14 @@ alignProtractorToPrimaryAngle(primaryAngleData) {
 drawCanvasButtons(ctx) {
     const cx = this.center.x;
     const cy = this.center.y;
-    const spacing = 20;
-    const btnSize = 20;
+    const spacing = 25;
+    const btnSize = 30;
 
     const buttons = [
-        { label: '-5°', dx: -spacing, dy: -spacing, delta: -5 },
-        { label: '-1°', dx: -spacing, dy: spacing, delta: -1 },
-        { label: '+1°', dx: spacing, dy: -spacing, delta: 1 },
-        { label: '+5°', dx: spacing, dy: spacing, delta: 5 },
+        { label: '↺5°', dx: -spacing, dy: -spacing, delta: -5 },
+        { label: '↺1°', dx: -spacing, dy: spacing, delta: -1 },
+        { label: '↻1°', dx: spacing, dy: -spacing, delta: 1 },
+        { label: '↻5°', dx: spacing, dy: spacing, delta: 5 },
     ];
 
     ctx.font = '12px sans-serif';
@@ -328,7 +328,7 @@ drawCanvasButtons(ctx) {
         ctx.fill();
         ctx.strokeStyle = 'white';
         ctx.stroke();
-
+        ctx.font = '16px sans-serif';
         ctx.fillStyle = 'white';
         ctx.fillText(label, x, y);
 
