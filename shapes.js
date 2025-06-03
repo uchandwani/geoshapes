@@ -436,15 +436,17 @@ canvas.addEventListener('mousedown', (e) => {
     } else if (mode === 'create') {
         collectPoints(offsetX, offsetY);
      } else if (mode === 'delete') {
-    const shapeToDelete = canvasManager.shapes.find((shape) =>
-        shape.isPointInside(offsetX, offsetY)
-    );
+
+        const shapeToDelete = canvasManager.shapes.find((shape) =>
+            (shape instanceof Divider && shape.isRoughlyInside(offsetX, offsetY)) ||
+            shape.isPointInside(offsetX, offsetY)
+        );
 
     if (shapeToDelete) {
         console.log("🗑️ Deleting shape:", shapeToDelete);
         if (shapeToDelete instanceof Divider) {
             shapeToDelete.removeDOMElements?.();
-            }
+        }
 
         canvasManager.removeShape(shapeToDelete); // ✅ Uses your existing method
         canvasManager.render(ctx, canvas);        // ✅ Triggers redraw
